@@ -16,6 +16,10 @@ const config = {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
+      fontFamily: {
+        cloister: ['Cloister', 'Esteban', 'serif'],
+        esteban: ['Esteban', 'serif'],
+      },
     },
   },
   content: [

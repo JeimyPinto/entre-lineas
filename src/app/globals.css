@@ -5,16 +5,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Esteban:wght@400&display=swap');
 
 @font-face{
-  
+  src: url('../../public/fonts/CloisterBlack.ttf');
+  font-family: "Cloister";
 }
 
-body {
+html, body {
   background-color: #ffffff;
   color: #000000;
   font-family: "Esteban", serif;
   font-weight: 400;
   font-style: normal;
 }
-h1,h2,h3{
-  font-family: "Cloister", "Esteban",serif
+
+h1, h2, h3 {
+  font-family: "Cloister", "Esteban", serif;
 }
