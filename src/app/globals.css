@@ -1,6 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Variables globales y paleta de colores */
+:root {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-third: #444444;
+  --color-fourth: #929090;
+  --color-accent: #fffbe6;
+
+  --font-main: "Esteban", serif;
+  --font-title: "Cloister", "Esteban", serif;
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.375rem;
+  --transition-fast: 0.2s;
+  --container-max: 72rem;
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--color-third), var(--color-fourth));
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-style: normal;
+  background-color: var(--color-primary);
+  /* padding para el contenido principal */
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.home-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+@media (min-width: 768px) {
+  .home-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.home-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  min-height: 200px;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Esteban:wght@400&display=swap');
 
@@ -9,14 +67,85 @@
   font-family: "Cloister";
 }
 
+
+
 html, body {
-  background-color: #ffffff;
-  color: #000000;
-  font-family: "Esteban", serif;
+  background-color: var(--color-primary);
+  font-family: var(--font-main);
   font-weight: 400;
   font-style: normal;
 }
 
-h1, h2, h3 {
-  font-family: "Cloister", "Esteban", serif;
+h1, h2, h3, .header-title {
+  font-family: var(--font-title);
+}
+
+/* Header styles (antes con Tailwind) */
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-primary);
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.header-logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.logo-img {
+  user-select: none;
+}
+
+
+.header-title {
+  color: var(--color-secondary);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 768px) {
+  .header-title {
+    font-size: 3rem;
+  }
+  .header-logo-title {
+    gap: 1.25rem;
+  }
+  .home-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.prueba-div {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.125rem;
+}
+
+.nav-link {
+  padding: 0.5rem 0.25rem;
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  outline: none;
+  color: var(--color-secondary);
+}
+.nav-link:hover {
+  color: var(--color-fourth);
+  background: rgba(255,255,255,0.1);
+}
+.nav-link:focus {
+  box-shadow: 0 0 0 2px var(--color-fourth);
 }

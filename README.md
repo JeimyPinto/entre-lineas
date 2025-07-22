@@ -1,4 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# Entre Líneas
+
+Proyecto web realizado con [Next.js](https://nextjs.org), sin frameworks de estilos externos. Todos los estilos se gestionan con CSS nativo en el archivo `src/app/globals.css`.
+
+## Estructura
+
+- `src/app/` : Páginas y estilos globales (`globals.css`).
+- `src/components/` : Componentes reutilizables.
+- `public/` : Imágenes, fuentes y archivos estáticos.
+
+## Instalación y desarrollo
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+Inicia el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+
+## Personalización de estilos
+
+Todos los estilos se encuentran en `src/app/globals.css`. Puedes modificar este archivo para adaptar el diseño según tus necesidades.
+
+## Tecnologías principales
+
+- Next.js
+- React
+- CSS nativo
+
+## Despliegue
+
+Puedes desplegar el proyecto fácilmente en [Vercel](https://vercel.com/new).
+
+Consulta la [documentación de Next.js sobre despliegue](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
 
 ## Getting Started
 
