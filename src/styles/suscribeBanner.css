@@ -1,0 +1,19 @@
+/* Estilos exclusivos para el banner de suscripción de la galería */
+.suscribe-banner {
+  margin: 1.2rem 0 0.5rem 0;
+  text-align: center;
+}
+.suscribe-banner p {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+.suscribe-banner span {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+.suscribe-banner .gallery-subscribe-btn svg {
+  vertical-align: middle;
+  margin-right: 0.5em;
+  filter: drop-shadow(0 2px 8px var(--color-primary-08));
+}
