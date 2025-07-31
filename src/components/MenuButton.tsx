@@ -11,7 +11,7 @@ interface MenuButtonProps {
 export default function MenuButton({ open, onClick }: MenuButtonProps) {
   return (
     <button
-      className="menu-btn btn menu-btn-box"
+      className="header-menu-button"
       aria-label={open ? "Cerrar menú" : "Abrir menú"}
       onClick={onClick}
     >
