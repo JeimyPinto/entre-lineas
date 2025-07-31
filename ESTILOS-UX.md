@@ -16,6 +16,8 @@
 ## UX/UI
 
 - **Comportamiento responsivo:**
+  - Los estilos base aplican a escritorio (desktop) y los media queries (`@media (max-width: 767px)`) sobrescriben para móvil.
+  - Ejemplo: el botón de menú solo es visible en móvil, oculto por defecto en escritorio.
   - Grid en desktop, carousel horizontal en móvil.
 - **Interacciones clave:**
   - Modal para ver videos, tabs para alternar entre videos y shorts, navegación sticky en desktop.

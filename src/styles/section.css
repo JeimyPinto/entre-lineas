@@ -1,0 +1,9 @@
+/* Iconos sociales: mantener aspecto */
+.home-social-icon {
+  width: auto;
+  height: auto;
+  max-width: 22.7px;
+  max-height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}

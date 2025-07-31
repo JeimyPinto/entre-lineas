@@ -66,7 +66,7 @@ export default function Gallery() {
 			{/* Bloque informativo superior */}
 			<div className="gallery-info-block">
 				<div className="gallery-info-header">
-					<Image src="/1-01.png." alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff' }} />
+					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff' }} />
 					<div className="gallery-info-title">
 						<h2>Galería de Videos</h2>
 						{subscriberCount && (

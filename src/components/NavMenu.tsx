@@ -11,8 +11,6 @@ interface NavMenuProps {
 }
 
 export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
-  // Alternar entre los logos blanco y negro
-  const logoPath = "/1-01.png";
   return (
     <nav className={`header-nav${open ? " open" : ""}`}>
       {/* Botón de cerrar solo visible en móvil y cuando el menú está abierto */}
@@ -35,7 +33,7 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
         >
           <span className="nav-logo-bullet">
             <Image
-              src={logoPath}
+              src="/1-01.png"
               alt="logo viñeta"
               width={28}
               height={28}

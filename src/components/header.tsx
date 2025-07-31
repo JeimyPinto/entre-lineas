@@ -20,24 +20,26 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* Logo, título y botón hamburguesa alineados */}
-      <div className="header-logo-title">
-        <Image
-          src="/1-01.png"
-          alt="Logo"
-          width={107}
-          height={139}
-          className="header-logo"
+      <div className="header-row">
+        <div className="header-logo-title">
+          <Image
+            src="/1-01.png"
+            alt="Logo"
+            width={107}
+            height={139}
+            className="header-logo"
+          />
+          <h1 className="header-title">
+            Entre Líneas
+          </h1>
+        </div>
+        <MenuButton open={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
         />
-        <h1 className="header-title">
-          Entre Líneas
-        </h1>
       </div>
-      <MenuButton open={menuOpen}
-        onClick={() => setMenuOpen((open) => !open)}
-      />
-      {/* Menú de navegación */}
-      <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
-    </header >
+      <div className="header-navmenu">
+        <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
+      </div>
+    </header>
   );
 }

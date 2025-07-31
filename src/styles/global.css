@@ -17,6 +17,8 @@
 
   --font-main: "Esteban", serif;
   --font-title: "Cloister", "Esteban", serif;
+
+  --border-radius: 10px;
 }
 
 /* LAYOUT */

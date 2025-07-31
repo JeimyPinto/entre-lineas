@@ -24,8 +24,8 @@ export default function MainSection() {
           <Image src="/skill-icons_instagram.svg"
             alt="Instagram"
             className="home-social-icon"
-            width={22.7}
-            height={16} />
+            width={32}
+            height={32} />
           Instagram
         </a>
         <a className="home-social-link"
@@ -34,9 +34,9 @@ export default function MainSection() {
           rel="noopener noreferrer">
           <Image src="/logos_youtube-icon.svg"
             alt="YouTube"
-            width={22.7}
-            height={16}
-            className="home-social-icon" />
+            className="home-social-icon"
+            width={32}
+            height={32} />
           YouTube
         </a>
       </div>
