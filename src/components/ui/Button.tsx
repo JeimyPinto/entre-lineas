@@ -22,7 +22,6 @@ export default function Button(props: ButtonProps | LinkProps) {
     fullWidth = false, 
     children, 
     className = '', 
-    ...rest 
   } = props;
 
   const btnClasses = [

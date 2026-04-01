@@ -51,19 +51,21 @@ export async function GET() {
   const detailsRes = await fetch(detailsUrl);
   const detailsData = await detailsRes.json();
   
+  interface YoutubeVideoStatistics {
+    viewCount: string;
+    likeCount?: string;
+    commentCount?: string;
+  }
+
   interface YoutubeVideoDetailsItem {
     id: string;
     contentDetails: {
       duration: string;
     };
-    statistics: {
-      viewCount: string;
-      likeCount?: string;
-      commentCount?: string;
-    }
+    statistics: YoutubeVideoStatistics;
   }
 
-  const detailsMap: Record<string, { duration: string, statistics: any }> = {};
+  const detailsMap: Record<string, { duration: string, statistics: YoutubeVideoStatistics }> = {};
   (detailsData.items as YoutubeVideoDetailsItem[] || []).forEach((item) => {
     detailsMap[item.id] = { 
       duration: item.contentDetails.duration,
