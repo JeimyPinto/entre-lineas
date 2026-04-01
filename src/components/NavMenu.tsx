@@ -12,16 +12,6 @@ interface NavMenuProps {
 export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
   return (
     <nav className={`${styles.headerNav} ${open ? styles.open : ""}`}>
-      {/* Botón de cerrar solo visible en móvil y cuando el menú está abierto */}
-      {open && (
-        <button
-          className={styles.navmenuCloseBtn}
-          aria-label="Cerrar menú"
-          onClick={onNavigate}
-        >
-          ×
-        </button>
-      )}
       {links.map((link) => (
         <Link
           key={link.label}
@@ -32,10 +22,17 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
           <span className={styles.navLogoBullet}>
             <Image
               src="/1-01.png"
-              alt="logo viñeta"
-              width={28}
-              height={28}
-              style={{ minWidth: 28, minHeight: 28 }}
+              alt="ojo cerrado"
+              width={24}
+              height={32}
+              className={styles.logoImgClosed}
+            />
+            <Image
+              src="/1-04.png"
+              alt="ojo abierto"
+              width={24}
+              height={32}
+              className={styles.logoImgOpen}
             />
           </span>
           {link.label}

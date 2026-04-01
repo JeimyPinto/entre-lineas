@@ -1,15 +1,17 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: var(--glass-effect);
-  border-bottom: var(--border-glass);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2000;
   transition: all 0.3s ease;
-  padding: 0.5rem 2rem;
+  padding: 0 2rem;
+  height: 85px; /* Más espacio para respirar */
+  display: flex;
+  align-items: center;
 }
 
 .headerRow {
@@ -17,7 +19,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -45,25 +46,10 @@
   letter-spacing: 1px;
 }
 
-.headerScrolled {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 0.3rem 2rem;
-}
-
-.headerDesktopNav {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  margin: 0 2rem;
-}
-
 @media (max-width: 768px) {
-  .headerDesktopNav {
-    display: none;
-  }
-  
   .header {
-    padding: 0.5rem 1rem;
+    height: 75px; /* Altura generosa en móvil también */
+    padding: 0 1.2rem;
   }
   
   .headerTitle {
@@ -71,7 +57,7 @@
   }
   
   .headerLogo {
-    width: 60px;
+    width: 42px; /* Un poco más pequeño para que no toque bordes */
     height: auto;
   }
 }

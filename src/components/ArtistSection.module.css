@@ -97,15 +97,25 @@
   .artistSection {
     flex-direction: column;
     text-align: center;
-    gap: 3rem;
-    padding: 4rem 1.5rem;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
   }
 
   .artistName {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .artistBio {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   .artistDetails {
     justify-content: center;
+    gap: 1rem;
+  }
+
+  .detailValue {
+    font-size: 1rem;
   }
 }

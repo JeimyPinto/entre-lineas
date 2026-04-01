@@ -1,5 +1,4 @@
 import styles from "./MenuButton.module.css";
-import Image from "next/image";
 
 interface MenuButtonProps {
   open: boolean;
@@ -9,11 +8,15 @@ interface MenuButtonProps {
 export default function MenuButton({ open, onClick }: MenuButtonProps) {
   return (
     <button
-      className={styles.headerMenuButton}
+      className={`${styles.headerMenuButton} ${open ? styles.open : ""}`}
       aria-label={open ? "Cerrar menú" : "Abrir menú"}
       onClick={onClick}
     >
-      <Image src="/menu.svg" alt="Menú" width={32} height={32} />
+      <div className={styles.hamburger}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </button>
   );
 }

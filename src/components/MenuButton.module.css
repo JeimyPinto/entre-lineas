@@ -1,41 +1,48 @@
 .headerMenuButton {
-    background-color: var(--color-primary);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: transparent;
     border: none;
     cursor: pointer;
-    width: 48px;
-    height: 48px;
-    display: flex;
+    width: 44px;
+    height: 44px;
+    display: none;
     align-items: center;
     justify-content: center;
     padding: 0;
-    transition: box-shadow 0.2s, background 0.2s;
-    display: none;
-    /* Ocultar en desktop */
+    margin-right: 2rem;
+    transition: all 0.3s ease;
+    z-index: 1001; /* Above NavMenu if needed, but usually sibling */
 }
 
-/* Hamburger icon (3 white lines) */
 .hamburger {
-    width: 28px;
-    height: 20px;
+    width: 30px;
+    height: 22px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.3s ease;
 }
 
 .hamburger span {
     display: block;
     height: 3px;
-    background: var(--color-secondary);
-    border-radius: 2px;
     width: 100%;
+    background: var(--color-secondary);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
-/* Hover effect */
-.headerMenuButton:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    background-color: var(--color-third);
+/* Open State Animation */
+.headerMenuButton.open .hamburger span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.headerMenuButton.open .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.headerMenuButton.open .hamburger span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
 }
 
 @media (max-width: 767px) {

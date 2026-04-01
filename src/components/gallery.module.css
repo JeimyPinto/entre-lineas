@@ -119,13 +119,32 @@
 
 /* Mobile specific logic in CSS */
 @media (max-width: 768px) {
+  .gallerySection {
+    padding: 3rem 1.2rem;
+  }
+
+  .galleryInfoBlock {
+    padding: 2rem 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .galleryInfoTitle h2 {
+    font-size: 2rem;
+  }
+
+  .galleryInfoDesc {
+    font-size: 0.95rem;
+  }
+
   .galleryGrid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 1rem;
+    gap: 1.2rem;
     overflow-x: auto;
-    padding-bottom: 1rem;
+    padding: 0 0.5rem 1.5rem;
+    margin: 0 -1.2rem;
     scrollbar-width: none;
+    -ms-overflow-style: none;
   }
   .galleryGrid::-webkit-scrollbar {
     display: none;

@@ -1,19 +1,29 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./section.module.css";
 import { useYouTubeData } from "@/hooks/useYouTubeData";
 import Card from "./ui/Card";
-import { FaInstagram, FaYoutube } from "react-icons/fa6";
+import { FaInstagram, FaYoutube, FaHeart, FaComment, FaFire } from "react-icons/fa6";
 
 export default function MainSection() {
   const { highlights } = useYouTubeData();
+  const [logoIndex, setLogoIndex] = useState(0);
+  const logos = ["/1-01.png", "/1-02.png", "/1-03.png", "/1-04.png"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLogoIndex((prev) => (prev + 1) % logos.length);
+    }, 400); // 400ms per frame to make it feel like an old film or blink
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.homeSection}>
       <div className={styles.homeAbout}>
-        <Image src="/1-01.png"
-          alt="Logo Entre Líneas"
+        <Image src={logos[logoIndex]}
+          alt="Logo Animado Entre Líneas"
           className={styles.homeLogo}
           width={140}
           height={198}
@@ -30,7 +40,7 @@ export default function MainSection() {
           <div className={styles.highlightsGrid}>
             {highlights.viral && (
               <div className={styles.highlightItem}>
-                <span className={styles.highlightLabel}>🚀 Más Viral</span>
+                <span className={styles.highlightLabel}><FaFire size={18} /> Más Viral</span>
                 <Card 
                   image={highlights.viral.thumbnail} 
                   title={highlights.viral.title} 
@@ -42,7 +52,7 @@ export default function MainSection() {
             )}
             {highlights.mostLiked && (
               <div className={styles.highlightItem}>
-                <span className={styles.highlightLabel}>❤️ Más Gustado</span>
+                <span className={styles.highlightLabel}><FaHeart size={16} /> Más Gustado</span>
                 <Card 
                   image={highlights.mostLiked.thumbnail} 
                   title={highlights.mostLiked.title} 
@@ -54,7 +64,7 @@ export default function MainSection() {
             )}
             {highlights.mostCommented && (
               <div className={styles.highlightItem}>
-                <span className={styles.highlightLabel}>💬 Más Comentado</span>
+                <span className={styles.highlightLabel}><FaComment size={16} /> Más Comentado</span>
                 <Card 
                   image={highlights.mostCommented.thumbnail} 
                   title={highlights.mostCommented.title} 

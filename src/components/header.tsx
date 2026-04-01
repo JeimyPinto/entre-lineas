@@ -40,11 +40,8 @@ export default function Header() {
           <h1 className={styles.headerTitle}>Entre Líneas</h1>
         </div>
         
-        {/* En desktop el NavMenu se integra aquí, en móvil usa el botón */}
-        <div className={styles.headerDesktopNav}>
-           <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
-        </div>
-
+        <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
+        
         <MenuButton open={menuOpen} onClick={() => setMenuOpen((open) => !open)} />
       </div>
     </header>
