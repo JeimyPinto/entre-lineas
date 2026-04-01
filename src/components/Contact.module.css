@@ -1,0 +1,225 @@
+.contactSection {
+  padding: 100px 20px;
+  background: var(--bg-main);
+  color: var(--color-secondary);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle at center, var(--color-red-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.headerContent {
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contactLogo {
+  filter: drop-shadow(0 0 15px var(--color-red-glow));
+  transition: transform 0.4s ease;
+  background: white;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.contactLogo:hover {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+  /* Use the brand red instead of purple/blue */
+  background: linear-gradient(to right, var(--color-secondary), var(--color-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInDown 0.8s ease forwards;
+}
+
+.invitation {
+  text-align: center;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--color-fourth);
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.invitation strong {
+  display: block;
+  margin-top: 15px;
+  color: var(--color-red);
+  text-shadow: 0 0 15px var(--color-red-glow);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--color-third);
+  backdrop-filter: var(--glass-effect);
+  border: var(--border-glass);
+  padding: 40px;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.3s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.5s; }
+.card:nth-child(4) { animation-delay: 0.6s; }
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: var(--color-red);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--color-red);
+  transition: color 0.3s ease;
+}
+
+.card:hover .icon {
+  color: var(--color-secondary);
+  filter: drop-shadow(0 0 10px var(--color-red-glow));
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--color-secondary);
+}
+
+.platformsSubtitle {
+  color: var(--color-fourth);
+  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.infoItem {
+  margin: 10px 0;
+}
+
+.link {
+  color: var(--color-fourth);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.platformsGrid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.platformIcon {
+  font-size: 2rem;
+  color: var(--color-fourth);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  border: 1px solid var(--color-third);
+}
+
+.platformIcon:hover {
+  color: var(--color-secondary);
+  border-color: var(--color-red);
+  transform: translateY(-5px);
+  background: var(--color-red);
+  box-shadow: 0 10px 20px var(--color-red-glow);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .contactSection {
+    padding: 60px 20px;
+  }
+  .card {
+    padding: 30px;
+  }
+}

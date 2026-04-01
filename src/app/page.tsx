@@ -1,6 +1,7 @@
 import MainSection from '@/components/section';
 import Gallery from '@/components/gallery'
 import ArtistSection from '@/components/ArtistSection'
+import Contact from '@/components/Contact'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <div id="galeria">
         <Gallery />
       </div>
+      <Contact />
     </main>
   );
 }

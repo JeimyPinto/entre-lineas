@@ -69,7 +69,7 @@ export default function MainSection() {
       )}
 
       <div className={styles.homeSocial}>
-        <span className={styles.homeSocialLabel}>Síguenos:</span>
+        <span className={styles.homeSocialLabel}>Tu apoyo hace crecer la escena. ¡Síguenos!:</span>
         <a className={styles.homeSocialLink}
           href="https://instagram.com/entr3_line4s"
           target="_blank"

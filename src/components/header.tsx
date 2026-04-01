@@ -12,7 +12,7 @@ export default function Header() {
     { label: "Galería", href: "#galeria" },
     { label: "Artistas", href: "#artistas" },
     { label: "Eventos", href: "#" },
-    { label: "Contacto", href: "#" },
+    { label: "Contacto", href: "#contacto" },
   ];
   
   const [menuOpen, setMenuOpen] = useState(false);
