@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./section.module.css";
 import { useYouTubeData } from "@/hooks/useYouTubeData";
 import Card from "./ui/Card";
+import { FaInstagram, FaYoutube } from "react-icons/fa6";
 
 export default function MainSection() {
   const { highlights } = useYouTubeData();
@@ -73,22 +74,14 @@ export default function MainSection() {
           href="https://instagram.com/entr3_line4s"
           target="_blank"
           rel="noopener noreferrer">
-          <Image src="/skill-icons_instagram.svg"
-            alt="Instagram"
-            className={styles.homeSocialIcon}
-            width={32}
-            height={32} />
+          <FaInstagram className={styles.homeSocialIcon} size={24} />
           Instagram
         </a>
         <a className={styles.homeSocialLink}
           href="https://www.youtube.com/@Entr3_Line4s"
           target="_blank"
           rel="noopener noreferrer">
-          <Image src="/logos_youtube-icon.svg"
-            alt="YouTube"
-            className={styles.homeSocialIcon}
-            width={32}
-            height={32} />
+          <FaYoutube className={styles.homeSocialIcon} size={24} />
           YouTube
         </a>
       </div>

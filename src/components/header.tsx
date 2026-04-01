@@ -10,7 +10,7 @@ export default function Header() {
   const links = [
     { label: "Inicio", href: "#" },
     { label: "Galería", href: "#galeria" },
-    { label: "Artistas", href: "#" },
+    { label: "Artistas", href: "#artistas" },
     { label: "Eventos", href: "#" },
     { label: "Contacto", href: "#" },
   ];
