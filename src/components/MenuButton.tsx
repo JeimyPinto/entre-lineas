@@ -1,5 +1,4 @@
-"use client";
-import '@/styles/menuButton.css';
+import styles from "./MenuButton.module.css";
 import Image from "next/image";
 
 interface MenuButtonProps {
@@ -10,7 +9,7 @@ interface MenuButtonProps {
 export default function MenuButton({ open, onClick }: MenuButtonProps) {
   return (
     <button
-      className="header-menu-button"
+      className={styles.headerMenuButton}
       aria-label={open ? "Cerrar menú" : "Abrir menú"}
       onClick={onClick}
     >

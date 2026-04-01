@@ -1,7 +1,5 @@
-
 "use client";
-import Image from "next/image";
-import '@/styles/galleryItem.css';
+import Card from "./ui/Card";
 
 interface GalleryItemProps {
   id: string;
@@ -12,21 +10,11 @@ interface GalleryItemProps {
 
 export default function GalleryItem({ id, title, thumbnail, onClick }: GalleryItemProps) {
   return (
-    <div
-      className="gallery-item"
-      onClick={() => onClick(id)}
-    >
-      <div style={{ position: 'relative', width: '100%' }}>
-        <Image
-          src={thumbnail}
-          alt={title}
-          width={320}
-          height={180}
-          className="gallery-thumb"
-        />
-        <div className="gallery-thumb-overlay" />
-      </div>
-      <span className="gallery-caption">{title}</span>
-    </div>
+    <Card 
+      image={thumbnail} 
+      title={title} 
+      aspectRatio="video" 
+      onClick={() => onClick(id)} 
+    />
   );
 }

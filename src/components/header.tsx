@@ -1,44 +1,51 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import NavMenu from "./NavMenu";
 import MenuButton from "./MenuButton";
-
-import "@/styles/header.css";
+import styles from "./header.module.css";
 
 export default function Header() {
   const links = [
-    { label: "Inicio", href: "#inicio" },
+    { label: "Inicio", href: "#" },
     { label: "Galería", href: "#galeria" },
+    { label: "Artistas", href: "#" },
     { label: "Eventos", href: "#" },
     { label: "Contacto", href: "#" },
-    { label: "Artistas", href: "#" },
   ];
+  
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="header">
-      <div className="header-row">
-        <div className="header-logo-title">
+    <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}>
+      <div className={styles.headerRow}>
+        <div className={styles.headerLogoTitle}>
           <Image
             src="/1-01.png"
-            alt="Logo"
-            width={107}
-            height={139}
-            className="header-logo"
+            alt="Logo Entre Líneas"
+            width={60}
+            height={78}
+            className={styles.headerLogo}
           />
-          <h1 className="header-title">
-            Entre Líneas
-          </h1>
+          <h1 className={styles.headerTitle}>Entre Líneas</h1>
         </div>
-        <MenuButton open={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        />
-      </div>
-      <div className="header-navmenu">
-        <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
+        
+        {/* En desktop el NavMenu se integra aquí, en móvil usa el botón */}
+        <div className={styles.headerDesktopNav}>
+           <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
+        </div>
+
+        <MenuButton open={menuOpen} onClick={() => setMenuOpen((open) => !open)} />
       </div>
     </header>
   );

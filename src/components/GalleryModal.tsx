@@ -1,6 +1,7 @@
 "use client";
+
+import styles from "./GalleryModal.module.css";
 import { ReactNode } from "react";
-import '@/styles/gallery.css';
 
 interface GalleryModalProps {
   open: boolean;
@@ -11,12 +12,12 @@ interface GalleryModalProps {
 export default function GalleryModal({ open, onClose, children }: GalleryModalProps) {
   if (!open) return null;
   return (
-    <div className="gallery-modal" onClick={onClose}>
+    <div className={styles.modalOverlay} onClick={onClose}>
       <div
-        className="gallery-modal-content gallery-modal-content--large"
+        className={`${styles.modalContent} ${styles.modalContentLarge}`}
         onClick={e => e.stopPropagation()}
       >
-        <button className="btn" style={{ alignSelf: 'flex-end', marginBottom: '1rem' }} onClick={onClose} aria-label="Cerrar modal">
+        <button className={styles.closeButton} onClick={onClose} aria-label="Cerrar modal">
           Cerrar
         </button>
         {children}

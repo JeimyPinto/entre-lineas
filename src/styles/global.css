@@ -9,16 +9,22 @@
 
 /* Variables globales y paleta de colores */
 :root {
-  /* Paleta principal en rgba */
-  --color-primary: rgba(0, 0, 0, 1);
-  --color-secondary: rgba(255, 255, 255, 1);
-  --color-third: rgba(68, 68, 68, 1);
-  --color-fourth: rgba(146, 144, 144, 1);
+  /* Paleta principal */
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-third: #2a2a2a;
+  --color-fourth: #929090;
+  --color-red: #950303;
+  --color-red-glow: rgba(149, 3, 3, 0.4);
 
+  /* Design Tokens */
   --font-main: "Esteban", serif;
   --font-title: "Cloister", "Esteban", serif;
-
-  --border-radius: 10px;
+  --border-radius: 12px;
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --bg-main: radial-gradient(circle at 50% 50%, #151515 0%, #000000 100%);
+  --shadow-premium: 0 15px 35px rgba(0, 0, 0, 0.5);
+  --glass-effect: blur(12px) saturate(180%);
 }
 
 /* LAYOUT */

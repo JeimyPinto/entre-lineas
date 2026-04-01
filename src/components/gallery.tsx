@@ -1,106 +1,77 @@
 "use client";
 
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import GalleryItem from "./GalleryItem";
 import GalleryModal from "./GalleryModal";
 import YouTubeIframe from "./YouTubeIframe";
 import SuscribeBanner from "./SuscribeBanner";
 import Image from "next/image";
+import styles from "./gallery.module.css";
+import { useYouTubeData } from "../hooks/useYouTubeData";
+import Button from "./ui/Button";
 
-interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
-}
-
-interface GalleryData {
-  shorts: Video[];
-  videos: Video[];
-  subscriberCount?: string;
-}
 export default function Gallery() {
-	const [shorts, setShorts] = useState<Video[]>([]);
-	const [videos, setVideos] = useState<Video[]>([]);
-	const [subscriberCount, setSubscriberCount] = useState<string | null>(null);
+	const { shorts, videos, subscriberCount, loading, isOnline } = useYouTubeData();
 	const [selected, setSelected] = useState<string | null>(null);
-	const [isOnline, setIsOnline] = useState(true);
 	const [carouselIndex, setCarouselIndex] = useState(0);
 	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>('videos');
 
-	useEffect(() => {
-		const handleOnline = () => setIsOnline(true);
-		const handleOffline = () => setIsOnline(false);
-		setIsOnline(navigator.onLine);
-		window.addEventListener('online', handleOnline);
-		window.addEventListener('offline', handleOffline);
-		return () => {
-			window.removeEventListener('online', handleOnline);
-			window.removeEventListener('offline', handleOffline);
-		};
-	}, []);
-
-	useEffect(() => {
-		if (!isOnline) return;
-		fetch("/api/youtube")
-			.then((res) => res.json())
-			.then((data: GalleryData) => {
-				setShorts(data.shorts || []);
-				setVideos(data.videos || []);
-				setSubscriberCount(data.subscriberCount || null);
-			});
-	}, [isOnline]);
+	if (loading && isOnline) {
+		return <div className={styles.gallerySection}>Cargando galería...</div>;
+	}
 
 	return (
-		<div className="gallery-section">
+		<div className={styles.gallerySection}>
 			{!isOnline && (
-				<div className="gallery-offline-banner">
+				<div className={styles.galleryOfflineBanner}>
 					<Image
 						src="/entre lineas 2-02.png"
 						alt="Entre Líneas Logo"
-						style={{ height: "48px", marginBottom: "0.5rem" }}
+						width={48}
+						height={48}
+						style={{ marginBottom: "0.5rem" }}
 					/>
 					<span>Sin conexión a internet. Conéctate para ver la galería de videos.</span>
 				</div>
 			)}
 			{/* Bloque informativo superior */}
-			<div className="gallery-info-block">
-				<div className="gallery-info-header">
+			<div className={styles.galleryInfoBlock}>
+				<div className={styles.galleryInfoHeader}>
 					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff' }} />
-					<div className="gallery-info-title">
+					<div className={styles.galleryInfoTitle}>
 						<h2>Galería de Videos</h2>
 						{subscriberCount && (
-							<span className="gallery-subscribers">{Number(subscriberCount).toLocaleString()} suscriptores</span>
+							<span className={styles.gallerySubscribers}>{Number(subscriberCount).toLocaleString()} suscriptores</span>
 						)}
 					</div>
 				</div>
-				<p className="gallery-info-desc">
+				<p className={styles.galleryInfoDesc}>
 					Este es un compendio de los últimos videos y shorts subidos al canal oficial de Entre Líneas. ¡Explora el contenido y no olvides suscribirte para apoyar el proyecto!
 				</p>
-				<a
-					className="btn btn-primary gallery-suscribe-btn"
-					href="https://www.youtube.com/@EntreLineasOficial" target="_blank" rel="noopener noreferrer"
+				<Button 
+					href="https://www.youtube.com/@EntreLineasOficial" 
+					variant="primary"
 				>
 					Suscribirse al canal
-				</a>
+				</Button>
 			</div>
-			<div className="gallery-block-tabs">
+			<div className={styles.galleryBlockTabs}>
 				<button
-					className={activeBlock === 'videos' ? 'active' : ''}
+					className={activeBlock === 'videos' ? styles.active : ''}
 					onClick={() => setActiveBlock('videos')}
 				>Videos</button>
 				<button
-					className={activeBlock === 'shorts' ? 'active' : ''}
+					className={activeBlock === 'shorts' ? styles.active : ''}
 					onClick={() => setActiveBlock('shorts')}
 				>Shorts</button>
 			</div>
-			{/* Carousel nav solo en móvil */}
-			{((activeBlock === 'videos' ? videos : shorts).length > 1) && typeof window !== 'undefined' && window.innerWidth <= 768 && (
-				<div className="gallery-carousel-nav">
+			{/* Carousel nav solo en móvil. Dejamos que CSS controle la visibilidad pero JS controla el índice */}
+			{((activeBlock === 'videos' ? videos : shorts).length > 1) && (
+				<div className={styles.galleryCarouselNav}>
 					{Array.from({ length: (activeBlock === 'videos' ? videos : shorts).length }).map((_, i) => (
 						<button
 							key={i}
-							className={"gallery-carousel-dot" + (i === carouselIndex ? " active" : "")}
+							className={styles.galleryCarouselDot + (i === carouselIndex ? ` ${styles.active}` : "")}
 							aria-label={`Ir al video ${i + 1}`}
 							onClick={() => setCarouselIndex(i)}
 						/>
@@ -108,11 +79,11 @@ export default function Gallery() {
 				</div>
 			)}
 			<div
-				className="gallery-grid"
+				className={styles.galleryGrid}
 				style={
 					typeof window !== 'undefined' && window.innerWidth <= 768 && (activeBlock === 'videos' ? videos : shorts).length > 0
-						? { scrollBehavior: 'smooth', transform: `translateX(-${carouselIndex * 86}vw)` }
-						: { scrollBehavior: 'smooth' }
+						? { transform: `translateX(-${carouselIndex * 86}vw)` }
+						: undefined
 				}
 			>
 				{(activeBlock === 'videos' ? videos : shorts).map((video) => (
@@ -128,13 +99,15 @@ export default function Gallery() {
 			<GalleryModal open={!!selected} onClose={() => setSelected(null)}>
 				{selected && <YouTubeIframe videoId={selected} />}
 				<SuscribeBanner />
-				<button
-					className="gallery-modal-close"
-					onClick={() => setSelected(null)}
-				>
-					Cerrar
-				</button>
+				<div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+					<Button 
+						variant="secondary" 
+						onClick={() => setSelected(null)}
+					>
+						Cerrar
+					</Button>
+				</div>
 			</GalleryModal>
 		</div>
 	);
-}
+}

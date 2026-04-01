@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+import { Video } from '@/types/youtube';
+
 // Tipos para la respuesta de la API de YouTube
 interface YoutubeApiSnippet {
   title: string;
@@ -15,13 +17,6 @@ interface YoutubeApiItem {
 
 interface YoutubeApiResponse {
   items: YoutubeApiItem[];
-}
-
-// Tipo para el video simplificado
-interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
 }
 
 export async function GET() {
@@ -48,26 +43,36 @@ export async function GET() {
     .filter((item) => item.id.kind === 'youtube#video' && item.id.videoId);
 
   // 3. Obtener los IDs de los videos
-  const videoIds = videoItems.map((item) => item.id.videoId).join(",");
+  const videoIdsArray = videoItems.map((item) => item.id.videoId);
+  const videoIds = videoIdsArray.join(",");
 
-  // 4. Obtener detalles de duración de los videos
-  const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=contentDetails`;
+  // 4. Obtener detalles de duración y estadisticas de los videos
+  const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=contentDetails,statistics`;
   const detailsRes = await fetch(detailsUrl);
   const detailsData = await detailsRes.json();
+  
   interface YoutubeVideoDetailsItem {
     id: string;
     contentDetails: {
       duration: string;
     };
+    statistics: {
+      viewCount: string;
+      likeCount?: string;
+      commentCount?: string;
+    }
   }
-  const durations: Record<string, string> = {};
+
+  const detailsMap: Record<string, { duration: string, statistics: any }> = {};
   (detailsData.items as YoutubeVideoDetailsItem[] || []).forEach((item) => {
-    durations[item.id] = item.contentDetails.duration;
+    detailsMap[item.id] = { 
+      duration: item.contentDetails.duration,
+      statistics: item.statistics
+    };
   });
 
   // 5. Función para convertir ISO 8601 duration a segundos
   function parseISODuration(duration: string): number {
-    // Ejemplo: PT1M30S, PT45S, PT2M
     const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) return 0;
     const minutes = match[1] ? parseInt(match[1]) : 0;
@@ -75,18 +80,29 @@ export async function GET() {
     return minutes * 60 + seconds;
   }
 
-  // 6. Separar shorts y videos normales
+  // 6. Separar shorts y videos normales y recolectar para highlights
   const shorts: Video[] = [];
   const videos: Video[] = [];
+  const allParsedVideos: Video[] = [];
+
   videoItems.forEach((item) => {
     const id = item.id.videoId!;
-    const duration = durations[id] || "";
+    const details = detailsMap[id];
+    const duration = details?.duration || "";
+    const statistics = details?.statistics || {};
     const seconds = parseISODuration(duration);
-    const videoObj = {
+    
+    const videoObj: Video = {
       id,
       title: item.snippet.title,
       thumbnail: item.snippet.thumbnails.high.url,
+      viewCount: statistics.viewCount || "0",
+      likeCount: statistics.likeCount || "0",
+      commentCount: statistics.commentCount || "0",
     };
+
+    allParsedVideos.push(videoObj);
+
     if (seconds > 0 && seconds < 120) {
       shorts.push(videoObj);
     } else {
@@ -94,5 +110,12 @@ export async function GET() {
     }
   });
 
-  return NextResponse.json({ shorts, videos, subscriberCount });
+  // Encontrar highlights (solo de los videos normales para mejores resultados visuales, o de todos)
+  const highlights = {
+    viral: allParsedVideos.length > 0 ? [...allParsedVideos].sort((a, b) => parseInt(b.viewCount || "0") - parseInt(a.viewCount || "0"))[0] : null,
+    mostLiked: allParsedVideos.length > 0 ? [...allParsedVideos].sort((a, b) => parseInt(b.likeCount || "0") - parseInt(a.likeCount || "0"))[0] : null,
+    mostCommented: allParsedVideos.length > 0 ? [...allParsedVideos].sort((a, b) => parseInt(b.commentCount || "0") - parseInt(a.commentCount || "0"))[0] : null,
+  };
+
+  return NextResponse.json({ shorts, videos, subscriberCount, highlights });
 }

@@ -1,22 +1,20 @@
-"use client";
-import '@/styles/suscribeBanner.css';
+import styles from "./SuscribeBanner.module.css";
+import Button from "./ui/Button";
 const CHANNEL_ID = "UColw-XWA4S-yN9SLKnL31xQ";
-
 
 export default function SuscribeBanner() {
   return (
-    <div className="suscribe-banner">
+    <div className={styles.suscribeBanner}>
       <p>
         ¡Suscríbete a nuestro canal de YouTube!<br />
         <span>
           Es gratis y nos apoyas muchísimo 🙌
         </span>
       </p>
-      <a
+      <Button
         href={`https://www.youtube.com/channel/${CHANNEL_ID}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn--subscribe"
+        variant="primary"
+        className={styles.subscribeButton}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +27,7 @@ export default function SuscribeBanner() {
           <polygon points="10,15 16,12 10,9" fill="#fff"/>
         </svg>
         Suscribirse
-      </a>
+      </Button>
     </div>
   );
 }

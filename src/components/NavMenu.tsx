@@ -1,6 +1,5 @@
-
 "use client";
-import '@/styles/navMenu.css';
+import styles from "./NavMenu.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,12 +11,11 @@ interface NavMenuProps {
 
 export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
   return (
-    <nav className={`header-nav${open ? " open" : ""}`}>
+    <nav className={`${styles.headerNav} ${open ? styles.open : ""}`}>
       {/* Botón de cerrar solo visible en móvil y cuando el menú está abierto */}
       {open && (
         <button
-          className="btn navmenu-close-btn"
-          style={{ position: 'absolute', top: 18, right: 18, zIndex: 101, fontSize: 28, background: 'none', color: 'var(--color-secondary)' }}
+          className={styles.navmenuCloseBtn}
           aria-label="Cerrar menú"
           onClick={onNavigate}
         >
@@ -28,10 +26,10 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
         <Link
           key={link.label}
           href={link.href}
-          className="header-nav-link link nav-link-flex"
+          className={styles.headerNavLink}
           onClick={onNavigate}
         >
-          <span className="nav-logo-bullet">
+          <span className={styles.navLogoBullet}>
             <Image
               src="/1-01.png"
               alt="logo viñeta"

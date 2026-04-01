@@ -1,0 +1,119 @@
+.homeSection {
+  padding: 8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--bg-main);
+  color: var(--color-secondary);
+}
+
+.homeAbout {
+  max-width: 900px;
+  margin-bottom: 6rem;
+}
+
+.homeLogo {
+  margin-bottom: 3rem;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15));
+}
+
+.homeTitle {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 3px;
+}
+
+.homeDescription {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--color-fourth);
+}
+
+.homeSocial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.homeHighlights {
+  width: 100%;
+  max-width: 1100px;
+  margin: 4rem 0;
+  padding: 0 1rem;
+}
+
+.highlightsTitle {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  color: var(--color-secondary);
+}
+
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.highlightItem {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.highlightLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-red);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .homeTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.homeSocialLabel {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-fourth);
+}
+
+.homeSocialLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--color-third);
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.homeSocialLink:hover {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.homeSocialIcon {
+  width: 24px;
+  height: 24px;
+}
