@@ -11,7 +11,7 @@ export default function Header() {
     { label: "Inicio", href: "#" },
     { label: "Galería", href: "#galeria" },
     { label: "Artistas", href: "#artistas" },
-    { label: "Eventos", href: "#" },
+    { label: "Eventos", href: "#eventos" },
     { label: "Contacto", href: "#contacto" },
   ];
   

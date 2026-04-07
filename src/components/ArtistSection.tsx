@@ -11,7 +11,7 @@ export default function ArtistSection() {
     <section className={styles.artistSection}>
       <div className={styles.imageContainer}>
         <Image
-          src="/Foto-Galactico.png"
+          src="/artists/galactico.png"
           alt="Galáctico - Fundador Entre Líneas"
           fill
           className={styles.artistImage}
