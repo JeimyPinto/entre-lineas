@@ -37,6 +37,7 @@ export default function Header() {
             width={60}
             height={78}
             className={styles.headerLogo}
+            style={{ height: "auto" }}
           />
           <h1 className={styles.headerTitle}>Entre Líneas</h1>
         </Link>

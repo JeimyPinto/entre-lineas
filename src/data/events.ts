@@ -18,6 +18,7 @@ export const eventsData = [
       },
       {
         name: "Ser",
+        artistId: "zer",
       },
     ],
   },
@@ -40,6 +41,7 @@ export const eventsData = [
       },
       {
         name: "Murz",
+        artistId: "murz",
       },
     ],
   },
@@ -54,6 +56,7 @@ export const eventsData = [
     judges: [
       {
         name: "Diaz",
+        artistId: "diaz",
       },
       {
         name: "Ray",
@@ -62,6 +65,7 @@ export const eventsData = [
       },
       {
         name: "Murz",
+        artistId: "murz",
       },
     ],
   },
@@ -76,6 +80,7 @@ export const eventsData = [
     judges: [
       {
         name: "Diaz",
+        artistId: "diaz",
       },
       {
         name: "Ray",
@@ -84,6 +89,7 @@ export const eventsData = [
       },
       {
         name: "Murz",
+        artistId: "murz",
       },
     ],
   }

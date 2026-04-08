@@ -50,6 +50,7 @@ export default function InstagramCard({
           src={thumbnail}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={styles.thumbnail}
         />
         <div className={styles.thumbnailOverlay} />
@@ -83,6 +84,7 @@ export default function InstagramCard({
                       width={28}
                       height={28}
                       className={styles.judgeAvatar}
+                      style={{ height: "auto" }}
                     />
                   ) : (
                     <span className={styles.judgePlaceholder}>

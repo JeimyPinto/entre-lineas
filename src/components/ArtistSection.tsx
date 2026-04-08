@@ -18,16 +18,25 @@ export default function ArtistSection() {
         <section key={artist.id} id={`artista-${artist.id}`} className={styles.artistSection}>
           <div className={styles.imageContainer}>
             <Image
-              src={artist.image}
-              alt={`${artist.name} - ${artist.tag}`}
+              src={artist.image || "/artists/placeholder.jpg"}
+              alt={`${artist.name} - ${Array.isArray(artist.tag) ? artist.tag.join(" - ") : artist.tag}`}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={styles.artistImage}
               priority
             />
           </div>
 
           <div className={styles.contentContainer}>
-            <span className={styles.artistTag}>{artist.tag}</span>
+            <div className={styles.tagContainer}>
+              {Array.isArray(artist.tag) ? (
+                artist.tag.map((t, index) => (
+                  <span key={index} className={styles.artistTag}>{t}</span>
+                ))
+              ) : (
+                <span className={styles.artistTag}>{artist.tag}</span>
+              )}
+            </div>
             <h2 className={styles.artistName}>{artist.name}</h2>
             
             {artist.details && artist.details.length > 0 && (

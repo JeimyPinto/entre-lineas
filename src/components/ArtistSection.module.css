@@ -63,6 +63,12 @@
   gap: 1.5rem;
 }
 
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .artistTag {
   font-size: 0.9rem;
   text-transform: uppercase;

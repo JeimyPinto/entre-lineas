@@ -29,7 +29,7 @@ export default function Gallery() {
 						alt="Entre Líneas Logo"
 						width={48}
 						height={48}
-						style={{ marginBottom: "0.5rem" }}
+						style={{ marginBottom: "0.5rem", height: "auto" }}
 					/>
 					<span>Sin conexión a internet. Conéctate para ver la galería de videos.</span>
 				</div>
@@ -37,7 +37,7 @@ export default function Gallery() {
 			{/* Bloque informativo superior */}
 			<div className={styles.galleryInfoBlock}>
 				<div className={styles.galleryInfoHeader}>
-					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff' }} />
+					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff', height: 'auto' }} />
 					<div className={styles.galleryInfoTitle}>
 						<h2>Galería de Videos</h2>
 						{subscriberCount && (

@@ -26,6 +26,7 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
               width={24}
               height={32}
               className={styles.logoImgClosed}
+              style={{ height: "auto" }}
             />
             <Image
               src="/1-04.png"
@@ -33,6 +34,7 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
               width={24}
               height={32}
               className={styles.logoImgOpen}
+              style={{ height: "auto" }}
             />
           </span>
           {link.label}

@@ -2,7 +2,7 @@ export const artistsData = [
   {
     id: "galactico",
     name: "Galáctico",
-    tag: "Fundador de la Organización",
+    tag: ["Fundador de la Organización", "Artista"],
     image: "/artists/galactico.webp",
     details: [
       { label: "Profesión", value: "Abogado" },
@@ -19,10 +19,10 @@ export const artistsData = [
   {
     id: "ray",
     name: "Ray",
-    tag: "Juez y Artista",
+    tag: ["Juez", "Artista"],
     image: "/artists/ray.jpg",
     details: [
-      { label: "Profesion", value: "Productor y Artista de R Studios" },
+      { label: "Profesion", value: "Productor y Artista" },
       { label: "Origen", value: "Manizales, Colombia" },
 
     ],
@@ -30,5 +30,48 @@ export const artistsData = [
       "Productor y artista destacado en R Studios, aportando su visión y talento a las instrumentales y a la escena urbana."
     ],
     instagram: "https://www.instagram.com/ray_oficialr"
+  },
+  {
+    id: "zer",
+    name: "ZER",
+    tag: ["Juez"],
+    image: "",
+    details: [
+      { label: "Profesion", value: "" },
+      { label: "Origen", value: "" },
+
+    ],
+    bio: [
+      ""
+    ],
+    instagram: "https://www.instagram.com/zerlamortmamut?igsh=cmpiZ2Y1YW90YWk2"
+  },
+  {
+    id: "murz",
+    name: "Murz",
+    tag: ["Juez"],
+    image: "",
+    details: [
+      { label: "Profesion", value: "" },
+      { label: "Origen", value: "" },
+    ],
+    bio: [
+      ""
+    ],
+    instagram: "https://www.instagram.com/7murzz?igsh=a245YWUyZzBldTNr"
+  },
+  {
+    id: "diaz",
+    name: "DIAZ",
+    tag: ["Juez"],
+    image: "",
+    details: [
+      { label: "Profesion", value: "" },
+      { label: "Origen", value: "" },
+    ],
+    bio: [
+      ""
+    ],
+    instagram: "https://www.instagram.com/e.diazz11?igsh=Z2loOWtwZDR1ZWRm"
   }
 ];
