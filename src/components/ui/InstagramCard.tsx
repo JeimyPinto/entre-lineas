@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./InstagramCard.module.css";
 import { FaInstagram, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 export interface Judge {
   name: string;
   image?: string; // path to photo in /public/artists/
+  artistId?: string; // anchor id to link to artist section
 }
 
 export interface InstagramCardProps {
@@ -71,24 +73,36 @@ export default function InstagramCard({
         <div className={styles.judgesRow}>
           <span className={styles.judgesLabel}>Jueces</span>
           <div className={styles.judgesAvatars}>
-            {judges.map((judge) => (
-              <div key={judge.name} className={styles.judgeChip}>
-                {judge.image ? (
-                  <Image
-                    src={judge.image}
-                    alt={judge.name}
-                    width={28}
-                    height={28}
-                    className={styles.judgeAvatar}
-                  />
-                ) : (
-                  <span className={styles.judgePlaceholder}>
-                    {judge.name.charAt(0).toUpperCase()}
-                  </span>
-                )}
-                <span className={styles.judgeName}>{judge.name}</span>
-              </div>
-            ))}
+            {judges.map((judge) => {
+              const content = (
+                <>
+                  {judge.image ? (
+                    <Image
+                      src={judge.image}
+                      alt={judge.name}
+                      width={28}
+                      height={28}
+                      className={styles.judgeAvatar}
+                    />
+                  ) : (
+                    <span className={styles.judgePlaceholder}>
+                      {judge.name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                  <span className={styles.judgeName}>{judge.name}</span>
+                </>
+              );
+
+              return judge.artistId ? (
+                <Link key={judge.name} href={`#artista-${judge.artistId}`} className={styles.judgeChip}>
+                  {content}
+                </Link>
+              ) : (
+                <div key={judge.name} className={styles.judgeChip}>
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

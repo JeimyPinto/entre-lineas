@@ -4,62 +4,65 @@ import styles from "./ArtistSection.module.css";
 import Button from "./ui/Button";
 import { FaInstagram } from "react-icons/fa6";
 
+import { artistsData } from "../data/artists";
+
 export default function ArtistSection() {
-  const instagramUrl = process.env.NEXT_PUBLIC_GALACTICO_INSTAGRAM || "https://instagram.com/";
-
   return (
-    <section className={styles.artistSection}>
-      <div className={styles.imageContainer}>
-        <Image
-          src="/artists/galactico.png"
-          alt="Galáctico - Fundador Entre Líneas"
-          fill
-          className={styles.artistImage}
-          priority
-        />
+    <div className={styles.artistsWrapper}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.title}>Nuestros Artistas</h2>
+        <p className={styles.subtitle}>Conoce más sobre los talentos que forman parte de Entre Líneas.</p>
       </div>
 
-      <div className={styles.contentContainer}>
-        <span className={styles.artistTag}>Fundador de la Organización</span>
-        <h2 className={styles.artistName}>Galáctico</h2>
-        
-        <div className={styles.artistDetails}>
-          <div className={styles.detailItem}>
-                <span className={styles.detailLabel}>Profesión</span>
-                <span className={styles.detailValue}>Abogado</span>
+      {artistsData.map((artist) => (
+        <section key={artist.id} id={`artista-${artist.id}`} className={styles.artistSection}>
+          <div className={styles.imageContainer}>
+            <Image
+              src={artist.image}
+              alt={`${artist.name} - ${artist.tag}`}
+              fill
+              className={styles.artistImage}
+              priority
+            />
           </div>
-          <div className={styles.detailItem}>
-                <span className={styles.detailLabel}>Origen</span>
-                <span className={styles.detailValue}>Manizales, Colombia</span>
-          </div>
-          <div className={styles.detailItem}>
-                <span className={styles.detailLabel}>Trayectoria</span>
-                <span className={styles.detailValue}>Desde 2020</span>
-          </div>
-        </div>
 
-        <div className={styles.artistBio}>
-          <p>
-            Artista originario de la ciudad de Manizales, cuya carrera artística comienza a partir del año 2020.
-          </p>
-          <p>
-            Enfocado en el desarrollo musical, lírico, artístico, pedagógico y profesional, e influenciado por la Cultura Hip-Hop, la Poesía y la Rítmica.
-          </p>
-          <p>
-            Convergiendo en el proyecto artístico que lo caracteriza.
-          </p>
-        </div>
+          <div className={styles.contentContainer}>
+            <span className={styles.artistTag}>{artist.tag}</span>
+            <h2 className={styles.artistName}>{artist.name}</h2>
+            
+            {artist.details && artist.details.length > 0 && (
+              <div className={styles.artistDetails}>
+                {artist.details.map((detail, index) => (
+                  <div key={index} className={styles.detailItem}>
+                    <span className={styles.detailLabel}>{detail.label}</span>
+                    <span className={styles.detailValue}>{detail.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
-        <div className={styles.socialContainer}>
-          <Button 
-            href={instagramUrl} 
-            variant="outline"
-          >
-            <FaInstagram size={22} />
-            Seguir en Instagram
-          </Button>
-        </div>
-      </div>
-    </section>
+            {artist.bio && artist.bio.length > 0 && (
+              <div className={styles.artistBio}>
+                {artist.bio.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+
+            {artist.instagram && (
+              <div className={styles.socialContainer}>
+                <Button 
+                  href={artist.instagram} 
+                  variant="outline"
+                >
+                  <FaInstagram size={22} />
+                  Seguir en Instagram
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+    </div>
   );
 }

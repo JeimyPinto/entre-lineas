@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import NavMenu from "./NavMenu";
 import MenuButton from "./MenuButton";
@@ -8,7 +9,7 @@ import styles from "./header.module.css";
 
 export default function Header() {
   const links = [
-    { label: "Inicio", href: "#" },
+    { label: "Inicio", href: "#inicio" },
     { label: "Galería", href: "#galeria" },
     { label: "Artistas", href: "#artistas" },
     { label: "Eventos", href: "#eventos" },
@@ -29,7 +30,7 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}>
       <div className={styles.headerRow}>
-        <div className={styles.headerLogoTitle}>
+        <Link href="#inicio" className={styles.headerLogoTitle}>
           <Image
             src="/1-01.png"
             alt="Logo Entre Líneas"
@@ -38,7 +39,7 @@ export default function Header() {
             className={styles.headerLogo}
           />
           <h1 className={styles.headerTitle}>Entre Líneas</h1>
-        </div>
+        </Link>
         
         <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
         
