@@ -19,6 +19,7 @@ export default function RootLayout({
         {children}
         {/* Reset de css */}
         <Script src="https://gist.github.com/devinschumacher/6cbd52c082040f0e4c414836aebdb36f.js" strategy="lazyOnload" />
+        <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
       </body>
     </html>
   );

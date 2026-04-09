@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./InstagramCard.module.css";
-import { FaInstagram, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { FaInstagram, FaYoutube, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { artistsData } from "../../data/artists";
 
 export interface Judge {
   name: string;
@@ -14,29 +15,39 @@ export interface Judge {
 export interface InstagramCardProps {
   /** URL of the Instagram post */
   postUrl: string;
+  /** URL of the YouTube video */
+  youtubeLink?: string;
   /** Thumbnail image (local path in /public) */
-  thumbnail: string;
+  thumbnail?: string;
   /** Title / name of the event */
   title: string;
   /** Display date string */
   date: string;
   /** City / location */
   location: string;
-  /** List of judges / artists */
+  /** List of judges */
   judges?: Judge[];
+  /** List of hosts */
+  hosts?: Judge[];
   /** Extra CSS class */
   className?: string;
 }
 
+const DEFAULT_THUMBNAIL = "/Entre-lineas-logo.png";
+
 export default function InstagramCard({
   postUrl,
+  youtubeLink,
   thumbnail,
   title,
   date,
   location,
   judges = [],
+  hosts = [],
   className = "",
 }: InstagramCardProps) {
+  const displayThumbnail = thumbnail || DEFAULT_THUMBNAIL;
+
   return (
     <div className={`${styles.card} ${className}`}>
       {/* Thumbnail */}
@@ -47,11 +58,12 @@ export default function InstagramCard({
         className={styles.thumbnailWrapper}
       >
         <Image
-          src={thumbnail}
+          src={displayThumbnail}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={styles.thumbnail}
+          style={{ objectFit: thumbnail ? "cover" : "contain", padding: thumbnail ? 0 : "2rem" }}
         />
         <div className={styles.thumbnailOverlay} />
         <span className={styles.instaBadge}>
@@ -75,28 +87,35 @@ export default function InstagramCard({
           <span className={styles.judgesLabel}>Jueces</span>
           <div className={styles.judgesAvatars}>
             {judges.map((judge) => {
+              const artistInfo = judge.artistId 
+                ? artistsData.find(a => a.id === judge.artistId) 
+                : null;
+              
+              const displayName = artistInfo ? artistInfo.name : judge.name;
+              const displayImage = artistInfo ? artistInfo.image : judge.image;
+
               const content = (
                 <>
-                  {judge.image ? (
+                  {displayImage ? (
                     <Image
-                      src={judge.image}
-                      alt={judge.name}
+                      src={displayImage}
+                      alt={displayName}
                       width={28}
                       height={28}
                       className={styles.judgeAvatar}
-                      style={{ height: "auto" }}
+                      style={{ width: "28px", height: "auto" }}
                     />
                   ) : (
                     <span className={styles.judgePlaceholder}>
-                      {judge.name.charAt(0).toUpperCase()}
+                      {displayName.charAt(0).toUpperCase()}
                     </span>
                   )}
-                  <span className={styles.judgeName}>{judge.name}</span>
+                  <span className={styles.judgeName}>{displayName}</span>
                 </>
               );
 
               return judge.artistId ? (
-                <Link key={judge.name} href={`#artista-${judge.artistId}`} className={styles.judgeChip}>
+                <Link key={judge.artistId} href={`#artista-${judge.artistId}`} className={styles.judgeChip}>
                   {content}
                 </Link>
               ) : (
@@ -109,16 +128,79 @@ export default function InstagramCard({
         </div>
       )}
 
-      {/* CTA */}
-      <a
-        href={postUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.ctaLink}
-      >
-        Ver en Instagram
-        <FaArrowUpRightFromSquare size={13} className={styles.ctaIcon} />
-      </a>
+      {/* Hosts strip */}
+      {hosts.length > 0 && (
+        <div className={styles.judgesRow} style={{ paddingTop: 0 }}>
+          <span className={styles.judgesLabel}>Host</span>
+          <div className={styles.judgesAvatars}>
+            {hosts.map((host) => {
+              const artistInfo = host.artistId 
+                ? artistsData.find(a => a.id === host.artistId) 
+                : null;
+              
+              const displayName = artistInfo ? artistInfo.name : host.name;
+              const displayImage = artistInfo ? artistInfo.image : host.image;
+
+              const content = (
+                <>
+                  {displayImage ? (
+                    <Image
+                      src={displayImage}
+                      alt={displayName}
+                      width={28}
+                      height={28}
+                      className={styles.judgeAvatar}
+                      style={{ width: "28px", height: "auto" }}
+                    />
+                  ) : (
+                    <span className={styles.judgePlaceholder}>
+                      {displayName.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                  <span className={styles.judgeName}>{displayName}</span>
+                </>
+              );
+
+              return host.artistId ? (
+                <Link key={host.artistId} href={`#artista-${host.artistId}`} className={styles.judgeChip}>
+                  {content}
+                </Link>
+              ) : (
+                <div key={host.name} className={styles.judgeChip}>
+                  {content}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* CTAs */}
+      <div className={styles.actions}>
+        <a
+          href={postUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.ctaLink}
+        >
+          <FaInstagram size={16} />
+          Instagram
+          <FaArrowUpRightFromSquare size={10} className={styles.ctaIcon} />
+        </a>
+        
+        {youtubeLink && (
+          <a
+            href={youtubeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.ctaLink} ${styles.youtubeLink}`}
+          >
+            <FaYoutube size={16} />
+            YouTube
+            <FaArrowUpRightFromSquare size={10} className={styles.ctaIcon} />
+          </a>
+        )}
+      </div>
     </div>
   );
 }

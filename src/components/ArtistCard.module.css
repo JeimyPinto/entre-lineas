@@ -1,0 +1,231 @@
+.card {
+  width: 100%;
+}
+
+/* Desktop Styles */
+.desktopView {
+  display: block;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.desktopView:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.desktopView:hover .image {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.desktopView:hover .overlay {
+  opacity: 1;
+}
+
+.overlayText {
+  background: var(--color-red);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roleTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.roleTag {
+  color: var(--color-red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.name {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: white;
+  line-height: 1.2;
+}
+
+/* Mobile View (Hidden by default) */
+.mobileView {
+  display: none;
+}
+
+/* Responsive Switch */
+@media (max-width: 900px) {
+  .desktopView {
+    display: none;
+  }
+
+  .mobileView {
+    display: block;
+    background: #1a1a1a; /* Solid Background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .expanded .mobileView {
+    border-color: var(--color-red);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .accordionHeader {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    cursor: pointer;
+  }
+
+  .thumbWrapper {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+
+  .thumb {
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobileMainInfo {
+    flex: 1;
+  }
+
+  .mobileName {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: white; /* Explicitly White */
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .mobileRoles {
+    font-size: 0.7rem;
+    color: var(--color-fourth);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .chevron {
+    color: var(--color-fourth);
+    transition: transform 0.3s ease;
+  }
+
+  .chevronUp {
+    transform: rotate(180deg);
+    color: var(--color-red);
+  }
+
+  .accordionContent {
+    padding: 0 1.2rem 1.5rem 1.2rem;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .mobileMeta {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .metaItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .metaLabel {
+    font-size: 0.65rem;
+    color: var(--color-fourth);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .metaValue {
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .mobileBio {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #eee;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--color-red);
+    padding-left: 1rem;
+  }
+
+  .mobileBio p {
+    margin-bottom: 1rem;
+  }
+
+  .mobileSocials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .mobileSocialBtn {
+    background: transparent !important;
+    border: 1px solid var(--color-red) !important;
+    color: white !important;
+    border-radius: 50px !important;
+  }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

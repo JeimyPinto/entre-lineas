@@ -26,6 +26,8 @@ export default function EventsSection() {
             postUrl={event.postUrl}
             thumbnail={event.thumbnail}
             judges={event.judges}
+            hosts={event.host}
+            youtubeLink={event.youtubeLink}
           />
         ))}
       </div>

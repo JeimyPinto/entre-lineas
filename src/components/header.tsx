@@ -10,6 +10,7 @@ import styles from "./header.module.css";
 export default function Header() {
   const links = [
     { label: "Inicio", href: "#inicio" },
+    { label: "Historia", href: "#historia" },
     { label: "Galería", href: "#galeria" },
     { label: "Artistas", href: "#artistas" },
     { label: "Eventos", href: "#eventos" },

@@ -1,77 +1,144 @@
 "use client";
-import Image from "next/image";
+import { useState, useMemo } from "react";
 import styles from "./ArtistSection.module.css";
+import ArtistCard from "./ArtistCard";
+import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe } from "react-icons/fa6";
+import Image from "next/image";
 import Button from "./ui/Button";
-import { FaInstagram } from "react-icons/fa6";
 
-import { artistsData } from "../data/artists";
+import { artistsData, Artist } from "../data/artists";
 
 export default function ArtistSection() {
+  const [filter, setFilter] = useState("Todos");
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+
+  const roles = useMemo(() => {
+    const allRoles = artistsData.flatMap(a => a.orgRole);
+    return ["Todos", ...new Set(allRoles)];
+  }, []);
+
+  const filteredArtists = useMemo(() => {
+    if (filter === "Todos") return artistsData;
+    return artistsData.filter(a => a.orgRole.includes(filter));
+  }, [filter]);
+
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case 'instagram': return <FaInstagram size={20} />;
+      case 'youtube': return <FaYoutube size={20} />;
+      case 'facebook': return <FaFacebook size={20} />;
+      default: return <FaGlobe size={20} />;
+    }
+  };
+
   return (
     <div className={styles.artistsWrapper}>
       <div className={styles.sectionHeader}>
-        <h2 className={styles.title}>Nuestros Artistas</h2>
-        <p className={styles.subtitle}>Conoce más sobre los talentos que forman parte de Entre Líneas.</p>
+        <h2 className={styles.title}>Vínculo de Fraternidad</h2>
+        <p className={styles.subtitle}>Conoce al equipo y los artistas que hacen posible Entre Líneas.</p>
+        
+        <div className={styles.filterBar}>
+          {roles.map(role => (
+            <button
+              key={role}
+              className={`${styles.filterChip} ${filter === role ? styles.activeChip : ""}`}
+              onClick={() => setFilter(role)}
+            >
+              {role}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {artistsData.map((artist) => (
-        <section key={artist.id} id={`artista-${artist.id}`} className={styles.artistSection}>
-          <div className={styles.imageContainer}>
-            <Image
-              src={artist.image || "/artists/placeholder.jpg"}
-              alt={`${artist.name} - ${Array.isArray(artist.tag) ? artist.tag.join(" - ") : artist.tag}`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className={styles.artistImage}
-              priority
-            />
-          </div>
+      <div className={styles.artistsContainer}>
+        {filteredArtists.map((artist) => (
+          <ArtistCard 
+            key={artist.id} 
+            artist={artist} 
+            onOpenModal={setSelectedArtist} 
+          />
+        ))}
+      </div>
 
-          <div className={styles.contentContainer}>
-            <div className={styles.tagContainer}>
-              {Array.isArray(artist.tag) ? (
-                artist.tag.map((t, index) => (
-                  <span key={index} className={styles.artistTag}>{t}</span>
-                ))
-              ) : (
-                <span className={styles.artistTag}>{artist.tag}</span>
-              )}
-            </div>
-            <h2 className={styles.artistName}>{artist.name}</h2>
+      {/* Detail Modal */}
+      {selectedArtist && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedArtist(null)}>
+          <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setSelectedArtist(null)}>
+              <FaXmark size={24} />
+            </button>
             
-            {artist.details && artist.details.length > 0 && (
-              <div className={styles.artistDetails}>
-                {artist.details.map((detail, index) => (
-                  <div key={index} className={styles.detailItem}>
-                    <span className={styles.detailLabel}>{detail.label}</span>
-                    <span className={styles.detailValue}>{detail.value}</span>
+            <div className={styles.modalBody}>
+              <div className={styles.modalImageWrapper}>
+                <Image
+                  src={selectedArtist.image || "/1-01.png"}
+                  alt={selectedArtist.name}
+                  fill
+                  className={styles.modalImage}
+                />
+              </div>
+              
+              <div className={styles.modalInfo}>
+                <div className={styles.modalHeader}>
+                  <div className={styles.tagContainer}>
+                    {selectedArtist.orgRole.map((role, idx) => (
+                      <span key={idx} className={styles.artistTag}>{role}</span>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+                  <h2 className={styles.modalName}>{selectedArtist.name}</h2>
+                </div>
 
-            {artist.bio && artist.bio.length > 0 && (
-              <div className={styles.artistBio}>
-                {artist.bio.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-            )}
+                <div className={styles.artistDetails}>
+                  {selectedArtist.profession && (
+                    <div className={styles.detailItem}>
+                      <span className={styles.detailLabel}>Profesión</span>
+                      <span className={styles.detailValue}>{selectedArtist.profession}</span>
+                    </div>
+                  )}
+                  {selectedArtist.origin && (
+                    <div className={styles.detailItem}>
+                      <span className={styles.detailLabel}>Origen</span>
+                      <span className={styles.detailValue}>{selectedArtist.origin}</span>
+                    </div>
+                  )}
+                  {selectedArtist.trajectory && (
+                    <div className={styles.detailItem}>
+                      <span className={styles.detailLabel}>Trayectoria</span>
+                      <span className={styles.detailValue}>{selectedArtist.trajectory}</span>
+                    </div>
+                  )}
+                </div>
 
-            {artist.instagram && (
-              <div className={styles.socialContainer}>
-                <Button 
-                  href={artist.instagram} 
-                  variant="outline"
-                >
-                  <FaInstagram size={22} />
-                  Seguir en Instagram
-                </Button>
+                {selectedArtist.bio && selectedArtist.bio[0] !== "" && (
+                  <div className={styles.artistBio}>
+                    {selectedArtist.bio.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+
+                {selectedArtist.socials && selectedArtist.socials.length > 0 && (
+                  <div className={styles.socialContainer}>
+                    {selectedArtist.socials.map((social, index) => (
+                      social.url !== "https://www.instagram.com/" && (
+                        <Button 
+                          key={index}
+                          href={social.url} 
+                          variant="outline"
+                          className={styles.socialButton}
+                        >
+                          {getSocialIcon(social.platform)}
+                          {social.label}
+                        </Button>
+                      )
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
-        </section>
-      ))}
+        </div>
+      )}
     </div>
   );
 }

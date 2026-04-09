@@ -3,6 +3,7 @@ import Gallery from '@/components/gallery'
 import ArtistSection from '@/components/ArtistSection'
 import EventsSection from '@/components/EventsSection'
 import Contact from '@/components/Contact'
+import HistorySection from '@/components/HistorySection'
 
 export default function Home() {
   return (
@@ -10,14 +11,15 @@ export default function Home() {
       <div id="inicio">
         <MainSection />
       </div>
+      <HistorySection />
+      <div id="galeria">
+        <Gallery />
+      </div>
       <div id="artistas">
         <ArtistSection />
       </div>
       <div id="eventos">
         <EventsSection />
-      </div>
-      <div id="galeria">
-        <Gallery />
       </div>
       <Contact />
     </main>
