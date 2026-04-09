@@ -4,7 +4,7 @@ import { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import Link from "next/link";
 import styles from "./Button.module.css";
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'social';
 
 interface CommonProps {
   variant?: ButtonVariant;

@@ -13,14 +13,21 @@
   margin-bottom: 6rem;
 }
 
-.homeLogo {
-  margin-bottom: 3rem;
+.logoContainer {
+  position: relative;
+  width: 140px;
+  height: 198px;
+  margin: 0 auto 3rem auto;
   /* Glow increased and backed by a subtle halo */
   filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2)) 
           drop-shadow(0 0 50px rgba(255, 255, 255, 0.1));
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
   border-radius: 50%;
   padding: 15px;
+}
+
+.homeLogo {
+  /* Image fills the container, aspect ratio handled by object-fit: contain */
 }
 
 .homeTitle {

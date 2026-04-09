@@ -124,7 +124,7 @@ export default function ArtistSection() {
                         <Button 
                           key={index}
                           href={social.url} 
-                          variant="outline"
+                          variant="social"
                           className={styles.socialButton}
                         >
                           {getSocialIcon(social.platform)}

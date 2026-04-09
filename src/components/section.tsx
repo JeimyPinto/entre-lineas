@@ -7,27 +7,30 @@ import { useYouTubeData } from "@/hooks/useYouTubeData";
 import Card from "./ui/Card";
 import { FaInstagram, FaYoutube, FaHeart, FaComment, FaFire } from "react-icons/fa6";
 
+import { useInterval } from "@/hooks/useInterval";
+
 export default function MainSection() {
   const { highlights } = useYouTubeData();
   const [logoIndex, setLogoIndex] = useState(0);
   const logos = ["/1-01.png", "/1-02.png", "/1-03.png", "/1-04.png"];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLogoIndex((prev) => (prev + 1) % logos.length);
-    }, 400); // 400ms per frame to make it feel like an old film or blink
-    return () => clearInterval(interval);
-  }, []);
+  useInterval(() => {
+    setLogoIndex((prev) => (prev + 1) % logos.length);
+  }, 400);
 
   return (
     <section className={styles.homeSection}>
       <div className={styles.homeAbout}>
-        <Image src={logos[logoIndex]}
-          alt="Logo Animado Entre Líneas"
-          className={styles.homeLogo}
-          width={140}
-          height={198}
-          priority />
+        <div className={styles.logoContainer}>
+          <Image 
+            src={logos[logoIndex]}
+            alt="Logo Animado Entre Líneas"
+            fill
+            className={styles.homeLogo}
+            style={{ objectFit: "contain" }}
+            priority 
+          />
+        </div>
         <h2 className={styles.homeTitle}>¿Quiénes somos?</h2>
         <p className={styles.homeDescription}>
           Entre Líneas es un proyecto audiovisual y artístico dedicado a promover y difundir la cultura, así como el talento de artistas, freestylers y músicos colombianos.

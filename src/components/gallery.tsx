@@ -10,8 +10,11 @@ import styles from "./gallery.module.css";
 import { useYouTubeData } from "../hooks/useYouTubeData";
 import Button from "./ui/Button";
 
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+
 export default function Gallery() {
 	const { shorts, videos, subscriberCount, loading, isOnline } = useYouTubeData();
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	const [selected, setSelected] = useState<string | null>(null);
 	const [carouselIndex, setCarouselIndex] = useState(0);
 	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>('videos');
@@ -83,7 +86,7 @@ export default function Gallery() {
 			<div
 				className={styles.galleryGrid}
 				style={
-					typeof window !== 'undefined' && window.innerWidth <= 768 && (activeBlock === 'videos' ? videos : shorts).length > 0
+					isMobile && (activeBlock === 'videos' ? videos : shorts).length > 0
 						? { transform: `translateX(-${carouselIndex * 86}vw)` }
 						: undefined
 				}

@@ -102,7 +102,7 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
                   <Button 
                     key={i}
                     href={social.url} 
-                    variant="outline"
+                    variant="social"
                     className={styles.mobileSocialBtn}
                     fullWidth
                   >

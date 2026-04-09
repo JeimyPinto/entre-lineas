@@ -1,0 +1,22 @@
+import { useEffect, useRef } from 'react';
+
+/**
+ * Custom hook to use setInterval in a declarative way within React components.
+ * Solution inspired by Dan Abramov's blog post.
+ */
+export function useInterval(callback: () => void, delay: number | null) {
+  const savedCallback = useRef(callback);
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    if (delay !== null) {
+      const id = setInterval(() => savedCallback.current(), delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
