@@ -41,7 +41,9 @@ export default function Gallery() {
 					<div className={styles.galleryInfoTitle}>
 						<h2>Galería de Videos</h2>
 						{subscriberCount && (
-							<span className={styles.gallerySubscribers}>{Number(subscriberCount).toLocaleString()} suscriptores</span>
+							<span className={styles.gallerySubscribers}>
+								{typeof subscriberCount === 'string' ? subscriberCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Number(subscriberCount).toLocaleString()} suscriptores
+							</span>
 						)}
 					</div>
 				</div>

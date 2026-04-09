@@ -117,6 +117,7 @@ export async function GET() {
     const highlights = {
       viral: [...videos, ...shorts].sort((a, b) => parseInt(b.viewCount || "0") - parseInt(a.viewCount || "0"))[0] || null,
       mostLiked: [...videos, ...shorts].sort((a, b) => parseInt(b.likeCount || "0") - parseInt(a.likeCount || "0"))[0] || null,
+      mostCommented: [...videos, ...shorts].sort((a, b) => parseInt(b.commentCount || "0") - parseInt(a.commentCount || "0"))[0] || null,
     };
 
     return NextResponse.json({ shorts, videos, subscriberCount, highlights });
@@ -162,7 +163,11 @@ export async function GET() {
       shorts: mockShorts, 
       videos: mockVideos, 
       subscriberCount: "1,200", 
-      highlights: { viral: mockShorts[0], mostLiked: mockVideos[0] } 
+      highlights: { 
+        viral: mockShorts[0], 
+        mostLiked: mockVideos[0],
+        mostCommented: mockVideos[1]
+      } 
     });
   }
 }
