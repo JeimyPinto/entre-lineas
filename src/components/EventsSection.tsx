@@ -24,7 +24,6 @@ export default function EventsSection() {
             date={event.date}
             location={event.location}
             postUrl={event.postUrl}
-            thumbnail={event.thumbnail}
             judges={event.judges}
             hosts={event.host}
             youtubeLink={event.youtubeLink}
