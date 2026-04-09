@@ -1,4 +1,23 @@
-export const eventsData = [
+export interface Event {
+  id: number;
+  title: string;
+  date: string;
+  location: string;
+  postUrl: string;
+  youtubeLink?: string;
+  judges: {
+    name: string;
+    image?: string;
+    artistId?: string;
+  }[];
+  host?: {
+    name: string;
+    image?: string;
+    artistId?: string;
+  }[];
+}
+
+export const eventsData: Event[] = [
   {
     id: 1,
     title: "Entre Líneas - Edición 1",
