@@ -1,7 +1,7 @@
 .contactSection {
-  padding: 100px 20px;
+  padding: 100px 20px 180px;
   background: var(--bg-main);
-  color: var(--color-secondary);
+  color: var(--color-white);
   font-family: 'Inter', sans-serif;
   overflow: hidden;
   position: relative;
@@ -37,22 +37,18 @@
   filter: drop-shadow(0 0 15px var(--color-red-glow));
   transition: transform 0.4s ease;
   background: white;
-  border-radius: 12px;
-  padding: 8px;
-}
-
-.contactLogo:hover {
+  border-radius: var(--border-radius-m);
   transform: rotate(5deg) scale(1.1);
 }
 
 .title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--font-h1);
   font-weight: 900;
   text-align: center;
   margin-bottom: 20px;
   letter-spacing: -2px;
   /* Use the brand red instead of purple/blue */
-  background: linear-gradient(to right, var(--color-secondary), var(--color-red));
+  background: linear-gradient(to right, var(--color-white), var(--color-red));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -61,11 +57,11 @@
 
 .invitation {
   text-align: center;
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-size: var(--font-body-lg);
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
-  color: var(--color-fourth);
+  color: var(--color-grey-light);
   animation: fadeInUp 0.8s ease 0.2s forwards;
   opacity: 0;
 }
@@ -84,16 +80,11 @@
 }
 
 .card {
-  background: var(--color-third);
+  background: var(--color-grey-dark);
   backdrop-filter: var(--glass-effect);
   border: var(--border-glass);
   padding: 40px;
-  border-radius: 20px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  border-radius: var(--border-radius-xl);
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
 }
@@ -106,32 +97,29 @@
 .card:hover {
   transform: translateY(-10px);
   border-color: var(--color-red);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-}
-
-.icon {
-  font-size: 3rem;
+    box-shadow: 0 15px 35px var(--color-shadow);
+  font-size: var(--font-h1);
   margin-bottom: 20px;
   color: var(--color-red);
   transition: color 0.3s ease;
 }
 
 .card:hover .icon {
-  color: var(--color-secondary);
+  color: var(--color-white);
   filter: drop-shadow(0 0 10px var(--color-red-glow));
 }
 
 .cardTitle {
-  font-size: 1.5rem;
+  font-size: var(--font-h4);
   font-weight: 700;
   margin-bottom: 15px;
-  color: var(--color-secondary);
+  color: var(--color-white);
 }
 
 .platformsSubtitle {
-  color: var(--color-fourth);
+  color: var(--color-grey-light);
   margin: 0 0 20px 0;
-  font-size: 0.95rem;
+  font-size: var(--font-body);
 }
 
 .infoList {
@@ -146,7 +134,7 @@
 }
 
 .link {
-  color: var(--color-fourth);
+  color: var(--color-grey-light);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -156,7 +144,7 @@
 }
 
 .link:hover {
-  color: var(--color-secondary);
+  color: var(--color-white);
   text-decoration: underline;
 }
 
@@ -169,24 +157,15 @@
 }
 
 .platformIcon {
-  font-size: 2rem;
-  color: var(--color-fourth);
+  font-size: var(--font-h2);
+  color: var(--color-grey-light);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;
   height: 50px;
-  border-radius: 12px;
-  background: var(--color-primary);
-  border: 1px solid var(--color-third);
-}
-
-.platformIcon:hover {
-  color: var(--color-secondary);
-  border-color: var(--color-red);
-  transform: translateY(-5px);
-  background: var(--color-red);
+  border-radius: var(--border-radius-m);
   box-shadow: 0 10px 20px var(--color-red-glow);
 }
 
@@ -214,7 +193,7 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: 2.2rem;
+    font-size: var(--font-h2);
   }
   .contactSection {
     padding: 60px 20px;

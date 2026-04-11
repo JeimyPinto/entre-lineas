@@ -4,6 +4,7 @@ import ArtistSection from '@/components/ArtistSection'
 import EventsSection from '@/components/EventsSection'
 import Contact from '@/components/Contact'
 import HistorySection from '@/components/HistorySection'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <EventsSection />
       </div>
       <Contact />
+      <Footer />
     </main>
   );
 }

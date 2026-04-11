@@ -1,0 +1,131 @@
+.footer {
+  background-color: var(--color-black);
+  border-top: 1px solid var(--color-border);
+  padding: 80px 20px 40px;
+  color: var(--color-white);
+  font-family: var(--font-main);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 80px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 60px;
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brandName {
+  font-family: var(--font-title);
+  font-size: var(--font-h2);
+  letter-spacing: 1px;
+}
+
+.description {
+  color: var(--color-grey-light);
+  font-size: var(--font-body);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.columnTitle {
+  font-family: var(--font-title);
+  color: var(--color-red);
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: var(--font-body-lg);
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linksList li a {
+  color: var(--color-grey-light);
+  transition: all 0.3s ease;
+  font-size: var(--font-body);
+}
+
+.linksList li a:hover {
+  color: var(--color-white);
+  padding-left: 5px;
+}
+
+.brandingLink {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background: color-mix(in srgb, var(--color-red) 10%, var(--color-dark) 90%);
+  border: 1px solid color-mix(in srgb, var(--color-red) 20%, transparent);
+  border-radius: var(--border-radius-s);
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.copyright {
+  color: var(--color-grey-light);
+  font-size: var(--font-small);
+}
+
+.socialIcons {
+  display: flex;
+  gap: 20px;
+}
+
+.socialIcons a {
+  font-size: var(--font-body-lg);
+  color: var(--color-grey-light);
+  transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+  color: var(--color-red);
+}
+
+@media (max-width: 768px) {
+  .topSection {
+    /* grid-template-columns: 1fr; handled by global .mobile-single-column class */
+    gap: 40px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .linksGrid {
+    /* grid-template-columns: 1fr; handled by global .mobile-single-column class */
+    gap: 30px;
+  }
+}

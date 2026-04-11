@@ -1,10 +1,7 @@
 .suscribeBanner {
-  background: linear-gradient(135deg, var(--color-red) 0%, #600000 100%);
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-dark) 100%);
   padding: 3rem;
-  border-radius: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: var(--border-radius-xl);
   gap: 2rem;
   color: white;
   margin-top: 3rem;
@@ -13,28 +10,24 @@
 
 .suscribeBanner p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: var(--font-body-lg);
   font-weight: 700;
   line-height: 1.4;
 }
 
 .suscribeBanner p span {
   display: block;
-  font-size: 0.9rem;
+  font-size: var(--font-body);
   font-weight: 400;
   opacity: 0.9;
   margin-top: 0.3rem;
 }
 
 .subscribeButton {
-  background: white;
-  color: #FF0000;
+  background: var(--color-white);
+  color: var(--color-red);
   padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+  border-radius: var(--border-radius-m);
   gap: 0.8rem;
   transition: transform 0.3s, box-shadow 0.3s;
   flex-shrink: 0;
@@ -42,7 +35,7 @@
 
 .subscribeButton:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px var(--color-shadow-soft);
 }
 
 @media (max-width: 600px) {

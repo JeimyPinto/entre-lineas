@@ -9,37 +9,93 @@
 
 /* Variables globales y paleta de colores */
 :root {
-  /* Paleta principal */
-  --color-primary: #000000;
-  --color-secondary: #ffffff;
-  --color-third: #2a2a2a;
-  --color-fourth: #929090;
-  --color-red: #950303;
-  --color-red-glow: rgba(149, 3, 3, 0.4);
+  /* Paleta de Colores Principal - Dark Theme */
+  --color-black: #000000;
+  --color-dark: #0f0f0f;
+  --color-grey-dark: #1e1e1e;
+  --color-grey: #2d2d2d;
+  --color-grey-light: #a4a4a4;
+  --color-white: #ffffff;
+  --color-red: #e80316;
+  --color-red-glow: rgba(232, 3, 22, 0.35);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.841);
+  --color-bg-surface-light: color-mix(in srgb, var(--color-white) 6%, var(--color-dark) 94%);
+  --color-bg-overlay: color-mix(in srgb, var(--color-white) 3%, transparent);
+  --color-border-light: color-mix(in srgb, var(--color-white) 5%, transparent);
+  --color-shadow: color-mix(in srgb, var(--color-black) 50%, transparent);
+  --color-shadow-soft: color-mix(in srgb, var(--color-white) 30%, transparent);
+  --color-shadow-red: color-mix(in srgb, var(--color-red) 20%, transparent);
+  --color-text-muted: color-mix(in srgb, var(--color-white) 70%, var(--color-black) 30%);
 
-  /* Design Tokens */
+  /* Background Gradients */
+  --bg-main: radial-gradient(circle at 50% 50%, #1e1e1e 0%, #0f0f0f 100%);
+
+  --font-display: clamp(3.75rem, 10vw, 4.5rem); /* 60–72px */
+  --font-h1: clamp(2.25rem, 6vw, 3rem); /* 36–48px */
+  --font-h2: clamp(1.75rem, 4.5vw, 2.2rem); /* 28–35px */
+  --font-h3: clamp(1.3rem, 3vw, 1.6rem); /* 21–26px */
+  --font-h4: clamp(1.1rem, 2.4vw, 1.25rem); /* 18–20px */
+  --font-body-lg: 1.125rem; /* 18px */
+  --font-body: 1rem; /* 16px */
+  --font-small: 0.875rem; /* 14px */
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+
+  /* Typography Fonts */
   --font-main: "Esteban", serif;
   --font-title: "Cloister", "Esteban", serif;
-  --border-radius: 12px;
+
+  /* Global Settings */
+  --border-radius-s: 0.5em;
+  --border-radius-m: 0.75em;
+  --border-radius-l: 1em;
+  --border-radius-xl: 1.5em;
+
   --border-glass: 1px solid rgba(255, 255, 255, 0.08);
-  --bg-main: radial-gradient(circle at 50% 50%, #151515 0%, #000000 100%);
-  --shadow-premium: 0 15px 35px rgba(0, 0, 0, 0.5);
+
   --glass-effect: blur(12px) saturate(180%);
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --gap-s: 0.5rem;
+  --gap-m: 0.75rem;
+  --gap-l: 1rem;
+  --gap-xl: 1.5rem;
+  --gap-xxl: 2rem;
+
+  --padding-s:0.5rem;
+  --padding-m:0.75rem;
+  --padding-l:1rem;
+  --padding-xl:1.5rem;
+  --padding-xxl:2rem;
+  --padding-xxxl:2.5rem;
+
+  --margin-s:0.5rem;
+  --margin-m:0.75rem;
+  --margin-l:1rem;
+  --margin-xl:1.5rem;
+  --margin-xxl:2rem;
+  --margin-xxxl:3rem;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
 html, body {
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
+  text-decoration: none;
 }
 
 body {
-  background-color: var(--color-primary);
+  background-color: var(--color-dark);
   margin: 0;
   padding-top: 85px; /* PC height */
   display: flex;
@@ -58,4 +114,70 @@ img, video, iframe {
     margin: 0;
     overflow-x: hidden;
   }
+}
+
+/* Responsive Breakpoints - Common across components */
+/* Use these as base for consistent responsive behavior */
+
+@media (max-width: 1024px) {
+  /* Large tablets and small laptops - Menu hamburger appears */
+}
+
+@media (max-width: 900px) {
+  /* Tablets - Layout switches (e.g., cards to mobile view) */
+}
+
+@media (max-width: 768px) {
+  /* Large mobiles - Reduced padding, compact layouts */
+}
+
+@media (max-width: 600px) {
+  /* Mobiles - Smaller fonts, single columns */
+}
+
+@media (max-width: 480px) {
+  /* Small mobiles - Minimal layouts, stacked elements */
+}
+
+/* Responsive Utility Classes - To avoid duplication across components */
+/* Apply these classes to elements for common responsive behaviors */
+/* Using html selector for higher specificity without !important */
+
+html .mobile-single-column {
+  grid-template-columns: 1fr;
+}
+
+html .mobile-center {
+  text-align: center;
+}
+
+html .mobile-reduced-gap {
+  gap: 1rem;
+}
+
+html .mobile-title-h1 {
+  font-size: var(--font-h1);
+}
+
+html .mobile-section-padding {
+  padding: 4rem 1.5rem;
+}
+
+html .mobile-compact-padding {
+  padding: 1rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-grey);
+  border-radius: var(--border-radius-s);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-red);
 }

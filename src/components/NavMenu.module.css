@@ -3,11 +3,11 @@
   gap: 2rem;
   align-items: center;
   margin-left: auto; /* Push to the right in desktop */
-  margin-right: 2rem;
+  margin-right: 5rem;
 }
 
 .headerNavLink {
-  color: var(--color-fourth);
+  color: var(--color-white);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s;
@@ -31,7 +31,7 @@
 }
 
 .headerNavLink:hover {
-  color: var(--color-secondary);
+  color: var(--color-red);
 }
 
 .headerNavLink:hover::after {
@@ -42,15 +42,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: var(--color-dark);
   padding: 4px;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-}
-
-.logoImgOpen {
-  display: none;
+  border-radius: var(--border-radius-s);
 }
 
 .headerNavLink:hover .logoImgClosed {
@@ -61,7 +55,7 @@
   display: block;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .headerNav {
     position: fixed;
     margin: 0;
@@ -73,11 +67,11 @@
     height: 100dvh;
     padding: 8rem 4rem 4rem 2.5rem; /* Aumentado el margen derecho a 4rem (2.5 original + 1.5 extra o similar) */
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.9);
+    z-index: 1;
+    background: color-mix(in srgb, var(--color-black) 90%, transparent);
     backdrop-filter: blur(15px);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: -15px 0 35px rgba(0, 0, 0, 0.8);
+    border-left: 1px solid var(--color-border);
+    box-shadow: -15px 0 35px var(--color-shadow);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -89,12 +83,12 @@
   }
 
   .headerNavLink {
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    font-size: var(--font-h3);
     font-family: var(--font-title);
     width: 100%;
     padding: 1rem 0;
     justify-content: flex-end;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--color-border);
     letter-spacing: 1px;
     gap: 1rem;
   }
@@ -105,8 +99,8 @@
 
   .navLogoBullet {
     order: 2; /* Move icon to the right of the text */
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
+    background: color-mix(in srgb, var(--color-white) 95%, transparent);
+    border-radius: var(--border-radius-s);
     width: 32px;
     height: 32px;
   }

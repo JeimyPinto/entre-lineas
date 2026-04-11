@@ -3,12 +3,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: color-mix(in srgb, var(--color-black) 90%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 2000;
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1;
   transition: all 0.3s ease;
-  padding: 0 2rem;
+  padding: 0 var(--padding-xxl);
   height: 85px; /* Más espacio para respirar */
   display: flex;
   align-items: center;
@@ -25,23 +25,21 @@
 .headerLogoTitle {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: var(--gap-xl);
   text-decoration: none;
-  padding: 0.5rem 0;
+  padding: var(--padding-s) 0;
 }
 
 .headerLogo {
-  background: white;
-  border-radius: 8px;
-  padding: 2px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  background: var(--color-white);
+  border-radius: var(--border-radius-s);
 }
 
 .headerTitle {
   font-family: var(--font-title);
-  color: var(--color-secondary);
-  font-size: 1.8rem;
-  font-weight: 500;
+  color: var(--color-white);
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-normal);
   margin: 0;
   letter-spacing: 1px;
 }
@@ -49,15 +47,15 @@
 @media (max-width: 768px) {
   .header {
     height: 75px; /* Altura generosa en móvil también */
-    padding: 0 1.2rem;
+    padding: 0 var(--padding-xl);
   }
   
   .headerTitle {
-    font-size: 1.4rem;
+    font-size: var(--font-h4);
   }
   
   .headerLogo {
-    width: 42px; /* Un poco más pequeño para que no toque bordes */
-    height: auto;
+    width: 50px; 
+    height: 65px;
   }
 }

@@ -1,188 +1,235 @@
 .card {
   position: relative;
-  border-radius: 20px;
+  border-radius: var(--border-radius-xl);
   overflow: hidden;
-  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              box-shadow 0.4s ease;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(145deg, var(--color-grey-dark) 0%, var(--color-dark) 100%);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-normal);
+  box-shadow: 0 8px 32px var(--color-shadow-soft);
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(149, 3, 3, 0.15),
-              0 8px 24px rgba(0, 0, 0, 0.6);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px var(--color-shadow-red),
+              0 12px 32px var(--color-shadow);
 }
-/* Thumbnail area */
+
+/* Thumbnail - 16:9 aspect ratio for better visual */
 .thumbnailWrapper {
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #111;
+  background: var(--color-black);
 }
 
 .thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover .thumbnail {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .thumbnailOverlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.1) 40%,
-    transparent 100%
+    135deg,
+    color-mix(in srgb, var(--color-black) 80%, transparent) 0%,
+    color-mix(in srgb, var(--color-red-glow) 20%, transparent) 50%,
+    rgba(255,255,255,0.05) 100%
   );
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: all var(--transition-normal);
 }
 
-/* Instagram icon badge */
+.card:hover .thumbnailOverlay {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-red-glow) 40%, transparent) 0%,
+    color-mix(in srgb, var(--color-red) 10%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+/* Enhanced Instagram badge with pulse */
 .instaBadge {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  background: rgba(232, 3, 22, 0.9);
+  border: 2px solid var(--color-white);
+  border-radius: var(--border-radius-m);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.4);
-  z-index: 2;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 3;
+  box-shadow: 0 4px 16px var(--color-red-glow);
+  animation: pulse-ring 2s infinite;
+  transition: all var(--transition-fast);
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(232, 3, 22, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(232, 3, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 3, 22, 0); }
 }
 
 .card:hover .instaBadge {
-  transform: scale(1.1) rotate(-5deg);
-  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6);
+  transform: scale(1.15) rotate(360deg);
+  background: var(--color-red);
+  animation: none;
 }
 
-/* Content area */
+/* Content - Better hierarchy */
 .content {
-  padding: 1.4rem 1.4rem 0.8rem;
+  padding: 1.75rem 1.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.75rem;
 }
 
 .eventDate {
-  font-size: 0.75rem;
+  font-size: var(--font-small);
+  font-family: var(--font-title);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: var(--color-red);
-  font-weight: 700;
+  font-weight: var(--font-weight-black);
+  text-shadow: 0 0 8px var(--color-red-glow);
 }
 
 .eventTitle {
-  font-family: var(--font-main);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-secondary);
+  font-family: var(--font-title);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: var(--font-weight-black);
+  color: var(--color-white);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-shadow: 0 2px 4px var(--color-shadow);
 }
 
 .eventLocation {
-  font-size: 0.85rem;
-  color: var(--color-fourth);
+  font-size: var(--font-small);
+  color: var(--color-grey-light);
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  font-weight: 500;
 }
 
-/* Judges / artists strip */
+/* Judges row - Horizontal scrollable */
 .judgesRow {
-  padding: 0 1.4rem 1.4rem;
+  padding: 0 1.75rem 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.75rem;
+  overflow: hidden;
 }
 
 .judgesLabel {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
+  font-family: var(--font-main);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--color-fourth);
+  letter-spacing: 2px;
+  color: var(--color-red);
+  font-weight: var(--font-weight-bold);
 }
 
 .judgesAvatars {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-red-glow) transparent;
+}
+
+.judgesAvatars::-webkit-scrollbar {
+  height: 4px;
+}
+
+.judgesAvatars::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.judgesAvatars::-webkit-scrollbar-thumb {
+  background: var(--color-red-glow);
+  border-radius: 2px;
 }
 
 .judgeChip {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background 0.3s, border-color 0.3s;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem 0.5rem 0.5rem;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-m);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .judgeChip:hover {
-  background: rgba(149, 3, 3, 0.15);
-  border-color: rgba(149, 3, 3, 0.3);
+  background: var(--color-red-glow);
+  border-color: var(--color-red);
+  transform: translateY(-2px);
 }
 
 .judgeAvatar {
-  width: 28px;
-  height: 28px;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--color-white);
+  flex-shrink: 0;
 }
 
 .judgePlaceholder {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-red), #4a0101);
+  background: linear-gradient(135deg, var(--color-red), var(--color-red-glow));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-black);
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  flex-shrink: 0;
 }
 
 .judgeName {
-  font-size: 0.8rem;
-  color: #ccc;
-  font-weight: 500;
+  font-size: var(--font-small);
+  color: var(--color-white);
+  font-weight: 600;
+  font-family: var(--font-main);
 }
 
-/* Actions area */
+/* Actions - Match Button.social style */
 .actions {
   display: flex;
   gap: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--color-grey);
+  border-top: 1px solid var(--color-border);
+  backdrop-filter: blur(20px);
 }
 
 .ctaLink {
@@ -190,55 +237,90 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 1rem 0.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-  color: var(--color-secondary);
+  gap: 0.75rem;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--color-white) 3%, var(--color-grey-dark));
+  color: var(--color-white);
   text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s;
+}
+
+.ctaLink:hover::before {
+  left: 100%;
 }
 
 .ctaLink:hover {
-  background: linear-gradient(135deg, rgba(149, 3, 3, 0.2), rgba(149, 3, 3, 0.1));
-  color: #fff;
+  background: var(--color-red-glow);
+  color: var(--color-white);
+  box-shadow: 0 4px 16px var(--color-red-glow);
 }
 
 .youtubeLink {
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 1px solid var(--color-border);
 }
 
 .youtubeLink:hover {
-  background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
-  color: #ff4d4d;
+  background: color-mix(in srgb, var(--color-red) 25%, var(--color-grey-dark));
+  color: var(--color-red);
 }
 
 .ctaIcon {
-  opacity: 0.5;
-  transition: transform 0.3s;
+  opacity: 0.8;
+  transition: all var(--transition-fast);
 }
 
 .ctaLink:hover .ctaIcon {
-  transform: translate(2px, -2px);
+  transform: scale(1.2) rotate(10deg);
   opacity: 1;
 }
 
-@media (max-width: 480px) {
+/* Mobile optimizations */
+@media (max-width: 768px) {
   .card {
     max-width: 100%;
   }
 
   .content {
-    padding: 1.1rem;
+    padding: 1.5rem 1.25rem 1rem;
   }
 
   .judgesRow {
-    padding: 0 1.1rem 1.1rem;
+    padding: 0 1.25rem 1.25rem;
   }
 
   .eventTitle {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
+  }
+
+  .judgesAvatars {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1.25rem 1rem 0.75rem;
+  }
+
+  .judgesRow {
+    padding: 0 1rem 1rem;
   }
 }

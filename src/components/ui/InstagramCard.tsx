@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./InstagramCard.module.css";
 import { FaInstagram, FaYoutube, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { artistsData } from "../../data/artists";
+import { staticArtists } from "@/data/staticArtists";
 
 export interface Judge {
   name: string;
@@ -87,11 +87,8 @@ export default function InstagramCard({
           <span className={styles.judgesLabel}>Jueces</span>
           <div className={styles.judgesAvatars}>
             {judges.map((judge) => {
-              const artistInfo = judge.artistId 
-                ? artistsData.find(a => a.id === judge.artistId) 
-                : null;
-              
-              const displayName = artistInfo ? artistInfo.name : judge.name;
+              const artistInfo = judge.artistId ? staticArtists.find(a => a.id === judge.artistId) || null : null;
+              const displayName = artistInfo ? artistInfo.name.toUpperCase() : judge.name.toUpperCase();
               const displayImage = artistInfo ? artistInfo.image : judge.image;
 
               const content = (
@@ -134,11 +131,8 @@ export default function InstagramCard({
           <span className={styles.judgesLabel}>Host</span>
           <div className={styles.judgesAvatars}>
             {hosts.map((host) => {
-              const artistInfo = host.artistId 
-                ? artistsData.find(a => a.id === host.artistId) 
-                : null;
-              
-              const displayName = artistInfo ? artistInfo.name : host.name;
+              const artistInfo = host.artistId ? staticArtists.find(a => a.id === host.artistId) || null : null;
+              const displayName = artistInfo ? artistInfo.name.toUpperCase() : host.name.toUpperCase();
               const displayImage = artistInfo ? artistInfo.image : host.image;
 
               const content = (

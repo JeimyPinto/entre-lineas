@@ -8,7 +8,6 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'social';
 
 interface CommonProps {
   variant?: ButtonVariant;
-  fullWidth?: boolean;
   children: ReactNode;
   className?: string;
 }
@@ -19,15 +18,13 @@ type LinkProps = CommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href:
 export default function Button(props: ButtonProps | LinkProps) {
   const { 
     variant = 'primary', 
-    fullWidth = false, 
     children, 
     className = '', 
   } = props;
 
   const btnClasses = [
-    styles.btn,
-    styles[variant],
-    fullWidth ? styles.fullWidth : '',
+    styles.btn || 'btn',
+    styles[variant] || variant,
     className
   ].join(' ');
 

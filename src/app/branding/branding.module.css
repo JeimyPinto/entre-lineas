@@ -1,0 +1,312 @@
+.brandingPage {
+  background: var(--bg-main);
+  min-height: 100vh;
+  color: var(--color-white);
+  padding-bottom: 100px;
+}
+
+.banner {
+  padding: 120px 20px 60px;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-red) 10%, transparent) 0%, transparent 100%);
+  text-align: center;
+  position: relative;
+}
+
+.backLink {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-grey-light);
+  transition: color 0.3s ease;
+  font-family: var(--font-main);
+}
+
+.backLink:hover {
+  color: var(--color-red);
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--font-display);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--color-red);
+  font-family: var(--font-main);
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sectionIcon {
+  font-size: var(--font-h2);
+  color: var(--color-red);
+}
+
+.sectionTitle {
+  font-family: var(--font-title);
+  font-size: var(--font-h2);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Logos */
+.brandingGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.logoGroup {
+  background: var(--color-grey-dark);
+  padding: 30px;
+  border-radius: var(--border-radius-xl);
+  border: var(--border-glass);
+}
+
+.groupTitle {
+  font-family: var(--font-title);
+  font-size: var(--font-h4);
+  margin-bottom: 25px;
+  color: var(--color-red);
+  text-transform: uppercase;
+}
+
+.logoRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.logoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-size: var(--font-body);
+  color: var(--color-grey-light);
+}
+
+.logoPreviewLight, .logoPreviewDark {
+  padding: 30px;
+  border-radius: var(--border-radius-m);
+  align-items: center;
+  width: 120px;
+  height: 120px;
+}
+
+.logoPreviewLight {
+  background: var(--color-bg-surface-light);
+}
+
+.logoPreviewDark {
+  background: var(--color-black);
+  border: 1px solid var(--color-border);
+}
+
+/* Colors */
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.colorCard {
+  background: var(--color-grey-dark);
+  padding: 15px;
+  border-radius: var(--border-radius-l);
+  border: 1px solid var(--color-border);
+}
+
+.colorValue {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-m);
+}
+
+.colorInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.colorName {
+  font-weight: bold;
+}
+
+.hexCode {
+  font-family: monospace;
+  color: var(--color-grey-light);
+}
+
+/* Typo Scale */
+.typoScaleList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.typoScaleItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.typoScaleMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sizeName {
+  font-weight: bold;
+  color: var(--color-red);
+  font-size: var(--font-body);
+  letter-spacing: 2px;
+}
+
+.sizeValue {
+  font-size: var(--font-small);
+  color: var(--color-grey-light);
+}
+
+.typoScalePreview {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.varName {
+  font-size: var(--font-small);
+  background: var(--color-grey-dark);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+}
+
+/* UI Showcase */
+.uiShowcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.uiColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.uiLabel {
+  font-size: var(--font-small);
+  color: var(--color-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.uiContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.socialBtn {
+  min-width: 180px;
+  justify-content: flex-start !important;
+  padding-left: 25px !important;
+}
+
+.cardShowcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.cardPreviewItem {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.demoGlass {
+  background: var(--color-bg-overlay);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: var(--border-radius-xl);
+}
+
+.demoInputBox {
+  display: flex;
+  gap: 10px;
+  background: var(--color-bg-overlay-soft);
+  padding: 8px;
+  border-radius: var(--border-radius-m);
+  border: none;
+  color: white;
+  padding: 0 20px;
+  flex: 1;
+  outline: none;
+  font-family: var(--font-main);
+}
+
+/* Responsive Design Section */
+.responsiveNote {
+  font-size: var(--font-body);
+  color: var(--color-grey-light);
+  margin-bottom: var(--margin-l);
+  line-height: 1.6;
+}
+
+.breakpointList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+}
+
+.breakpointList li {
+  padding: var(--padding-m);
+  background: var(--color-grey-dark);
+  border-radius: var(--border-radius-m);
+  border: 1px solid var(--color-border);
+  font-size: var(--font-body);
+  color: var(--color-white);
+  line-height: 1.5;
+}
+
+.breakpointList strong {
+  color: var(--color-red);
+}
+
+@media (max-width: 768px) {
+  .backLink {
+    position: static;
+    margin-bottom: 40px;
+    justify-content: center;
+  }
+}

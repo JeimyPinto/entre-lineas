@@ -1,0 +1,199 @@
+[
+  {
+    "id": "galactico",
+    "name": "Galáctico",
+    "orgRole": ["Fundador"],
+    "image": "/artists/galactico.webp",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "profession": "Abogado",
+    "origin": "Manizales, Colombia",
+    "trajectory": "Desde 2020",
+    "bio": [
+      "Artista originario de la ciudad de Manizales, cuya carrera artística comienza a partir del año 2020.",
+      "Enfocado en el desarrollo musical, lírico, artístico, pedagógico y profesional, e influenciado por la Cultura Hip-Hop, la Poesía y la Rítmica.",
+      "Convergiendo en el proyecto artístico que lo caracteriza."
+    ],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/_mr_galactico_", "label": "Instagram" }]
+  },
+  {
+    "id": "ray",
+    "name": "Ray",
+    "orgRole": ["Juez"],
+    "image": "/artists/ray.jpg",
+    "imageWidth": 1080,
+    "imageHeight": 1080,
+    "profession": "Productor y Artista",
+    "origin": "Manizales, Colombia",
+    "trajectory": "Desde 2018",
+    "bio": [
+      "Productor y artista destacado en R Studios, aportando su visión y talento a las instrumentales y a la escena urbana."
+    ],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/ray_oficialr", "label": "Instagram" }]
+  },
+  {
+    "id": "zer",
+    "name": "ZER",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "Desde 2019",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/zerlamortmamut?igsh=cmpiZ2Y1YW90YWk2", "label": "Instagram" }]
+  },
+  {
+    "id": "murz",
+    "name": "Murz",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "Desde 2019",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/7murzz?igsh=a245YWUyZzBldTNr", "label": "Instagram" }]
+  },
+  {
+    "id": "diaz",
+    "name": "Díaz",
+    "orgRole": ["Juez"],
+    "image": "/artists/diaz.jpg",
+    "imageWidth": 829,
+    "imageHeight": 817,
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "Desde 2019",
+    "bio": [
+      "Con un gran conocimiento sobre el hip hop y el freestyle, empieza su trayectoria como juez en 2020, siendo parte de la terna de jueces de los eventos más importantes realizados en la ciudad."
+    ],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/e.diazz11?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", "label": "Instagram" }]
+  },
+  {
+    "id": "malcolm",
+    "name": "Malcolm",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Artista y Tatuador",
+    "origin": "Manizales, Colombia",
+    "trajectory": "",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/_malckom_/", "label": "Instagram" }]
+  },
+  {
+    "id": "samply",
+    "name": "Samply",
+    "orgRole": ["Juez"],
+    "image": "/artists/samply.jpg",
+    "imageWidth": 1080,
+    "imageHeight": 720,
+    "profession": "Rapero, Productor y Gestor Cultural",
+    "origin": "Chinchiná, Colombia",
+    "trajectory": "Desde 2019",
+    "bio": [
+      "Artista de la ciudad de Chinchiná.",
+      "Sus aportaciones han sido como gestor cultural en la ciudad de Chinchiná, rapero y freestyler. También se enfoca en la producción musical, el rap y el arte en general."
+    ],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/____samply____?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", "label": "Instagram" }]
+  },
+  {
+    "id": "raigo",
+    "name": "Raigo",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }]
+  },
+  {
+    "id": "cris",
+    "name": "Cris",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }]
+  },
+  {
+    "id": "kZQ",
+    "name": "KZQ",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }]
+  },
+  {
+    "id": "emebe",
+    "name": "Emebe",
+    "orgRole": ["Juez"],
+    "image": "",
+    "profession": "Juez",
+    "origin": "Manizales, Colombia",
+    "trajectory": "",
+    "bio": [""],
+    "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }]
+  },
+  {
+    "id": "kza",
+    "name": "Kza",
+    "orgRole": ["Juez"],
+    "image": "/artists/kza.webp",
+    "imageWidth": 1440,
+    "imageHeight": 1799,
+    "profession": "Organizador y Juez",
+    "origin": "Medellín, Colombia",
+    "trajectory": "Desde 2019",
+    "bio": [
+      "Su compromiso con el fomento de la escena lo ha consolidado actualmente en su desempeño como organizador y juez.",
+      "Ante la carencia de plataformas competitivas en su entorno, fundó la liga 'Geométricas', un espacio dedicado a la prospección y formación de jóvenes talentos que buscan integrarse a la cultura del rap.",
+      "Asimismo, lidera la 'Copa del Aburr', una innovadora propuesta bajo el sello de Geométricas que busca unificar la escena mediante batallas interligas, marcando una nueva etapa de expansión y articulación para su organización."
+    ],
+    "socials": [
+      { "platform": "instagram", "url": "https://www.instagram.com/yohan.kza", "label": "Instagram" },
+      { "platform": "instagram", "url": "https://www.instagram.com/geometricas.hiphop?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", "label": "Liga Geométricas" }
+    ]
+  },
+  { "id": "zalazar", "name": "Zalazar", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "candela", "name": "Candela", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "mambo", "name": "Mambo", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "nemexiz", "name": "Nemexiz", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "enfasix", "name": "Enfasix", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "arenik", "name": "Arenik", "orgRole": ["Host"], "image": "", "profession": "Host", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "zinhiloz", "name": "Zinhiloz", "orgRole": ["Host"], "image": "", "profession": "Host", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "sonkey", "name": "Sonkey", "orgRole": ["Juez", "Host"], "image": "", "profession": "Juez y Host", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "hostil", "name": "Hostil", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { 
+    "id": "zaku", 
+    "name": "Zaku", 
+    "orgRole": ["Juez"], 
+    "image": "/artists/zaku.webp", 
+    "profession": "Organizador y Rapero", 
+    "origin": "Manizales, Colombia", 
+    "trajectory": "Desde 2017", 
+    "bio": [
+      "Se ha consolidado como un actor clave en la gestión cultural de la ciudad al ser uno de los pilares de la competencia 'La Fuente Del Under', donde lidera un equipo organizador enfocado en proyectar el talento local hacia una escala nacional.",
+      "Como competidor, ha dejado su huella en certámenes de renombre como Corta Bigote y Supremacía Mc. Su desempeño más destacado tuvo lugar en 'Maestro de las lomas', donde alcanzó el tercer puesto, asegurando así su clasificación a la fase nacional de este prestigioso torneo.",
+      "Actualmente, centra sus esfuerzos en institucionalizar y expandir el impacto de su organización, buscando elevar el reconocimiento de la cultura urbana regional en todo el país."
+    ], 
+    "socials": [
+      { "platform": "instagram", "url": "https://www.instagram.com/zaku_mz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", "label": "Instagram" },
+      { "platform": "tiktok", "url": "https://www.tiktok.com/@zaku_mc?is_from_webapp=1&sender_device=pc", "label": "TikTok" }
+    ] 
+  },
+  { "id": "puma", "name": "Puma", "orgRole": ["Host"], "image": "", "profession": "Host", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "shoot", "name": "Shoot", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "leona", "name": "Leona", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "sirius", "name": "Sirius", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "clezart", "name": "Clezart", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "syd", "name": "Syd", "orgRole": ["Host"], "image": "", "profession": "Host", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "chrisre", "name": "Chris Re", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "tiago", "name": "Tiago", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "poetademarfil", "name": "Poeta de Marfil", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] },
+  { "id": "ds", "name": "Ds", "orgRole": ["Juez"], "image": "", "profession": "Juez", "origin": "", "trajectory": "", "bio": [""], "socials": [{ "platform": "instagram", "url": "https://www.instagram.com/", "label": "Instagram" }] }
+]

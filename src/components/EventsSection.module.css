@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  color: var(--color-secondary);
+  color: var(--color-white);
 }
 
 .sectionHeader {
@@ -16,15 +16,15 @@
 
 .title {
   font-family: var(--font-title);
-  font-size: 4rem;
+  font-size: var(--font-display);
   margin: 0 0 1rem;
-  color: var(--color-secondary);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  text-shadow: 0 0 20px color-mix(in srgb, var(--color-white) 10%, transparent);
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  color: var(--color-fourth);
+  font-size: var(--font-body-lg);
+  color: var(--color-grey-light);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -32,21 +32,21 @@
 
 .eventsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2rem;
   justify-items: center;
 }
 
 @media (max-width: 768px) {
   .eventsSection {
-    padding: 4rem 1.5rem;
+    /* Padding handled by global .mobile-section-padding class */
   }
 
   .title {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    /* Font size handled by global .mobile-title-h1 class */
   }
 
   .eventsGrid {
-    gap: 2rem;
+    /* Gap handled by global .mobile-reduced-gap class */
   }
 }

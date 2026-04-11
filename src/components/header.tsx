@@ -1,20 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import NavMenu from "./NavMenu";
 import MenuButton from "./MenuButton";
 import styles from "./header.module.css";
+import BlinkingLogo from "./ui/BlinkingLogo";
 
 export default function Header() {
   const links = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Historia", href: "#historia" },
-    { label: "Galería", href: "#galeria" },
-    { label: "Artistas", href: "#artistas" },
-    { label: "Eventos", href: "#eventos" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Historia", href: "/#historia" },
+    { label: "Galería", href: "/#galeria" },
+    { label: "Artistas", href: "/#artistas" },
+    { label: "Eventos", href: "/#eventos" },
+    { label: "Contacto", href: "/#contacto" },
   ];
   
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,15 +31,10 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}>
       <div className={styles.headerRow}>
-        <Link href="#inicio" className={styles.headerLogoTitle}>
-          <Image
-            src="/1-01.png"
-            alt="Logo Entre Líneas"
-            width={60}
-            height={78}
-            className={styles.headerLogo}
-            style={{ height: "auto" }}
-          />
+        <Link href="/#inicio" className={styles.headerLogoTitle}>
+          <div className={styles.headerLogo}>
+            <BlinkingLogo closedImg="/1-04.png" openImg="/1-01.png" size={50} />
+          </div>
           <h1 className={styles.headerTitle}>Entre Líneas</h1>
         </Link>
         

@@ -8,15 +8,15 @@ export default function EventsSection() {
   const events = eventsData;
 
   return (
-    <section className={styles.eventsSection}>
+    <section className={`${styles.eventsSection} mobile-section-padding`}>
       <div className={styles.sectionHeader}>
-        <h2 className={styles.title}>Eventos</h2>
+        <h2 className={`${styles.title} mobile-title-h1`}>Eventos</h2>
         <p className={styles.subtitle}>
           Revive los mejores momentos de nuestras batallas de freestyle y eventos culturales.
         </p>
       </div>
 
-      <div className={styles.eventsGrid}>
+      <div className={`${styles.eventsGrid} mobile-reduced-gap`}>
         {events.map((event) => (
           <InstagramCard
             key={event.id}

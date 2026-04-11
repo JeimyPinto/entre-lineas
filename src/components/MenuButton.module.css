@@ -7,28 +7,27 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    margin-right: 2rem;
+    margin-right: var(--margin-xxl);
     transition: all 0.3s ease;
-    z-index: 1001; /* Above NavMenu if needed, but usually sibling */
+    z-index: 1; 
 }
 
 .hamburger {
-    width: 30px;
-    height: 22px;
+    width: 80%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: all var(--transition-fast);
 }
 
 .hamburger span {
+    background: var(--color-white);
     display: block;
-    height: 3px;
+    height: 18%;
     width: 100%;
-    background: var(--color-secondary);
-    border-radius: 3px;
-    transition: all 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    border-radius: var(--border-radius-m);
+    transition: all var(--transition-normal);
 }
 
 /* Open State Animation */
@@ -45,7 +44,7 @@
     transform: translateY(-10px) rotate(-45deg);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
     .headerMenuButton {
         display: flex;
     }

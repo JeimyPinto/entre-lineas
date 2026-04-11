@@ -20,22 +20,7 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
           onClick={onNavigate}
         >
           <span className={styles.navLogoBullet}>
-            <Image
-              src="/1-01.png"
-              alt="ojo cerrado"
-              width={24}
-              height={32}
-              className={styles.logoImgClosed}
-              style={{ height: "auto" }}
-            />
-            <Image
-              src="/1-04.png"
-              alt="ojo abierto"
-              width={24}
-              height={32}
-              className={styles.logoImgOpen}
-              style={{ height: "auto" }}
-            />
+            <Image src="/1-03.png" alt="Ojo" width={50} height={50} />
           </span>
           {link.label}
         </Link>

@@ -1,32 +1,51 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import styles from "./ArtistSection.module.css";
 import ArtistCard from "./ArtistCard";
-import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe } from "react-icons/fa6";
+import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "./ui/Button";
 
-import { artistsData, Artist } from "../data/artists";
+import { Artist } from "@/types/artists";
+import { getArtistsData } from "../data/artists";
 
 export default function ArtistSection() {
   const [filter, setFilter] = useState("Todos");
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
 
+  const [artistsData, setArtistsData] = useState<Artist[]>([]);
+  // const [loading, setLoading] = useState(true); // unused ESLint
+
+  useEffect(() => {
+    async function loadArtists() {
+      try {
+        const data = await getArtistsData();
+        setArtistsData(data);
+      } catch (error) {
+        console.error('Error loading artists:', error);
+      } finally {
+        // setLoading(false); // unused
+      }
+    }
+    loadArtists();
+  }, []);
+
   const roles = useMemo(() => {
     const allRoles = artistsData.flatMap(a => a.orgRole);
-    return ["Todos", ...new Set(allRoles)];
-  }, []);
+    return ["Todos", ...Array.from(new Set(allRoles))];
+  }, [artistsData]);
 
   const filteredArtists = useMemo(() => {
     if (filter === "Todos") return artistsData;
     return artistsData.filter(a => a.orgRole.includes(filter));
-  }, [filter]);
+  }, [filter, artistsData]);
 
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'instagram': return <FaInstagram size={20} />;
       case 'youtube': return <FaYoutube size={20} />;
       case 'facebook': return <FaFacebook size={20} />;
+      case 'tiktok': return <FaTiktok size={20} />;
       default: return <FaGlobe size={20} />;
     }
   };
@@ -34,8 +53,8 @@ export default function ArtistSection() {
   return (
     <div className={styles.artistsWrapper}>
       <div className={styles.sectionHeader}>
-        <h2 className={styles.title}>Vínculo de Fraternidad</h2>
-        <p className={styles.subtitle}>Conoce al equipo y los artistas que hacen posible Entre Líneas.</p>
+        <h2 className={styles.title}>Memorias de Artistas</h2>
+        <p className={styles.subtitle}>Conoce los diferentes artistas que han participado en Entre Líneas y su trayectoria.</p>
         
         <div className={styles.filterBar}>
           {roles.map(role => (
@@ -69,7 +88,7 @@ export default function ArtistSection() {
             </button>
             
             <div className={styles.modalBody}>
-              <div className={styles.modalImageWrapper}>
+              <div className={styles.modalImageWrapper} style={{ aspectRatio: `${selectedArtist.imageWidth ?? 1}/${selectedArtist.imageHeight ?? 1}` }}>
                 <Image
                   src={selectedArtist.image || "/1-01.png"}
                   alt={selectedArtist.name}
@@ -125,7 +144,6 @@ export default function ArtistSection() {
                           key={index}
                           href={social.url} 
                           variant="social"
-                          className={styles.socialButton}
                         >
                           {getSocialIcon(social.platform)}
                           {social.label}

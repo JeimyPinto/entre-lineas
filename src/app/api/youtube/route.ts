@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-
 import { Video } from '@/types/youtube';
+import youtubeMockData from '@/data/youtube_mock.json';
 
 // Tipos para la respuesta de la API de YouTube
 interface YoutubeApiSnippet {
@@ -20,6 +20,16 @@ interface YoutubeApiResponse {
 }
 
 export async function GET() {
+  // Verifica si debemos usar datos simulados (entorno de desarrollo)
+  // Permite omitir esto con una variable de entorno si alguien realmente quiere probar la API
+  const isDev = process.env.NODE_ENV === 'development';
+  const skipMock = process.env.YOUTUBE_SKIP_MOCK === 'true';
+
+  if (isDev && !skipMock) {
+    console.log("YouTube API: Running in development mode, returning mock data to save quota.");
+    return NextResponse.json(youtubeMockData);
+  }
+
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = process.env.YOUTUBE_CHANNEL_ID;
   const maxResults = 50;
@@ -43,13 +53,14 @@ export async function GET() {
     const data: YoutubeApiResponse = await res.json();
     const videoItems = data.items || [];
 
+    // ... (rest of the logic remains same for production)
     // 1b. Obtener estadísticas del canal
     const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
     const channelRes = await fetch(channelUrl);
     let subscriberCount = null;
     if (channelRes.ok) {
-      const channelData = await channelRes.json();
-      if (channelData.items?.length > 0) {
+      const channelData = await channelRes.ok ? await channelRes.json() : null;
+      if (channelData?.items?.length > 0) {
         subscriberCount = channelData.items[0].statistics.subscriberCount;
       }
     }
@@ -106,7 +117,6 @@ export async function GET() {
         commentCount: stats.commentCount || "0",
       };
 
-      // YouTube Shorts suelen ser < 60s, pero filtramos por 90s para mayor seguridad
       if (totalSeconds > 0 && totalSeconds <= 90) {
         shorts.push(videoObj);
       } else {
@@ -124,50 +134,7 @@ export async function GET() {
 
   } catch (error) {
     console.error("YouTube API Route Error, returning fallback data:", error);
-    
-    // Fallback data if API fails or quota exceeded
-    const mockVideos: Video[] = [
-      {
-        id: "vFzYt2mHnO4",
-        title: "ENTRE LÍNEAS - Final Nacional 2023",
-        thumbnail: "https://i.ytimg.com/vi/vFzYt2mHnO4/hqdefault.jpg",
-        viewCount: "5200",
-        likeCount: "340"
-      },
-      {
-        id: "Y9S9eX_6jSw",
-        title: "Highlights Temporada 2023 | Resumen Oficial",
-        thumbnail: "https://i.ytimg.com/vi/Y9S9eX_6jSw/hqdefault.jpg",
-        viewCount: "3100",
-        likeCount: "210"
-      },
-      {
-        id: "r_pT8z8qT-o",
-        title: "Entrevistas Exclusivas: El origen de la escena",
-        thumbnail: "https://i.ytimg.com/vi/r_pT8z8qT-o/hqdefault.jpg",
-        viewCount: "1200",
-        likeCount: "95"
-      }
-    ];
-
-    const mockShorts: Video[] = [
-      {
-        id: "k-fA6XGvVjY",
-        title: "Locura en la final! #Shorts",
-        thumbnail: "https://i.ytimg.com/vi/k-fA6XGvVjY/hqdefault.jpg",
-        viewCount: "12500"
-      }
-    ];
-
-    return NextResponse.json({ 
-      shorts: mockShorts, 
-      videos: mockVideos, 
-      subscriberCount: "1,200", 
-      highlights: { 
-        viral: mockShorts[0], 
-        mostLiked: mockVideos[0],
-        mostCommented: mockVideos[1]
-      } 
-    });
+    return NextResponse.json(youtubeMockData);
   }
 }
+

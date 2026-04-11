@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Button from "./ui/Button";
 import styles from "./section.module.css";
 import { useYouTubeData } from "@/hooks/useYouTubeData";
 import Card from "./ui/Card";
@@ -26,9 +27,10 @@ export default function MainSection() {
             src={logos[logoIndex]}
             alt="Logo Animado Entre Líneas"
             fill
-            className={styles.homeLogo}
-            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 100vw, 400px"
+            loading="eager"
             priority 
+            style={{ objectFit: "contain" }}
           />
         </div>
         <h2 className={styles.homeTitle}>¿Quiénes somos?</h2>
@@ -82,21 +84,22 @@ export default function MainSection() {
       )}
 
       <div className={styles.homeSocial}>
-        <span className={styles.homeSocialLabel}>Tu apoyo hace crecer la escena. ¡Síguenos!:</span>
-        <a className={styles.homeSocialLink}
-          href="https://instagram.com/entr3_line4s"
-          target="_blank"
-          rel="noopener noreferrer">
-          <FaInstagram className={styles.homeSocialIcon} size={24} />
-          Instagram
-        </a>
-        <a className={styles.homeSocialLink}
-          href="https://www.youtube.com/@Entr3_Line4s"
-          target="_blank"
-          rel="noopener noreferrer">
-          <FaYoutube className={styles.homeSocialIcon} size={24} />
-          YouTube
-        </a>
+        <div className={styles.socialInvitation}>
+          <span className={styles.homeSocialLabel}>Únete a Nuestra Comunidad</span>
+          <p className={styles.socialDescription}>
+            Seguir nuestras redes sociales es fundamental para estar conectado con los últimos estrenos, eventos exclusivos y contenido detrás de cámaras. Tu apoyo impulsa el crecimiento de la escena artística colombiana y ayuda a amplificar el talento de nuestros artistas. Sé parte de Este movimiento cultural.
+          </p>
+        </div>
+        <div className={styles.socialLinks}>
+          <Button href="https://instagram.com/entr3_line4s" variant="social">
+            <FaInstagram />
+            Instagram
+          </Button>
+          <Button href="https://www.youtube.com/@Entr3_Line4s" variant="social">
+            <FaYoutube />
+            YouTube
+          </Button>
+        </div>
       </div>
     </section>
   )

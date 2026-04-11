@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import Image from "next/image";
 import styles from "./ArtistCard.module.css";
 import Button from "./ui/Button";
-import { FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaChevronDown } from "react-icons/fa6";
-import { Artist } from "../data/artists";
+import { FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaChevronDown, FaTiktok } from "react-icons/fa6";
+import { Artist } from "@/types/artists";
+
 
 interface ArtistCardProps {
   artist: Artist;
@@ -14,17 +15,19 @@ interface ArtistCardProps {
 
 export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const getSocialIcon = (platform: string) => {
+const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'instagram': return <FaInstagram size={18} />;
       case 'youtube': return <FaYoutube size={18} />;
       case 'facebook': return <FaFacebook size={18} />;
+      case 'tiktok': return <FaTiktok size={18} />;
       default: return <FaGlobe size={18} />;
     }
   };
 
-  const hasContent = artist.bio[0] !== "" || artist.socials.some(s => s.url !== "https://www.instagram.com/");
+  const socialLinks = artist.socials.filter(s => s.url !== "https://www.instagram.com/");
+  const hasContent = artist.bio[0] !== "" || socialLinks.length > 0;
+  const imageSrc = artist.image || "/1-01.png";
 
   return (
     <div className={`${styles.card} ${isExpanded ? styles.expanded : ""}`}>
@@ -32,12 +35,11 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
       <div className={styles.desktopView} onClick={() => hasContent && onOpenModal(artist)}>
         <div className={styles.imageWrapper}>
           <Image
-            src={artist.image || "/1-01.png"}
+            src={imageSrc}
             alt={artist.name}
             fill
             sizes="(min-width: 900px) 25vw, 100vw"
             className={styles.image}
-            style={{ objectFit: 'cover' }}
           />
           {hasContent && (
             <div className={styles.overlay}>
@@ -52,6 +54,18 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
             ))}
           </div>
           <h3 className={styles.name}>{artist.name}</h3>
+          {socialLinks.length > 0 && (
+            <div className={styles.cardSocials}>
+              <Button
+                href={socialLinks[0].url}
+                variant="social"
+                onClick={(event: MouseEvent<HTMLAnchorElement>) => event.stopPropagation()}
+              >
+                {getSocialIcon(socialLinks[0].platform)}
+                {socialLinks[0].label}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -60,12 +74,10 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
         <div className={styles.accordionHeader} onClick={() => hasContent && setIsExpanded(!isExpanded)}>
           <div className={styles.thumbWrapper}>
             <Image
-              src={artist.image || "/1-01.png"}
+              src={imageSrc}
               alt={artist.name}
-              width={60}
-              height={60}
+              fill
               className={styles.thumb}
-              style={{ width: "60px", height: "auto" }}
             />
           </div>
           <div className={styles.mobileMainInfo}>
@@ -103,8 +115,6 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
                     key={i}
                     href={social.url} 
                     variant="social"
-                    className={styles.mobileSocialBtn}
-                    fullWidth
                   >
                     {getSocialIcon(social.platform)}
                     {social.label}
