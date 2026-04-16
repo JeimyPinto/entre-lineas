@@ -1,0 +1,140 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  width: 100%;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.dropZone {
+  width: 100%;
+  height: 250px;
+  background: var(--bg-glass-thin);
+  border: 2px dashed var(--bg-glass-thick);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropZone:hover {
+  background: var(--bg-glass-medium);
+  border-color: var(--color-red);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-l);
+  color: var(--color-grey-light);
+  text-align: center;
+}
+
+.icon {
+  color: var(--color-red);
+  opacity: 0.8;
+}
+
+.text {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}
+
+.subtext {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.previewContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-overlay-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.previewContainer:hover .overlay {
+  opacity: 1;
+}
+
+
+
+.positionControl {
+  margin-top: var(--gap-l);
+  background: var(--bg-glass-thin);
+  padding: var(--padding-xl);
+  border-radius: 15px;
+  border: 1px solid var(--bg-glass-medium);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+}
+
+.positionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  color: var(--color-grey-light);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.posValue {
+  margin-left: auto;
+  color: var(--color-red);
+  font-weight: var(--font-weight-bold);
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--bg-glass-thick);
+  border-radius: 5px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--color-red);
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-red-glow);
+}

@@ -2,18 +2,26 @@
 
 import styles from "./EventsSection.module.css";
 import InstagramCard from "./ui/InstagramCard";
-import { eventsData } from "../data/events";
+import { Event } from "@/types/events";
 
-export default function EventsSection() {
-  const events = eventsData;
+interface EventsSectionProps {
+  initialEvents: Event[];
+}
+
+export default function EventsSection({ initialEvents }: EventsSectionProps) {
+  const events = initialEvents || [];
 
   return (
     <section className={`${styles.eventsSection} mobile-section-padding`}>
       <div className={styles.sectionHeader}>
         <h2 className={`${styles.title} mobile-title-h1`}>Eventos</h2>
-        <p className={styles.subtitle}>
-          Revive los mejores momentos de nuestras batallas de freestyle y eventos culturales.
-        </p>
+        {events.length > 0 ? (
+          <p className={styles.subtitle}>
+            Revive los mejores momentos de nuestras batallas de freestyle y eventos culturales.
+          </p>
+        ) : (
+          <p className={styles.subtitle}>No hay eventos registrados actualmente.</p>
+        )}
       </div>
 
       <div className={`${styles.eventsGrid} mobile-reduced-gap`}>

@@ -1,34 +1,20 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import styles from "./ArtistSection.module.css";
 import ArtistCard from "./ArtistCard";
 import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "./ui/Button";
-
 import { Artist } from "@/types/artists";
-import { getArtistsData } from "../data/artists";
 
-export default function ArtistSection() {
+interface ArtistSectionProps {
+  initialArtists: Artist[];
+}
+
+export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
   const [filter, setFilter] = useState("Todos");
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
-
-  const [artistsData, setArtistsData] = useState<Artist[]>([]);
-  // const [loading, setLoading] = useState(true); // unused ESLint
-
-  useEffect(() => {
-    async function loadArtists() {
-      try {
-        const data = await getArtistsData();
-        setArtistsData(data);
-      } catch (error) {
-        console.error('Error loading artists:', error);
-      } finally {
-        // setLoading(false); // unused
-      }
-    }
-    loadArtists();
-  }, []);
+  const [artistsData] = useState<Artist[]>(initialArtists || []);
 
   const roles = useMemo(() => {
     const allRoles = artistsData.flatMap(a => a.orgRole);
@@ -54,19 +40,25 @@ export default function ArtistSection() {
     <div className={styles.artistsWrapper}>
       <div className={styles.sectionHeader}>
         <h2 className={styles.title}>Memorias de Artistas</h2>
-        <p className={styles.subtitle}>Conoce los diferentes artistas que han participado en Entre Líneas y su trayectoria.</p>
+        {artistsData.length > 0 ? (
+          <p className={styles.subtitle}>Conoce los diferentes artistas que han participado en Entre Líneas y su trayectoria.</p>
+        ) : (
+          <p className={styles.subtitle}>No se encontraron artistas registrados por el momento.</p>
+        )}
         
-        <div className={styles.filterBar}>
-          {roles.map(role => (
-            <button
-              key={role}
-              className={`${styles.filterChip} ${filter === role ? styles.activeChip : ""}`}
-              onClick={() => setFilter(role)}
-            >
-              {role}
-            </button>
-          ))}
-        </div>
+        {artistsData.length > 0 && (
+          <div className={styles.filterBar}>
+            {roles.map(role => (
+              <button
+                key={role}
+                className={`${styles.filterChip} ${filter === role ? styles.activeChip : ""}`}
+                onClick={() => setFilter(role)}
+              >
+                {role}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className={styles.artistsContainer}>
@@ -79,7 +71,6 @@ export default function ArtistSection() {
         ))}
       </div>
 
-      {/* Detail Modal */}
       {selectedArtist && (
         <div className={styles.modalOverlay} onClick={() => setSelectedArtist(null)}>
           <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
@@ -94,6 +85,7 @@ export default function ArtistSection() {
                   alt={selectedArtist.name}
                   fill
                   className={styles.modalImage}
+                  style={{ objectPosition: `center ${selectedArtist.imagePosition || '50%'}` }}
                 />
               </div>
               
@@ -143,7 +135,7 @@ export default function ArtistSection() {
                         <Button 
                           key={index}
                           href={social.url} 
-                          variant="social"
+                          variant="danger"
                         >
                           {getSocialIcon(social.platform)}
                           {social.label}

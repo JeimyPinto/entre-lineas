@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Footer.module.css';
-import { FaInstagram, FaYoutube, FaWhatsapp, FaEnvelope, FaFingerprint } from 'react-icons/fa6';
+import { FaInstagram, FaYoutube, FaWhatsapp, FaEnvelope, FaUserShield } from 'react-icons/fa6';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,49 +10,53 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={`${styles.topSection} mobile-single-column`}>
-          <div className={styles.brandInfo}>
+        <div className={styles.footerBlocks}>
+          {/* Bloque 1: Marca y Propósito */}
+          <div className={styles.brandBlock}>
             <div className={styles.logoWrapper}>
               <Image 
                 src="/1-01.png" 
                 alt="Entre Líneas Logo" 
                 width={50} 
                 height={65} 
-                style={{ height: 'auto' }}
+                priority
+                style={{ width: 'auto', height: 'auto' }}
               />
               <span className={styles.brandName}>Entre Líneas</span>
             </div>
             <p className={styles.description}>
               Plataforma audiovisual y artística dedicada a la cultura urbana y el freestyle. 
-              Descentralizando el talento, construyendo hermandad.
+              Descentralizando el talento, construyendo hermandad desde Manizales.
             </p>
           </div>
 
-          <div className={`${styles.linksGrid} mobile-single-column`}>
-            <div className={styles.linkColumn}>
-              <h4 className={styles.columnTitle}>Navegación</h4>
-              <ul className={styles.linksList}>
-                <li><Link href="#inicio">Inicio</Link></li>
-                <li><Link href="#historia">Historia</Link></li>
-                <li><Link href="#galeria">Galería</Link></li>
-                <li><Link href="#artistas">Artistas</Link></li>
-              </ul>
-            </div>
+          {/* Bloque 2: Navegación Principal */}
+          <div className={styles.linkBlock}>
+            <h4 className={styles.blockTitle}>Navegación</h4>
+            <ul className={styles.linksList}>
+              <li><Link href="#inicio">Inicio</Link></li>
+              <li><Link href="#historia">Historia</Link></li>
+              <li><Link href="#galeria">Galería</Link></li>
+              <li><Link href="#artistas">Artistas</Link></li>
+              <li><Link href="#eventos">Eventos</Link></li>
+            </ul>
+          </div>
 
-            <div className={styles.linkColumn}>
-              <h4 className={styles.columnTitle}>Legales</h4>
-              <ul className={styles.linksList}>
-                {/* User requested corporate identity here */}
-                <li>
-                  <Link href="/branding" className={styles.brandingLink}>
-                    <FaFingerprint size={14} style={{ marginRight: '8px' }} />
-                    Identidad Corporativa
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          {/* Bloque 3: Gestión y Control */}
+          <div className={styles.linkBlock}>
+            <h4 className={styles.blockTitle}>Administración</h4>
+            <ul className={styles.linksList}>
+              <li>
+                <Link href="/admin/login" className={styles.adminLink}>
+                  <FaUserShield size={16} />
+                  <span>Panel de Control</span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
+
+        <div className={styles.footerDivider}></div>
 
         <div className={styles.bottomSection}>
           <div className={styles.copyright}>

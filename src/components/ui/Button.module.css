@@ -105,3 +105,37 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.danger {
+  background: var(--color-red);
+  color: var(--color-white);
+  border: 1px solid var(--color-red);
+}
+
+.danger:hover:not(:disabled) {
+  background: #c21520; /* Un rojo un poco más profundo para el hover */
+  border-color: #c21520;
+  box-shadow: 0 0 20px rgba(214, 28, 38, 0.3);
+}
+
+.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.medium {
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.fullWidth {
+  width: 100%;
+  flex: 1;
+}
+

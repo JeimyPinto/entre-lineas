@@ -50,3 +50,34 @@
     /* Gap handled by global .mobile-reduced-gap class */
   }
 }
+
+/* Status States */
+.statusContainer {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.statusText {
+  color: var(--color-grey-light);
+  font-size: 1.1rem;
+}
+
+.errorTitle {
+  font-family: var(--font-title);
+  color: var(--color-red);
+  font-size: 2rem;
+  margin: 0;
+}
+
+.errorText {
+  color: var(--color-grey-light);
+  max-width: 400px;
+  line-height: 1.6;
+}

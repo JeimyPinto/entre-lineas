@@ -36,9 +36,11 @@
 .contactLogo {
   filter: drop-shadow(0 0 15px var(--color-red-glow));
   transition: transform 0.4s ease;
-  background: white;
+  background: var(--color-white);
   border-radius: var(--border-radius-m);
   transform: rotate(5deg) scale(1.1);
+  position: relative;
+  z-index: 0;
 }
 
 .title {
@@ -79,42 +81,7 @@
   gap: 30px;
 }
 
-.card {
-  background: var(--color-grey-dark);
-  backdrop-filter: var(--glass-effect);
-  border: var(--border-glass);
-  padding: 40px;
-  border-radius: var(--border-radius-xl);
-  animation: fadeInUp 0.6s ease forwards;
-  opacity: 0;
-}
 
-.card:nth-child(1) { animation-delay: 0.3s; }
-.card:nth-child(2) { animation-delay: 0.4s; }
-.card:nth-child(3) { animation-delay: 0.5s; }
-.card:nth-child(4) { animation-delay: 0.6s; }
-
-.card:hover {
-  transform: translateY(-10px);
-  border-color: var(--color-red);
-    box-shadow: 0 15px 35px var(--color-shadow);
-  font-size: var(--font-h1);
-  margin-bottom: 20px;
-  color: var(--color-red);
-  transition: color 0.3s ease;
-}
-
-.card:hover .icon {
-  color: var(--color-white);
-  filter: drop-shadow(0 0 10px var(--color-red-glow));
-}
-
-.cardTitle {
-  font-size: var(--font-h4);
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: var(--color-white);
-}
 
 .platformsSubtitle {
   color: var(--color-grey-light);
@@ -197,8 +164,5 @@
   }
   .contactSection {
     padding: 60px 20px;
-  }
-  .card {
-    padding: 30px;
   }
 }

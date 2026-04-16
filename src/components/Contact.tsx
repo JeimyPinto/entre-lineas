@@ -11,6 +11,7 @@ import {
   FaMusic
 } from 'react-icons/fa';
 import Image from 'next/image';
+import Card from '@/components/ui/Card';
 import styles from './Contact.module.css';
 
 const Contact = () => {
@@ -35,9 +36,7 @@ const Contact = () => {
         </div>
         <div className={styles.grid}>
           {/* Email Card */}
-          <div className={styles.card}>
-            <FaEnvelope className={styles.icon} />
-            <h3 className={styles.cardTitle}>Correo Electrónico</h3>
+          <Card title="Correo Electrónico" icon={<FaEnvelope />}>
             <ul className={styles.infoList}>
               <li className={styles.infoItem}>
                 <a href="mailto:entr3line4s@gmail.com" className={styles.link}>
@@ -45,12 +44,10 @@ const Contact = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </Card>
 
           {/* WhatsApp Card */}
-          <div className={styles.card}>
-            <FaWhatsapp className={styles.icon} />
-            <h3 className={styles.cardTitle}>WhatsApp</h3>
+          <Card title="WhatsApp" icon={<FaWhatsapp />}>
             <ul className={styles.infoList}>
               <li className={styles.infoItem}>
                 <a 
@@ -63,23 +60,11 @@ const Contact = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </Card>
 
           {/* Instagram Card */}
-          <div className={styles.card}>
-            <FaInstagram className={styles.icon} />
-            <h3 className={styles.cardTitle}>Instagram</h3>
+          <Card title="Instagram" icon={<FaInstagram />}>
             <ul className={styles.infoList}>
-              <li className={styles.infoItem}>
-                <a 
-                  href="https://instagram.com/_mr_galactico_" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  @_mr_galactico_
-                </a>
-              </li>
               <li className={styles.infoItem}>
                 <a 
                   href="https://instagram.com/entr3_line4s" 
@@ -90,16 +75,21 @@ const Contact = () => {
                   @entr3_line4s
                 </a>
               </li>
+              <li className={styles.infoItem}>
+                <a 
+                  href="https://instagram.com/_mr_galactico_" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  @_mr_galactico_
+                </a>
+              </li>
             </ul>
-          </div>
+          </Card>
 
           {/* Platforms Card */}
-          <div className={styles.card}>
-            <FaMusic className={styles.icon} />
-            <h3 className={styles.cardTitle}>Plataformas Digitales</h3>
-            <p className={styles.platformsSubtitle}>
-              Galáctico / Entre Líneas Manizales
-            </p>
+          <Card title="Plataformas Digitales" subtitle="Galáctico / Entre Líneas Manizales" icon={<FaMusic />}>
             <div className={styles.platformsGrid}>
               <a href="#" className={styles.platformIcon} aria-label="YouTube">
                 <FaYoutube />
@@ -111,7 +101,7 @@ const Contact = () => {
                 <FaTiktok />
               </a>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </section>

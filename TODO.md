@@ -2,6 +2,6 @@
 
 ## Steps:
 - [x] 1. Update src/data/artists.ts: Add static fallback for getArtistsData()
-- [ ] 2. Test locally: npm run dev, check #artistas section loads artists
-- [ ] 3. Commit & push
+- [x] 2. Test locally: npm run dev, check #artistas section loads artists
+- [x] 3. Commit & push
 - [x] Previous: Fix hydration in InstagramCard (complete)

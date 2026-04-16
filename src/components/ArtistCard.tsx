@@ -40,6 +40,7 @@ const getSocialIcon = (platform: string) => {
             fill
             sizes="(min-width: 900px) 25vw, 100vw"
             className={styles.image}
+            style={{ objectPosition: `center ${artist.imagePosition || '50%'}` }}
           />
           {hasContent && (
             <div className={styles.overlay}>
@@ -78,6 +79,7 @@ const getSocialIcon = (platform: string) => {
               alt={artist.name}
               fill
               className={styles.thumb}
+              style={{ objectPosition: `center ${artist.imagePosition || '50%'}` }}
             />
           </div>
           <div className={styles.mobileMainInfo}>
