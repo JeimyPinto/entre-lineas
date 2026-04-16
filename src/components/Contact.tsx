@@ -94,9 +94,6 @@ const Contact = () => {
               <a href="#" className={styles.platformIcon} aria-label="YouTube">
                 <FaYoutube />
               </a>
-              <a href="#" className={styles.platformIcon} aria-label="Spotify">
-                <FaSpotify />
-              </a>
               <a href="#" className={styles.platformIcon} aria-label="TikTok">
                 <FaTiktok />
               </a>

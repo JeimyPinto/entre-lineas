@@ -15,7 +15,7 @@ interface ArtistCardProps {
 
 export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-const getSocialIcon = (platform: string) => {
+  const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'instagram': return <FaInstagram size={18} />;
       case 'youtube': return <FaYoutube size={18} />;
@@ -95,7 +95,7 @@ const getSocialIcon = (platform: string) => {
           <div className={styles.accordionContent}>
             <div className={styles.mobileMeta}>
               <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Profesión</span>
+                <span className={styles.metaLabel}>Profesión u Ocupación</span>
                 <span className={styles.metaValue}>{artist.profession}</span>
               </div>
               <div className={styles.metaItem}>
@@ -113,9 +113,9 @@ const getSocialIcon = (platform: string) => {
             <div className={styles.mobileSocials}>
               {artist.socials.map((social, i) => (
                 social.url !== "https://www.instagram.com/" && (
-                  <Button 
+                  <Button
                     key={i}
-                    href={social.url} 
+                    href={social.url}
                     variant="social"
                   >
                     {getSocialIcon(social.platform)}

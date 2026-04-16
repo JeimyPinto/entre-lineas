@@ -40,48 +40,48 @@ export default function EditArtistForm({ artist, id }: EditArtistFormProps) {
       <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
         <div className={styles.row}>
           <div className={styles.textareaGroup}>
-             <label className={styles.label}>ID (No editable)</label>
-             <input className={`${styles.textarea} ${styles.disabledInput}`} value={id} disabled />
+            <label className={styles.label}>ID (No editable)</label>
+            <input className={`${styles.textarea} ${styles.disabledInput}`} value={id} disabled />
           </div>
           <Input label="Nombre del Artista" name="name" defaultValue={artist.name} required />
         </div>
 
         <div className={styles.row}>
-          <TagSelector 
-            label="Roles en la Organización" 
-            name="orgRole" 
-            options={["Juez", "Host", "Artista", "Fundador"]} 
+          <TagSelector
+            label="Roles en la Organización"
+            name="orgRole"
+            options={["Juez", "Host", "Artista", "Dj", "Fundador", "Logistica", "Freestyler"]}
             defaultValue={artist.orgRole}
-            required 
+            required
           />
-          <Input label="Profesión" name="profession" defaultValue={artist.profession} />
+          <Input label="Profesión u Ocupación" name="profession" defaultValue={artist.profession} />
         </div>
 
         <div className={styles.row}>
-          <LocationSelector label="Origen (Ciudad)" name="origin" defaultValue={artist.origin} />
+          <LocationSelector label="Origen" name="origin" defaultValue={artist.origin} />
           <YearSelector label="Trayectoria (Inició en...)" name="trajectory" defaultValue={artist.trajectory} />
         </div>
 
-        <ImageUploader 
-          label="Foto del Artista" 
-          name="imageFile" 
-          defaultImage={artist.image} 
+        <ImageUploader
+          label="Foto del Artista"
+          name="imageFile"
+          defaultImage={artist.image}
           defaultPosition={artist.imagePosition}
         />
-        
-        <Input 
-          label="Instagram URL" 
-          name="instagram" 
-          defaultValue={artist.socials.find(s => s.platform === 'instagram')?.url || ''} 
-          placeholder="https://instagram.com/..." 
+
+        <Input
+          label="Instagram URL"
+          name="instagram"
+          defaultValue={artist.socials.find(s => s.platform === 'instagram')?.url || ''}
+          placeholder="https://instagram.com/..."
         />
 
         <div className={styles.textareaGroup}>
           <label className={styles.label}>Biografía (una oración por línea)</label>
-          <textarea 
-            name="bio" 
-            className={styles.textarea} 
-            rows={5} 
+          <textarea
+            name="bio"
+            className={styles.textarea}
+            rows={5}
             defaultValue={artist.bio.join('\n')}
           ></textarea>
         </div>

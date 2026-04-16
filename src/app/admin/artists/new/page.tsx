@@ -44,23 +44,23 @@ export default function NewArtistPage() {
           </div>
 
           <div className={styles.row}>
-            <TagSelector 
-              label="Roles en la Organización" 
-              name="orgRole" 
-              options={["Juez", "Host", "Artista", "Fundador"]} 
-              required 
+            <TagSelector
+              label="Roles en la Organización"
+              name="orgRole"
+              options={["Juez", "Host", "Artista", "Dj", "Fundador", "Logistica", "Freestyler"]}
+              required
             />
-            <Input label="Profesión" name="profession" />
+            <Input label="Profesión u Ocupación" name="profession" />
           </div>
 
           <div className={styles.row}>
-            <LocationSelector label="Origen (Ciudad)" name="origin" />
+            <LocationSelector label="Origen" name="origin" />
             <YearSelector label="Trayectoria (Inició en...)" name="trajectory" min={1900} />
           </div>
 
           {/* Cargador de Imágenes con Preview */}
           <ImageUploader label="Foto del Artista" name="imageFile" />
-          
+
           <Input label="Instagram URL" name="instagram" placeholder="https://instagram.com/..." />
 
           <div className={styles.textareaGroup}>

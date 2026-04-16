@@ -25,19 +25,19 @@ export default function ArtistControlCard({ artist }: { artist: Artist }) {
     <Card title={artist.name} subtitle={artist.orgRole.join(', ')}>
       <div className={styles.artistInfo}>
         <p><strong>ID/Alias:</strong> {artist.id}</p>
-        <p><strong>Profesión:</strong> {artist.profession || 'N/A'}</p>
-        
+        <p><strong>Profesión u Ocupación:</strong> {artist.profession || 'N/A'}</p>
+
         <div className={styles.actions}>
-          <Button 
-            href={`/admin/artists/edit/${artist.id}`} 
-            variant="ghost" 
+          <Button
+            href={`/admin/artists/edit/${artist.id}`}
+            variant="ghost"
             fullWidth
           >
             Editar
           </Button>
-          
-          <Button 
-            variant="danger" 
+
+          <Button
+            variant="danger"
             onClick={handleDelete}
             disabled={isDeleting}
             fullWidth

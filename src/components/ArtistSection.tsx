@@ -45,7 +45,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
         ) : (
           <p className={styles.subtitle}>No se encontraron artistas registrados por el momento.</p>
         )}
-        
+
         {artistsData.length > 0 && (
           <div className={styles.filterBar}>
             {roles.map(role => (
@@ -63,10 +63,10 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
 
       <div className={styles.artistsContainer}>
         {filteredArtists.map((artist) => (
-          <ArtistCard 
-            key={artist.id} 
-            artist={artist} 
-            onOpenModal={setSelectedArtist} 
+          <ArtistCard
+            key={artist.id}
+            artist={artist}
+            onOpenModal={setSelectedArtist}
           />
         ))}
       </div>
@@ -77,7 +77,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
             <button className={styles.closeButton} onClick={() => setSelectedArtist(null)}>
               <FaXmark size={24} />
             </button>
-            
+
             <div className={styles.modalBody}>
               <div className={styles.modalImageWrapper} style={{ aspectRatio: `${selectedArtist.imageWidth ?? 1}/${selectedArtist.imageHeight ?? 1}` }}>
                 <Image
@@ -88,7 +88,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
                   style={{ objectPosition: `center ${selectedArtist.imagePosition || '50%'}` }}
                 />
               </div>
-              
+
               <div className={styles.modalInfo}>
                 <div className={styles.modalHeader}>
                   <div className={styles.tagContainer}>
@@ -102,7 +102,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
                 <div className={styles.artistDetails}>
                   {selectedArtist.profession && (
                     <div className={styles.detailItem}>
-                      <span className={styles.detailLabel}>Profesión</span>
+                      <span className={styles.detailLabel}>Profesión u Ocupación</span>
                       <span className={styles.detailValue}>{selectedArtist.profession}</span>
                     </div>
                   )}
@@ -132,9 +132,9 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
                   <div className={styles.socialContainer}>
                     {selectedArtist.socials.map((social, index) => (
                       social.url !== "https://www.instagram.com/" && (
-                        <Button 
+                        <Button
                           key={index}
-                          href={social.url} 
+                          href={social.url}
                           variant="danger"
                         >
                           {getSocialIcon(social.platform)}

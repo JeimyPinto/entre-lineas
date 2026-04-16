@@ -12,7 +12,7 @@ export interface Artist {
   imageWidth?: number;
   imageHeight?: number;
   imagePosition?: string; // Porcentaje de posición vertical (ej. '50%' o 'top')
-  profession: string; // Carrera o profesión (ej. Rapero, Productor, Abogado)
+  profession: string; // Carrera o Profesión u Ocupación (ej. Rapero, Productor, Abogado)
   origin: string; // Ciudad o lugar de origen
   trajectory: string; // Tiempo en la escena (ej. Desde 2019)
   bio: string[];

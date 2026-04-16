@@ -5,7 +5,7 @@ import { createEventAction } from '@/app/actions/eventActions';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
-import styles from '../artists/new/new.module.css'; // Reutilizamos estilos de formulario
+import styles from '../../artists/new/new.module.css'; // Reutilizamos estilos de formulario
 
 export default function NewEventPage() {
   const [error, setError] = useState<string | null>(null);

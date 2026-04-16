@@ -183,10 +183,13 @@ export default function BrandingPage() {
               <span className={styles.uiLabel}>Standard Card</span>
               <div style={{ width: '100%', maxWidth: '320px' }}>
                 <Card 
-                  image="/Entre-lineas-logo.png" 
                   title="Final Nacional 2023" 
                   subtitle="Manizales, Colombia"
-                />
+                >
+                  <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
+                    <Image src="/Entre-lineas-logo.png" alt="Logo Entre Líneas" width={150} height={80} style={{ objectFit: 'contain' }} />
+                  </div>
+                </Card>
               </div>
             </div>
             

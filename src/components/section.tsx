@@ -46,37 +46,58 @@ export default function MainSection() {
             {highlights.viral && (
               <div className={styles.highlightItem}>
                 <span className={styles.highlightLabel}><FaFire size={18} /> Más Viral</span>
-                <Card 
-                  image={highlights.viral.thumbnail} 
-                  title={highlights.viral.title} 
-                  subtitle={`${Number(highlights.viral.viewCount).toLocaleString()} Visualizaciones`}
-                  href={`https://youtube.com/watch?v=${highlights.viral.id}`}
-                  isExternal
-                />
+                <a href={`https://youtube.com/watch?v=${highlights.viral.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <Card 
+                    title={highlights.viral.title} 
+                    subtitle={`${Number(highlights.viral.viewCount).toLocaleString()} Visualizaciones`}
+                  >
+                    <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+                      <img 
+                        src={highlights.viral.thumbnail} 
+                        alt={highlights.viral.title} 
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    </div>
+                  </Card>
+                </a>
               </div>
             )}
             {highlights.mostLiked && (
               <div className={styles.highlightItem}>
                 <span className={styles.highlightLabel}><FaHeart size={16} /> Más Gustado</span>
-                <Card 
-                  image={highlights.mostLiked.thumbnail} 
-                  title={highlights.mostLiked.title} 
-                  subtitle={`${Number(highlights.mostLiked.likeCount).toLocaleString()} Likes`}
-                  href={`https://youtube.com/watch?v=${highlights.mostLiked.id}`}
-                  isExternal
-                />
+                <a href={`https://youtube.com/watch?v=${highlights.mostLiked.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <Card 
+                    title={highlights.mostLiked.title} 
+                    subtitle={`${Number(highlights.mostLiked.likeCount).toLocaleString()} Likes`}
+                  >
+                    <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+                      <img 
+                        src={highlights.mostLiked.thumbnail} 
+                        alt={highlights.mostLiked.title} 
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    </div>
+                  </Card>
+                </a>
               </div>
             )}
             {highlights.mostCommented && (
               <div className={styles.highlightItem}>
                 <span className={styles.highlightLabel}><FaComment size={16} /> Más Comentado</span>
-                <Card 
-                  image={highlights.mostCommented.thumbnail} 
-                  title={highlights.mostCommented.title} 
-                  subtitle={`${Number(highlights.mostCommented.commentCount).toLocaleString()} Comentarios`}
-                  href={`https://youtube.com/watch?v=${highlights.mostCommented.id}`}
-                  isExternal
-                />
+                <a href={`https://youtube.com/watch?v=${highlights.mostCommented.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <Card 
+                    title={highlights.mostCommented.title} 
+                    subtitle={`${Number(highlights.mostCommented.commentCount).toLocaleString()} Comentarios`}
+                  >
+                    <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+                      <img 
+                        src={highlights.mostCommented.thumbnail} 
+                        alt={highlights.mostCommented.title} 
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    </div>
+                  </Card>
+                </a>
               </div>
             )}
           </div>
