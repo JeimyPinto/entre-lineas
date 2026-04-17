@@ -113,6 +113,17 @@
   --margin-xl:1.5rem;
   --margin-xxl:2rem;
   --margin-xxxl:3rem;
+
+  /* Jerarquía de Z-Index */
+  --z-below: -1;
+  --z-base: 0;
+  --z-content: 10;
+  --z-sticky: 100;
+  --z-header: 500;
+  --z-sidebar: 600;
+  --z-menu: 1000;
+  --z-modal: 2000;
+  --z-toast: 3000;
 }
 
 a {
@@ -213,3 +224,12 @@ html .mobile-compact-padding {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-red);
 }
+
+/* Fix para el área de Administración */
+body:has(.adminContainer) {
+  padding-top: 0 !important;
+}
+
+body:has(.adminContainer) header {
+  display: none !important;
+}

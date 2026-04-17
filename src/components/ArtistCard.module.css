@@ -25,15 +25,16 @@
 
 .imageWrapper {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   width: 100%;
   overflow: hidden;
   background: var(--color-black);
+  border-bottom: 2px solid color-mix(in srgb, var(--color-white) 10%, transparent);
 }
 
 .image {
   object-fit: cover;
-  object-position: center top;
+  object-position: center var(--image-position, 50%);
   width: 100%;
   height: 100%;
   transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
@@ -154,6 +155,7 @@
     border-radius: var(--border-radius-m);
     object-fit: cover;
     border: 2px solid color-mix(in srgb, var(--color-white) 10%, transparent);
+    object-position: center var(--image-position, 50%);
   }
 
   .mobileMainInfo {

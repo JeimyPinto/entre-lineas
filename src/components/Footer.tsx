@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './Footer.module.css';
 import { FaInstagram, FaYoutube, FaWhatsapp, FaEnvelope, FaUserShield } from 'react-icons/fa6';
+import { contactData } from '@/data/contact';
+import styles from './Footer.module.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -63,10 +64,10 @@ const Footer = () => {
             © {currentYear} Entre Líneas. Todos los derechos reservados.
           </div>
           <div className={styles.socialIcons}>
-            <a href="https://instagram.com/entr3_line4s" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
-            <a href="https://wa.me/573192749317" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
-            <a href="mailto:entr3line4s@gmail.com"><FaEnvelope /></a>
+            <a href={contactData.instagram.main.link} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+            <a href={contactData.platforms.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            <a href={contactData.whatsapp.link} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
+            <a href={`mailto:${contactData.email}`} aria-label="Email"><FaEnvelope /></a>
           </div>
         </div>
       </div>

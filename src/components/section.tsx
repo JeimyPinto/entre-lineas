@@ -12,6 +12,11 @@ import { useInterval } from "@/hooks/useInterval";
 
 export default function MainSection() {
   const { highlights } = useYouTubeData();
+  
+  const formatStat = (value: any) => {
+    const num = Number(value);
+    return isNaN(num) ? "0" : num.toLocaleString();
+  };
   const [logoIndex, setLogoIndex] = useState(0);
   const logos = ["/1-01.png", "/1-02.png", "/1-03.png", "/1-04.png"];
 
@@ -49,7 +54,7 @@ export default function MainSection() {
                 <a href={`https://youtube.com/watch?v=${highlights.viral.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                   <Card 
                     title={highlights.viral.title} 
-                    subtitle={`${Number(highlights.viral.viewCount).toLocaleString()} Visualizaciones`}
+                    subtitle={`${formatStat(highlights.viral.viewCount)} Visualizaciones`}
                   >
                     <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
                       <img 
@@ -68,7 +73,7 @@ export default function MainSection() {
                 <a href={`https://youtube.com/watch?v=${highlights.mostLiked.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                   <Card 
                     title={highlights.mostLiked.title} 
-                    subtitle={`${Number(highlights.mostLiked.likeCount).toLocaleString()} Likes`}
+                    subtitle={`${formatStat(highlights.mostLiked.likeCount)} Likes`}
                   >
                     <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
                       <img 
@@ -87,7 +92,7 @@ export default function MainSection() {
                 <a href={`https://youtube.com/watch?v=${highlights.mostCommented.id}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                   <Card 
                     title={highlights.mostCommented.title} 
-                    subtitle={`${Number(highlights.mostCommented.commentCount).toLocaleString()} Comentarios`}
+                    subtitle={`${formatStat(highlights.mostCommented.commentCount)} Comentarios`}
                   >
                     <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
                       <img 

@@ -11,9 +11,11 @@
   display: flex;
   flex-direction: column;
   padding: var(--padding-xl);
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: fixed;
+  top: 86px;
+  left: 0;
+  height: 95vh;
+  z-index: var(--z-sidebar);
 }
 
 .sidebarHeader h2 {
@@ -73,5 +75,19 @@
 .mainContent {
   flex: 1;
   padding: var(--padding-xxl);
-  overflow-y: auto;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--color-black-pure);
+  position: relative;
 }
+
+/* No mostrar Sidebar ni márgenes en el Login */
+.adminContainer:has(.loginContainer) .sidebar {
+  display: none;
+}
+
+.adminContainer:has(.loginContainer) .mainContent {
+  margin-left: 0;
+  padding: 0;
+}
+

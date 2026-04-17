@@ -43,7 +43,6 @@ export default function ImageUploader({ label, name, defaultImage, defaultPositi
       <div 
         className={`${styles.dropZone} ${preview ? styles.hasPreview : ''}`}
         onClick={() => !preview && fileInputRef.current?.click()}
-        style={{ height: preview ? '400px' : '250px' }}
       >
         <input 
           type="file" 

@@ -6,12 +6,12 @@ import {
   FaWhatsapp, 
   FaInstagram, 
   FaYoutube, 
-  FaSpotify, 
   FaTiktok,
   FaMusic
 } from 'react-icons/fa';
 import Image from 'next/image';
 import Card from '@/components/ui/Card';
+import { contactData } from '@/data/contact';
 import styles from './Contact.module.css';
 
 const Contact = () => {
@@ -39,8 +39,8 @@ const Contact = () => {
           <Card title="Correo Electrónico" icon={<FaEnvelope />}>
             <ul className={styles.infoList}>
               <li className={styles.infoItem}>
-                <a href="mailto:entr3line4s@gmail.com" className={styles.link}>
-                  entr3line4s@gmail.com
+                <a href={`mailto:${contactData.email}`} className={styles.link}>
+                  {contactData.email}
                 </a>
               </li>
             </ul>
@@ -51,12 +51,12 @@ const Contact = () => {
             <ul className={styles.infoList}>
               <li className={styles.infoItem}>
                 <a 
-                  href="https://wa.me/573192749317" 
+                  href={contactData.whatsapp.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  +57 319 274 9317
+                  {contactData.whatsapp.number}
                 </a>
               </li>
             </ul>
@@ -67,22 +67,22 @@ const Contact = () => {
             <ul className={styles.infoList}>
               <li className={styles.infoItem}>
                 <a 
-                  href="https://instagram.com/entr3_line4s" 
+                  href={contactData.instagram.main.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  @entr3_line4s
+                  {contactData.instagram.main.handle}
                 </a>
               </li>
               <li className={styles.infoItem}>
                 <a 
-                  href="https://instagram.com/_mr_galactico_" 
+                  href={contactData.instagram.founder.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  @_mr_galactico_
+                  {contactData.instagram.founder.handle}
                 </a>
               </li>
             </ul>
@@ -91,10 +91,10 @@ const Contact = () => {
           {/* Platforms Card */}
           <Card title="Plataformas Digitales" subtitle="Galáctico / Entre Líneas Manizales" icon={<FaMusic />}>
             <div className={styles.platformsGrid}>
-              <a href="#" className={styles.platformIcon} aria-label="YouTube">
+              <a href={contactData.platforms.youtube} target="_blank" rel="noopener noreferrer" className={styles.platformIcon} aria-label="YouTube">
                 <FaYoutube />
               </a>
-              <a href="#" className={styles.platformIcon} aria-label="TikTok">
+              <a href={contactData.platforms.tiktok} target="_blank" rel="noopener noreferrer" className={styles.platformIcon} aria-label="TikTok">
                 <FaTiktok />
               </a>
             </div>

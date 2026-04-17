@@ -15,10 +15,13 @@
 
 .cardHeader {
   display: flex;
-  align-items: center;
-  gap: var(--gap-m);
-  padding: var(--padding-xl);
+  flex-direction: column;
+  gap: var(--gap-s);
+  padding: 1.5rem;
   border-bottom: 1px solid var(--border-glass-thin);
+  position: relative;
+  min-height: 110px;
+  justify-content: center;
 }
 
 .cardIcon {
@@ -34,17 +37,20 @@
 
 .cardTitle {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: var(--font-weight-bold);
+  font-size: 1rem;
+  font-weight: 800;
   color: var(--color-white);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  line-height: 1.4;
 }
 
 .cardSubtitle {
-  color: var(--color-grey-light);
-  font-size: 0.85rem;
-  margin: 0.25rem 0 0;
+  color: var(--color-red);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
 .cardContent {

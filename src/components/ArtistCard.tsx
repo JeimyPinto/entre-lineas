@@ -38,9 +38,8 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
             src={imageSrc}
             alt={artist.name}
             fill
-            sizes="(min-width: 900px) 25vw, 100vw"
             className={styles.image}
-            style={{ objectPosition: `center ${artist.imagePosition || '50%'}` }}
+            style={{ '--image-position': artist.imagePosition || '50%' } as React.CSSProperties}
           />
           {hasContent && (
             <div className={styles.overlay}>
@@ -79,7 +78,7 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
               alt={artist.name}
               fill
               className={styles.thumb}
-              style={{ objectPosition: `center ${artist.imagePosition || '50%'}` }}
+              style={{ '--image-position': artist.imagePosition || '50%' } as React.CSSProperties}
             />
           </div>
           <div className={styles.mobileMainInfo}>
