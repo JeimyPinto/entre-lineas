@@ -82,11 +82,11 @@
 }
 
 /* No mostrar Sidebar ni márgenes en el Login */
-.adminContainer:has(.loginContainer) .sidebar {
+.adminContainer:has(.admin-login-page) .sidebar {
   display: none;
 }
 
-.adminContainer:has(.loginContainer) .mainContent {
+.adminContainer:has(.admin-login-page) .mainContent {
   margin-left: 0;
   padding: 0;
 }

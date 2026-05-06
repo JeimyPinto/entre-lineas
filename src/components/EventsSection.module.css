@@ -1,23 +1,23 @@
 .eventsSection {
-  padding: 6rem 2rem;
+  padding: var(--padding-xxxl) var(--padding-xxl);
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: var(--margin-xxxl);
   color: var(--color-white);
 }
 
 .sectionHeader {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-xxl);
 }
 
 .title {
   font-family: var(--font-title);
   font-size: var(--font-display);
-  margin: 0 0 1rem;
+  margin: 0 0 var(--margin-l);
   color: var(--color-white);
   text-shadow: 0 0 20px color-mix(in srgb, var(--color-white) 10%, transparent);
 }
@@ -33,46 +33,34 @@
 .eventsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 2rem;
+  gap: var(--gap-xxl);
   justify-items: center;
 }
 
-@media (max-width: 768px) {
-  .eventsSection {
-    /* Padding handled by global .mobile-section-padding class */
-  }
 
-  .title {
-    /* Font size handled by global .mobile-title-h1 class */
-  }
-
-  .eventsGrid {
-    /* Gap handled by global .mobile-reduced-gap class */
-  }
-}
 
 /* Status States */
 .statusContainer {
   text-align: center;
-  padding: 4rem 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: var(--padding-xxxl) var(--padding-xxl);
+  background: var(--bg-card);
+  border-radius: var(--border-radius-xl);
+  border: 1px dashed var(--bg-glass-thick);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--gap-xl);
 }
 
 .statusText {
   color: var(--color-grey-light);
-  font-size: 1.1rem;
+  font-size: var(--font-body-lg);
 }
 
 .errorTitle {
   font-family: var(--font-title);
   color: var(--color-red);
-  font-size: 2rem;
+  font-size: var(--font-h1);
   margin: 0;
 }
 

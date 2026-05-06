@@ -7,7 +7,14 @@ import MenuButton from "./MenuButton";
 import styles from "./header.module.css";
 import BlinkingLogo from "./ui/BlinkingLogo";
 
+import { usePathname } from "next/navigation";
+
 export default function Header() {
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith('/admin');
+
+  if (isAdmin) return null;
+
   const links = [
     { label: "Inicio", href: "/#inicio" },
     { label: "Historia", href: "/#historia" },

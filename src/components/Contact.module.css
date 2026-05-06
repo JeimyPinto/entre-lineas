@@ -1,8 +1,8 @@
 .contactSection {
-  padding: 100px 20px 180px;
+  padding: 6rem var(--padding-xxl) 10rem;
   background: var(--bg-main);
   color: var(--color-white);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-main), sans-serif;
   overflow: hidden;
   position: relative;
 }
@@ -26,11 +26,11 @@
 }
 
 .headerContent {
-  margin-bottom: 60px;
+  margin-bottom: var(--margin-xxxl);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--gap-xl);
 }
 
 .contactLogo {

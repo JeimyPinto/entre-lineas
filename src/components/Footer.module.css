@@ -1,55 +1,67 @@
 .footer {
-  background-color: #000;
+  background-color: var(--color-dark);
   color: var(--color-white);
-  padding: 5rem 0 3rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--padding-xxxl) 0 var(--padding-xl);
+  border-top: 1px solid var(--color-grey-dark);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--padding-xxl);
 }
 
 .footerBlocks {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: var(--gap-xl);
+  margin-bottom: var(--margin-xxl);
 }
 
-.brandBlock {
+/* Diseño modular y cuadrado con bordes suaves */
+.brandBlock, .linkBlock {
+  background: var(--bg-card);
+  border: 1px solid var(--color-grey-dark);
+  border-radius: var(--border-radius-s);
+  padding: var(--padding-xl);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--gap-l);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.brandBlock:hover, .linkBlock:hover {
+  border-color: var(--border-card-hover);
+  background: var(--bg-card-hover);
 }
 
 .logoWrapper {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--gap-m);
 }
 
 .brandName {
   font-family: var(--font-title);
-  font-size: 1.5rem;
+  font-size: var(--font-h4);
   letter-spacing: 1px;
 }
 
 .description {
   color: var(--color-grey-light);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  max-width: 400px;
+  font-size: var(--font-small);
+  line-height: 1.6;
 }
 
 .blockTitle {
   font-family: var(--font-title);
-  color: var(--color-red);
-  font-size: 1.2rem;
+  color: var(--color-white);
+  font-size: var(--font-body-lg);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
+  letter-spacing: 1.5px;
+  margin-bottom: var(--margin-s);
+  border-bottom: 1px solid var(--color-grey-dark);
+  padding-bottom: var(--padding-s);
 }
 
 .linksList {
@@ -57,32 +69,45 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: var(--gap-s);
 }
 
 .linksList a {
   color: var(--color-grey-light);
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s ease;
+  font-size: var(--font-small);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
 }
 
 .linksList a:hover {
   color: var(--color-white);
+  transform: translateX(4px);
 }
 
 .adminLink {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: var(--gap-s);
+  color: var(--color-grey-light) !important;
+  font-weight: var(--font-weight-semibold);
+  background: var(--bg-card);
+  padding: var(--padding-m);
+  border-radius: var(--border-radius-s);
+  border: 1px solid var(--color-grey-dark);
+  transition: all var(--transition-fast);
+}
+
+.adminLink:hover {
   color: var(--color-white) !important;
-  font-weight: 500;
+  background: var(--bg-card-hover);
+  border-color: var(--border-card-hover);
 }
 
 .footerDivider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 2rem;
+  background: var(--color-grey-dark);
+  margin-bottom: var(--margin-xl);
 }
 
 .bottomSection {
@@ -92,35 +117,45 @@
 }
 
 .copyright {
-  color: var(--color-grey-dark);
-  font-size: 0.85rem;
+  color: var(--color-grey-light);
+  font-size: var(--font-small);
 }
 
 .socialIcons {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--gap-l);
 }
 
 .socialIcons a {
   color: var(--color-grey-light);
-  font-size: 1.2rem;
-  transition: all 0.2s ease;
+  font-size: var(--font-body-lg);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--color-grey-dark);
+  border-radius: var(--border-radius-s);
 }
 
 .socialIcons a:hover {
-  color: var(--color-red);
-  transform: translateY(-3px);
+  color: var(--color-white);
+  background: var(--bg-glass-thick);
+  border-color: var(--color-border-light);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {
   .footerBlocks {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--gap-xl);
   }
   
   .bottomSection {
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--gap-xl);
     text-align: center;
   }
 }

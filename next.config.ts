@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    unoptimized: process.env.NODE_ENV === 'development',
     remotePatterns: [
       {
         protocol: 'https',
@@ -20,6 +21,12 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'paywsuxfzsoeunettwuj.supabase.co',
         port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '54321',
         pathname: '/storage/v1/object/public/**',
       },
     ],

@@ -1,10 +1,10 @@
 .suscribeBanner {
   background: linear-gradient(135deg, var(--color-red) 0%, var(--color-dark) 100%);
-  padding: 3rem;
+  padding: var(--padding-xxxl);
   border-radius: var(--border-radius-xl);
-  gap: 2rem;
+  gap: var(--gap-xxl);
   color: white;
-  margin-top: 3rem;
+  margin-top: var(--margin-xxxl);
   box-shadow: 0 15px 40px var(--color-red-glow);
 }
 
@@ -26,10 +26,10 @@
 .subscribeButton {
   background: var(--color-white);
   color: var(--color-red);
-  padding: 0.8rem 1.5rem;
+  padding: var(--padding-m) var(--padding-xl);
   border-radius: var(--border-radius-m);
-  gap: 0.8rem;
-  transition: transform 0.3s, box-shadow 0.3s;
+  gap: var(--gap-m);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   flex-shrink: 0;
 }
 
@@ -42,6 +42,6 @@
   .suscribeBanner {
     flex-direction: column;
     text-align: center;
-    padding: 1.5rem;
+    padding: var(--padding-xl);
   }
 }

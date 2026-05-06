@@ -5,18 +5,18 @@
   width: 100vw;
   height: 100vh;
   background: color-mix(in srgb, var(--color-black) 85%, transparent);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass-effect);
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: var(--padding-xxl);
 }
 
 .modalContent {
   background: var(--color-dark);
   border: 1px solid var(--color-grey-dark);
-  padding: 2rem;
+  padding: var(--padding-xxl);
   border-radius: var(--border-radius-xl);
   max-width: 900px;
   width: 100%;
@@ -37,7 +37,7 @@
   background: var(--color-grey-dark);
   color: var(--color-white);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: var(--padding-s) var(--padding-l);
   border-radius: var(--border-radius-s);
 }
 .closeButton:hover {

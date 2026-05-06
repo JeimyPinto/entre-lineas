@@ -1,5 +1,5 @@
 .gallerySection {
-  padding: 6rem 2rem;
+  padding: var(--padding-xxxl) var(--padding-xxl);
   max-width: 1200px;
   margin: 0 auto;
   color: var(--color-white);
@@ -8,9 +8,9 @@
 .galleryOfflineBanner {
   background: color-mix(in srgb, var(--color-red) 10%, var(--color-dark) 90%);
   border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
-  padding: 1rem;
+  padding: var(--padding-l);
   border-radius: var(--border-radius-m);
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--margin-xxxl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +22,7 @@
   margin-bottom: 5rem;
   background: var(--color-bg-overlay);
   backdrop-filter: var(--glass-effect);
-  padding: 3.5rem;
+  padding: var(--padding-xxxl);
   border-radius: var(--border-radius-xl);
   border: var(--border-glass);
   box-shadow: var(--shadow-premium);
@@ -31,8 +31,8 @@
 .galleryInfoHeader {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: var(--gap-xl);
+  margin-bottom: var(--margin-xl);
 }
 
 .galleryInfoTitle h2 {
@@ -53,7 +53,7 @@
   font-size: var(--font-body-lg);
   line-height: 1.6;
   color: color-mix(in srgb, var(--color-white) 80%, var(--color-dark) 20%);
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-xxl);
   max-width: 800px;
 }
 
@@ -61,7 +61,7 @@
   display: inline-block;
   background: color-mix(in srgb, var(--color-white) 90%, var(--color-dark) 10%);
   color: var(--color-dark);
-  padding: 0.8rem 2rem;
+  padding: var(--padding-m) var(--padding-xxl);
   border-radius: var(--border-radius-s);
 }
 
@@ -73,10 +73,10 @@
 .galleryBlockTabs {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--gap-xxl);
   margin-bottom: 4rem;
   border-bottom: 1px solid var(--color-grey-dark);
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--padding-s);
 }
 
 .galleryBlockTabs button {
@@ -86,8 +86,8 @@
   font-size: var(--font-body-lg);
   font-weight: 500;
   cursor: pointer;
-  padding: 0.8rem 1.5rem;
-  transition: all 0.3s;
+  padding: var(--padding-m) var(--padding-xl);
+  transition: all var(--transition-fast);
   position: relative;
   letter-spacing: 1px;
 }
@@ -110,19 +110,19 @@
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 3rem;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: var(--gap-xxxl);
+  transition: all var(--transition-normal);
 }
 
 /* Mobile specific logic in CSS */
 @media (max-width: 768px) {
   .gallerySection {
-    padding: 3rem 1.2rem;
+    padding: 3rem var(--padding-xl);
   }
 
   .galleryInfoBlock {
-    padding: 2rem 1.5rem;
-    margin-bottom: 3rem;
+    padding: var(--padding-xxl) var(--padding-xl);
+    margin-bottom: var(--margin-xxxl);
   }
 
   .galleryInfoTitle h2 {
@@ -136,9 +136,9 @@
   .galleryGrid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 1.2rem;
+    gap: var(--gap-xl);
     overflow-x: auto;
-    padding: 0 0.5rem 1.5rem;
+    padding: 0 0.5rem var(--padding-xl);
     margin: 0 -1.2rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -151,8 +151,8 @@
 .galleryCarouselNav {
   display: none;
   justify-content: center;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
+  gap: var(--gap-m);
+  margin-top: var(--margin-xl);
 }
 
 @media (max-width: 768px) {
@@ -180,5 +180,6 @@
   background: var(--color-white);
   color: var(--color-dark);
   border: none;
-  padding: 0.6rem 1.5rem;
+  padding: var(--padding-m) var(--padding-xl);
   border-radius: var(--border-radius-s);
+}

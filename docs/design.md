@@ -12,6 +12,8 @@
   - Se utilizan clases globales y por componente (solo si existen en el CSS actual).
 - **Principios de diseño:**
   - Estilo oscuro, moderno, modular, cuadrado, con sombras y bordes suaves.
+  - Los bloques de contenido secundarios (como el Footer) deben usar un diseño de "tarjeta modular": fondo semitransparente (`rgba(255, 255, 255, 0.02)`), bordes sutiles de `--color-grey-dark` y `border-radius: 6px`.
+  - El diseño debe ser compacto pero con suficiente respiro; evitar paddings excesivos que rompan la densidad de la información.
 
 ## UX/UI
 

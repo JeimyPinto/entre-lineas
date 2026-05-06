@@ -4,10 +4,10 @@
   left: 0;
   width: 100%;
   background: color-mix(in srgb, var(--color-black) 90%, transparent);
-  backdrop-filter: blur(12px);
+  backdrop-filter: var(--glass-effect);
   border-bottom: 1px solid var(--color-border);
   z-index: var(--z-header);
-  transition: all 0.3s ease;
+  transition: all var(--transition-fast);
   padding: 0 var(--padding-xxl);
   height: 85px; /* Más espacio para respirar */
   display: flex;

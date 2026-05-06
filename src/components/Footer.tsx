@@ -21,7 +21,6 @@ const Footer = () => {
                 width={50} 
                 height={65} 
                 priority
-                style={{ width: 'auto', height: 'auto' }}
               />
               <span className={styles.brandName}>Entre Líneas</span>
             </div>

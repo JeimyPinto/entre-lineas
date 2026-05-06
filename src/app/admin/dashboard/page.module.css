@@ -35,17 +35,22 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--gap-xl);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gap-xxl);
 }
 
 .statCard {
-  transition: transform 0.3s var(--transition-main), border-color 0.3s var(--transition-main);
+  transition: all 0.3s var(--transition-main);
+  background: var(--bg-glass-thin);
+  border: 1px solid var(--border-glass-thin);
+  padding: var(--padding-xxl);
 }
 
 .statCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   border-color: var(--color-red);
+  background: var(--bg-glass-medium);
+  box-shadow: 0 15px 40px var(--color-shadow);
 }
 
 .statCard p {

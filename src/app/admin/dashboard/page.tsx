@@ -13,7 +13,7 @@ export default function DashboardPage() {
           <p className={styles.welcome}>Bienvenido al centro de mando de Entre Líneas</p>
         </div>
         <form action={logoutAction}>
-          <Button type="submit" variant="danger" className={styles.logoutBtn}>
+          <Button type="submit" variant="ghost" className={styles.logoutBtn}>
             <FaArrowRightFromBracket /> Cerrar Sesión
           </Button>
         </form>

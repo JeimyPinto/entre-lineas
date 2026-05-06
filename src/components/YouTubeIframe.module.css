@@ -6,7 +6,7 @@
   overflow: hidden;
   background: var(--color-black);
   box-shadow: 0 10px 30px var(--color-shadow);
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-xxl);
 }
 
 .iframe {

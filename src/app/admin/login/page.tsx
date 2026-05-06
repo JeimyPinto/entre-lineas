@@ -27,7 +27,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={`${styles.loginContainer} admin-login-page`}>
       <Card className={styles.loginCard}>
         <div className={styles.header}>
           <Image src="/1-01.png" alt="Logo" width={80} height={80} className={styles.logo} />
