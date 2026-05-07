@@ -4,7 +4,14 @@ import Card from '@/components/ui/Card';
 import styles from '../artists/artists.module.css'; // Reutilizamos estilos de lista
 
 export default async function AdminEventsPage() {
-  const events = await eventService.getAll();
+  let events: import('@/types/events').Event[] = [];
+  let loadError = false;
+
+  try {
+    events = await eventService.getAll();
+  } catch {
+    loadError = true;
+  }
 
   return (
     <div className={styles.container}>
@@ -14,7 +21,12 @@ export default async function AdminEventsPage() {
       </div>
 
       <div className={styles.grid}>
-        {events.map((event) => (
+        {loadError && (
+          <p style={{ color: 'var(--color-red)', gridColumn: '1 / -1' }}>
+            Error al conectar con el servidor. No se pudieron cargar los eventos.
+          </p>
+        )}
+        {!loadError && events.map((event) => (
           <Card key={event.id} title={event.title} subtitle={event.date}>
             <div className={styles.artistInfo}>
               <p><strong>Edición:</strong> #{event.id}</p>
@@ -26,7 +38,7 @@ export default async function AdminEventsPage() {
             </div>
           </Card>
         ))}
-        {events.length === 0 && (
+        {!loadError && events.length === 0 && (
           <p style={{ color: 'var(--color-grey-light)' }}>No hay eventos registrados en la base de datos.</p>
         )}
       </div>

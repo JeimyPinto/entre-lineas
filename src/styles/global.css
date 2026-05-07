@@ -232,4 +232,22 @@ body:has(.adminContainer) {
 
 body:has(.adminContainer) header {
   display: none !important;
+}
+
+/* Server Error Banner */
+.server-error-banner {
+  background: color-mix(in srgb, var(--color-red) 15%, transparent);
+  border: 1px solid var(--color-red);
+  border-radius: 6px;
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  margin: 1rem auto;
+  max-width: 1200px;
+  text-align: center;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+.server-error-banner p {
+  margin: 0;
 }

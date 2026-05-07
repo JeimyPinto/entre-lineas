@@ -9,14 +9,31 @@ import { eventService } from '@/services/eventService'
 import { artistService } from '@/services/artistService'
 
 export default async function Home() {
-  // Carga paralela de datos en el servidor
-  const [events, artists] = await Promise.all([
-    eventService.getAll(),
-    artistService.getAll()
-  ]);
+  let events: import('@/types/events').Event[] = [];
+  let artists: import('@/types/artists').Artist[] = [];
+  let serverError: string | null = null;
+
+  try {
+    [events, artists] = await Promise.all([
+      eventService.getAll(),
+      artistService.getAll()
+    ]);
+
+    if (events.length === 0 && artists.length === 0) {
+      serverError = 'Error al conectar con el servidor.';
+    }
+  } catch (e) {
+    serverError = 'Error al conectar con el servidor.';
+    console.error('[Home] Error inesperado:', e);
+  }
 
   return (
     <main className="home">
+      {serverError && (
+        <div className="server-error-banner" role="alert">
+          <p>{serverError} Algunos datos podrían no estar disponibles.</p>
+        </div>
+      )}
       <div id="inicio">
         <MainSection />
       </div>

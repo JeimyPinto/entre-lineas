@@ -20,7 +20,7 @@ export default function EventsSection({ initialEvents }: EventsSectionProps) {
             Revive los mejores momentos de nuestras batallas de freestyle y eventos culturales.
           </p>
         ) : (
-          <p className={styles.subtitle}>No hay eventos registrados actualmente.</p>
+          <p className={styles.subtitle}>No se pudieron cargar los eventos. Verifica tu conexión e inténtalo de nuevo.</p>
         )}
       </div>
 

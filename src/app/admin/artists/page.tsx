@@ -4,7 +4,14 @@ import ArtistControlCard from './ArtistControlCard';
 import styles from './artists.module.css';
 
 export default async function AdminArtistsPage() {
-  const artists = await artistService.getAll();
+  let artists: import('@/types/artists').Artist[] = [];
+  let loadError = false;
+
+  try {
+    artists = await artistService.getAll();
+  } catch {
+    loadError = true;
+  }
 
   return (
     <div className={styles.container}>
@@ -14,10 +21,15 @@ export default async function AdminArtistsPage() {
       </div>
 
       <div className={styles.grid}>
-        {artists.map((artist) => (
+        {loadError && (
+          <p style={{ color: 'var(--color-red)', gridColumn: '1 / -1' }}>
+            Error al conectar con el servidor. No se pudieron cargar los artistas.
+          </p>
+        )}
+        {!loadError && artists.map((artist) => (
           <ArtistControlCard key={artist.id} artist={artist} />
         ))}
-        {artists.length === 0 && (
+        {!loadError && artists.length === 0 && (
           <p style={{ color: 'var(--color-grey-light)' }}>No hay artistas registrados aún.</p>
         )}
       </div>

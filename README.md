@@ -1,88 +1,121 @@
-# 🖋️ Entre Líneas | Plataforma Artística
+# Entre Líneas — Plataforma Artística
 
 ![Entre Líneas Logo](/1-01.png)
 
-Plataforma oficial del proyecto **Entre Líneas**, diseñada para proyectar y difundir el talento colombiano (músicos, freestylers y artistas) mediante una experiencia web premium, modular y dinámica.
+Plataforma oficial del colectivo **Entre Líneas**, diseñada para proyectar y difundir el talento colombiano (freestylers, músicos y artistas urbanos) mediante una experiencia web moderna, modular y dinámica.
+
+Basado en Manizales, Colombia. 25+ ediciones de eventos documentadas.
 
 ---
 
-## 🚀 Arquitectura y Tecnologías
+## Stack
 
-Este proyecto ha sido rediseñado bajo una arquitectura **Modular y Escalable**, garantizando que el mantenimiento y crecimiento de la plataforma sea fluido.
-
-- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router & Server Actions).
-- **Estilos**: [CSS Modules](https://nextjs.org/docs/app/building-your-application/styling/css-modules) para un encapsulamiento total.
-- **Datos**: Integración dinámica con la [YouTube Data API v3](https://developers.google.com/youtube/v3).
-- **Estado**: Custom Hooks para la gestión de datos asíncronos y conectividad.
-- **UI System**: Librería de componentes propia (`/ui`) que garantiza coherencia visual (Design System).
-
----
-
-## ✨ Características (Highlights)
-
-- **Premium Dark UI**: Paleta de colores curada (Negro, Blanco, Rojo profundo) con efectos de **Glassmorphism**.
-- **YouTube Integration**: Seguimiento en tiempo real de videos, shorts y estadísticas (suscriptores).
-- **Hitos Dinámicos**: Cálculo automático de los videos más virales y comentados del canal.
-- **Responsive Pro**: Experiencia optimizada para móviles con navegación fluida y carruseles táctiles.
-- **SEO Friendly**: Estructura semántica para mejorar el posicionamiento del colectivo.
+| Capa | Tecnología |
+|---|---|
+| Framework | Next.js 16 (App Router, Server Components, Server Actions) |
+| UI | React 19, CSS Modules, framer-motion 12 |
+| Backend | Supabase (PostgreSQL, Auth, Storage) |
+| API Externa | YouTube Data API v3 |
+| Assets | sharp (procesamiento de imágenes), react-icons |
 
 ---
 
-## 📁 Estructura del Proyecto
+## Características
 
-```bash
+- **Galería YouTube** — Videos y shorts del canal, highlights automáticos (más viral, likeado, comentado)
+- **Artistas** — Grid con filtros por rol, modal de detalle, fotos, biografías y redes
+- **Eventos** — 25 ediciones documentadas con jueces, hosts y enlaces a Instagram/YouTube
+- **Historia** — Línea de tiempo animada (Orígenes, Filosofía, Estructura, Visión)
+- **Panel Admin** — CRUD completo de artistas y eventos con autenticación Supabase
+- **Dark UI** — Diseño oscuro con glassmorphism, tipografía Cloister + Esteban
+- **Responsive** — Desktop-first con menú móvil, carruseles táctiles, grids adaptativos
+
+---
+
+## Rutas
+
+| Ruta | Descripción |
+|---|---|
+| `/` | Landing page (hero, galería, artistas, eventos, contacto, footer) |
+| `/admin` | Login / Dashboard / CRUD artistas y eventos / Branding showcase |
+
+---
+
+## Estructura del Proyecto
+
+```
 src/
- ├── app/              # Rutas y API (Next.js App Router)
- ├── components/       # Componentes de negocio
- │    └── ui/          # Elementos básicos reutilizables (Design System)
- ├── hooks/            # Lógica de datos y utilidades
- ├── styles/           # Tokens de diseño y estilos globales
- └── types/            # Centralización de interfaces TypeScript
+├── app/                  # Rutas, layouts, API routes, Server Actions
+│   ├── actions/          #   Server Actions (auth, artist, event CRUD)
+│   └── api/              #   API Routes (youtube, admin/crud, upload)
+├── components/           # Componentes públicos + UI system
+│   └── ui/               #   Design System (Button, Card, Input, etc.)
+├── hooks/                # Custom hooks (useYouTubeData, useInterval, useMediaQuery)
+├── services/             # Capa de servicios (auth, artist, event)
+├── models/               # Modelos con mapeo DB ↔ app
+├── types/                # Interfaces TypeScript
+├── data/                 # Datos estáticos y mock
+└── styles/               # Tokens de diseño y estilos globales
+docs/                     # Documentación detallada
+public/
+├── artists/              # Imágenes de artistas
+├── fonts/                # Tipografías (CloisterBlack)
+└── data/                 # JSON de artistas (fallback producción)
+supabase/
+└── migrations/           # Schema SQL
 ```
 
 ---
 
-## 🛠️ Instalación y Desarrollo
+## Instalación
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [link-del-repo]
-   ```
+```bash
+npm install
+```
 
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
+### Variables de Entorno (`.env.local`)
 
-3. **Variables de Entorno:**
-   Crea un archivo `.env.local` y añade tus credenciales de Google Cloud:
-   ```env
-   YOUTUBE_API_KEY=tu_api_key
-   YOUTUBE_CHANNEL_ID=UColw-XWA4S-yN9SLKnL31xQ
-   ```
+```env
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+YOUTUBE_API_KEY=tu_api_key
+YOUTUBE_CHANNEL_ID=UColw-XWA4S-yN9SLKnL31xQ
+```
 
-4. **Ejecutar en local:**
-   ```bash
-   npm run dev
-   ```
+### Desarrollo
 
----
+```bash
+npm run dev        # next dev
+npm run build      # next build
+npm run lint       # next lint
+```
 
-## 📖 Documentación Detallada
+### Supabase
 
-Para profundizar en aspectos específicos del proyecto, consulta nuestra base de conocimientos:
-
-- 📊 [Objetivos del Proyecto (PRD)](./docs/prd.md)
-- 🎨 [Sistema de Diseño y UX/UI](./docs/design.md)
-- ⚙️ [Stack Técnico y Arquitectura](./docs/technologies.md)
-- 📡 [Guía de API y Datos](./docs/api-data.md)
+```bash
+npm run db:link    # npx supabase link --project-ref paywsuxfzsoeunettwuj
+npm run db:push    # npx supabase db push
+npm run db:seed    # npx supabase db query --linked -f supabase/seed.sql
+```
 
 ---
 
-## 🌐 Despliegue
+## Documentación
 
-La plataforma está optimizada para desplegarse en **Vercel** con un solo clic, soportando funciones servidor para la API de YouTube.
+| Documento | Contenido |
+|---|---|
+| 📊 [PRD — Requerimientos del Proyecto](./docs/prd.md) | Objetivos, contexto, requerimientos funcionales y no funcionales |
+| 🎨 [Sistema de Diseño y UX/UI](./docs/design.md) | Paleta de colores, tipografía, principios de diseño, accesibilidad |
+| ⚙️ [Stack Técnico y Arquitectura](./docs/technologies.md) | Tecnologías, componentes, hooks, servicios, modelos |
+| 📡 [Guía de API y Datos](./docs/api-data.md) | Endpoints, Server Actions, esquema Supabase, datos estáticos |
 
 ---
 
-Desarrollado con ❤️ para el talento colombiano.
+## Despliegue
+
+Optimizado para **Vercel** con funciones serverless para el proxy de YouTube y soporte nativo de Server Actions y Server Components.
+
+---
+
+Desarrollado por Jeimy Tatiana Pinto Tapia para el colectivo Entre Líneas.

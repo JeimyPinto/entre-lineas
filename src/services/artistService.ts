@@ -6,13 +6,21 @@ import { Artist } from '@/models/Artist';
 export const artistService = {
   
   async getAll(): Promise<ArtistType[]> {
-    const { data, error } = await supabaseAnon
-      .from('artists')
-      .select('*')
-      .order('name');
+    try {
+      const { data, error } = await supabaseAnon
+        .from('artists')
+        .select('*')
+        .order('name');
 
-    if (error) throw new Error('No se pudieron cargar los artistas');
-    return (data || []).map(db => Artist.fromDb(db));
+      if (error) {
+        console.error('[artistService.getAll] Error:', error.message);
+        return [];
+      }
+      return (data || []).map(db => Artist.fromDb(db));
+    } catch (err) {
+      console.error('[artistService.getAll] Unexpected error:', err);
+      return [];
+    }
   },
 
   async getById(id: string): Promise<ArtistType | null> {

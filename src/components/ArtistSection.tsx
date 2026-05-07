@@ -43,7 +43,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
         {artistsData.length > 0 ? (
           <p className={styles.subtitle}>Conoce los diferentes artistas que han participado en Entre Líneas y su trayectoria.</p>
         ) : (
-          <p className={styles.subtitle}>No se encontraron artistas registrados por el momento.</p>
+          <p className={styles.subtitle}>No se pudieron cargar los artistas. Verifica tu conexión e inténtalo de nuevo.</p>
         )}
 
         {artistsData.length > 0 && (

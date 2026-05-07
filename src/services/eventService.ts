@@ -6,17 +6,21 @@ import { Event } from '@/models/Event';
 export const eventService = {
   
   async getAll(): Promise<EventType[]> {
-    const { data, error } = await supabaseAnon
-      .from('events')
-      .select('*')
-      .order('id', { ascending: false });
+    try {
+      const { data, error } = await supabaseAnon
+        .from('events')
+        .select('*')
+        .order('id', { ascending: false });
 
-    if (error) {
-      console.error('Error fetching events:', error.message);
-      throw new Error('No se pudieron cargar los eventos');
+      if (error) {
+        console.error('[eventService.getAll] Error:', error.message);
+        return [];
+      }
+      return (data || []).map(db => Event.fromDb(db));
+    } catch (err) {
+      console.error('[eventService.getAll] Unexpected error:', err);
+      return [];
     }
-
-    return (data || []).map(db => Event.fromDb(db));
   },
 
   async create(eventData: EventType): Promise<EventType> {

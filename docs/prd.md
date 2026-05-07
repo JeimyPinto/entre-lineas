@@ -39,13 +39,13 @@ Este documento se basa en la reunión inicial (AR-01, 17-07-2025) entre Jeimy Ta
 
 Para detalles técnicos, estructura de componentes, estilos y API, consultar:
 
-- [TECNOLOGIAS-COMPONENTES.md](./TECNOLOGIAS-COMPONENTES.md)
-- [ESTILOS-UX.md](./ESTILOS-UX.md)
-- [API-DATOS.md](./API-DATOS.md)
+- [Stack Técnico y Arquitectura](./technologies.md)
+- [Sistema de Diseño y UX/UI](./design.md)
+- [Guía de API y Datos](./api-data.md)
 
 ## Última actualización
 
-Julio 2025
+Mayo 2026
 
 ---
 Este PRD debe acompañar el proyecto en cualquier codespace para mantener el contexto y los objetivos claros.
