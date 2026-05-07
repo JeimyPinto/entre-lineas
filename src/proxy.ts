@@ -6,7 +6,7 @@ import { NextResponse, type NextRequest } from 'next/server'
  */
 export default async function proxy(request: NextRequest) {
   // Verificamos que el middleware se esté ejecutando
-  console.log('🛡️ [Proxy Middleware] Verificando acceso para:', request.nextUrl.pathname);
+  console.log('[Proxy Middleware] Verificando acceso para:', request.nextUrl.pathname);
 
   let supabaseResponse = NextResponse.next({
     request,

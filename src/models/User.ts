@@ -5,6 +5,7 @@ export interface UserProfile {
   email: string;
   role: string;
   name: string;
+  alias?: string;
 }
 
 export class User {
@@ -14,9 +15,9 @@ export class User {
     return {
       id: user.id,
       email: user.email || '',
-      // Supabase por defecto guarda metadata en user_metadata
       role: user.user_metadata?.role || 'admin',
       name: user.user_metadata?.name || 'Administrador',
+      alias: user.user_metadata?.alias || undefined,
     };
   }
 }

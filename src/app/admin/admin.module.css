@@ -81,13 +81,3 @@
   position: relative;
 }
 
-/* No mostrar Sidebar ni márgenes en el Login */
-.adminContainer:has(.admin-login-page) .sidebar {
-  display: none;
-}
-
-.adminContainer:has(.admin-login-page) .mainContent {
-  margin-left: 0;
-  padding: 0;
-}
-

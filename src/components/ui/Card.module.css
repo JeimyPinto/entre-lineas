@@ -5,6 +5,8 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   transition: all 0.3s var(--transition-main);
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -16,23 +18,24 @@
 .cardHeader {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: var(--gap-s);
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1rem;
   border-bottom: 1px solid var(--border-glass-thin);
-  position: relative;
-  min-height: 110px;
-  justify-content: center;
 }
 
 .cardIcon {
   color: var(--color-red);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-glass-thin);
   padding: 0.8rem;
   border-radius: var(--radius-main);
+  width: 48px;
+  height: 48px;
 }
 
 .cardTitle {
@@ -47,12 +50,18 @@
 
 .cardSubtitle {
   color: var(--color-red);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   margin: 0;
   letter-spacing: 0.5px;
+  line-height: 1.4;
 }
 
 .cardContent {
-  padding: var(--padding-xl);
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
 }
