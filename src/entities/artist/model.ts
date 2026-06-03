@@ -5,9 +5,10 @@ export class Artist {
    * Crea un objeto PLANO de Artist desde los datos de Supabase
    * Next.js requiere objetos planos para pasar datos entre Server y Client Components
    */
-  static fromDb(dbData: any): ArtistType {
+static fromDb(dbData: any): ArtistType {
     return {
       id: String(dbData.id),
+      alias: dbData.alias || dbData.name,
       name: dbData.name,
       orgRole: dbData.org_role || [],
       image: dbData.image,
@@ -23,8 +24,9 @@ export class Artist {
   /**
    * Convierte un objeto de tipo Artist a uno compatible con DB
    */
-  static toDb(artist: Partial<ArtistType>) {
+static toDb(artist: Partial<ArtistType>) {
     return {
+      alias: artist.alias,
       name: artist.name,
       org_role: artist.orgRole,
       image: artist.image,

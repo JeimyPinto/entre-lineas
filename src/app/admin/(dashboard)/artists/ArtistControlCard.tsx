@@ -21,10 +21,10 @@ export default function ArtistControlCard({ artist }: { artist: Artist }) {
     }
   };
 
-  return (
-    <Card title={artist.name} subtitle={artist.orgRole.join(', ')}>
+return (
+    <Card title={artist.alias || artist.name} subtitle={artist.orgRole.join(', ')}>
       <div className={styles.artistInfo}>
-        <p><strong>ID/Alias:</strong> {artist.id}</p>
+        <p><strong>Nombre real:</strong> {artist.name}</p>
         <p><strong>Profesión u Ocupación:</strong> {artist.profession || 'N/A'}</p>
 
         <div className={styles.actions}>

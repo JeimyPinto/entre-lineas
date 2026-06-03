@@ -1,12 +1,12 @@
 'use server';
 
-import { authService } from '@/features/auth/services';
+import { login, logout } from '@/features/auth/services';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 export async function logoutAction() {
   try {
-    await authService.logout();
+    await logout();
     revalidatePath('/admin');
   } catch (error) {
     console.error('Logout error:', error);
@@ -24,7 +24,7 @@ export async function loginAction(formData: FormData) {
   }
 
   try {
-    await authService.login(email, password);
+    await login(email, password);
     revalidatePath('/admin');
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Credenciales incorrectas';

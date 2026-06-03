@@ -2,36 +2,15 @@
 
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
-import { prisma } from '@/lib/prisma';
+import { createClient } from '@/shared/api/supabaseServer';
 
 const COOKIE_NAME = 'admin_session';
 
-/**
- * Genera hash de contraseña usando scrypt de Node.js
- * Formato almacenado: salt:hash (ambos en base64)
- */
-function hashPassword(password: string): { salt: string; hash: string } {
-  const salt = crypto.randomBytes(16).toString('base64');
-  const key = crypto.scryptSync(password, salt, 64);
-  return {
-    salt,
-    hash: key.toString('base64'),
-  };
-}
-
-/**
- * Verifica contraseña contra hash almacenado
- * Formato esperado en DB: salt:hash
- */
-function verifyPassword(password: string, storedValue: string): boolean {
-  const [salt, storedHash] = storedValue.split(':');
-  if (!salt || !storedHash) return false;
-  
-  const key = crypto.scryptSync(password, salt, 64);
-  return crypto.timingSafeEqual(
-    Buffer.from(storedHash, 'base64'),
-    Buffer.from(key.toString('base64'), 'base64')
-  );
+export interface AuthUser {
+  id: string;
+  email: string;
+  name: string | null;
+  role: string;
 }
 
 /**
@@ -42,102 +21,101 @@ function generateSessionToken(email: string): string {
   return crypto.createHash('sha256').update(payload).digest('hex');
 }
 
-export interface AuthUser {
-  id: number;
-  email: string;
-  name: string | null;
-  role: string;
+/**
+ * Inicia sesión usando Supabase Auth
+ */
+export async function login(email: string, password: string): Promise<AuthUser> {
+  const supabase = await createClient();
+  
+  // Autenticar con Supabase Auth
+  const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (authError || !authData.user) {
+    console.error('Login error:', authError?.message);
+    throw new Error('Credenciales incorrectas');
+  }
+
+  // Generar token de sesión propio
+  const sessionToken = generateSessionToken(email);
+
+  // Guardar cookie de sesión
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, sessionToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24, // 24 horas
+    path: '/',
+  });
+
+  // Obtener datos adicionales del usuario desde user_metadata
+  const userMetadata = authData.user.user_metadata;
+  
+  return {
+    id: authData.user.id,
+    email: authData.user.email || email,
+    name: userMetadata?.name || userMetadata?.full_name || null,
+    role: userMetadata?.role || 'admin',
+  };
 }
 
-export const authService = {
-  /**
-   * Inicia sesión con correo y contraseña usando la tabla AdminUser de Prisma
-   */
-  async login(email: string, password: string): Promise<AuthUser> {
-    // Buscar usuario en la tabla admin_users
-    const user = await prisma.adminUser.findUnique({
-      where: { email },
-    });
+/**
+ * Cierra la sesión actual
+ */
+export async function logout(): Promise<void> {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  
+  const cookieStore = await cookies();
+  cookieStore.delete(COOKIE_NAME);
+}
 
-    if (!user) {
-      throw new Error('Credenciales incorrectas');
-    }
+/**
+ * Obtiene el usuario actual desde Supabase Auth
+ */
+export async function getCurrentUser(): Promise<AuthUser | null> {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(COOKIE_NAME);
 
-    if (!user.active) {
-      throw new Error('Usuario inactivo');
-    }
-
-    // Verificar contraseña usando el hash almacenado (formato: salt:hash)
-    const isValid = verifyPassword(password, user.password);
-    
-    if (!isValid) {
-      throw new Error('Credenciales incorrectas');
-    }
-
-    // Generar token de sesión
-    const sessionToken = generateSessionToken(email);
-
-    // Guardar cookie de sesión
-    const cookieStore = await cookies();
-    cookieStore.set(COOKIE_NAME, sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24, // 24 horas
-      path: '/',
-    });
-
-    return {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-    };
-  },
-
-  /**
-   * Cierra la sesión actual
-   */
-  async logout(): Promise<void> {
-    const cookieStore = await cookies();
-    cookieStore.delete(COOKIE_NAME);
-  },
-
-  /**
-   * Obtiene el usuario actual desde la cookie de sesión
-   */
-  async getCurrentUser(): Promise<AuthUser | null> {
-    const cookieStore = await cookies();
-    const cookie = cookieStore.get(COOKIE_NAME);
-
-    if (!cookie) {
-      return null;
-    }
-
-    // TODO: Implementar sesión server-side más robusta
-    // Por ahora retornamos null - el middleware verificará la sesión
+  if (!cookie) {
     return null;
-  },
+  }
 
-  /**
-   * Verifica si hay una sesión activa
-   */
-  async isAuthenticated(): Promise<boolean> {
-    const user = await this.getCurrentUser();
-    return !!user;
-  },
+  // Verificar sesión con Supabase
+  const supabase = await createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
 
-  /**
-   * Crea hash de contraseña (para usar en seeds/setup)
-   * Retorna formato: salt:hash
-   */
-  createPasswordHash(password: string): string {
-    const { salt, hash } = hashPassword(password);
-    return `${salt}:${hash}`;
-  },
+  if (error || !user) {
+    return null;
+  }
 
-  /**
-   * Verifica contraseña (para uso interno)
-   */
-  verifyPassword,
-};
+  const userMetadata = user.user_metadata;
+  
+  return {
+    id: user.id,
+    email: user.email || '',
+    name: userMetadata?.name || userMetadata?.full_name || null,
+    role: userMetadata?.role || 'admin',
+  };
+}
+
+/**
+ * Verifica si hay una sesión activa
+ */
+export async function isAuthenticated(): Promise<boolean> {
+  const user = await getCurrentUser();
+  return !!user;
+}
+
+/**
+ * Crea hash de contraseña (para usar en seeds/setup)
+ * Retorna formato: salt:hash (para referencia, pero usaremos Supabase Auth)
+ */
+export async function createPasswordHash(password: string): Promise<string> {
+  const salt = crypto.randomBytes(16).toString('base64');
+  const key = crypto.scryptSync(password, salt, 64);
+  return `${salt}:${key.toString('base64')}`;
+}

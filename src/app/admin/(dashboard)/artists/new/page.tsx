@@ -38,9 +38,9 @@ export default function NewArtistPage() {
 
       <Card className={styles.formCard}>
         <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
-          <div className={styles.row}>
-            <Input label="ID Único (Su Alias)" name="id" required />
-            <Input label="Nombre del Artista" name="name" required />
+<div className={styles.row}>
+            <Input label="Alias / Nombre Artístico" name="alias" placeholder="Nombre que se muestra en la web" required />
+            <Input label="Nombre Real" name="name" required />
           </div>
 
           <div className={styles.row}>

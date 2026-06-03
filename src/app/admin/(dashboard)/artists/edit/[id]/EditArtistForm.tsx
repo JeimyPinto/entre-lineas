@@ -38,12 +38,9 @@ export default function EditArtistForm({ artist, id }: EditArtistFormProps) {
   return (
     <Card className={styles.formCard}>
       <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
-        <div className={styles.row}>
-          <div className={styles.textareaGroup}>
-            <label className={styles.label}>ID (No editable)</label>
-            <input className={`${styles.textarea} ${styles.disabledInput}`} value={id} disabled />
-          </div>
-          <Input label="Nombre del Artista" name="name" defaultValue={artist.name} required />
+<div className={styles.row}>
+          <Input label="Alias /Nombre Artístico" name="alias" defaultValue={artist.alias} placeholder="Nombre que se muestra en la web" />
+          <Input label="Nombre Real" name="name" defaultValue={artist.name} required />
         </div>
 
         <div className={styles.row}>

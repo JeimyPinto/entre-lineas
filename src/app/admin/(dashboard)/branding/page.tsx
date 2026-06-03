@@ -27,12 +27,12 @@ export default function BrandingPage() {
     { name: 'Small', var: 'var(--font-small)', label: 'Metadatos / Notas' },
   ];
 
-  const colors = [
+const colors = [
     { name: 'Black', hex: '#000000', var: '--color-black' },
     { name: 'Dark', hex: '#0a0a0a', var: '--color-dark' },
-    { name: 'Grey', hex: '#2a2a2a', var: '--color-grey' },
-    { name: 'Brand Red', hex: '#950303', var: '--color-red' },
-    { name: 'Grey Light', hex: '#929090', var: '--color-grey-light' },
+    { name: 'Grey', hex: '#2d2d2d', var: '--color-grey' },
+    { name: 'Crimson Red', hex: '#dc2626', var: '--color-accent' },
+    { name: 'Grey Light', hex: '#a4a4a4', var: '--color-grey-light' },
     { name: 'White', hex: '#ffffff', var: '--color-white' },
   ];
 
@@ -114,11 +114,11 @@ export default function BrandingPage() {
                   </div>
                   <span>4. Abierto</span>
                 </div>
-                <div className={styles.logoItem}>
+<div className={styles.logoItem}>
                   <div className={styles.logoPreviewLight}>
                     <BlinkingLogo closedImg="/1-01.png" openImg="/1-04.png" size={50} />
                   </div>
-                  <span style={{ color: 'var(--color-red)' }}>Animación: Parpadeo</span>
+                  <span style={{ color: 'var(--color-accent)' }}>Animación: Parpadeo</span>
                 </div>
               </div>
             </div>
@@ -138,11 +138,11 @@ export default function BrandingPage() {
                   </div>
                   <span>3. Abierto</span>
                 </div>
-                <div className={styles.logoItem}>
+<div className={styles.logoItem}>
                   <div className={styles.logoPreviewDark}>
                     <BlinkingLogo closedImg="/1-02.png" openImg="/1-03.png" size={50} />
                   </div>
-                  <span style={{ color: 'var(--color-red)' }}>Animación: Parpadeo</span>
+                  <span style={{ color: 'var(--color-accent)' }}>Animación: Parpadeo</span>
                 </div>
               </div>
             </div>

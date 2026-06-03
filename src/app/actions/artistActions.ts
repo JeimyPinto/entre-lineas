@@ -18,8 +18,8 @@ export async function createArtistAction(formData: FormData) {
       imageUrl = await artistService.uploadImage(imageFile);
     }
 
-    const newArtist: Artist = {
-      id: formData.get('id') as string,
+const newArtist: Artist = {
+      alias: formData.get('alias') as string,
       name: formData.get('name') as string,
       orgRole: rawRoles.split(',').map(r => r.trim()),
       image: imageUrl,

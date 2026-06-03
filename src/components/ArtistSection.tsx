@@ -81,7 +81,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
             <div className={styles.modalBody}>
               <div className={styles.modalImageWrapper} style={{ aspectRatio: `${selectedArtist.imageWidth ?? 1}/${selectedArtist.imageHeight ?? 1}` }}>
                 <Image
-                  src={selectedArtist.image || "/1-01.png"}
+                  src={selectedArtist.image || "/1-02.png"}
                   alt={selectedArtist.name}
                   fill
                   className={styles.modalImage}
@@ -91,12 +91,12 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
 
               <div className={styles.modalInfo}>
                 <div className={styles.modalHeader}>
+                  <h2 className={styles.modalName}>{selectedArtist.name}</h2>
                   <div className={styles.tagContainer}>
                     {selectedArtist.orgRole.map((role, idx) => (
                       <span key={idx} className={styles.artistTag}>{role}</span>
                     ))}
                   </div>
-                  <h2 className={styles.modalName}>{selectedArtist.name}</h2>
                 </div>
 
                 <div className={styles.artistDetails}>
