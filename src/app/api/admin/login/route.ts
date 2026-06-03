@@ -1,19 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { authService } from '@/features/auth/services';
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await request.json();
+    const { email, password } = await request.json();
     
-    // Check against .env variables
-    const envUser = process.env.USERNAME;
-    const envPass = process.env.PASSWORD;
-    
-    if (username === envUser && password === envPass) {
-      return NextResponse.json({ success: true });
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email y contraseña requeridos' }, { status: 400 });
     }
+
+    const user = await authService.login(email, password);
     
-    return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
-  } catch (error) {
-    return NextResponse.json({ error: 'Error processing request' }, { status: 500 });
+    return NextResponse.json({ 
+      success: true, 
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      }
+    });
+} catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Credenciales incorrectas';
+    return NextResponse.json({ error: message }, { status: 401 });
   }
 }

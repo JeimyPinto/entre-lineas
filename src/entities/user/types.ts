@@ -1,23 +1,31 @@
-import { User as SupabaseUser } from '@supabase/supabase-js';
-
 export interface UserProfile {
-  id: string;
+  id: number;
   email: string;
+  name: string | null;
   role: string;
-  name: string;
-  alias?: string;
+  active?: boolean;
 }
 
 export class User {
-  static fromSupabase(user: SupabaseUser | null): UserProfile | null {
-    if (!user) return null;
-    
-    return {
-      id: user.id,
-      email: user.email || '',
-      role: user.user_metadata?.role || 'admin',
-      name: user.user_metadata?.name || 'Administrador',
-      alias: user.user_metadata?.alias || undefined,
-    };
+  private constructor(
+    public readonly id: number,
+    public readonly email: string,
+    public readonly name: string | null,
+    public readonly role: string,
+    public readonly active: boolean = true
+  ) {}
+
+  static fromData(data: UserProfile): User {
+    return new User(
+      data.id,
+      data.email,
+      data.name,
+      data.role,
+      data.active ?? true
+    );
+  }
+
+  isAdmin(): boolean {
+    return this.role === 'admin';
   }
 }

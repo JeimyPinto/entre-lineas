@@ -19,13 +19,17 @@ export async function loginAction(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
+  if (!email || !password) {
+    return { error: 'Email y contraseña requeridos' };
+  }
+
   try {
     await authService.login(email, password);
     revalidatePath('/admin');
-  } catch (error: any) {
-    return { error: error.message || 'Credenciales incorrectas' };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Credenciales incorrectas';
+    return { error: message };
   }
 
   redirect('/admin/dashboard');
 }
-

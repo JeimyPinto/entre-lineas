@@ -7,6 +7,19 @@ datasource db {
   provider = "postgresql"
 }
 
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String   // Enrypted password (bcrypt)
+  name     String?
+  role     String   @default("admin")
+  active   Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admin_users")
+}
+
 model Artist {
   id            Int       @id @default(autoincrement())
   name          String
