@@ -41,21 +41,31 @@ Basado en Manizales, Colombia. 25+ ediciones de eventos documentadas.
 
 ---
 
-## Estructura del Proyecto
+## Estructura del Proyecto (Feature-Sliced Design)
 
 ```
 src/
 ├── app/                  # Rutas, layouts, API routes, Server Actions
 │   ├── actions/          #   Server Actions (auth, artist, event CRUD)
-│   └── api/              #   API Routes (youtube, admin/crud, upload)
+│   ├── api/              #   API Routes internas del framework
+│   └── admin/            #   Panel de administración
 ├── components/           # Componentes públicos + UI system
 │   └── ui/               #   Design System (Button, Card, Input, etc.)
-├── hooks/                # Custom hooks (useYouTubeData, useInterval, useMediaQuery)
-├── services/             # Capa de servicios (auth, artist, event)
-├── models/               # Modelos con mapeo DB ↔ app
-├── types/                # Interfaces TypeScript
-├── data/                 # Datos estáticos y mock
-└── styles/               # Tokens de diseño y estilos globales
+├── entities/              # Tipos, modelos y datos del dominio
+│   ├── artist/           #   Tipos, modelo, datos de artistas
+│   ├── event/            #   Tipos y modelo de eventos
+│   ├── user/             #   Tipos de usuario
+│   └── youtube-video/     #   Tipos de videos
+├── features/             # Lógica de negocio (servicios, API, hooks)
+│   ├── artists/          #   Servicios, API de artistas
+│   ├── auth/             #   Servicios, API de autenticación
+│   ├── events/           #   Servicios de eventos
+│   └── youtube/          #   API, hooks de YouTube
+├── shared/               # Utilidades compartidas
+│   ├── api/             #   Clientes Supabase (anon, server)
+│   ├── hooks/           #   Hooks genéricos (useInterval, useMediaQuery)
+│   ├── styles/          #   Estilos globales
+│   └── utils/           #   Utilidades (imageUtils)
 docs/                     # Documentación detallada
 public/
 ├── artists/              # Imágenes de artistas
@@ -64,6 +74,8 @@ public/
 supabase/
 └── migrations/           # Schema SQL
 ```
+
+> La estructura sigue el patrón **Feature-Sliced Design (FSD)** para mejor organización y escalabilidad.
 
 ---
 

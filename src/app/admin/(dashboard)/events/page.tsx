@@ -1,10 +1,10 @@
-import { eventService } from '@/services/eventService';
+import { eventService } from '@/features/events/services';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import styles from '../artists/artists.module.css'; // Reutilizamos estilos de lista
 
 export default async function AdminEventsPage() {
-  let events: import('@/types/events').Event[] = [];
+  let events: import('@/entities/event/types').Event[] = [];
   let loadError = false;
 
   try {

@@ -1,10 +1,10 @@
-import { artistService } from '@/services/artistService';
+import { artistService } from '@/features/artists/services';
 import Button from '@/components/ui/Button';
 import ArtistControlCard from './ArtistControlCard';
 import styles from './artists.module.css';
 
 export default async function AdminArtistsPage() {
-  let artists: import('@/types/artists').Artist[] = [];
+  let artists: import('@/entities/artist/types').Artist[] = [];
   let loadError = false;
 
   try {

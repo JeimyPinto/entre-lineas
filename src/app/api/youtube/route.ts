@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { Video } from '@/types/youtube';
+import { Video } from '@/entities/youtube-video/types';
 import youtubeMockData from '@/data/youtube_mock.json';
 
 // Tipos para la respuesta de la API de YouTube

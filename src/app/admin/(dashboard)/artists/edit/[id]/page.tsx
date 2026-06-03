@@ -1,4 +1,4 @@
-import { artistService } from '@/services/artistService';
+import { artistService } from '@/features/artists/services';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import EditArtistForm from './EditArtistForm';

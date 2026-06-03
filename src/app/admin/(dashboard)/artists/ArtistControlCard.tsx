@@ -1,6 +1,6 @@
 'use client';
 
-import { Artist } from '@/types/artists';
+import { Artist } from '@/entities/artist/types';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { deleteArtistAction } from '@/app/actions/artistActions';

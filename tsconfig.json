@@ -22,9 +22,21 @@
         "name": "next"
       }
     ],
-    "paths": {
+"paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@/data/*": [
+        "./src/data/*"
+      ],
+      "@/hooks/*": [
+        "./src/shared/hooks/*"
+      ],
+      "@/styles/*": [
+        "./src/shared/styles/*"
+      ],
+      "@/types/*": [
+        "./src/entities/*/types.ts"
       ]
     }
   },

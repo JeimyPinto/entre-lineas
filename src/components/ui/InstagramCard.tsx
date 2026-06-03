@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./InstagramCard.module.css";
 import { FaInstagram, FaYoutube, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { staticArtists } from "@/data/artists";
+import { staticArtists } from "@/entities/artist/data";
 
 export interface Judge {
   name: string;

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "./ui/Button";
 import styles from "./section.module.css";
-import { useYouTubeData } from "@/hooks/useYouTubeData";
+import { useYouTubeData } from "@/features/youtube/hooks/useYouTubeData";
 import Card from "./ui/Card";
 import { FaInstagram, FaYoutube, FaHeart, FaComment, FaFire } from "react-icons/fa6";
 
