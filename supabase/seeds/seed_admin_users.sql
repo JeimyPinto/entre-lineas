@@ -1,6 +1,6 @@
--- Seed: Admin Users
--- Crea los dos usuarios administradores iniciales
--- Password por defecto para ambos: Admin123!
+-- SEED: Admin Users
+-- Crea los usuarios administradores iniciales para el panel de control
+-- Password por defecto: Admin123!
 
 -- Usuario 1: Jeimy Tatiana Pinto Tapia
 INSERT INTO auth.users (
@@ -65,3 +65,8 @@ SELECT
 WHERE NOT EXISTS (
   SELECT 1 FROM auth.users WHERE email = 'entr3line4s@gmail.com'
 );
+
+-- Verificar usuarios creados
+SELECT id, email, raw_user_meta_data->>'name' as name, raw_user_meta_data->>'role' as role 
+FROM auth.users 
+WHERE raw_user_meta_data->>'role' = 'admin';

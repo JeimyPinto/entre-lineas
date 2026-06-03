@@ -1,12 +1,11 @@
 -- BULK INSERT: Artists from artists.json
 -- Run with: npx supabase db query --linked -f supabase/seed_artists_bulk.sql
 
--- First, clear existing artists (optional - remove if you want to keep existing)
--- DELETE FROM artists;
+-- Clear existing artists first
+DELETE FROM artists;
 
--- Bulk insert all artists from public/data/artists.json
+-- Bulk insert all artists from public/data/artists.json (Galáctico ya está en seed.sql, se omite aquí)
 INSERT INTO artists (name, org_role, image, image_position, profession, origin, trajectory, bio, socials) VALUES
-('Galáctico', ARRAY['Fundador'], '/artists/galactico.webp', '50%', 'Abogado', 'Manizales, Colombia', 'Desde 2020', ARRAY['Artista originario de la ciudad de Manizales, cuya carrera artística comienza a partir del año 2020.', 'Enfocado en el desarrollo musical, lírico, artístico, pedagógico y profesional, e influenciado por la Cultura Hip-Hop, la Poesía y la Rítmica.', 'Convergiendo en el proyecto artístico que lo caracteriza.'], '[{"platform":"instagram","url":"https://www.instagram.com/_mr_galactico_","label":"Instagram"}]'::jsonb),
 ('Ray', ARRAY['Juez'], '/artists/ray.jpg', '50%', 'Productor y Artista', 'Manizales, Colombia', 'Desde 2018', ARRAY['Productor y artista destacado en R Studios, aportando su visión y talento a las instrumentales y a la escena urbana.'], '[{"platform":"instagram","url":"https://www.instagram.com/ray_oficialr","label":"Instagram"}]'::jsonb),
 ('ZER', ARRAY['Juez'], NULL, '50%', 'Juez', 'Manizales, Colombia', 'Desde 2019', ARRAY[''], '[{"platform":"instagram","url":"https://www.instagram.com/zerlamortmamut?igsh=cmpiZ2Y1YW90YWk2","label":"Instagram"}]'::jsonb),
 ('Murz', ARRAY['Juez'], NULL, '50%', 'Juez', 'Manizales, Colombia', 'Desde 2019', ARRAY[''], '[{"platform":"instagram","url":"https://www.instagram.com/7murzz?igsh=a245YWUyZzBldTNr","label":"Instagram"}]'::jsonb),

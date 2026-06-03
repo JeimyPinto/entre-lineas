@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Artist {
+  id            Int       @id @default(autoincrement())
+  name          String
+  orgRole       String[]
+  image        String?
+  imagePosition String    @default("50%")
+  profession   String?
+  origin       String?
+  trajectory   String?
+  bio          String[]
+  socials      Json      @default("[]")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  createdBy   String?   @map("created_by")
+
+  @@map("artists")
+}
+
+model Event {
+  id           Int       @id @default(autoincrement())
+  title       String
+  date        String
+  location   String?
+  postUrl    String?   @map("post_url")
+  youtubeLink String?  @map("youtube_link")
+  judges     Json      @default("[]")
+  hosts      Json      @default("[]")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  @@map("events")
+}

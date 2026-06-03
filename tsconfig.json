@@ -35,6 +35,9 @@
       "@/styles/*": [
         "./src/shared/styles/*"
       ],
+      "@/types/youtube": [
+        "./src/entities/youtube-video/types.ts"
+      ],
       "@/types/*": [
         "./src/entities/*/types.ts"
       ]

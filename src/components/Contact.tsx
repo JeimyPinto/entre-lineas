@@ -19,8 +19,8 @@ const Contact = () => {
     <section className={styles.contactSection} id="contacto">
       <div className={styles.container}>
         <div className={styles.headerContent}>
-          <Image 
-            src="/1-05.png" 
+<Image 
+            src="/1-04.png" 
             alt="Logo Entre Líneas" 
             width={100} 
             height={140} 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./InstagramCard.module.css";
 import { FaInstagram, FaYoutube, FaLocationDot, FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { staticArtists } from "@/entities/artist/data";
+import { use } from "react";
 
 export interface Judge {
   name: string;
@@ -29,6 +29,8 @@ export interface InstagramCardProps {
   judges?: Judge[];
   /** List of hosts */
   hosts?: Judge[];
+  /** Artists data for lookups - passed from server */
+  artists?: { id: string; name: string; image?: string }[];
   /** Extra CSS class */
   className?: string;
 }
@@ -44,6 +46,7 @@ export default function InstagramCard({
   location,
   judges = [],
   hosts = [],
+  artists = [],
   className = "",
 }: InstagramCardProps) {
   const displayThumbnail = thumbnail || DEFAULT_THUMBNAIL;
@@ -87,9 +90,15 @@ export default function InstagramCard({
           <span className={styles.judgesLabel}>Jueces</span>
           <div className={styles.judgesAvatars}>
             {judges.map((judge) => {
-              const artistInfo = judge.artistId ? staticArtists.find(a => a.id === judge.artistId) || null : null;
-              const displayName = artistInfo ? artistInfo.name.toUpperCase() : judge.name.toUpperCase();
-              const displayImage = artistInfo ? artistInfo.image : judge.image;
+              const artistInfo = judge.artistId 
+                ? artists.find(a => a.id === judge.artistId) || null 
+                : null;
+              const displayName = artistInfo 
+                ? artistInfo.name.toUpperCase() 
+                : judge.name.toUpperCase();
+              const displayImage = artistInfo 
+                ? artistInfo.image 
+                : judge.image;
 
               const content = (
                 <>
@@ -131,9 +140,15 @@ export default function InstagramCard({
           <span className={styles.judgesLabel}>Host</span>
           <div className={styles.judgesAvatars}>
             {hosts.map((host) => {
-              const artistInfo = host.artistId ? staticArtists.find(a => a.id === host.artistId) || null : null;
-              const displayName = artistInfo ? artistInfo.name.toUpperCase() : host.name.toUpperCase();
-              const displayImage = artistInfo ? artistInfo.image : host.image;
+              const artistInfo = host.artistId 
+                ? artists.find(a => a.id === host.artistId) || null 
+                : null;
+              const displayName = artistInfo 
+                ? artistInfo.name.toUpperCase() 
+                : host.name.toUpperCase();
+              const displayImage = artistInfo 
+                ? artistInfo.image 
+                : host.image;
 
               const content = (
                 <>

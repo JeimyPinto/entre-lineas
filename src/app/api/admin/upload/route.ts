@@ -2,16 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
-import { getArtistsData } from '@/entities/artist/data';
+import { artistService } from '@/features/artists/services';
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get('image') as File;
-    const id = formData.get('id') as string;
+    const idParam = formData.get('id') as string;
 
-    if (!file || !id) {
+    if (!file || !idParam) {
       return NextResponse.json({ error: 'Missing file or id' }, { status: 400 });
+    }
+
+    // Support both numeric IDs (legacy) and string UUIDs
+    let id: string;
+    const numericId = parseInt(idParam, 10);
+    if (!isNaN(numericId)) {
+      id = String(numericId);
+    } else {
+      id = idParam;
     }
 
     const bytes = await file.arrayBuffer();
@@ -21,7 +30,7 @@ export async function POST(request: NextRequest) {
     const processedImage = await sharp(buffer)
       .resize(640, 800, {
         fit: 'cover',
-        position: 'top' // Prioritize face
+        position: 'top'
       })
       .webp({ quality: 90 })
       .toBuffer();
@@ -31,17 +40,12 @@ export async function POST(request: NextRequest) {
     const filepath = path.join(process.cwd(), 'public', 'artists', filename);
     await writeFile(filepath, processedImage);
 
-    // Update JSON
-    const artists = await getArtistsData();
-    const artistIndex = artists.findIndex(a => a.id === id);
-    if (artistIndex !== -1) {
-      artists[artistIndex].image = `/artists/${filename}`;
-      // Write back to JSON (simple for demo, use DB in prod)
-      const jsonPath = path.join(process.cwd(), 'public', 'data', 'artists.json');
-      await writeFile(jsonPath, JSON.stringify(artists, null, 2));
-    }
+    // Update artist record in database
+    const imagePath = `/artists/${filename}`;
+    const updates = { image: imagePath };
+    await artistService.update(id, updates);
 
-    return NextResponse.json({ success: true, image: `/artists/${filename}` });
+    return NextResponse.json({ success: true, image: imagePath });
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
