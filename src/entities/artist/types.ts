@@ -5,7 +5,7 @@ export interface SocialLink {
 }
 
 export interface Artist {
-  id: string;
+  id?: string;
   alias: string; // Nombre artístico/apodo (para mostrar en la interfaz)
   name: string; // Nombre real
   orgRole: string[]; // Rol dentro de la organización (ej. Juez, Host, Fundador)

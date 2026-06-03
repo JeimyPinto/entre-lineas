@@ -10,7 +10,11 @@ import { useState } from 'react';
 export default function ArtistControlCard({ artist }: { artist: Artist }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDelete = async () => {
+const handleDelete = async () => {
+    if (!artist.id) {
+      alert("ID del artista no válido");
+      return;
+    }
     if (confirm(`¿Estás seguro de eliminar a ${artist.name}? Esta acción no se puede deshacer.`)) {
       setIsDeleting(true);
       const result = await deleteArtistAction(artist.id);
@@ -28,10 +32,11 @@ return (
         <p><strong>Profesión u Ocupación:</strong> {artist.profession || 'N/A'}</p>
 
         <div className={styles.actions}>
-          <Button
-            href={`/admin/artists/edit/${artist.id}`}
+<Button
+            href={artist.id ? `/admin/artists/edit/${artist.id}` : '#'}
             variant="ghost"
             fullWidth
+            disabled={!artist.id}
           >
             Editar
           </Button>

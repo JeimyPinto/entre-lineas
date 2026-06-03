@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authService } from '@/features/auth/services';
+import { login } from '@/features/auth/services';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email y contraseña requeridos' }, { status: 400 });
     }
 
-    const user = await authService.login(email, password);
+    const user = await login(email, password);
     
     return NextResponse.json({ 
       success: true, 
