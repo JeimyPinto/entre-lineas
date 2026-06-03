@@ -1,20 +1,27 @@
+/* ============================================
+   CONTACT SECTION v2.0
+   Consistent styling with animations
+   ============================================ */
+
 .contactSection {
-  padding: 6rem 1.5rem 8rem;
-  background: var(--bg-main);
+  padding: var(--padding-4xl) var(--padding-xl) var(--padding-xxxl);
+  background: var(--color-bg-primary);
   color: var(--color-white);
   font-family: var(--font-main), sans-serif;
   overflow: hidden;
   position: relative;
 }
 
+/* Ambient glow effect */
 .contactSection::before {
   content: '';
   position: absolute;
-  top: -10%;
+  top: -20%;
   left: -10%;
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(circle at center, var(--color-red-glow) 0%, transparent 70%);
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle at center, var(--color-accent-glow) 0%, transparent 60%);
+  opacity: 0.3;
   pointer-events: none;
 }
 
@@ -26,16 +33,18 @@
 }
 
 .headerContent {
-  margin-bottom: 3.5rem;
+  margin-bottom: var(--margin-xxxl);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--gap-xl);
+  animation: fadeInDown 0.8s ease forwards;
 }
 
+/* Logo styling */
 .contactLogo {
-  filter: drop-shadow(0 0 15px var(--color-red-glow));
-  transition: transform 0.4s ease;
+  filter: drop-shadow(0 0 20px var(--color-accent-glow));
+  transition: transform var(--transition-normal);
   background: var(--color-white);
   border-radius: var(--border-radius-m);
   transform: rotate(5deg) scale(1.1);
@@ -43,43 +52,50 @@
   z-index: 0;
 }
 
+.contactLogo:hover {
+  transform: rotate(0deg) scale(1.15);
+}
+
+/* Title */
 .title {
   font-size: var(--font-h1);
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
   text-align: center;
   margin: 0;
-  letter-spacing: -2px;
-  background: linear-gradient(to right, var(--color-white), var(--color-red));
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--color-white) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: fadeInDown 0.8s ease forwards;
 }
 
+/* Invitation text */
 .invitation {
   text-align: center;
   font-size: var(--font-body-lg);
-  line-height: 1.6;
+  line-height: 1.7;
   max-width: 720px;
   margin: 0 auto;
-  color: var(--color-grey-light);
-  animation: fadeInUp 0.8s ease 0.2s forwards;
+  color: var(--color-text-muted);
   opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
 }
 
 .invitation strong {
   display: block;
-  margin-top: 15px;
-  color: var(--color-red);
-  text-shadow: 0 0 15px var(--color-red-glow);
+  margin-top: var(--margin-l);
+  color: var(--color-accent);
+  text-shadow: 0 0 20px var(--color-accent-glow);
 }
 
+/* Grid for cards */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap-l);
 }
 
+/* Info list */
 .infoList {
   list-style: none;
   padding: 0;
@@ -88,17 +104,18 @@
 }
 
 .infoItem {
-  padding: 0.35rem 0;
+  padding: var(--padding-s) 0;
 }
 
+/* Links */
 .link {
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-base);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--gap-s);
   word-break: break-all;
 }
 
@@ -107,38 +124,42 @@
   text-decoration: underline;
 }
 
+/* Platform icons */
 .platformsGrid {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--gap-l);
   flex-wrap: wrap;
 }
 
 .platformIcon {
   font-size: 1.6rem;
-  color: var(--color-grey-light);
-  transition: all 0.3s ease;
+  color: var(--color-text-muted);
+  transition: all var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--border-radius-m);
   background: var(--bg-glass-thin);
-  border: 1px solid var(--border-glass-thin);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
 }
 
 .platformIcon:hover {
-  color: var(--color-red);
-  border-color: var(--color-red);
-  box-shadow: 0 0 20px var(--color-red-glow);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+  background: var(--color-accent-glow);
+  box-shadow: 0 0 25px var(--color-accent-glow);
   transform: translateY(-3px);
 }
 
+/* Animations */
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;
@@ -161,11 +182,21 @@
   .title {
     font-size: var(--font-h2);
   }
+  
   .contactSection {
-    padding: 3rem 1rem 5rem;
+    padding: var(--padding-xxxl) var(--padding-l) var(--padding-xxxl);
   }
+  
+  .headerContent {
+    margin-bottom: var(--margin-xxl);
+  }
+  
   .grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--gap-m);
+  }
+  
+  .invitation {
+    font-size: var(--font-body);
   }
 }

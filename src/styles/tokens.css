@@ -1,0 +1,164 @@
+/* ============================================
+   DESIGN TOKENS v2.0
+   Colors, Typography, Spacing, Borders
+   ============================================ */
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Esteban:wght@400&display=swap');
+
+@font-face {
+  font-family: "Cloister";
+  src: url('/fonts/CloisterBlack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* ===== PALETTE - Crimson Night ===== */
+  /* Backgrounds */
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #0f0f0f;
+  --color-bg-surface: #141414;
+  --color-bg-elevated: #1a1a1a;
+  
+  /* Neutrals */
+  --color-black: #000000;
+  --color-dark: #0f0f0f;
+  --color-grey-dark: #1e1e1e;
+  --color-grey: #2d2d2d;
+  --color-grey-light: #a4a4a4;
+  --color-white: #ffffff;
+  
+  /* Accent - Refined Crimson */
+  --color-accent: #dc2626;
+  --color-accent-hover: #ef4444;
+  --color-accent-subtle: #7f1d1d;
+  --color-accent-glow: rgba(220, 38, 38, 0.4);
+  --color-accent-glow-intense: rgba(220, 38, 38, 0.6);
+  
+  /* Legacy aliases */
+  --color-red: #dc2626;
+  --color-red-glow: rgba(220, 38, 38, 0.4);
+  
+  /* Borders & Glass */
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.12);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+  
+  /* Glassmorphism */
+  --bg-glass-thin: rgba(255, 255, 255, 0.025);
+  --bg-glass-medium: rgba(255, 255, 255, 0.04);
+  --bg-glass-thick: rgba(255, 255, 255, 0.08);
+  --bg-glass-hover: rgba(255, 255, 255, 0.12);
+  --bg-overlay-dark: rgba(0, 0, 0, 0.7);
+  
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-shadow-soft: rgba(0, 0, 0, 0.3);
+  --color-shadow-accent: rgba(220, 38, 38, 0.15);
+  
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e5e5e5;
+  --color-text-muted: #a3a3a3;
+  --color-text-subtle: #525252;
+  
+  /* Card System */
+  --bg-card: rgba(255, 255, 255, 0.025);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --bg-card-active: rgba(255, 255, 255, 0.08);
+  
+  /* Form System */
+  --input-bg: rgba(255, 255, 255, 0.025);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-border-focus: var(--color-accent);
+  --input-text: var(--color-white);
+  --input-placeholder: rgba(255, 255, 255, 0.35);
+  --label-text: var(--color-text-muted);
+  --label-font-size: 0.75rem;
+  --form-gap: var(--gap-xl);
+
+  /* ===== ADMIN ===== */
+  --sidebar-width: 260px;
+  --bg-sidebar: #050505;
+  --border-red-low: rgba(220, 38, 38, 0.15);
+  --radius-main: 12px;
+  --radius-card: 24px;
+  --radius-pill: 50px;
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-display: clamp(3rem, 8vw, 4.5rem);
+  --font-h1: clamp(2rem, 5vw, 3rem);
+  --font-h2: clamp(1.5rem, 4vw, 2.25rem);
+  --font-h3: clamp(1.25rem, 3vw, 1.75rem);
+  --font-h4: clamp(1rem, 2vw, 1.25rem);
+  --font-body-lg: 1.125rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+  --font-xs: 0.75rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Fonts */
+  --font-main: "Esteban", serif;
+  --font-title: "Cloister", "Esteban", serif;
+
+  /* ===== SPACING ===== */
+  --gap-xs: 0.25rem;
+  --gap-s: 0.5rem;
+  --gap-m: 0.75rem;
+  --gap-l: 1rem;
+  --gap-xl: 1.5rem;
+  --gap-xxl: 2rem;
+  --gap-xxxl: 3rem;
+
+  --padding-xs: 0.25rem;
+  --padding-s: 0.5rem;
+  --padding-m: 0.75rem;
+  --padding-l: 1rem;
+  --padding-xl: 1.5rem;
+  --padding-xxl: 2rem;
+  --padding-xxxl: 2.5rem;
+  --padding-4xl: 4rem;
+
+  --margin-xs: 0.25rem;
+  --margin-s: 0.5rem;
+  --margin-m: 0.75rem;
+  --margin-l: 1rem;
+  --margin-xl: 1.5rem;
+  --margin-xxl: 2rem;
+  --margin-xxxl: 3rem;
+
+  /* ===== BORDERS & EFFECTS ===== */
+  --border-radius-s: 0.5em;
+  --border-radius-m: 0.75em;
+  --border-radius-l: 1em;
+  --border-radius-xl: 1.5em;
+  --border-radius-2xl: 2em;
+
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-effect: blur(12px) saturate(180%);
+  
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-normal: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ===== Z-INDEX ===== */
+  --z-below: -1;
+  --z-base: 0;
+  --z-content: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 500;
+  --z-overlay: 800;
+  --z-modal: 1000;
+  --z-toast: 2000;
+}

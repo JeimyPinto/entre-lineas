@@ -1,16 +1,24 @@
+/* ============================================
+   MAIN SECTION v2.0
+   Hero section with animated logo
+   ============================================ */
+
 .homeSection {
-  padding: var(--gap-xl);
+  padding: var(--padding-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: var(--bg-main);
+  background: var(--color-bg-primary);
   color: var(--color-white);
+  min-height: 90vh;
 }
 
+/* About section */
 .homeAbout {
   margin-bottom: var(--margin-xl);
   width: 60%;
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 @media (max-width: 768px) {
@@ -19,135 +27,144 @@
   }
 }
 
+/* Animated Logo Container */
 .logoContainer {
   position: relative;
   width: 140px;
   height: 198px;
   margin: 0 auto var(--margin-xxl) auto;
-  /* Glow increased and backed by a subtle halo */
-  filter: drop-shadow(0 0 25px color-mix(in srgb, var(--color-white) 20%, transparent))
-          drop-shadow(0 0 50px color-mix(in srgb, var(--color-white) 10%, transparent));
-  background: radial-gradient(circle at center, color-mix(in srgb, var(--color-white) 8%, transparent) 0%, transparent 70%);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15))
+          drop-shadow(0 0 60px rgba(255, 255, 255, 0.08));
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   border-radius: var(--border-radius-l);
   padding: var(--padding-l);
+  animation: fadeIn 1s ease forwards;
 }
 
+/* Title */
 .homeTitle {
   font-family: var(--font-title);
   font-size: var(--font-display);
   font-weight: var(--font-weight-normal);
   margin-bottom: var(--margin-xl);
   letter-spacing: 3px;
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
 }
 
+/* Description */
 .homeDescription {
   font-size: var(--font-body-lg);
   line-height: 1.8;
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+  opacity: 0;
 }
 
+/* Social section */
 .homeSocial {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+  gap: var(--gap-xxl);
+  margin-top: var(--gap-xxxl);
+  padding-top: var(--padding-xxl);
+  border-top: 1px solid var(--color-border-subtle);
   max-width: 900px;
   width: 100%;
 }
 
+/* Social invitation card */
 .socialInvitation {
   padding: var(--padding-xxxl);
   background: var(--bg-card);
-  backdrop-filter: var(--glass-effect);
-  border: 1px solid var(--border-card);
-  border-radius: var(--border-radius-l);
-  box-shadow: inset 0 0 20px var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
   text-align: center;
   width: 100%;
+  transition: all var(--transition-base);
+}
+
+.socialInvitation:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 8px 40px var(--color-shadow);
 }
 
 .socialDescription {
   margin: 0;
   font-size: var(--font-body);
   line-height: 1.8;
-  color: var(--color-grey-light);
-  margin-top: 1rem;
+  color: var(--color-text-muted);
+  margin-top: var(--margin-l);
 }
 
+/* Social links */
 .socialLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--gap-xl);
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
 }
 
+/* Highlights section */
 .homeHighlights {
   width: 100%;
   max-width: 1100px;
-  margin: 4rem 0;
-  padding: 0 1rem;
+  margin: var(--margin-xxxl) 0;
+  padding: 0 var(--padding-l);
 }
 
 .highlightsTitle {
   font-family: var(--font-title);
   font-size: var(--font-h2);
-  margin-bottom: 3rem;
+  margin-bottom: var(--margin-xxxl);
   color: var(--color-white);
 }
 
 .highlightsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
+  gap: var(--gap-xxl);
 }
 
 .highlightItem {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--gap-l);
   text-align: left;
 }
 
 .highlightLabel {
   font-size: var(--font-small);
-  font-weight: 700;
-  color: var(--color-red);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-s);
 }
 
 @media (max-width: 768px) {
   .highlightsGrid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--gap-xxxl);
   }
   
   .homeTitle {
     font-size: var(--font-h1);
   }
-}
-
-.homeSocialLabel {
-  font-size: var(--font-h4);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--color-white);
-  font-weight: 600;
-  display: block;
-}
-
-
-
-@media (max-width: 768px) {
+  
+  .homeSocial {
+    gap: var(--gap-xl);
+    margin-top: var(--gap-xxl);
+    padding-top: var(--padding-xl);
+  }
+  
   .socialInvitation {
-    padding: 1.5rem;
+    padding: var(--padding-xl);
   }
 
   .socialDescription {
@@ -155,9 +172,35 @@
   }
 
   .socialLinks {
-    gap: 1rem;
+    gap: var(--gap-m);
     flex-direction: column;
   }
+}
 
+/* Section label */
+.homeSocialLabel {
+  font-size: var(--font-h4);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+  display: block;
+  margin-bottom: var(--margin-m);
+}
 
+/* Animation keyframes (local) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

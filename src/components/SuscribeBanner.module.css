@@ -1,47 +1,60 @@
+/* ============================================
+   SUBSCRIBE BANNER v2.0
+   Call-to-action with accent background
+   ============================================ */
+
 .suscribeBanner {
-  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-dark) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-bg-primary) 100%);
   padding: var(--padding-xxxl);
   border-radius: var(--border-radius-xl);
-  gap: var(--gap-xxl);
-  color: white;
+  gap: var(--gap-xl);
+  color: var(--color-white);
   margin-top: var(--margin-xxxl);
-  box-shadow: 0 15px 40px var(--color-red-glow);
+  box-shadow: 0 15px 40px var(--color-shadow-accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .suscribeBanner p {
   margin: 0;
   font-size: var(--font-body-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.4;
 }
 
 .suscribeBanner p span {
   display: block;
   font-size: var(--font-body);
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   opacity: 0.9;
-  margin-top: 0.3rem;
+  margin-top: var(--gap-xs);
 }
 
+/* Subscribe button */
 .subscribeButton {
   background: var(--color-white);
-  color: var(--color-red);
+  color: var(--color-accent);
   padding: var(--padding-m) var(--padding-xl);
   border-radius: var(--border-radius-m);
   gap: var(--gap-m);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: all var(--transition-base);
   flex-shrink: 0;
+  font-weight: var(--font-weight-semibold);
 }
 
 .subscribeButton:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 15px var(--color-shadow-soft);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
+/* Mobile responsive */
 @media (max-width: 600px) {
   .suscribeBanner {
     flex-direction: column;
     text-align: center;
     padding: var(--padding-xl);
+    gap: var(--gap-l);
   }
 }

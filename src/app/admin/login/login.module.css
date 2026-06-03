@@ -1,88 +1,110 @@
+/* ============================================
+   LOGIN PAGE v2.0
+   Consistent with Crimson Night palette
+   ============================================ */
+
 .loginContainer {
   min-height: 100vh;
   width: 100%;
   display: flex;
-  align-items: flex-start; /* Move up */
+  align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, var(--color-grey-dark) 0%, var(--color-black) 100%);
-  padding: 5vh 2rem 2rem; /* Reduced top padding */
+  background: radial-gradient(circle at center, var(--color-bg-surface) 0%, var(--color-bg-primary) 100%);
+  padding: var(--padding-xxl);
 }
 
 .loginCard {
   width: 100%;
   max-width: 450px;
-  background: var(--bg-glass-thin);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-glass-thin);
-  border-radius: 30px;
-  padding: 3rem;
-  box-shadow: 0 25px 50px var(--color-shadow);
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-2xl);
+  padding: var(--padding-xxxl);
+  box-shadow: 0 25px 60px var(--color-shadow);
 }
 
+/* Header */
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--margin-xxxl);
 }
 
 .logo {
-  border-radius: 15px;
-  margin-bottom: 1.5rem;
-  background: white;
-  padding: 5px;
+  border-radius: var(--border-radius-m);
+  margin-bottom: var(--gap-xl);
+  background: var(--color-white);
+  padding: var(--padding-s);
+  display: inline-block;
 }
 
 .header h1 {
   font-family: var(--font-title);
-  font-size: 2rem;
-  color: white;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-h2);
+  color: var(--color-white);
+  margin-bottom: var(--gap-s);
 }
 
 .header p {
-  color: var(--color-grey-light);
-  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-body);
 }
 
+/* Form */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--gap-xl);
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-s);
 }
 
 .inputGroup label {
-  font-size: 0.8rem;
-  color: white;
+  font-size: var(--font-small);
+  color: var(--color-white);
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: var(--font-weight-medium);
 }
 
 .inputGroup input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
-  color: white;
-  outline: none;
-  transition: all 0.2s ease;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  padding: var(--padding-m) var(--padding-l);
+  border-radius: var(--border-radius-m);
+  color: var(--input-text);
+  font-size: var(--font-body);
+  font-family: var(--font-main);
+  transition: all var(--transition-base);
 }
 
 .inputGroup input:focus {
-  border-color: var(--color-red);
-  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
+.inputGroup input::placeholder {
+  color: var(--input-placeholder);
+}
+
+/* Error message */
 .errorMessage {
-  background: rgba(149, 3, 3, 0.2);
-  border: 1px solid var(--color-red);
-  color: white;
-  padding: 0.8rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  background: var(--color-accent-glow);
+  border: 1px solid var(--color-accent);
+  color: var(--color-white);
+  padding: var(--padding-m);
+  border-radius: var(--border-radius-m);
+  font-size: var(--font-body);
   text-align: center;
+}
+
+/* Submit button */
+.submitBtn {
+  margin-top: var(--gap-m);
+  width: 100%;
 }

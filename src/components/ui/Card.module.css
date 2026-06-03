@@ -1,67 +1,115 @@
+/* ============================================
+   CARD COMPONENT v2.0
+   Glassmorphism with consistent interactions
+   ============================================ */
+
 .card {
   background: var(--bg-card);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
   overflow: hidden;
-  transition: all 0.3s var(--transition-main);
+  transition: all var(--transition-normal);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--border-card-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px var(--color-shadow);
+}
+
+/* Interactive card (clickable) */
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:active {
   transform: translateY(-2px);
 }
 
+/* Card Header */
 .cardHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--gap-s);
-  padding: 1.5rem 1.5rem 1rem;
-  border-bottom: 1px solid var(--border-glass-thin);
+  gap: var(--gap-m);
+  padding: var(--padding-xl) var(--padding-xl) var(--padding-l);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
+/* Icon container */
 .cardIcon {
-  color: var(--color-red);
-  font-size: 1.4rem;
+  color: var(--color-accent);
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-glass-thin);
-  padding: 0.8rem;
-  border-radius: var(--radius-main);
-  width: 48px;
-  height: 48px;
+  padding: var(--padding-m);
+  border-radius: var(--border-radius-m);
+  width: 52px;
+  height: 52px;
+  transition: all var(--transition-base);
 }
 
+.card:hover .cardIcon {
+  background: var(--color-accent-glow);
+  box-shadow: 0 0 20px var(--color-accent-glow);
+}
+
+/* Title */
 .cardTitle {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-bold);
   color: var(--color-white);
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.4;
 }
 
+/* Subtitle */
 .cardSubtitle {
-  color: var(--color-red);
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: var(--color-accent);
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-medium);
   margin: 0;
   letter-spacing: 0.5px;
   line-height: 1.4;
 }
 
+/* Card Content */
 .cardContent {
-  padding: 1.25rem 1.5rem 1.5rem;
+  padding: var(--padding-xl) var(--padding-xl) var(--padding-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Elevated state */
+.elevated {
+  background: var(--bg-card-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* Compact variant */
+.compact {
+  padding: var(--padding-l);
+}
+
+.compact .cardHeader {
+  padding: var(--padding-l) var(--padding-l) var(--padding-m);
+}
+
+.compact .cardContent {
+  padding: var(--padding-m) var(--padding-l);
 }

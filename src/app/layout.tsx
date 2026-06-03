@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "@/styles/global.css";
 import Header from "@/components/header"
+
 export const metadata: Metadata = {
   title: "Entre Lineas",
   description: "Plataforma Web de Entre Lineas",

@@ -1,13 +1,19 @@
+/* ============================================
+   GALLERY SECTION v2.0
+   Grid with consistent styling
+   ============================================ */
+
 .gallerySection {
-  padding: var(--padding-xxxl) var(--padding-xxl);
+  padding: var(--padding-xxxl) var(--padding-xl);
   max-width: 1200px;
   margin: 0 auto;
   color: var(--color-white);
 }
 
+/* Offline banner */
 .galleryOfflineBanner {
-  background: color-mix(in srgb, var(--color-red) 10%, var(--color-dark) 90%);
-  border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+  background: var(--color-accent-glow);
+  border: 1px solid var(--color-accent);
   padding: var(--padding-l);
   border-radius: var(--border-radius-m);
   margin-bottom: var(--margin-xxxl);
@@ -18,14 +24,14 @@
   backdrop-filter: var(--glass-effect);
 }
 
+/* Info block */
 .galleryInfoBlock {
-  margin-bottom: 5rem;
-  background: var(--color-bg-overlay);
+  margin-bottom: var(--margin-xxxl);
+  background: var(--bg-card);
   backdrop-filter: var(--glass-effect);
   padding: var(--padding-xxxl);
   border-radius: var(--border-radius-xl);
-  border: var(--border-glass);
-  box-shadow: var(--shadow-premium);
+  border: 1px solid var(--color-border);
 }
 
 .galleryInfoHeader {
@@ -40,56 +46,61 @@
   font-size: var(--font-h1);
   margin: 0;
   letter-spacing: 2px;
+  color: var(--color-white);
 }
 
 .gallerySubscribers {
   font-size: var(--font-body);
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .galleryInfoDesc {
   font-size: var(--font-body-lg);
-  line-height: 1.6;
-  color: color-mix(in srgb, var(--color-white) 80%, var(--color-dark) 20%);
+  line-height: 1.7;
+  color: var(--color-text-muted);
   margin-bottom: var(--margin-xxl);
   max-width: 800px;
 }
 
+/* Subscribe button */
 .gallerySuscribeBtn {
   display: inline-block;
-  background: color-mix(in srgb, var(--color-white) 90%, var(--color-dark) 10%);
-  color: var(--color-dark);
+  background: var(--color-white);
+  color: var(--color-black);
   padding: var(--padding-m) var(--padding-xxl);
-  border-radius: var(--border-radius-s);
+  border-radius: var(--border-radius-m);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-base);
 }
 
 .gallerySuscribeBtn:hover {
   transform: scale(1.05);
-  background: color-mix(in srgb, var(--color-white) 70%, var(--color-dark) 30%);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
 
+/* Tabs */
 .galleryBlockTabs {
   display: flex;
   justify-content: center;
-  gap: var(--gap-xxl);
-  margin-bottom: 4rem;
-  border-bottom: 1px solid var(--color-grey-dark);
+  gap: var(--gap-xl);
+  margin-bottom: var(--margin-xxxl);
+  border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: var(--padding-s);
 }
 
 .galleryBlockTabs button {
   background: none;
   border: none;
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   font-size: var(--font-body-lg);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   padding: var(--padding-m) var(--padding-xl);
-  transition: all var(--transition-fast);
-  position: relative;
+  transition: all var(--transition-base);
   letter-spacing: 1px;
+  position: relative;
 }
 
 .galleryBlockTabs button.active {
@@ -99,29 +110,34 @@
 .galleryBlockTabs button.active::after {
   content: '';
   position: absolute;
-  bottom: -0.6rem;
+  bottom: -9px;
   left: 0;
   width: 100%;
   height: 3px;
-  background: var(--color-red);
-  box-shadow: 0 0 12px var(--color-red-glow);
+  background: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent-glow);
 }
 
+.galleryBlockTabs button:hover:not(.active) {
+  color: var(--color-white);
+}
+
+/* Grid */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--gap-xxxl);
+  gap: var(--gap-xxl);
   transition: all var(--transition-normal);
 }
 
-/* Mobile specific logic in CSS */
+/* Mobile responsive */
 @media (max-width: 768px) {
   .gallerySection {
-    padding: 3rem var(--padding-xl);
+    padding: var(--padding-xxxl) var(--padding-xl);
   }
 
   .galleryInfoBlock {
-    padding: var(--padding-xxl) var(--padding-xl);
+    padding: var(--padding-xl) var(--padding-l);
     margin-bottom: var(--margin-xxxl);
   }
 
@@ -136,18 +152,20 @@
   .galleryGrid {
     display: flex;
     flex-wrap: nowrap;
-    gap: var(--gap-xl);
+    gap: var(--gap-l);
     overflow-x: auto;
-    padding: 0 0.5rem var(--padding-xl);
+    padding: 0 var(--gap-s) var(--padding-l);
     margin: 0 -1.2rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+  
   .galleryGrid::-webkit-scrollbar {
     display: none;
   }
 }
 
+/* Carousel navigation */
 .galleryCarouselNav {
   display: none;
   justify-content: center;
@@ -165,10 +183,11 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-grey-dark);
+  background: var(--color-border-subtle);
   border: none;
   padding: 0;
   cursor: pointer;
+  transition: all var(--transition-base);
 }
 
 .galleryCarouselDot.active {
@@ -176,10 +195,18 @@
   transform: scale(1.2);
 }
 
+/* Modal close */
 .galleryModalClose {
   background: var(--color-white);
-  color: var(--color-dark);
+  color: var(--color-black);
   border: none;
   padding: var(--padding-m) var(--padding-xl);
-  border-radius: var(--border-radius-s);
+  border-radius: var(--border-radius-m);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.galleryModalClose:hover {
+  transform: scale(1.05);
 }

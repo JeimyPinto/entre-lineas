@@ -1,7 +1,13 @@
+/* ============================================
+   INPUT COMPONENT v2.0
+   Consistent styling with focus states
+   ============================================ */
+
 .inputWrapper {
   display: flex;
   flex-direction: column;
   gap: var(--gap-m);
+  width: 100%;
 }
 
 .label {
@@ -9,17 +15,18 @@
   color: var(--label-text);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
 }
 
 .input {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
-  border-radius: 12px;
-  padding: 0.8rem 1.2rem;
+  border-radius: var(--border-radius-m);
+  padding: var(--padding-m) var(--padding-l);
   color: var(--input-text);
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: var(--font-body);
+  font-family: var(--font-main);
+  transition: all var(--transition-base);
   width: 100%;
   box-sizing: border-box;
 }
@@ -32,15 +39,36 @@
   outline: none;
   border-color: var(--input-border-focus);
   background: var(--bg-glass-medium);
-  box-shadow: 0 0 15px rgba(214, 28, 38, 0.1);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
+.input:hover:not(:focus) {
+  border-color: var(--color-border-light);
+}
+
+/* Error state */
 .inputError {
-  border-color: var(--color-red);
+  border-color: var(--color-accent);
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
 .errorText {
-  font-size: 0.8rem;
-  color: var(--color-red);
-  margin-top: 0.2rem;
+  font-size: var(--font-xs);
+  color: var(--color-accent);
+  margin-top: var(--gap-xs);
+}
+
+/* Textarea variant */
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Disabled */
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

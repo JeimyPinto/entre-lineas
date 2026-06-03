@@ -1,5 +1,10 @@
+/* ============================================
+   EVENTS SECTION v2.0
+   Grid with consistent styling
+   ============================================ */
+
 .eventsSection {
-  padding: var(--padding-xxxl) var(--padding-xxl);
+  padding: var(--padding-xxxl) var(--padding-xl);
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -12,24 +17,28 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: var(--margin-xxl);
+  animation: fadeInDown 0.8s ease forwards;
 }
 
+/* Title */
 .title {
   font-family: var(--font-title);
   font-size: var(--font-display);
   margin: 0 0 var(--margin-l);
   color: var(--color-white);
-  text-shadow: 0 0 20px color-mix(in srgb, var(--color-white) 10%, transparent);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
+/* Subtitle */
 .subtitle {
   font-size: var(--font-body-lg);
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   max-width: 600px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
+/* Events Grid */
 .eventsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -37,15 +46,13 @@
   justify-items: center;
 }
 
-
-
-/* Status States */
+/* Status container */
 .statusContainer {
   text-align: center;
   padding: var(--padding-xxxl) var(--padding-xxl);
   background: var(--bg-card);
   border-radius: var(--border-radius-xl);
-  border: 1px dashed var(--bg-glass-thick);
+  border: 1px dashed var(--color-border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,19 +60,31 @@
 }
 
 .statusText {
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   font-size: var(--font-body-lg);
 }
 
 .errorTitle {
   font-family: var(--font-title);
-  color: var(--color-red);
+  color: var(--color-accent);
   font-size: var(--font-h1);
   margin: 0;
 }
 
 .errorText {
-  color: var(--color-grey-light);
+  color: var(--color-text-muted);
   max-width: 400px;
-  line-height: 1.6;
+  line-height: 1.7;
+}
+
+/* Animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,21 +1,27 @@
+/* ============================================
+   GALLERY MODAL v2.0
+   Overlay with consistent styling
+   ============================================ */
+
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: color-mix(in srgb, var(--color-black) 85%, transparent);
-  backdrop-filter: var(--glass-effect);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-xxl);
+  padding: var(--padding-xl);
+  animation: fadeIn 0.3s ease;
 }
 
 .modalContent {
-  background: var(--color-dark);
-  border: 1px solid var(--color-grey-dark);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
   padding: var(--padding-xxl);
   border-radius: var(--border-radius-xl);
   max-width: 900px;
@@ -25,21 +31,44 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 25px 50px -12px var(--color-shadow);
+  box-shadow: 0 25px 60px var(--color-shadow);
+  animation: scaleIn 0.3s ease;
 }
 
 .modalContentLarge {
   max-width: 1100px;
 }
 
+/* Close button */
 .closeButton {
   align-self: flex-end;
-  background: var(--color-grey-dark);
+  background: var(--color-bg-surface);
   color: var(--color-white);
-  border: none;
+  border: 1px solid var(--color-border);
   padding: var(--padding-s) var(--padding-l);
-  border-radius: var(--border-radius-s);
+  border-radius: var(--border-radius-m);
+  cursor: pointer;
+  transition: all var(--transition-base);
 }
+
 .closeButton:hover {
-  background: var(--color-grey-light);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
 }
