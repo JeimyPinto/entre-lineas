@@ -1,5 +1,5 @@
-import { createClient } from '@/lib/supabaseServer';
-import { supabase as supabaseAnon } from '@/lib/supabase';
+import { createClient } from '@/shared/api/supabaseServer';
+import { supabase as supabaseAnon } from '@/shared/api/supabase';
 
 export const authService = {
   /**

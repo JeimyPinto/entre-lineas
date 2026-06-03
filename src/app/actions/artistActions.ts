@@ -2,8 +2,8 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { artistService } from '@/services/artistService';
-import { Artist } from '@/types/artists';
+import { artistService } from '@/features/artists/services';
+import { Artist } from '@/entities/artist/types';
 
 export async function createArtistAction(formData: FormData) {
   try {

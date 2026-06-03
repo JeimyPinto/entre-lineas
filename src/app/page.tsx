@@ -5,12 +5,12 @@ import EventsSection from '@/components/EventsSection'
 import Contact from '@/components/Contact'
 import HistorySection from '@/components/HistorySection'
 import Footer from '@/components/Footer'
-import { eventService } from '@/services/eventService'
-import { artistService } from '@/services/artistService'
+import { eventService } from '@/features/events/services'
+import { artistService } from '@/features/artists/services'
 
 export default async function Home() {
-  let events: import('@/types/events').Event[] = [];
-  let artists: import('@/types/artists').Artist[] = [];
+  let events: import('@/entities/event/types').Event[] = [];
+  let artists: import('@/entities/artist/types').Artist[] = [];
   let serverError: string | null = null;
 
   try {

@@ -7,7 +7,7 @@ import YouTubeIframe from "./YouTubeIframe";
 import SuscribeBanner from "./SuscribeBanner";
 import Image from "next/image";
 import styles from "./gallery.module.css";
-import { useYouTubeData } from "../hooks/useYouTubeData";
+import { useYouTubeData } from "@/features/youtube/hooks/useYouTubeData";
 import Button from "./ui/Button";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";

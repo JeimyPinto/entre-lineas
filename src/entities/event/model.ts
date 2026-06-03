@@ -1,4 +1,4 @@
-import { Event as EventType } from '@/types/events';
+import { Event as EventType } from './types';
 
 export class Event {
   static fromDb(dbData: any): EventType {

@@ -2,7 +2,7 @@
 
 import styles from "./EventsSection.module.css";
 import InstagramCard from "./ui/InstagramCard";
-import { Event } from "@/types/events";
+import { Event } from "@/entities/event/types";
 
 interface EventsSectionProps {
   initialEvents: Event[];

@@ -4,6 +4,7 @@
 
 -- Usuario 1: Jeimy Tatiana Pinto Tapia
 INSERT INTO auth.users (
+  id,
   email,
   encrypted_password,
   email_confirmed_at,
@@ -11,9 +12,11 @@ INSERT INTO auth.users (
   created_at,
   updated_at,
   role,
-  aud
+  aud,
+  instance_id
 )
 SELECT
+  gen_random_uuid(),
   'jeimytatianapinto@gmail.com',
   crypt('Admin123!', gen_salt('bf')),
   NOW(),
@@ -25,13 +28,15 @@ SELECT
   NOW(),
   NOW(),
   'authenticated',
-  'authenticated'
+  'authenticated',
+  '00000000-0000-0000-0000-000000000000'
 WHERE NOT EXISTS (
   SELECT 1 FROM auth.users WHERE email = 'jeimytatianapinto@gmail.com'
 );
 
 -- Usuario 2: Sebastian Piedrahita Bucurú
 INSERT INTO auth.users (
+  id,
   email,
   encrypted_password,
   email_confirmed_at,
@@ -39,9 +44,11 @@ INSERT INTO auth.users (
   created_at,
   updated_at,
   role,
-  aud
+  aud,
+  instance_id
 )
 SELECT
+  gen_random_uuid(),
   'entr3line4s@gmail.com',
   crypt('Admin123!', gen_salt('bf')),
   NOW(),
@@ -53,7 +60,8 @@ SELECT
   NOW(),
   NOW(),
   'authenticated',
-  'authenticated'
+  'authenticated',
+  '00000000-0000-0000-0000-000000000000'
 WHERE NOT EXISTS (
   SELECT 1 FROM auth.users WHERE email = 'entr3line4s@gmail.com'
 );

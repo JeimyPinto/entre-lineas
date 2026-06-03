@@ -1,7 +1,7 @@
-import { supabase as supabaseAnon } from '@/lib/supabase';
-import { createClient } from '@/lib/supabaseServer';
-import { Event as EventType } from '@/types/events';
-import { Event } from '@/models/Event';
+import { supabase as supabaseAnon } from '@/shared/api/supabase';
+import { createClient } from '@/shared/api/supabaseServer';
+import { Event as EventType } from '@/entities/event/types';
+import { Event } from '@/entities/event/model';
 
 export const eventService = {
   

@@ -77,14 +77,14 @@ export async function DELETE(request: NextRequest) {
 async function saveArtists(artists: any[]) {
   // Try to write to public JSON for live updates if it exists
   try {
-const jsonPath = path.join(process.cwd(), 'public', 'data', 'artists.json');
+    const jsonPath = path.join(process.cwd(), 'public', 'data', 'artists.json');
     await writeFile(jsonPath, JSON.stringify(artists, null, 2));
   } catch (e) {
     console.log("Could not write to JSON, might not exist yet.");
   }
   
-  // Write to src/data/artists.ts
-const tsContent = `import { Artist } from '@/entities/artist/types';
+  // Write to src/entities/artist/data.ts
+  const tsContent = `import { Artist } from '@/entities/artist/types';
 
 export const staticArtists: Artist[] = ${JSON.stringify(artists, null, 2)};
 
@@ -124,6 +124,6 @@ export async function getArtistsData(): Promise<Artist[]> {
 }
 `;
   
-const tsPath = path.join(process.cwd(), 'src', 'entities', 'artist', 'data.ts');
+  const tsPath = path.join(process.cwd(), 'src', 'entities', 'artist', 'data.ts');
   await writeFile(tsPath, tsContent);
 }

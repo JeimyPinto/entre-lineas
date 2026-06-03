@@ -1,4 +1,4 @@
-import { Artist as ArtistType, SocialLink } from '@/types/artists';
+import { Artist as ArtistType } from './types';
 
 export class Artist {
   /**

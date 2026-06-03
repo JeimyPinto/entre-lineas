@@ -5,7 +5,7 @@ import ArtistCard from "./ArtistCard";
 import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "./ui/Button";
-import { Artist } from "@/types/artists";
+import { Artist } from "@/entities/artist/types";
 
 interface ArtistSectionProps {
   initialArtists: Artist[];

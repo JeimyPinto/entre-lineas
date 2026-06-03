@@ -2,8 +2,8 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { eventService } from '@/services/eventService';
-import { Event } from '@/types/events';
+import { eventService } from '@/features/events/services';
+import { Event } from '@/entities/event/types';
 
 export async function createEventAction(formData: FormData) {
   try {

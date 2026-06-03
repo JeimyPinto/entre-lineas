@@ -1,6 +1,6 @@
 'use server';
 
-import { authService } from '@/services/authService';
+import { authService } from '@/features/auth/services';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 

@@ -7,6 +7,14 @@ export interface Video {
   commentCount?: string;
 }
 
+export interface YouTubeVideo {
+  id: string;
+  title: string;
+  thumbnail: string;
+  duration: string;
+  publishedAt: string;
+}
+
 export interface GalleryData {
   shorts: Video[];
   videos: Video[];
