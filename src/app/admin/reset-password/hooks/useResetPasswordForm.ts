@@ -13,11 +13,16 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
   const [loading, setLoading] = useState(false);
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
-  // Check for token and exchange code for session on mount
+// Check for token and exchange code for session on mount
   useEffect(() => {
     async function checkToken() {
-      console.log('[ResetPassword] Page loaded, checking URL:', window.location.href);
+      // Wait a moment for Supabase's auto-detectSessionInUrl to process hash tokens
+      await new Promise(resolve => setTimeout(resolve, 100));
       
+      console.log('[ResetPassword] Page loaded, checking URL:', window.location.href);
+      console.log('[ResetPassword] Hash:', window.location.hash);
+      
+      // Method 1: Check for PKCE code in query params (?code=xxx)
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
 
@@ -44,13 +49,38 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
         }
       }
 
-      // Check for OAuth tokens in hash
+      // Method 2: Check for tokens in URL hash fragment (#access_token=xxx&type=recovery)
+      // This handles Supabase's recovery flow that sends tokens in the hash
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const accessToken = hashParams.get('access_token');
       const refreshToken = hashParams.get('refresh_token');
+      const type = hashParams.get('type');
       
       console.log('[ResetPassword] Hash params:', Object.fromEntries(hashParams.entries()));
 
+      // Handle recovery flow - tokens in hash with type=recovery
+      if (accessToken && (type === 'recovery' || type === 'signup')) {
+        console.log('[ResetPassword] Processing recovery flow with hash tokens');
+        const { error: sessionError } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken || '',
+        });
+        
+        if (sessionError) {
+          console.error('[ResetPassword] Session error:', sessionError.message);
+          setError('El link de recuperación ha expirado. Solicita uno nuevo.');
+          setTokenValid(false);
+          return;
+        }
+        
+        console.log('[ResetPassword] Session set successfully from recovery flow');
+        setTokenValid(true);
+        // Clean URL - remove hash but stay on this page
+        window.history.replaceState(null, '', window.location.pathname);
+        return;
+      }
+
+      // Method 3: Any other access token in hash (OAuth implicit flow)
       if (accessToken) {
         const { error: sessionError } = await supabase.auth.setSession({
           access_token: accessToken,
@@ -70,7 +100,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
         return;
       }
 
-      // Check for existing session
+      // Method 4: Check for existing session
       const { data: { session } } = await supabase.auth.getSession();
       
       if (session) {
