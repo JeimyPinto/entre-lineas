@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { resetPassword } from '@/app/actions/passwordActions';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
@@ -18,7 +17,6 @@ function ResetPasswordForm() {
 
   // Check for token in URL
   useEffect(() => {
-    const token = searchParams.get('token');
     // If there's no token, check if user came from email link
     // Note: Supabase reset tokens are handled in the hash fragment
     // For now, we'll allow the form to show
