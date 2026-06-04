@@ -34,11 +34,17 @@ export async function POST(request: NextRequest) {
 
     const cookieStore = await cookies();
     
-    // Create client with cookies to maintain the session from the reset link
+    // Create client with PKCE and cookies to maintain the session from the reset link
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
+        auth: {
+          flowType: 'pkce',
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+        },
         cookies: {
           getAll() {
             return cookieStore.getAll();
