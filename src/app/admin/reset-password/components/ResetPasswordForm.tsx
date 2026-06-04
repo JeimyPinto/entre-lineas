@@ -21,8 +21,84 @@ export default function ResetPasswordForm({ onSuccess }: ResetPasswordFormProps)
     async function handleTokenExchange() {
       console.log('[ResetPassword] Page loaded, checking URL:', window.location.href);
       
-      // Supabase sends the access token in the URL hash (after #), not in query params
-      // Format: /reset-password?#access_token=xxx&expires_in=xxx&refresh_token=xxx&token_type=Bearer&type=recovery
+      // Method 1: Check for email action code in query params (?code=xxx)
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      
+      if (code) {
+        console.log('[ResetPassword] Found code in query params:', code);
+        
+        // Exchange the code for a session via API call
+        // supabase.auth.exchangeCodeForSession was added in v2, try via internal API
+        try {
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+          
+          // Call the Supabase auth exchange endpoint directly
+          const response = await fetch(`${supabaseUrl}/auth/v1/odata/v4/Token`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+              'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+            },
+            body: JSON.stringify({
+              grant_type: 'urn:ietf:params:oauth:grant-type:migration_off',
+              code: code,
+            }),
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            console.log('[ResetPassword] Code exchange success');
+            
+            // Set session with returned tokens
+            if (data.access_token) {
+              await supabase.auth.setSession({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token || '',
+              });
+              
+              setTokenValid(true);
+              window.history.replaceState(null, '', window.location.pathname);
+              return;
+            }
+          }
+        } catch (e) {
+          console.error('[ResetPassword] Code exchange error:', e);
+        }
+        
+// Try standard method if direct API fails - check if method exists
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const auth = supabase.auth as any;
+        if (typeof auth.exchangeCodeForSession === 'function') {
+          const { error: sessionError } = await auth.exchangeCodeForSession(code);
+          
+          if (sessionError) {
+            console.error('[ResetPassword] Exchange error:', sessionError.message);
+            setError('El link de recuperación ha expirado. Solicita uno nuevo.');
+            setTokenValid(false);
+            return;
+          }
+          
+          console.log('[ResetPassword] Session exchanged successfully');
+          setTokenValid(true);
+          window.history.replaceState(null, '', window.location.pathname);
+          return;
+        }
+        
+        // If still no success, check session
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          setTokenValid(true);
+          return;
+        }
+        
+        setError('El link de recuperación ha expirado. Solicita uno nuevo.');
+        setTokenValid(false);
+        return;
+      }
+      
+      // Method 2: Check for OAuth tokens in URL hash (for OAuth flow)
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const accessToken = hashParams.get('access_token');
       const refreshToken = hashParams.get('refresh_token');
@@ -30,7 +106,6 @@ export default function ResetPasswordForm({ onSuccess }: ResetPasswordFormProps)
       console.log('[ResetPassword] Hash params:', Object.fromEntries(hashParams.entries()));
       
       if (accessToken) {
-        // Set the session using the access token from the URL hash
         const { error: sessionError } = await supabase.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken || '',
@@ -45,20 +120,19 @@ export default function ResetPasswordForm({ onSuccess }: ResetPasswordFormProps)
         
         console.log('[ResetPassword] Session set successfully');
         setTokenValid(true);
-        
-        // Clear the hash from URL for security (optional, but good practice)
         window.history.replaceState(null, '', window.location.pathname);
+        return;
+      }
+      
+      // Method 3: Check if we have a session already
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        console.log('[ResetPassword] Existing session found');
+        setTokenValid(true);
       } else {
-        // Check if we have a session already (from cookies)
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (session) {
-          console.log('[ResetPassword] Existing session found');
-          setTokenValid(true);
-        } else {
-          console.log('[ResetPassword] No token in hash and no session');
-          setTokenValid(true); // Will be validated server-side
-        }
+        console.log('[ResetPassword] No token found in URL');
+        setTokenValid(true);
       }
     }
     
@@ -115,7 +189,8 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
           window.location.href = '/admin/login?reset=success';
         }
       }
-    } catch (err) {
+} catch (error) {
+      console.error('[ResetPassword] Submit error:', error);
       setError('Error al procesar la solicitud');
       setLoading(false);
     }
