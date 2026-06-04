@@ -28,8 +28,8 @@ export default async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin/dashboard', request.url));
   }
 
-  // 2. Si NO está logueado y va a cualquier ruta /admin (que no sea login) -> Mandar al LOGIN
-  if (!isAuthenticated && request.nextUrl.pathname.startsWith('/admin') && !request.nextUrl.pathname.startsWith('/admin/login')) {
+  // 2. Si NO está logueado y va a cualquier ruta /admin que no sea pública -> Mandar al LOGIN
+  if (!isAuthenticated && request.nextUrl.pathname.startsWith('/admin') && !request.nextUrl.pathname.startsWith('/admin/login') && !request.nextUrl.pathname.startsWith('/admin/reset-password')) {
     console.log('🚫 Acceso denegado, redirigiendo a login');
     return NextResponse.redirect(new URL('/admin/login', request.url));
   }
