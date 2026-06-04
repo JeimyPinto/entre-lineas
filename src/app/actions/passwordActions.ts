@@ -13,8 +13,10 @@ export async function requestPasswordReset(formData: FormData) {
   try {
     const supabase = await createClient();
     
-// Solicitar reset de contraseña - Site URL ya configurada en Supabase Dashboard
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
+// Solicitar reset de contraseña - especificar redirect URL manualmente
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://entre-lineas-rap.vercel.app/admin/reset-password',
+    });
 
     if (error) {
       console.error('Reset password error:', error.message);
