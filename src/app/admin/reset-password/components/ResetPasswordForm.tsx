@@ -15,8 +15,10 @@ export default function ResetPasswordForm({ onSuccess }: ResetPasswordFormProps)
   const [loading, setLoading] = useState(false);
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
-  // Check for token in URL - Supabase validates before redirecting
+// Check for token in URL - Supabase validates before redirecting
   useEffect(() => {
+    console.log('[ResetPassword] Page loaded, checking params:', window.location.search);
+    
     // If we reach this page, Supabase already validated the token
     // Just show the form
     setTokenValid(true);

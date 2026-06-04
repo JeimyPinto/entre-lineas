@@ -3,7 +3,9 @@ import { createClient } from '@/shared/api/supabaseServer';
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('[Password Update] Request received');
     const formData = await request.formData();
+    console.log('[Password Update] FormData keys:', Array.from(formData.keys()));
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
 
