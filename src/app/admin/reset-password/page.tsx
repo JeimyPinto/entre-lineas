@@ -1,18 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { resetPassword } from '@/app/actions/passwordActions';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import styles from '@/app/admin/login/login.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [tokenValid, setTokenValid] = useState<boolean | null>(null);
+
+  // Check for token in URL
+  useEffect(() => {
+    const token = searchParams.get('token');
+    // If there's no token, check if user came from email link
+    // Note: Supabase reset tokens are handled in the hash fragment
+    // For now, we'll allow the form to show
+    setTokenValid(true);
+  }, [searchParams]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -50,6 +61,18 @@ export default function ResetPasswordPage() {
     }
   }
 
+  if (tokenValid === null) {
+    return (
+      <div className={`${styles.loginContainer} admin-login-page`}>
+        <Card className={styles.loginCard}>
+          <div style={{ color: '#fff', textAlign: 'center', padding: '2rem' }}>
+            Verificando token...
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.loginContainer} admin-login-page`}>
       <Card className={styles.loginCard}>
@@ -60,43 +83,55 @@ export default function ResetPasswordPage() {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <Input
-                label="Nueva Contraseña"
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                required
-                className={styles.input}
-                minLength={6}
-              />
-            </div>
-            
-            <div className={styles.inputGroup}>
-              <Input
-                label="Confirmar Contraseña"
-                type="password"
-                name="confirmPassword"
-                placeholder="••••••••"
-                required
-                className={styles.input}
-                minLength={6}
-              />
-            </div>
+          <div className={styles.inputGroup}>
+            <Input
+              label="Nueva Contraseña"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              required
+              className={styles.input}
+              minLength={6}
+            />
+          </div>
+          
+          <div className={styles.inputGroup}>
+            <Input
+              label="Confirmar Contraseña"
+              type="password"
+              name="confirmPassword"
+              placeholder="••••••••"
+              required
+              className={styles.input}
+              minLength={6}
+            />
+          </div>
 
-            {error && <div className={styles.errorMessage}>{error}</div>}
-            
-<Button 
-              type="submit" 
-              variant="secondary" 
-              fullWidth 
-              size="large"
-              disabled={loading}
-            >
-              {loading ? 'Actualizando...' : 'Cambiar Contraseña'}
-            </Button>
+          {error && <div className={styles.errorMessage}>{error}</div>}
+          
+          <Button 
+            type="submit" 
+            variant="secondary" 
+            fullWidth 
+            size="large"
+            disabled={loading}
+          >
+            {loading ? 'Actualizando...' : 'Cambiar Contraseña'}
+          </Button>
         </form>
       </Card>
     </div>
   );
+}
+
+function ResetPasswordWithParams() {
+  return (
+    <Suspense fallback={<div style={{ color: '#fff', textAlign: 'center', padding: '2rem' }}>Cargando...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return <ResetPasswordWithParams />;
 }
