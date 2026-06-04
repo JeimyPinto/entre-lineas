@@ -1,76 +1,65 @@
 'use client';
 
-import { useState } from 'react';
-import { loginAction } from '@/app/actions/authActions';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Card from '@/components/ui/Card';
-import styles from './login.module.css';
-import Image from 'next/image';
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useLoginForm } from './hooks/useLoginForm';
+import { usePasswordResetForm } from './hooks/usePasswordResetForm';
+import { LoginCard, LoginFormComponent, ResetRequestForm, ResetSuccessMessage } from './components';
 
-export default function LoginPage() {
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const loginForm = useLoginForm();
+  const resetForm = usePasswordResetForm();
+  
+  const resetMode = searchParams.get('reset');
+  const resetSuccess = resetMode === 'success';
+  const resetRequestMode = resetMode === 'request';
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const formData = new FormData(event.currentTarget);
-    const result = await loginAction(formData);
-
-    if (result?.error) {
-      setError(result.error);
-      setLoading(false);
-    }
+  // Estados del flujo de recuperación
+  if (resetSuccess) {
+    return (
+      <LoginCard title="Contraseña Actualizada" subtitle="Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.">
+        <ResetSuccessMessage />
+      </LoginCard>
+    );
   }
 
+  if (resetForm.sent) {
+    return (
+      <LoginCard title="Revisa tu Email" subtitle="Te hemos enviado un link para recuperar tu contraseña. Revisa tu bandeja de entrada.">
+        <ResetSuccessMessage linkText="Volver al Login" />
+      </LoginCard>
+    );
+  }
+
+  if (resetRequestMode) {
+    return (
+      <LoginCard title="Recuperar Contraseña" subtitle="Ingresa tu correo para recibir el link de recuperación">
+        <ResetRequestForm
+          error={resetForm.error}
+          loading={resetForm.loading}
+          onSubmit={resetForm.handleResetRequest}
+        />
+      </LoginCard>
+    );
+  }
+
+  // Login normal
   return (
-    <div className={`${styles.loginContainer} admin-login-page`}>
-      <Card className={styles.loginCard}>
-        <div className={styles.header}>
-          <Image src="/1-01.png" alt="Logo" width={80} height={80} className={styles.logo} />
-          <h1>Panel de Control</h1>
-          <p>Ingresa tus credenciales para gestionar artistas y eventos</p>
-        </div>
+    <LoginCard title="Panel de Control" subtitle="Ingresa tus credenciales para gestionar artistas y eventos">
+      <LoginFormComponent
+        error={loginForm.error}
+        loading={loginForm.loading}
+        onSubmit={loginForm.handleLogin}
+      />
+    </LoginCard>
+  );
+}
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <Input
-                label="Correo Electrónico"
-                type="email"
-                name="email"
-                placeholder="admin@entrelineas.com"
-                required
-                className={styles.input}
-              />
-            </div>
-            
-            <div className={styles.inputGroup}>
-              <Input
-                label="Contraseña"
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                required
-                className={styles.input}
-              />
-            </div>
-
-            {error && <div className={styles.errorMessage}>{error}</div>}
-            
-            <Button 
-              type="submit" 
-              variant="primary" 
-              fullWidth 
-              size="large"
-              disabled={loading}
-            >
-              {loading ? 'Iniciando sesión...' : 'Entrar al Panel'}
-            </Button>
-        </form>
-      </Card>
-    </div>
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div style={{ color: '#fff', textAlign: 'center', padding: '2rem' }}>Cargando...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

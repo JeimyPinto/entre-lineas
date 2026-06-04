@@ -4,7 +4,7 @@
 
 Ir a: **Authentication → Templates → Reset password**
 
-## Plantilla mejorada para Entre Líneas
+## Plantilla mejorada para Entre Líneas (Crimson Night - tema corporativo)
 
 ```html
 <!DOCTYPE html>
@@ -30,46 +30,59 @@ Ir a: **Authentication → Templates → Reset password**
       margin-bottom: 30px;
     }
     .logo img {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background: #fff;
+      padding: 8px;
     }
     .card {
       background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-      border: 1px solid #333;
-      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
       padding: 40px;
       text-align: center;
     }
     h1 {
       color: #fff;
-      font-size: 28px;
+      font-size: 24px;
       margin: 0 0 20px 0;
-      font-weight: 300;
+      font-weight: 400;
     }
     p {
-      color: #888;
+      color: #a3a3a3;
       font-size: 16px;
       line-height: 1.6;
       margin: 0 0 30px 0;
     }
+    /* Botón estilo Crimson Night - Blanco y Negro */
     .button {
       display: inline-block;
-      background: linear-gradient(135deg, #ff6b35, #f7931e);
-      color: #fff;
+      background-color: #ffffff;
+      color: #0a0a0a;
       text-decoration: none;
-      padding: 16px 40px;
-      border-radius: 30px;
+      padding: 14px 32px;
+      border-radius: 12px;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
     }
     .button:hover {
-      background: linear-gradient(135deg, #f7931e, #ff6b35);
+      background-color: #f5f5f5;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
     }
     .footer {
       text-align: center;
       margin-top: 40px;
-      color: #444;
-      font-size: 14px;
+      color: #525252;
+      font-size: 13px;
+    }
+    .note {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #525252;
     }
   </style>
 </head>
@@ -77,13 +90,13 @@ Ir a: **Authentication → Templates → Reset password**
   <div class="container">
     <div class="card">
       <div class="logo">
-        <img src="https://tu-proyecto.vercel.app/1-01.png" alt="Entre Líneas">
+        <img src="https://entre-lineas-rap.vercel.app/1-01.png" alt="Entre Líneas">
       </div>
       <h1>Recupera tu Contraseña</h1>
       <p>Hemos recibido una solicitud para restablecer tu contraseña del Panel de Control de Entre Líneas.</p>
       <p>Haz clic en el botón de abajo para crear una nueva contraseña:</p>
-      <a href="{{ .ConfirmationURL }}" class="button">Restablecer Contraseña</a>
-      <p style="margin-top: 30px; font-size: 14px;">Este link expire en 60 minutos.</p>
+      <a href="{{ .ConfirmationURL }}" class="button">Crear Nueva Contraseña</a>
+      <p class="note">Este link expire en 60 minutos.</p>
     </div>
     <div class="footer">
       <p>© 2026 Entre Líneas - Colombia</p>

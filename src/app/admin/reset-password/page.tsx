@@ -86,9 +86,9 @@ export default function ResetPasswordPage() {
 
             {error && <div className={styles.errorMessage}>{error}</div>}
             
-            <Button 
+<Button 
               type="submit" 
-              variant="primary" 
+              variant="secondary" 
               fullWidth 
               size="large"
               disabled={loading}
