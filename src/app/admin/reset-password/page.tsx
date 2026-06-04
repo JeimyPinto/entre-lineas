@@ -15,13 +15,19 @@ function ResetPasswordForm() {
   const [loading, setLoading] = useState(false);
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
-  // Check for token in URL
+// Check for token in URL
   useEffect(() => {
-    // If there's no token, check if user came from email link
-    // Note: Supabase reset tokens are handled in the hash fragment
-    // For now, we'll allow the form to show
-    setTokenValid(true);
-  }, [searchParams]);
+    const tokenHash = searchParams.get('token_hash');
+    const type = searchParams.get('type');
+    
+    // Only allow if this is a password reset type
+    if (type === 'email' && tokenHash) {
+      setTokenValid(true);
+    } else {
+      // No token - redirect to login
+      router.push('/admin/login?error=invalid_token');
+    }
+  }, [searchParams, router]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
