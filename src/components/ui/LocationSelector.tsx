@@ -11,16 +11,18 @@ interface LocationSelectorProps {
 }
 
 export default function LocationSelector({ label, name, defaultValue = '' }: LocationSelectorProps) {
+  const countryNames = COMMON_COUNTRIES.map(c => c.name);
+  
   const [country, setCountry] = useState<string>(() => {
     if (!defaultValue) return '';
     if (defaultValue.includes('Colombia')) return 'Colombia';
-    if (COMMON_COUNTRIES.includes(defaultValue)) return defaultValue;
+    if (countryNames.includes(defaultValue)) return defaultValue;
     return 'Otro';
   });
 
   const [customCountry, setCustomCountry] = useState<string>(() => {
     if (!defaultValue) return '';
-    if (!defaultValue.includes('Colombia') && !COMMON_COUNTRIES.includes(defaultValue)) return defaultValue;
+    if (!defaultValue.includes('Colombia') && !countryNames.includes(defaultValue)) return defaultValue;
     return '';
   });
 
@@ -62,9 +64,9 @@ export default function LocationSelector({ label, name, defaultValue = '' }: Loc
           }}
           required
         >
-          <option value="" disabled style={{ background: '#000', color: '#fff' }}>-- Seleccionar País --</option>
+<option value="" disabled style={{ background: '#000', color: '#fff' }}>-- Seleccionar País --</option>
           {COMMON_COUNTRIES.map(c => (
-            <option key={c} value={c} style={{ background: '#000', color: '#fff' }}>{c}</option>
+            <option key={c.name} value={c.name} style={{ background: '#000', color: '#fff' }}>{c.name}</option>
           ))}
         </select>
 
