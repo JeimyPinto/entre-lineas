@@ -9,7 +9,9 @@
     "lint": "next lint",
     "db:link": "npx supabase link --project-ref paywsuxfzsoeunettwuj",
     "db:push": "npx supabase db push",
-    "db:seed": "npx supabase db query --linked -f supabase/seed.sql"
+    "db:seed": "npx supabase db query --linked -f supabase/seed.sql",
+    "deploy": "vercel --yes",
+    "deploy:prod": "vercel --prod --yes"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
