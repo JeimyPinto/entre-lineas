@@ -36,3 +36,41 @@ model Event {
 
   @@map("events")
 }
+
+// Location hierarchy for artists and events
+// Supports countries with optional departments (Colombia) and cities
+
+model Country {
+  id          Int          @id @default(autoincrement())
+  code        String       @unique // ISO 3166-1 alpha-2 (e.g., 'CO', 'AR')
+  name        String       // Display name
+  hasDepartments Boolean    @default(false) // Whether this country supports departments
+  departments Department[] 
+  createdAt   DateTime     @default(now()) @map("created_at")
+
+  @@map("countries")
+}
+
+model Department {
+  id          Int         @id @default(autoincrement())
+  code        String      // Department code (e.g., 'ANT', 'DC')
+  name        String      // Department name
+  countryId   Int         @map("country_id")
+  country     Country     @relation(fields: [countryId], references: [id])
+  cities      City[]
+  createdAt  DateTime    @default(now()) @map("created_at")
+
+  @@unique([code, countryId])
+  @@map("departments")
+}
+
+model City {
+  id            Int         @id @default(autoincrement())
+  name          String      // City name
+  departmentId  Int         @map("department_id")
+  department    Department  @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  @@unique([name, departmentId])
+  @@map("cities")
+}

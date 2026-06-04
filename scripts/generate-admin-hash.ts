@@ -26,7 +26,7 @@ console.log('='.repeat(50));
 // Guardar en stdout para usar en SQL
 console.log('\n--- SQL para插入 ---');
 console.log(`INSERT INTO admin_users (email, password, name, role, active)`);
-console.log(`SELECT 'jeimytatianapinto@gmail.com', '${hash}', 'Jeimy Tatiana Pinto Tapia', 'admin', true`);
+console.log(`SELECT 'jeimypintodev@gmail.com', '${hash}', 'Jeimy Tatiana Pinto Tapia', 'admin', true`);
 console.log(`WHERE NOT EXISTS (SELECT 1 FROM admin_users WHERE email = 'jeimytatianapinto@gmail.com');`);
 console.log('');
 console.log(`INSERT INTO admin_users (email, password, name, role, active)`);  
