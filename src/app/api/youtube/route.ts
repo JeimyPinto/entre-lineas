@@ -59,8 +59,13 @@ async function fetchYouTubeData(): Promise<GalleryData> {
     }
   }
 
-  if (videoItems.length === 0) {
-    return { shorts: [], videos: [], subscriberCount, highlights: null };
+if (videoItems.length === 0) {
+    return { 
+      shorts: [], 
+      videos: [], 
+      subscriberCount, 
+      highlights: { viral: null, mostLiked: null, mostCommented: null }
+    };
   }
 
   const videoIds = videoItems.map(item => item.id.videoId).join(",");
