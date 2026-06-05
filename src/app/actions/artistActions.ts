@@ -3,13 +3,12 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { artistService } from '@/features/artists/services';
-import { Artist } from '@/entities/artist/types';
+import { Artist, SocialLink } from '@/entities/artist/types';
 
 export async function createArtistAction(formData: FormData) {
   try {
     const rawBio = formData.get('bio') as string;
     const rawRoles = formData.get('orgRole') as string;
-    const igUrl = formData.get('instagram') as string;
     const imageFile = formData.get('imageFile') as File;
     let imageUrl = '';
 
@@ -18,7 +17,18 @@ export async function createArtistAction(formData: FormData) {
       imageUrl = await artistService.uploadImage(imageFile);
     }
 
-const newArtist: Artist = {
+    // Get socials from JSON
+    let socials: SocialLink[] = [];
+    const rawSocials = formData.get('socials') as string;
+    if (rawSocials) {
+      try {
+        socials = JSON.parse(rawSocials);
+      } catch {
+        // Keep empty if parse fails
+      }
+    }
+
+    const newArtist: Artist = {
       alias: formData.get('alias') as string,
       name: formData.get('name') as string,
       orgRole: rawRoles.split(',').map(r => r.trim()),
@@ -28,7 +38,7 @@ const newArtist: Artist = {
       origin: formData.get('origin') as string,
       trajectory: formData.get('trajectory') as string,
       bio: rawBio.split('\n').filter(p => p.trim() !== ''),
-      socials: igUrl ? [{ platform: 'instagram', url: igUrl, label: 'Instagram' }] : []
+      socials
     };
 
     await artistService.create(newArtist);
@@ -46,7 +56,6 @@ export async function updateArtistAction(id: string, formData: FormData) {
   try {
     const rawBio = formData.get('bio') as string;
     const rawRoles = formData.get('orgRole') as string;
-    const igUrl = formData.get('instagram') as string;
     const imageFile = formData.get('imageFile') as File;
     let imageUrl = formData.get('currentImage') as string;
 
@@ -55,7 +64,19 @@ export async function updateArtistAction(id: string, formData: FormData) {
       imageUrl = await artistService.uploadImage(imageFile);
     }
 
+    // Get socials from JSON
+    let socials: SocialLink[] = [];
+    const rawSocials = formData.get('socials') as string;
+    if (rawSocials) {
+      try {
+        socials = JSON.parse(rawSocials);
+      } catch {
+        socials = [];
+      }
+    }
+
     const updates: Partial<Artist> = {
+      alias: formData.get('alias') as string,
       name: formData.get('name') as string,
       orgRole: rawRoles.split(',').map(r => r.trim()),
       image: imageUrl,
@@ -64,7 +85,7 @@ export async function updateArtistAction(id: string, formData: FormData) {
       origin: formData.get('origin') as string,
       trajectory: formData.get('trajectory') as string,
       bio: rawBio.split('\n').filter(p => p.trim() !== ''),
-      socials: igUrl ? [{ platform: 'instagram', url: igUrl, label: 'Instagram' }] : []
+      socials
     };
 
     await artistService.update(id, updates);

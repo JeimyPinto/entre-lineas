@@ -7,11 +7,12 @@ interface CardProps {
   subtitle?: string;
   icon?: ReactNode;
   className?: string;
+  minimal?: boolean;
 }
 
-export default function Card({ children, title, subtitle, icon, className = '' }: CardProps) {
+export default function Card({ children, title, subtitle, icon, className = '', minimal = false }: CardProps) {
   return (
-    <div className={`${styles.card} ${className}`}>
+    <div className={`${styles.card} ${minimal ? styles.minimal : ''} ${className}`}>
       {(title || subtitle || icon) && (
         <div className={styles.cardHeader}>
           {icon && <span className={styles.cardIcon}>{icon}</span>}

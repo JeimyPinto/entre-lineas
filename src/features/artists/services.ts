@@ -1,13 +1,13 @@
 import { supabase as supabaseAnon } from '@/shared/api/supabase';
 import { createClient } from '@/shared/api/supabaseServer';
-import { Artist as ArtistType } from '@/entities/artist/types';
+import { Artist as ArtistType, SocialLink } from '@/entities/artist/types';
 import { Artist } from '@/entities/artist/model';
 
 export const artistService = {
   
   async getAll(): Promise<ArtistType[]> {
     try {
-      const { data, error } = await supabaseAnon
+      const { data: artists, error } = await supabaseAnon
         .from('artists')
         .select('*')
         .order('name');
@@ -16,7 +16,40 @@ export const artistService = {
         console.error('[artistService.getAll] Error:', error.message);
         return [];
       }
-      return (data || []).map(db => Artist.fromDb(db));
+
+// Get all social links in one query
+      const artistIds = (artists || []).map(a => a.id);
+      const socialLinksMap: Record<number, SocialLink[]> = {};
+      
+      if (artistIds.length > 0) {
+        const { data: socials } = await supabaseAnon
+          .from('artist_socials')
+          .select('artist_id, platform, url, label')
+          .in('artist_id', artistIds);
+
+        if (socials) {
+          socials.forEach(s => {
+            if (!socialLinksMap[s.artist_id]) {
+              socialLinksMap[s.artist_id] = [];
+            }
+            socialLinksMap[s.artist_id].push({
+              platform: s.platform as SocialLink['platform'],
+              url: s.url,
+              label: s.label || s.platform
+            });
+          });
+        }
+      }
+
+      return (artists || []).map(db => {
+        const artist = Artist.fromDb(db);
+        // Add social links from new table
+        const artistId = typeof db.id === 'number' ? db.id : parseInt(String(db.id));
+        if (socialLinksMap[artistId]) {
+          artist.socials = socialLinksMap[artistId];
+        }
+        return artist;
+      });
     } catch (err) {
       console.error('[artistService.getAll] Unexpected error:', err);
       return [];
@@ -24,33 +57,73 @@ export const artistService = {
   },
 
   async getById(id: string): Promise<ArtistType | null> {
-    const { data, error } = await supabaseAnon
+    const { data: artist, error } = await supabaseAnon
       .from('artists')
       .select('*')
       .eq('id', id)
       .single();
 
     if (error) return null;
-    return Artist.fromDb(data);
+    
+    const artistId = typeof artist.id === 'number' ? artist.id : parseInt(String(artist.id));
+    const { data: socials } = await supabaseAnon
+      .from('artist_socials')
+      .select('platform, url, label')
+      .eq('artist_id', artistId);
+
+    const result = Artist.fromDb(artist);
+    if (socials && socials.length > 0) {
+      result.socials = socials.map(s => ({
+        platform: s.platform as SocialLink['platform'],
+        url: s.url,
+        label: s.label || s.platform
+      }));
+    }
+    return result;
   },
 
   async create(artistData: ArtistType): Promise<ArtistType> {
     const supabase = await createClient(); // Cliente con Auth
+    
+    // Extract socials to insert separately
+    const socials = artistData.socials || [];
+    const artistWithoutSocials = { ...artistData, socials: [] };
+    
     const { data, error } = await supabase
       .from('artists')
-      .insert([Artist.toDb(artistData)])
+      .insert([Artist.toDb(artistWithoutSocials)])
       .select()
       .single();
 
     if (error) throw new Error(error.message);
+    
+    const artistId = typeof data.id === 'number' ? data.id : parseInt(String(data.id));
+    
+    // Insert social links
+    if (socials.length > 0) {
+      const socialRecords = socials.map(s => ({
+        artist_id: artistId,
+        platform: s.platform,
+        url: s.url,
+        label: s.label || s.platform
+      }));
+      
+      await supabase.from('artist_socials').insert(socialRecords);
+    }
+
     return Artist.fromDb(data);
   },
 
   async update(id: string, updates: Partial<ArtistType>): Promise<ArtistType> {
     const supabase = await createClient(); // Cliente con Auth
+    
+    // If socials are being updated, handle separately
+    const socials = updates.socials;
+    const updatesWithoutSocials = { ...updates, socials: [] };
+    
     const { data, error } = await supabase
       .from('artists')
-      .update(Artist.toDb(updates))
+      .update(Artist.toDb(updatesWithoutSocials))
       .eq('id', id)
       .select()
       .single();
@@ -59,6 +132,27 @@ export const artistService = {
       console.error('[artistService.update] Error de Supabase:', error);
       throw new Error(error.message);
     }
+
+    // Update social links if provided
+    if (socials !== undefined) {
+      const artistId = typeof data.id === 'number' ? data.id : parseInt(String(data.id));
+      
+      // Delete existing socials
+      await supabase.from('artist_socials').delete().eq('artist_id', artistId);
+      
+      // Insert new socials
+      if (socials.length > 0) {
+        const socialRecords = socials.map(s => ({
+          artist_id: artistId,
+          platform: s.platform,
+          url: s.url,
+          label: s.label || s.platform
+        }));
+        
+        await supabase.from('artist_socials').insert(socialRecords);
+      }
+    }
+
     return Artist.fromDb(data);
   },
 

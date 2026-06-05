@@ -1,12 +1,12 @@
 .container {
-  max-width: 1200px; /* Mantememos esto como base de grid */
+  max-width: 1200px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--gap-xxl);
+  margin-bottom: var(--gap-xl);
 }
 
 .header h1 {
@@ -15,6 +15,14 @@
   font-size: 2.5rem;
   margin: 0;
   letter-spacing: 1.5px;
+}
+
+.searchBar {
+  margin-bottom: var(--gap-xl);
+}
+
+.searchInput {
+  max-width: 400px;
 }
 
 .grid {
@@ -44,6 +52,29 @@
   border-top: 1px solid var(--border-glass-thin);
 }
 
+/* Thumbnail in artist card */
+.thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: var(--gap-m);
+  background: var(--input-bg);
+}
+
+.thumbnailPlaceholder {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  margin-bottom: var(--gap-m);
+  background: var(--bg-glass-thin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-light);
+  font-size: 3rem;
+}
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -53,5 +84,9 @@
   
   .header h1 {
     font-size: 2rem;
+  }
+  
+  .searchInput {
+    max-width: 100%;
   }
 }

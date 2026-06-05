@@ -1,15 +1,14 @@
 /* ============================================
-   CARD COMPONENT v2.0
-   Glassmorphism with consistent interactions
+   CARD COMPONENT v3.0 - Corporate Identity
    ============================================ */
 
 .card {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--border-radius-l);
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -17,9 +16,23 @@
 
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--color-border-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px var(--color-shadow);
+  border-color: var(--color-accent-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Minimal variant - for gallery items */
+.minimal {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.minimal:hover {
+  background: transparent;
+  border: none;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Interactive card (clickable) */
@@ -28,7 +41,7 @@
 }
 
 .interactive:active {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 /* Card Header */
@@ -38,7 +51,7 @@
   align-items: center;
   text-align: center;
   gap: var(--gap-m);
-  padding: var(--padding-xl) var(--padding-xl) var(--padding-l);
+  padding: var(--padding-l) var(--padding-l) var(--padding-m);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
@@ -49,7 +62,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-glass-thin);
+  background: rgba(239, 68, 68, 0.1);
   padding: var(--padding-m);
   border-radius: var(--border-radius-m);
   width: 52px;
@@ -59,14 +72,14 @@
 
 .card:hover .cardIcon {
   background: var(--color-accent-glow);
-  box-shadow: 0 0 20px var(--color-accent-glow);
+  box-shadow: 0 0 15px var(--color-accent-glow);
 }
 
 /* Title */
 .cardTitle {
   margin: 0;
-  font-size: var(--font-body);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-medium);
   color: var(--color-white);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -85,7 +98,7 @@
 
 /* Card Content */
 .cardContent {
-  padding: var(--padding-xl) var(--padding-xl) var(--padding-xl);
+  padding: var(--padding-l) var(--padding-l) var(--padding-l);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,13 +116,13 @@
 
 /* Compact variant */
 .compact {
-  padding: var(--padding-l);
+  padding: var(--padding-m);
 }
 
 .compact .cardHeader {
-  padding: var(--padding-l) var(--padding-l) var(--padding-m);
+  padding: var(--padding-m) var(--padding-m) var(--padding-s);
 }
 
 .compact .cardContent {
-  padding: var(--padding-m) var(--padding-l);
+  padding: var(--padding-s) var(--padding-m);
 }

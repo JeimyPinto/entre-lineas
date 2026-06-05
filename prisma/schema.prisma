@@ -17,10 +17,23 @@ model Artist {
   trajectory   String?
   bio          String[]
   socials      Json      @default("[]")
-  createdAt    DateTime  @default(now()) @map("created_at")
+  createdAt    DateTime  @default(now()) @map("created_id")
   createdBy   String?   @map("created_by")
+  socialLinks  ArtistSocial[]
 
   @@map("artists")
+}
+
+model ArtistSocial {
+  id        Int      @id @default(autoincrement())
+  artistId  Int      @map("artist_id")
+  artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  platform  String
+  url       String
+  label     String   @default("")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("artist_socials")
 }
 
 model Event {

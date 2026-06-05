@@ -1,6 +1,65 @@
 {
-  "shorts": [],
-  "videos": [],
-  "subscriberCount": null,
-  "highlights": null
+  "shorts": [
+    {
+      "id": "dQw4w9WgXcQ",
+      "title": "ENTRE LÍNEAZ - Freestyle Session 🔥",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/sddefault.jpg",
+      "viewCount": "15000",
+      "likeCount": "890",
+      "commentCount": "45"
+    },
+    {
+      "id": "9bZkp7q19f0",
+      "title": "BATTLE: vs Kenny",
+      "thumbnail": "https://i.ytimg.com/vi/9bZkp7q19f0/sddefault.jpg",
+      "viewCount": "8500",
+      "likeCount": "520",
+      "commentCount": "28"
+    }
+  ],
+  "videos": [
+    {
+      "id": "L_jWHffIx5E",
+      "title": "Documental: Orígenes del Freestyle",
+      "thumbnail": "https://i.ytimg.com/vi/L_jWHffIx5E/sddefault.jpg",
+      "viewCount": "45000",
+      "likeCount": "2300",
+      "commentCount": "156"
+    },
+    {
+      "id": "3JZ_D6H_5vI",
+      "title": "LIVE: Jam de Arte - Manizales",
+      "thumbnail": "https://i.ytimg.com/vi/3JZ_D6H_5vI/sddefault.jpg",
+      "viewCount": "22000",
+      "likeCount": "1100",
+      "commentCount": "89"
+    }
+  ],
+  "subscriberCount": "12500",
+  "highlights": {
+    "viral": {
+      "id": "L_jWHffIx5E",
+      "title": "Documental: Orígenes del Freestyle",
+      "thumbnail": "https://i.ytimg.com/vi/L_jWHffIx5E/sddefault.jpg",
+      "viewCount": "45000",
+      "likeCount": "2300",
+      "commentCount": "156"
+    },
+    "mostLiked": {
+      "id": "L_jWHffIx5E",
+      "title": "Documental: Orígenes del Freestyle",
+      "thumbnail": "https://i.ytimg.com/vi/L_jWHffIx5E/sddefault.jpg",
+      "viewCount": "45000",
+      "likeCount": "2300",
+      "commentCount": "156"
+    },
+    "mostCommented": {
+      "id": "L_jWHffIx5E",
+      "title": "Documental: Orígenes del Freestyle",
+      "thumbnail": "https://i.ytimg.com/vi/L_jWHffIx5E/sddefault.jpg",
+      "viewCount": "45000",
+      "likeCount": "2300",
+      "commentCount": "156"
+    }
+  }
 }

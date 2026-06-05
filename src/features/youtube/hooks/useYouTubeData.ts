@@ -1,52 +1,59 @@
-"use client"
-import { useState, useEffect } from "react";
-import { Video, GalleryData } from "@/entities/youtube-video/types";
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { Video, GalleryData } from '@/entities/youtube-video/types'
 
 export function useYouTubeData() {
-  const [shorts, setShorts] = useState<Video[]>([]);
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [subscriberCount, setSubscriberCount] = useState<string | null>(null);
-  const [highlights, setHighlights] = useState<GalleryData['highlights'] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [isOnline, setIsOnline] = useState(true);
+  const [shorts, setShorts] = useState<Video[]>([])
+  const [videos, setVideos] = useState<Video[]>([])
+  const [subscriberCount, setSubscriberCount] = useState<string | null>(null)
+  const [highlights, setHighlights] = useState<GalleryData['highlights'] | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [isOnline, setIsOnline] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const mountedRef = useRef(true)
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    let canceled = false
 
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
+    async function loadData() {
+      if (canceled || !mountedRef.current) return
 
-    setIsOnline(navigator.onLine);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
+      setLoading(true)
+      setError(null)
 
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
+      try {
+        // Add timestamp to prevent caching
+        const response = await fetch('/api/youtube?t=' + Date.now(), { cache: 'no-store' })
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
 
-  useEffect(() => {
-    if (!isOnline) {
-      setLoading(false);
-      return;
+        const data: GalleryData = await response.json()
+
+        if (canceled || !mountedRef.current) return
+
+        setShorts(data.shorts || [])
+        setVideos(data.videos || [])
+        setSubscriberCount(data.subscriberCount || null)
+        setHighlights(data.highlights || null)
+        setIsOnline(true)
+      } catch (e) {
+        if (canceled || !mountedRef.current) return
+        setError(e instanceof Error ? e.message : 'Error')
+        setIsOnline(false)
+      } finally {
+        if (mountedRef.current) {
+          setLoading(false)
+        }
+      }
     }
 
-    setLoading(true);
-    fetch("/api/youtube")
-      .then((res) => res.json())
-      .then((data: GalleryData) => {
-        setShorts(data.shorts || []);
-        setVideos(data.videos || []);
-        setSubscriberCount(data.subscriberCount || null);
-        setHighlights(data.highlights || null);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching YouTube data:", err);
-        setLoading(false);
-      });
-  }, [isOnline]);
+    loadData()
 
-  return { shorts, videos, subscriberCount, highlights, loading, isOnline };
+    return () => {
+      canceled = true
+      mountedRef.current = false
+    }
+  }, [])
+
+  return { shorts, videos, subscriberCount, highlights, loading, isOnline, error }
 }

@@ -13,14 +13,25 @@ import Button from "./ui/Button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function Gallery() {
-	const { shorts, videos, subscriberCount, loading, isOnline } = useYouTubeData();
+	const { shorts, videos, subscriberCount, loading, isOnline, error } = useYouTubeData();
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const [selected, setSelected] = useState<string | null>(null);
 	const [carouselIndex, setCarouselIndex] = useState(0);
 	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>('videos');
 
-	if (loading && isOnline) {
-		return <div className={styles.gallerySection}>Cargando galería...</div>;
+	// Debug logging
+	console.log("[Gallery] Render - loading:", loading, "isOnline:", isOnline, "videos:", videos.length, "shorts:", shorts.length, "error:", error);
+
+	// Show loading only when we're actually loading data (not during initial SSR)
+	if (loading) {
+		return (
+			<div className={styles.gallerySection}>
+				<div className={styles.galleryLoading}>
+					Cargando galería...
+					{error && <p style={{ color: 'red', marginTop: '0.5rem' }}>Error: {error}</p>}
+				</div>
+			</div>
+		);
 	}
 
 	return (

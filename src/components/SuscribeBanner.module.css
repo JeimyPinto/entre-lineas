@@ -1,16 +1,15 @@
 /* ============================================
-   SUBSCRIBE BANNER v2.0
-   Call-to-action with accent background
+   SUBSCRIBE BANNER v3.0 - Corporate Identity
    ============================================ */
 
 .suscribeBanner {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-bg-primary) 100%);
-  padding: var(--padding-xxxl);
-  border-radius: var(--border-radius-xl);
-  gap: var(--gap-xl);
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
+  padding: var(--padding-xxl);
+  border-radius: var(--border-radius-l);
+  gap: var(--gap-l);
   color: var(--color-white);
-  margin-top: var(--margin-xxxl);
-  box-shadow: 0 15px 40px var(--color-shadow-accent);
+  margin-top: var(--margin-xxl);
+  border: 1px solid var(--color-border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,34 +18,38 @@
 
 .suscribeBanner p {
   margin: 0;
-  font-size: var(--font-body-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.4;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  color: var(--color-text-muted);
 }
 
 .suscribeBanner p span {
   display: block;
-  font-size: var(--font-body);
+  font-size: var(--font-small);
   font-weight: var(--font-weight-normal);
-  opacity: 0.9;
+  color: var(--color-text-muted);
   margin-top: var(--gap-xs);
+  opacity: 0.8;
 }
 
 /* Subscribe button */
 .subscribeButton {
-  background: var(--color-white);
-  color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-white);
   padding: var(--padding-m) var(--padding-xl);
   border-radius: var(--border-radius-m);
-  gap: var(--gap-m);
+  gap: var(--gap-s);
   transition: all var(--transition-base);
   flex-shrink: 0;
   font-weight: var(--font-weight-semibold);
+  display: inline-flex;
+  align-items: center;
 }
 
 .subscribeButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--color-accent-glow);
 }
 
 /* Mobile responsive */
@@ -54,7 +57,7 @@
   .suscribeBanner {
     flex-direction: column;
     text-align: center;
-    padding: var(--padding-xl);
+    padding: var(--padding-l);
     gap: var(--gap-l);
   }
 }
