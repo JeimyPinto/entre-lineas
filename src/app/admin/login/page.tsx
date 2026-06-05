@@ -14,8 +14,21 @@ function LoginForm() {
   const resetMode = searchParams.get('reset');
   const resetSuccess = resetMode === 'success';
   const resetRequestMode = resetMode === 'request';
+  const sessionExpired = searchParams.get('expired') === 'true';
 
   // Estados del flujo de recuperación
+  if (sessionExpired) {
+    return (
+      <LoginCard title="Sesión Expirada" subtitle="Tu sesión ha expirado. Por favor, ingresa tus credenciales nuevamente.">
+        <LoginFormComponent
+          error={null}
+          loading={loginForm.loading}
+          onSubmit={loginForm.handleLogin}
+        />
+      </LoginCard>
+    );
+  }
+
   if (resetSuccess) {
     return (
       <LoginCard title="Contraseña Actualizada" subtitle="Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.">

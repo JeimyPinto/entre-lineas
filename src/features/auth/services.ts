@@ -86,20 +86,32 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
 
   // Verificar sesión con Supabase
   const supabase = await createClient();
-  const { data: { user }, error } = await supabase.auth.getUser();
+  
+  try {
+    const { data: { user }, error } = await supabase.auth.getUser();
 
-  if (error || !user) {
+    if (error || !user) {
+      // Token expirado o inválido - limpiar cookie
+      if (error?.message?.includes('token') || error?.message?.includes('expired')) {
+        cookieStore.delete(COOKIE_NAME);
+        console.log('[Auth] Session expired, cleared cookie');
+      }
+      return null;
+    }
+
+    const userMetadata = user.user_metadata;
+    
+    return {
+      id: user.id,
+      email: user.email || '',
+      name: userMetadata?.name || userMetadata?.full_name || null,
+      role: userMetadata?.role || 'admin',
+    };
+  } catch (error) {
+    // Error de red u otro - asumir no autenticado
+    console.error('[Auth] getCurrentUser error:', error);
     return null;
   }
-
-  const userMetadata = user.user_metadata;
-  
-  return {
-    id: user.id,
-    email: user.email || '',
-    name: userMetadata?.name || userMetadata?.full_name || null,
-    role: userMetadata?.role || 'admin',
-  };
 }
 
 /**

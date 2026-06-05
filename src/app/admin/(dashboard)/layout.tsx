@@ -1,7 +1,8 @@
 import { logoutAction } from '@/app/actions/authActions';
 import { getCurrentUser } from '@/features/auth/services';
+import { redirect } from 'next/navigation';
 import styles from '../admin.module.css';
-import { FaUser, FaUserGear, FaArrowRightFromBracket } from 'react-icons/fa6';
+import { FaUser, FaUserGear, FaArrowRightFromBracket, FaChartLine, FaUsers, FaCalendar, FaPalette } from 'react-icons/fa6';
 
 export default async function AdminLayout({
   children,
@@ -9,6 +10,11 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
+
+  // Redirect to login if no session
+  if (!user) {
+    redirect('/admin/login?expired=true');
+  }
 
   return (
     <div className={styles.adminContainer}>
@@ -30,12 +36,22 @@ export default async function AdminLayout({
           </div>
         )}
         
-<nav className={styles.nav}>
-          <a href="/admin/dashboard" className={styles.navLink}>Resumen</a>
-          <a href="/admin/artists" className={styles.navLink}>Artistas</a>
-          <a href="/admin/events" className={styles.navLink}>Eventos</a>
-          <a href="/admin/branding" className={styles.navLink}>Identidad</a>
-          <a href="/admin/users" className={styles.navLink}><FaUserGear /> Usuarios</a>
+        <nav className={styles.nav}>
+          <a href="/admin/dashboard" className={styles.navLink}>
+            <FaChartLine /> Resumen
+          </a>
+          <a href="/admin/artists" className={styles.navLink}>
+            <FaUsers /> Artistas
+          </a>
+          <a href="/admin/events" className={styles.navLink}>
+            <FaCalendar /> Eventos
+          </a>
+          <a href="/admin/branding" className={styles.navLink}>
+            <FaPalette /> Identidad
+          </a>
+          <a href="/admin/users" className={styles.navLink}>
+            <FaUserGear /> Usuarios
+          </a>
         </nav>
         <form action={logoutAction} className={styles.logoutWrapper}>
           <button type="submit" className={styles.logoutBtn}>
