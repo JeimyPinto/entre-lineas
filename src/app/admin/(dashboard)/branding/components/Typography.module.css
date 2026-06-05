@@ -1,0 +1,64 @@
+/* ============================================
+   Typography Section - Branding
+   ============================================ */
+
+.typoScaleList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.typoScaleItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.typoScaleItem:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.typoScaleMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+}
+
+.sizeName {
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sizeValue {
+  font-size: 0.75rem;
+  color: #737373;
+}
+
+.typoScalePreview {
+  margin: 0;
+  line-height: 1.2;
+  text-align: right;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .typoScaleItem {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .typoScalePreview {
+    text-align: left;
+    max-width: 100%;
+  }
+}

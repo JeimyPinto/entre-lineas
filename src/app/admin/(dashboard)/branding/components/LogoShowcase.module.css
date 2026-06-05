@@ -1,0 +1,66 @@
+/* ============================================
+   Logo Showcase Section - Branding
+   ============================================ */
+
+.brandingGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.logoGroup {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.logoRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.logoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #a4a4a4;
+}
+
+.logoPreviewLight, .logoPreviewDark {
+  padding: 28px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  transition: all 0.3s ease;
+}
+
+.logoPreviewLight {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoPreviewDark {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoPreviewLight:hover, .logoPreviewDark:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .logoPreviewLight, .logoPreviewDark {
+    width: 80px;
+    height: 80px;
+  }
+}

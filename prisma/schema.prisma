@@ -8,6 +8,7 @@ datasource db {
 
 model Artist {
   id            Int       @id @default(autoincrement())
+  alias         String    // Nombre artístico/apodo
   name          String
   orgRole       String[]
   image        String?

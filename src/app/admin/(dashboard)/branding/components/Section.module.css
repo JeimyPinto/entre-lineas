@@ -1,0 +1,60 @@
+/* ============================================
+   Shared Section Styles - Branding
+   ============================================ */
+
+.section {
+  position: relative;
+}
+
+/* Línea decorativa lateral */
+.section::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(220, 38, 38, 0.5) 20%,
+    rgba(220, 38, 38, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.sectionIcon {
+  font-size: 1.5rem;
+  color: #dc2626;
+  padding: 12px;
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  font-family: var(--font-title);
+  font-size: var(--font-h2);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 3px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .section::before {
+    display: none;
+  }
+  
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

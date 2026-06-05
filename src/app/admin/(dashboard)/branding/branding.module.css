@@ -1,15 +1,83 @@
-.brandingPage {
-  background: var(--color-bg-primary);
+/* ============================================
+   BACKSTAGE STYLE - Page Layout Only
+   Entre Líneas v2
+   
+   NOTE: Shared section styles moved to ./components/Section.module.css
+   Component-specific styles moved to their respective component CSS files
+   ============================================ */
+
+/* --- Fondo Principal con Spotlight --- */
+.main {
+  background: #0a0a0a;
   min-height: 100vh;
-  color: var(--color-white);
-  padding-bottom: 100px;
+  color: #f5f5f5;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 120px;
 }
 
+/* Spotlight radial desde el centro */
+.main::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(120, 20, 20, 0.15) 0%,
+    rgba(10, 10, 10, 0.8) 50%,
+    #0a0a0a 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Efecto de grano/ruido sutil */
+.main::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Banner Principal --- */
 .banner {
-  padding: 120px 20px 60px;
-  background: linear-gradient(to bottom, var(--color-accent-subtle) 0%, transparent 100%);
-  text-align: center;
   position: relative;
+  z-index: 2;
+  padding: 140px 20px 80px;
+  text-align: center;
+  border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+  /* Línea de cinta roja decorativa */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(220, 38, 38, 0.05) 50%,
+    transparent 100%
+  );
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
 }
 
 .backLink {
@@ -19,294 +87,79 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--color-grey-light);
-  transition: color 0.3s ease;
+  color: #a4a4a4;
+  transition: all 0.3s ease;
   font-family: var(--font-main);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
 }
 
 .backLink:hover {
-  color: var(--color-accent);
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
 }
 
 .title {
   font-family: var(--font-title);
   font-size: var(--font-display);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
   text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 40px rgba(220, 38, 38, 0.3);
 }
 
 .subtitle {
-  color: var(--color-accent);
+  color: #dc2626;
   font-family: var(--font-main);
-  letter-spacing: 5px;
-  font-weight: bold;
+  letter-spacing: 8px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin: 0;
 }
 
+/* --- Contenedor Principal --- */
 .container {
-  max-width: 1000px;
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 60px 24px;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 100px;
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 40px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.sectionIcon {
-  font-size: var(--font-h2);
-  color: var(--color-accent);
-}
-
-.sectionTitle {
-  font-family: var(--font-title);
-  font-size: var(--font-h2);
-  text-transform: uppercase;
-  margin: 0;
-}
-
-/* Logos */
-.brandingGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-}
-
-.logoGroup {
-  background: var(--color-grey-dark);
-  padding: 30px;
-  border-radius: var(--border-radius-xl);
-  border: var(--border-glass);
-}
-
-.groupTitle {
-  font-family: var(--font-title);
-  font-size: var(--font-h4);
-  margin-bottom: 25px;
-  color: var(--color-accent);
-  text-transform: uppercase;
-}
-
-.logoRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-.logoItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  font-size: var(--font-body);
-  color: var(--color-grey-light);
-}
-
-.logoPreviewLight, .logoPreviewDark {
-  padding: 30px;
-  border-radius: var(--border-radius-m);
-  align-items: center;
-  width: 120px;
-  height: 120px;
-}
-
-.logoPreviewLight {
-  background: var(--color-bg-surface);
-}
-
-.logoPreviewDark {
-  background: var(--color-black);
-  border: 1px solid var(--color-border);
-}
-
-/* Colors */
-.colorGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.colorCard {
-  background: var(--color-grey-dark);
-  padding: 15px;
-  border-radius: var(--border-radius-l);
-  border: 1px solid var(--color-border);
-}
-
-.colorValue {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--border-radius-m);
-}
-
-.colorInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.colorName {
-  font-weight: bold;
-}
-
-.hexCode {
-  font-family: monospace;
-  color: var(--color-grey-light);
-}
-
-/* Typo Scale */
-.typoScaleList {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.typoScaleItem {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.typoScaleMeta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sizeName {
-  font-weight: bold;
-  color: var(--color-accent);
-  font-size: var(--font-body);
-  letter-spacing: 2px;
-}
-
-.sizeValue {
-  font-size: var(--font-small);
-  color: var(--color-grey-light);
-}
-
-.typoScalePreview {
-  margin: 0;
-  line-height: 1.2;
-}
-
-.varName {
-  font-size: var(--font-small);
-  background: var(--color-grey-dark);
-  padding: 2px 8px;
-  border-radius: var(--border-radius-s);
-}
-
-/* UI Showcase */
-.uiShowcase {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-}
-
-.uiColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.uiLabel {
-  font-size: var(--font-small);
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-.uiContent {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.socialBtn {
-  min-width: 180px;
-  justify-content: flex-start !important;
-  padding-left: 25px !important;
-}
-
-.cardShowcase {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-}
-
-.cardPreviewItem {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.demoGlass {
-  background: var(--bg-overlay-dark);
-  backdrop-filter: blur(12px);
-  padding: 40px;
-  border-radius: var(--border-radius-xl);
-}
-
-.demoInputBox {
-  display: flex;
-  gap: 10px;
-  background: var(--bg-glass-medium);
-  padding: 8px;
-  border-radius: var(--border-radius-m);
-  border: none;
-  color: white;
-  padding: 0 20px;
-  flex: 1;
-  outline: none;
-  font-family: var(--font-main);
-}
-
-/* Responsive Design Section */
-.responsiveNote {
-  font-size: var(--font-body);
-  color: var(--color-grey-light);
-  margin-bottom: var(--margin-l);
-  line-height: 1.6;
-}
-
-.breakpointList {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-m);
-}
-
-.breakpointList li {
-  padding: var(--padding-m);
-  background: var(--color-grey-dark);
-  border-radius: var(--border-radius-m);
-  border: 1px solid var(--color-border);
-  font-size: var(--font-body);
-  color: var(--color-white);
-  line-height: 1.5;
-}
-
-.breakpointList strong {
-  color: var(--color-accent);
-}
-
+/* --- Page-Level Responsive --- */
 @media (max-width: 768px) {
   .backLink {
     position: static;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     justify-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .banner {
+    padding: 120px 16px 60px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+  
+  .subtitle {
+    letter-spacing: 4px;
+  }
+  
+  .container {
+    padding: 40px 16px;
+    gap: 60px;
   }
 }

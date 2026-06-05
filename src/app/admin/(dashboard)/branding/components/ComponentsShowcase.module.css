@@ -1,0 +1,52 @@
+/* ============================================
+   Components Showcase - Branding
+   ============================================ */
+
+.uiShowcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.uiColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uiLabel {
+  font-size: 0.75rem;
+  color: #dc2626;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.uiContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardShowcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.cardPreviewItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .uiShowcase {
+    grid-template-columns: 1fr;
+  }
+}
