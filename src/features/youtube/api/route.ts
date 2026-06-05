@@ -132,7 +132,19 @@ export async function GET() {
     return NextResponse.json({ shorts, videos, subscriberCount, highlights });
 
   } catch (error) {
-    console.error("YouTube API Route Error, returning fallback data:", error);
+    console.error("YouTube API Route Error:", error);
+    // En producción, no retornamos datos mock ya que podría mostrar videos de otros canales
+    // Solo retornamos error para que el cliente maneje el estado offline
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json({ 
+        shorts: [], 
+        videos: [], 
+        subscriberCount: null, 
+        highlights: null,
+        error: "YouTube API unavailable" 
+      }, { status: 500 });
+    }
+    // En desarrollo, retornamos mock para poder probar la UI
     return NextResponse.json(youtubeMockData);
   }
 }
