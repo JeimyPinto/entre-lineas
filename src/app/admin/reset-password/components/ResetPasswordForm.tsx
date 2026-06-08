@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Card from '@/components/ui/Card';
+import Button from '@/shared/ui/Button/Button';
+import Input from '@/shared/ui/Input/Input';
+import Card from '@/shared/ui/Card/Card';
 import { useResetPasswordForm } from '../hooks/useResetPasswordForm';
 import styles from '../reset-password.module.css';
 

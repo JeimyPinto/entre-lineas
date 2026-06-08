@@ -2,9 +2,12 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { FaHouse } from 'react-icons/fa6';
 import { useLoginForm } from './hooks/useLoginForm';
 import { usePasswordResetForm } from './hooks/usePasswordResetForm';
 import { LoginCard, LoginFormComponent, ResetRequestForm, ResetSuccessMessage } from './components';
+import styles from './login.module.css';
 
 function LoginForm() {
   const searchParams = useSearchParams();
@@ -19,59 +22,97 @@ function LoginForm() {
   // Estados del flujo de recuperación
   if (sessionExpired) {
     return (
-      <LoginCard title="Sesión Expirada" subtitle="Tu sesión ha expirado. Por favor, ingresa tus credenciales nuevamente.">
-        <LoginFormComponent
-          error={null}
-          loading={loginForm.loading}
-          onSubmit={loginForm.handleLogin}
-        />
-      </LoginCard>
+      <div className={styles.loginContainer}>
+        <Link href="/" className={styles.backLink} title="Volver a Entre Líneas">
+          <FaHouse size={16} />
+          <span>Volver a Entre Líneas</span>
+        </Link>
+        <LoginCard title="Sesión Expirada" subtitle="Tu sesión ha expirado. Por favor, ingresa tus credenciales nuevamente.">
+          <LoginFormComponent
+            error={null}
+            loading={loginForm.loading}
+            onSubmit={loginForm.handleLogin}
+          />
+        </LoginCard>
+      </div>
     );
   }
 
   if (resetSuccess) {
     return (
-      <LoginCard title="Contraseña Actualizada" subtitle="Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.">
-        <ResetSuccessMessage />
-      </LoginCard>
+      <div className={styles.loginContainer}>
+        <Link href="/" className={styles.backLink} title="Volver a Entre Líneas">
+          <FaHouse size={16} />
+          <span>Volver a Entre Líneas</span>
+        </Link>
+        <LoginCard title="Contraseña Actualizada" subtitle="Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.">
+          <ResetSuccessMessage />
+        </LoginCard>
+      </div>
     );
   }
 
   if (resetForm.sent) {
     return (
-      <LoginCard title="Revisa tu Email" subtitle="Te hemos enviado un link para recuperar tu contraseña. Revisa tu bandeja de entrada.">
-        <ResetSuccessMessage linkText="Volver al Login" />
-      </LoginCard>
+      <div className={styles.loginContainer}>
+        <Link href="/" className={styles.backLink} title="Volver a Entre Líneas">
+          <FaHouse size={16} />
+          <span>Volver a Entre Líneas</span>
+        </Link>
+        <LoginCard title="Revisa tu Email" subtitle="Te hemos enviado un link para recuperar tu contraseña. Revisa tu bandeja de entrada.">
+          <ResetSuccessMessage linkText="Volver al Login" />
+        </LoginCard>
+      </div>
     );
   }
 
   if (resetRequestMode) {
     return (
-      <LoginCard title="Recuperar Contraseña" subtitle="Ingresa tu correo para recibir el link de recuperación">
-        <ResetRequestForm
-          error={resetForm.error}
-          loading={resetForm.loading}
-          onSubmit={resetForm.handleResetRequest}
-        />
-      </LoginCard>
+      <div className={styles.loginContainer}>
+        <Link href="/" className={styles.backLink} title="Volver a Entre Líneas">
+          <FaHouse size={16} />
+          <span>Volver a Entre Líneas</span>
+        </Link>
+        <LoginCard title="Recuperar Contraseña" subtitle="Ingresa tu correo para recibir el link de recuperación">
+          <ResetRequestForm
+            error={resetForm.error}
+            loading={resetForm.loading}
+            onSubmit={resetForm.handleResetRequest}
+          />
+        </LoginCard>
+      </div>
     );
   }
 
   // Login normal
   return (
-    <LoginCard title="Panel de Control" subtitle="Ingresa tus credenciales para gestionar artistas y eventos">
-      <LoginFormComponent
-        error={loginForm.error}
-        loading={loginForm.loading}
-        onSubmit={loginForm.handleLogin}
-      />
-    </LoginCard>
+    <div className={styles.loginContainer}>
+      <Link href="/" className={styles.backLink} title="Volver a Entre Líneas">
+        <FaHouse size={16} />
+        <span>Volver a Entre Líneas</span>
+      </Link>
+      <LoginCard title="Panel de Control" subtitle="Ingresa tus credenciales para gestionar artistas y eventos">
+        <LoginFormComponent
+          error={loginForm.error}
+          loading={loginForm.loading}
+          onSubmit={loginForm.handleLogin}
+        />
+      </LoginCard>
+    </div>
   );
 }
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div style={{ color: '#fff', textAlign: 'center', padding: '2rem' }}>Cargando...</div>}>
+    <Suspense fallback={
+      <div className={styles.loginContainer}>
+        <div className={styles.cardWrapper}>
+          <div className={styles.loadingOverlay}>
+            <div className={styles.spinner} />
+          </div>
+        </div>
+      </div>
+    }>
       <LoginForm />
     </Suspense>
   );

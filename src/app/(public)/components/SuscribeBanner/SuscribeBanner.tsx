@@ -1,5 +1,5 @@
 import styles from "./SuscribeBanner.module.css";
-import Button from "./ui/Button";
+import Button from "@/shared/ui/Button/Button";
 import { FaYoutube } from "react-icons/fa6";
 const CHANNEL_ID = "UColw-XWA4S-yN9SLKnL31xQ";
 

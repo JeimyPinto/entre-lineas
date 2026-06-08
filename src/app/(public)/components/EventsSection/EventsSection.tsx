@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./EventsSection.module.css";
-import InstagramCard from "./ui/InstagramCard";
+import InstagramCard from "@/shared/ui/InstagramCard/InstagramCard";
 import { Event } from "@/entities/event/types";
 
 interface EventsSectionProps {

@@ -126,14 +126,14 @@ export async function updateArtistAction(id: string, formData: FormData) {
   redirect('/admin/artists');
 }
 
-export async function deleteArtistAction(id: string) {
+export async function deleteArtistAction(formData: FormData) {
   try {
+    const id = formData.get('id') as string;
     await artistService.delete(id);
     revalidatePath('/');
     revalidatePath('/admin/artists');
-    return { success: true };
   } catch (error: unknown) {
     const err = error as Error;
-    return { error: err.message };
+    console.error('Delete artist error:', err.message);
   }
 }

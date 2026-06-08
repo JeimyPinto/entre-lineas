@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { Artist } from '@/entities/artist/types';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Button from '@/shared/ui/Button/Button';
+import Input from '@/shared/ui/Input/Input';
 import ArtistControlCard from './ArtistControlCard';
 import styles from './artists.module.css';
 

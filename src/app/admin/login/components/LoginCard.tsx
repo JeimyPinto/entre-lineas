@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Card from '@/components/ui/Card';
+import Card from '@/shared/ui/Card/Card';
 import styles from '../login.module.css';
 
 interface LoginCardProps {
@@ -10,14 +10,25 @@ interface LoginCardProps {
 
 export function LoginCard({ children, title, subtitle }: LoginCardProps) {
   return (
-    <div className={`${styles.loginContainer} admin-login-page`}>
-      <Card className={styles.loginCard}>
+    <div className={styles.cardWrapper}>
+      <Card className={styles.loginCard} minimal>
         <div className={styles.header}>
-          <Image src="/1-01.png" alt="Logo" width={80} height={80} className={styles.logo} />
+          <div className={styles.logoWrapper}>
+            <Image 
+              src="/1-01.png" 
+              alt="Entre Líneas Logo" 
+              width={48} 
+              height={48} 
+              className={styles.logo}
+              priority
+            />
+          </div>
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </div>
-        {children}
+        <div className={styles.form}>
+          {children}
+        </div>
       </Card>
     </div>
   );

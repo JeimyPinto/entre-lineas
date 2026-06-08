@@ -1,5 +1,5 @@
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Button from '@/shared/ui/Button/Button';
+import Input from '@/shared/ui/Input/Input';
 import Link from 'next/link';
 import styles from '../login.module.css';
 

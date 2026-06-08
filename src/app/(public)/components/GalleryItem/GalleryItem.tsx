@@ -1,5 +1,5 @@
 "use client";
-import Card from "./ui/Card";
+import Card from "@/shared/ui/Card/Card";
 import { FaPlay } from "react-icons/fa6";
 
 interface GalleryItemProps {

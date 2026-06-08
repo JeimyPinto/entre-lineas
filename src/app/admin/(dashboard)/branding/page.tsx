@@ -1,15 +1,7 @@
-'use client';
+export const dynamic = 'force-dynamic';
 
-import { ColorPalette, Typography, LogoShowcase, ComponentsShowcase } from './components';
-import styles from './branding.module.css';
+import BrandingPageClient from './BrandingPageClient';
 
 export default function BrandingPage() {
-  return (
-    <main className={styles.main}>
-      <ColorPalette />
-      <Typography />
-      <LogoShowcase />
-      <ComponentsShowcase />
-    </main>
-  );
+  return <BrandingPageClient />;
 }

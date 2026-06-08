@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import NavMenu from "./NavMenu";
-import MenuButton from "./MenuButton";
+import NavMenu from "../NavMenu/NavMenu";
+import MenuButton from "../MenuButton/MenuButton";
 import styles from "./header.module.css";
-import BlinkingLogo from "./ui/BlinkingLogo";
+import BlinkingLogo from "@/shared/ui/BlinkingLogo/BlinkingLogo";
 
 import { usePathname } from "next/navigation";
 

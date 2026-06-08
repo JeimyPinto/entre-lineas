@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FaImage } from 'react-icons/fa6';
 import styles from './LogoShowcase.module.css';
 import sectionStyles from './Section.module.css';
-import BlinkingLogo from '@/components/ui/BlinkingLogo';
+import BlinkingLogo from '@/shared/ui/BlinkingLogo/BlinkingLogo';
 
 export function LogoShowcase() {
   return (

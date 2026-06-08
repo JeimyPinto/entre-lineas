@@ -1,6 +1,6 @@
 import { artistService } from '@/features/artists/services';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
+import Button from '@/shared/ui/Button/Button';
+import Card from '@/shared/ui/Card/Card';
 import EditArtistForm from './EditArtistForm';
 import styles from '../../new/new.module.css';
 

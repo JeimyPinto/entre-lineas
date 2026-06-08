@@ -1,5 +1,5 @@
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Button from '@/shared/ui/Button/Button';
+import Input from '@/shared/ui/Input/Input';
 import Link from 'next/link';
 import styles from '../login.module.css';
 
@@ -46,12 +46,12 @@ export function LoginFormComponent({ error, loading, onSubmit }: LoginFormCompon
         {loading ? 'Iniciando sesión...' : 'Entrar al Panel'}
       </Button>
 
-      <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+      <div style={{ marginTop: '0.75rem', textAlign: 'center' }}>
         <Link 
           href="/admin/login?reset=request" 
           style={{ 
             color: 'var(--color-text-muted)', 
-            fontSize: '0.875rem', 
+            fontSize: '0.75rem', 
             textDecoration: 'none',
             borderBottom: '1px solid var(--color-border-light)',
             paddingBottom: '2px',

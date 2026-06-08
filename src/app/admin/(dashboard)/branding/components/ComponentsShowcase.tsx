@@ -4,9 +4,9 @@ import { FaShapes, FaInstagram } from 'react-icons/fa6';
 import Image from 'next/image';
 import styles from './ComponentsShowcase.module.css';
 import sectionStyles from './Section.module.css';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import InstagramCard from '@/components/ui/InstagramCard';
+import Button from '@/shared/ui/Button/Button';
+import Card from '@/shared/ui/Card/Card';
+import InstagramCard from '@/shared/ui/InstagramCard/InstagramCard';
 
 export function ComponentsShowcase() {
   return (

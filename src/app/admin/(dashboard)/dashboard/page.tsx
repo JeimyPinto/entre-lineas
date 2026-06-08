@@ -1,14 +1,13 @@
+export const dynamic = 'force-dynamic';
+
 import styles from './page.module.css';
-import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import Button from '@/shared/ui/Button/Button';
 import { 
   FaUsers, 
   FaCalendarDays, 
   FaPalette, 
   FaChartLine, 
   FaPlus,
-  FaPenToSquare,
-  FaTrashCan,
   FaArrowRightFromBracket,
   FaHouse,
   FaGlobe
@@ -31,7 +30,7 @@ export default function DashboardPage() {
         </form>
       </header>
 
-      {/* Quick Actions - Main Navigation */}
+      {/* Quick Actions */}
       <section className={styles.quickActions}>
         <h2 className={styles.sectionTitle}>
           <FaChartLine /> Acciones Rápidas
@@ -87,35 +86,12 @@ export default function DashboardPage() {
           <Link href="/" className={styles.linkButton}>
             <FaHouse /> Ver Sitio Web
           </Link>
-          <Link href="/admin/artists" className={styles.linkButton}>
+          <Link href="/admin/artists/new" className={styles.linkButton}>
             <FaPlus /> Nuevo Artista
           </Link>
-          <Link href="/admin/events" className={styles.linkButton}>
+          <Link href="/admin/events/new" className={styles.linkButton}>
             <FaPlus /> Nuevo Evento
           </Link>
-        </div>
-      </section>
-
-      {/* Management Cards */}
-      <section className={styles.management}>
-        <h2 className={styles.sectionTitle}>
-          <FaChartLine /> Gestión de Contenido
-        </h2>
-        <div className={styles.grid}>
-          <Card title="Talento" icon={<FaUsers />} className={styles.statCard}>
-            <p>Gestiona los perfiles de los artistas, jueces y hosts.</p>
-            <Button href="/admin/artists" variant="primary" fullWidth>Ver Artistas</Button>
-          </Card>
-
-          <Card title="Eventos" icon={<FaCalendarDays />} className={styles.statCard}>
-            <p>Crea y edita las fechas de la temporada actual.</p>
-            <Button href="/admin/events" variant="primary" fullWidth>Ver Eventos</Button>
-          </Card>
-
-          <Card title="Identidad" icon={<FaPalette />} className={styles.statCard}>
-            <p>Paleta de colores, tipografía y componentes visuales.</p>
-            <Button href="/admin/branding" variant="outline" fullWidth>Ver Sistema</Button>
-          </Card>
         </div>
       </section>
     </div>

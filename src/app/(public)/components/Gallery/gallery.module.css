@@ -4,7 +4,7 @@
    ============================================ */
 
 .gallerySection {
-  padding: var(--padding-xxxl) var(--padding-xl);
+  padding: var(--padding-xxl) var(--padding-l);
   max-width: 1200px;
   margin: 0 auto;
   color: var(--color-white);
@@ -32,10 +32,10 @@
 
 /* Info block - Redesigned */
 .galleryInfoBlock {
-  margin-bottom: var(--margin-xxxl);
+  margin-bottom: var(--margin-l);
   background: linear-gradient(145deg, rgba(30, 30, 30, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
   backdrop-filter: blur(20px);
-  padding: var(--padding-xxxl) var(--padding-xxxl);
+  padding: var(--padding-l) var(--padding-m);
   border-radius: var(--border-radius-xl);
   border: 1px solid var(--color-border-subtle);
   position: relative;
@@ -56,8 +56,8 @@
 .galleryInfoHeader {
   display: flex;
   align-items: center;
-  gap: var(--gap-xl);
-  margin-bottom: var(--margin-l);
+  gap: var(--gap-l);
+  margin-bottom: var(--margin-s);
 }
 
 .galleryInfoTitle {
@@ -68,7 +68,7 @@
 
 .galleryInfoTitle h2 {
   font-family: var(--font-title);
-  font-size: var(--font-h1);
+  font-size: clamp(var(--font-h2), 5vw, var(--font-h1));
   margin: 0;
   letter-spacing: 3px;
   color: var(--color-white);
@@ -84,11 +84,11 @@
 }
 
 .galleryInfoDesc {
-  font-size: var(--font-body);
-  line-height: 1.8;
+  font-size: var(--font-small);
+  line-height: 1.5;
   color: var(--color-text-muted);
-  margin-bottom: var(--margin-xl);
-  max-width: 700px;
+  margin-bottom: var(--margin-s);
+  max-width: 100%;
   border-left: 2px solid var(--color-accent-dim);
   padding-left: var(--padding-l);
 }
@@ -110,7 +110,7 @@
   font-size: var(--font-body);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
-  padding: var(--padding-m) var(--padding-xl);
+  padding: var(--padding-s) var(--padding-l);
   transition: all var(--transition-base);
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -135,11 +135,17 @@
   color: var(--color-white);
 }
 
+/* Gallery subscribe button */
+.gallerySubscribeButton {
+  padding: var(--padding-s) var(--padding-l) !important;
+  font-size: var(--font-body) !important;
+}
+
 /* Grid */
 .galleryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--gap-xl);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--gap-l);
   transition: all var(--transition-normal);
 }
 
@@ -150,8 +156,8 @@
   }
 
   .galleryInfoBlock {
-    padding: var(--padding-xl) var(--padding-l);
-    margin-bottom: var(--margin-xxl);
+    padding: var(--padding-l) var(--padding-m);
+    margin-bottom: var(--margin-l);
   }
 
   .galleryInfoTitle h2 {

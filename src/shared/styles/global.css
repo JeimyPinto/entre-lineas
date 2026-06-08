@@ -176,7 +176,7 @@ html, body {
 body {
   background-color: var(--color-dark);
   margin: 0;
-  padding-top: 85px; /* PC height */
+  padding: 0; /* PC height */
   display: flex;
   flex-direction: column;
 }

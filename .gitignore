@@ -48,3 +48,4 @@ supabase/.branches/
 # agentes/IA locales
 .agents/
 skills-lock.json
+.blackboxcli/

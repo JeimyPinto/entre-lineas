@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import styles from './ImageUploader.module.css';
 import { FaCloudArrowUp, FaTrashCan, FaArrowsUpDown } from 'react-icons/fa6';
 import Image from 'next/image';
-import Button from './Button';
+import Button from '@/shared/ui/Button/Button';
 
 interface ImageUploaderProps {
   label: string;

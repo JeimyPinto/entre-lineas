@@ -1,10 +1,10 @@
-import MainSection from '@/components/section';
-import Gallery from '@/components/gallery'
-import ArtistSection from '@/components/ArtistSection'
-import EventsSection from '@/components/EventsSection'
-import Contact from '@/components/Contact'
-import HistorySection from '@/components/HistorySection'
-import Footer from '@/components/Footer'
+import MainSection from './components/MainSection/section';
+import Gallery from './components/Gallery/gallery'
+import ArtistSection from './components/ArtistSection/ArtistSection'
+import EventsSection from './components/EventsSection/EventsSection'
+import Contact from './components/Contact/Contact'
+import HistorySection from './components/HistorySection/HistorySection'
+import Footer from './components/Footer/Footer'
 import { eventService } from '@/features/events/services'
 import { artistService } from '@/features/artists/services'
 

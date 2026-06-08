@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import GalleryItem from "./GalleryItem";
-import GalleryModal from "./GalleryModal";
-import YouTubeIframe from "./YouTubeIframe";
-import SuscribeBanner from "./SuscribeBanner";
+import GalleryItem from "../GalleryItem/GalleryItem";
+import GalleryModal from "../GalleryModal/GalleryModal";
+import YouTubeIframe from "../YouTubeIframe/YouTubeIframe";
+import SuscribeBanner from "../SuscribeBanner/SuscribeBanner";
 import Image from "next/image";
 import styles from "./gallery.module.css";
 import { useYouTubeData } from "@/features/youtube/hooks/useYouTubeData";
-import Button from "./ui/Button";
+import Button from "@/shared/ui/Button/Button";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -18,9 +18,6 @@ export default function Gallery() {
 	const [selected, setSelected] = useState<string | null>(null);
 	const [carouselIndex, setCarouselIndex] = useState(0);
 	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>('videos');
-
-	// Debug logging
-	console.log("[Gallery] Render - loading:", loading, "isOnline:", isOnline, "videos:", videos.length, "shorts:", shorts.length, "error:", error);
 
 	// Show loading only when we're actually loading data (not during initial SSR)
 	if (loading) {
@@ -51,7 +48,7 @@ export default function Gallery() {
 			{/* Bloque informativo superior */}
 			<div className={styles.galleryInfoBlock}>
 				<div className={styles.galleryInfoHeader}>
-					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff', width: 'auto', height: 'auto' }} />
+					<Image src="/1-01.png" alt="Logo Entre Líneas" width={56} height={56} style={{ borderRadius: '1.2rem', background: '#fff', width: '56px', height: '56px', objectFit: 'contain' }} />
 					<div className={styles.galleryInfoTitle}>
 						<h2>Galería de Videos</h2>
 						{subscriberCount && (

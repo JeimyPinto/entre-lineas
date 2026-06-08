@@ -10,7 +10,7 @@ import {
   FaMusic
 } from 'react-icons/fa';
 import Image from 'next/image';
-import Card from '@/components/ui/Card';
+import Card from '@/shared/ui/Card/Card';
 import { contactData } from '@/data/contact';
 import styles from './Contact.module.css';
 

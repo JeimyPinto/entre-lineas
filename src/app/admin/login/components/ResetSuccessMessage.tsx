@@ -1,5 +1,6 @@
-import Button from '@/components/ui/Button';
-import Link from 'next/link';
+import Button from '@/shared/ui/Button/Button';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface ResetSuccessMessageProps {
   linkHref?: string;
@@ -7,11 +8,18 @@ interface ResetSuccessMessageProps {
 }
 
 export function ResetSuccessMessage({ linkHref = '/admin/login', linkText = 'Volver al Login' }: ResetSuccessMessageProps) {
+  const router = useRouter();
+  
+  const handleClick = () => {
+    // Open login in new tab
+    window.open(linkHref, '_blank', 'noopener,noreferrer');
+    // Close current tab/window
+    window.close();
+  };
+
   return (
-    <Link href={linkHref} style={{ display: 'block', width: '100%' }}>
-      <Button variant="primary" fullWidth size="large">
-        {linkText}
-      </Button>
-    </Link>
+    <Button variant="primary" fullWidth size="large" onClick={handleClick} type="button">
+      {linkText}
+    </Button>
   );
 }

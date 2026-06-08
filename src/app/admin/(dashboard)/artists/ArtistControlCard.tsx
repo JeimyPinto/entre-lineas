@@ -1,8 +1,8 @@
 'use client';
 
 import { Artist } from '@/entities/artist/types';
-import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import Card from '@/shared/ui/Card/Card';
+import Button from '@/shared/ui/Button/Button';
 import { deleteArtistAction } from '@/app/actions/artistActions';
 import styles from './artists.module.css';
 import { useState } from 'react';
@@ -18,18 +18,17 @@ export default function ArtistControlCard({ artist }: { artist: Artist }) {
     }
     if (confirm(`¿Estás seguro de eliminar a ${artist.name}? Esta acción no se puede deshacer.`)) {
       setIsDeleting(true);
-      const result = await deleteArtistAction(artist.id);
-      if (result?.error) {
-        alert("Error al eliminar: " + result.error);
-        setIsDeleting(false);
-      }
+      const formData = new FormData();
+      formData.set('id', artist.id);
+      await deleteArtistAction(formData);
+      setIsDeleting(false);
     }
   };
 
   const hasImage = artist.image && artist.image.length > 0;
 
   return (
-    <Card title={artist.alias || artist.name} subtitle={artist.orgRole.join(', ')}>
+    <Card title={artist.alias || artist.name} subtitle={artist.orgRole.join(', ')}> 
       {/* Thumbnail */}
       {hasImage ? (
         <img 
@@ -57,14 +56,17 @@ export default function ArtistControlCard({ artist }: { artist: Artist }) {
             Editar
           </Button>
 
-          <Button
-            variant="danger"
-            onClick={handleDelete}
-            disabled={isDeleting}
-            fullWidth
-          >
-            {isDeleting ? 'Borrando...' : 'Eliminar'}
-          </Button>
+          <form action={deleteArtistAction}>
+            <input type="hidden" name="id" value={artist.id} />
+            <Button
+              type="submit"
+              variant="danger"
+              disabled={isDeleting}
+              fullWidth
+            >
+              {isDeleting ? 'Borrando...' : 'Eliminar'}
+            </Button>
+          </form>
         </div>
       </div>
     </Card>

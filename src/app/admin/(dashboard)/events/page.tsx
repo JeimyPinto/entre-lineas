@@ -1,6 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import { eventService } from '@/features/events/services';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
+import Button from '@/shared/ui/Button/Button';
+import Card from '@/shared/ui/Card/Card';
+import { deleteEventAction } from '@/app/actions/eventActions';
 import styles from '../artists/artists.module.css'; // Reutilizamos estilos de lista
 
 export default async function AdminEventsPage() {
@@ -32,8 +35,15 @@ export default async function AdminEventsPage() {
               <p><strong>Edición:</strong> #{event.id}</p>
               <p><strong>Lugar:</strong> {event.location}</p>
               <div className={styles.actions}>
-                <Button variant="ghost" className={styles.actionBtn}>Editar</Button>
-                <Button variant="outline" className={styles.deleteBtn}>Eliminar</Button>
+                <Button href={`/admin/events/edit/${event.id}`} variant="ghost" className={styles.actionBtn}>
+                  Editar
+                </Button>
+                <form action={deleteEventAction}>
+                  <input type="hidden" name="id" value={event.id} />
+                  <Button type="submit" variant="danger" className={styles.deleteBtn}>
+                    Eliminar
+                  </Button>
+                </form>
               </div>
             </div>
           </Card>
