@@ -8,7 +8,7 @@ import {
   FaYoutube, 
   FaTiktok,
   FaMusic
-} from 'react-icons/fa';
+} from 'react-icons/fa6';
 import Image from 'next/image';
 import Card from '@/shared/ui/Card/Card';
 import { contactData } from '@/data/contact';
@@ -19,7 +19,7 @@ const Contact = () => {
     <section className={styles.contactSection} id="contacto">
       <div className={styles.container}>
         <div className={styles.headerContent}>
-<Image 
+          <Image 
             src="/1-04.png" 
             alt="Logo Entre Líneas" 
             width={100} 
@@ -36,69 +36,106 @@ const Contact = () => {
         </div>
         <div className={styles.grid}>
           {/* Email Card */}
-          <Card title="Correo Electrónico" icon={<FaEnvelope />}>
-            <ul className={styles.infoList}>
-              <li className={styles.infoItem}>
-                <a href={`mailto:${contactData.email}`} className={styles.link}>
-                  {contactData.email}
-                </a>
-              </li>
-            </ul>
-          </Card>
+          <div className={styles.contactCardWrapper}>
+            <Card 
+              title="Correo Electrónico" 
+              icon={<FaEnvelope />}
+              className={styles.cardInner}
+            >
+              <ul className={styles.infoList}>
+                <li className={styles.infoItem}>
+                  <a href={`mailto:${contactData.email}`} className={styles.link}>
+                    {contactData.email}
+                  </a>
+                </li>
+              </ul>
+            </Card>
+          </div>
 
           {/* WhatsApp Card */}
-          <Card title="WhatsApp" icon={<FaWhatsapp />}>
-            <ul className={styles.infoList}>
-              <li className={styles.infoItem}>
-                <a 
-                  href={contactData.whatsapp.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  {contactData.whatsapp.number}
-                </a>
-              </li>
-            </ul>
-          </Card>
+          <div className={styles.contactCardWrapper}>
+            <Card 
+              title="WhatsApp" 
+              icon={<FaWhatsapp />}
+              className={styles.cardInner}
+            >
+              <ul className={styles.infoList}>
+                <li className={styles.infoItem}>
+                  <a 
+                    href={contactData.whatsapp.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`${styles.link} ${styles.whatsappLink}`}
+                  >
+                    {contactData.whatsapp.number}
+                  </a>
+                </li>
+              </ul>
+            </Card>
+          </div>
 
           {/* Instagram Card */}
-          <Card title="Instagram" icon={<FaInstagram />}>
-            <ul className={styles.infoList}>
-              <li className={styles.infoItem}>
-                <a 
-                  href={contactData.instagram.main.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  {contactData.instagram.main.handle}
-                </a>
-              </li>
-              <li className={styles.infoItem}>
-                <a 
-                  href={contactData.instagram.founder.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  {contactData.instagram.founder.handle}
-                </a>
-              </li>
-            </ul>
-          </Card>
+          <div className={styles.contactCardWrapper}>
+            <Card 
+              title="Instagram" 
+              icon={<FaInstagram />}
+              className={styles.cardInner}
+            >
+              <ul className={styles.infoList}>
+                <li className={styles.infoItem}>
+                  <a 
+                    href={contactData.instagram.main.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    {contactData.instagram.main.handle}
+                  </a>
+                </li>
+                <li className={styles.infoItem}>
+                  <a 
+                    href={contactData.instagram.founder.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    {contactData.instagram.founder.handle}
+                  </a>
+                </li>
+              </ul>
+            </Card>
+          </div>
 
           {/* Platforms Card */}
-          <Card title="Plataformas Digitales" subtitle="Galáctico / Entre Líneas Manizales" icon={<FaMusic />}>
-            <div className={styles.platformsGrid}>
-              <a href={contactData.platforms.youtube} target="_blank" rel="noopener noreferrer" className={styles.platformIcon} aria-label="YouTube">
-                <FaYoutube />
-              </a>
-              <a href={contactData.platforms.tiktok} target="_blank" rel="noopener noreferrer" className={styles.platformIcon} aria-label="TikTok">
-                <FaTiktok />
-              </a>
-            </div>
-          </Card>
+          <div className={styles.contactCardWrapper}>
+            <Card 
+              title="Plataformas Digitales" 
+              subtitle="Galáctico / Entre Líneas Manizales" 
+              icon={<FaMusic />}
+              className={styles.cardInner}
+            >
+              <div className={styles.platformsGrid}>
+                <a 
+                  href={contactData.platforms.youtube} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.platformIcon} 
+                  aria-label="YouTube"
+                >
+                  <FaYoutube />
+                </a>
+                <a 
+                  href={contactData.platforms.tiktok} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.platformIcon} 
+                  aria-label="TikTok"
+                >
+                  <FaTiktok />
+                </a>
+              </div>
+            </Card>
+          </div>
         </div>
       </div>
     </section>

@@ -16,8 +16,8 @@
 
 /* About section */
 .homeAbout {
-  margin-bottom: var(--margin-xl);
-  width: 60%;
+  margin: var(--margin-xl);
+  padding: var(--margin-xl);
   animation: fadeInUp 0.8s ease forwards;
 }
 

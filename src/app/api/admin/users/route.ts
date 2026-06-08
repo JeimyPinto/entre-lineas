@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/shared/api/supabaseServer';
+import { createAdminClient } from '@/shared/api/supabaseAdmin';
 import { getCurrentUser } from '@/features/auth/services';
 
 /**
@@ -15,14 +15,21 @@ export async function GET() {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
-    // Listar usuarios (solo primeros 1000, paginación simple)
-    const { data: { users }, error } = await supabase.auth.admin.listUsers();
+    // Listar usuarios con paginación explícita
+    const { data: { users }, error } = await supabase.auth.admin.listUsers({
+      page: 1,
+      perPage: 1000,
+    });
 
     if (error) {
-      console.error('Error listing users:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error('Error listing users:', JSON.stringify(error, null, 2));
+      return NextResponse.json({ 
+        error: error.message, 
+        code: error.code,
+        status: error.status 
+      }, { status: 500 });
     }
 
 // Filtrar y formatear usuarios
@@ -62,7 +69,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email requerido' }, { status: 400 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Enviar invitación por email
     const { error } = await supabase.auth.admin.inviteUserByEmail(email, {

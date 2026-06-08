@@ -49,3 +49,20 @@ supabase/.branches/
 .agents/
 skills-lock.json
 .blackboxcli/
+
+# OS/Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.log
+
+# Test artifacts
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Build artifacts
+*.tsbuildinfo

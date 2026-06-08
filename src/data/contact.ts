@@ -1,8 +1,8 @@
 export const contactData = {
   email: "entrelineasmanizales@gmail.com",
   whatsapp: {
-    number: "+57 300 123 4567",
-    link: "https://wa.me/573001234567"
+    number: "+57 319 274 9317",
+    link: "https://wa.me/573192749317"
   },
   instagram: {
     main: {
