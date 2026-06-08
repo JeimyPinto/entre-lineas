@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cell {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--color-grey-light);
+  text-align: center;
+  padding: 2rem;
+}

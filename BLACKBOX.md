@@ -2,7 +2,7 @@ Entre Lineas - Plataforma Artistica
   
 ## Project Overview 
   
-Entre Lineas es una plataforma web oficial del colectivo colombiano del mismo nombre, disenada para proyectar y difundir el talento colombiano (freestylers, m£sicos y artistas urbanos) mediante una experiencia web moderna, modular y dinamica. 
+Entre Lineas es una plataforma web oficial del colectivo colombiano del mismo nombre, disenada para proyectar y difundir el talento colombiano (freestylers, mï¿½sicos y artistas urbanos) mediante una experiencia web moderna, modular y dinamica. 
   
 Basado en Manizales, Colombia, con mas de 25 ediciones de eventos documentados, la plataforma sirve como un hub central para: 
   
@@ -19,51 +19,54 @@ Technology Stack:
 - UI: React 19, CSS Modules, framer-motion 12  
 - Backend: Supabase (PostgreSQL, Auth, Storage)  
 - External API: YouTube Data API v3  
-- Assets: sharp (image processing), react-icons 
+- Assets: sharp (image processing), react-icons  
+- Virtualization: react-window (large list rendering optimization) 
   
 ## Project Structure 
   
 The project follows Feature-Sliced Design (FSD) for better organization and scalability:  
   
 src/  
-ÃÄÄ app/                  # Routes, layouts, API routes, Server Actions  
-³   ÃÄÄ actions/          # Server Actions (auth, artist, event CRUD)  
-³   ÃÄÄ api/              # Internal framework API Routes  
-³   ÀÄÄ admin/            # Administration panel  
-ÃÄÄ components/           # Public components + UI system  
-³   ÀÄÄ ui/               # Design System (Button, Card, Input, etc.)  
-ÃÄÄ entities/             # Types, models and domain data  
-³   ÃÄÄ artist/           # Types, model, data of artists  
-³   ÃÄÄ event/            # Types and model of events  
-³   ÃÄÄ user/             # User types  
-³   ÀÄÄ youtube-video/     # Types of videos  
-ÃÄÄ features/             # Business logic (services, API, hooks)  
-³   ÃÄÄ artists/          # Services, API of artists  
-³   ÃÄÄ auth/             # Services, API of authentication  
-³   ÃÄÄ events/           # Event services  
-³   ÀÄÄ youtube/          # API, hooks of YouTube  
-ÃÄÄ shared/               # Shared utilities  
-³   ÃÄÄ api/             # Supabase clients (anon, server)  
-³   ÃÄÄ hooks/           # Generic hooks (useInterval, useMediaQuery)  
-³   ÃÄÄ styles/          # Global styles  
-³   ÀÄÄ utils/           # Utilities (imageUtils)  
+ï¿½ï¿½ï¿½ app/                  # Routes, layouts, API routes, Server Actions  
+ï¿½   ï¿½ï¿½ï¿½ actions/          # Server Actions (auth, artist, event CRUD)  
+ï¿½   ï¿½ï¿½ï¿½ api/              # Internal framework API Routes  
+ï¿½   ï¿½ï¿½ï¿½ admin/            # Administration panel  
+ï¿½ï¿½ï¿½ components/           # Public components + UI system  
+ï¿½   ï¿½ï¿½ï¿½ ui/               # Design System (Button, Card, Input, etc.)  
+ï¿½ï¿½ï¿½ entities/             # Types, models and domain data  
+ï¿½   ï¿½ï¿½ï¿½ artist/           # Types, model, data of artists  
+ï¿½   ï¿½ï¿½ï¿½ event/            # Types and model of events  
+ï¿½   ï¿½ï¿½ï¿½ user/             # User types  
+ï¿½   ï¿½ï¿½ï¿½ youtube-video/     # Types of videos  
+ï¿½ï¿½ï¿½ features/             # Business logic (services, API, hooks)  
+ï¿½   ï¿½ï¿½ï¿½ artists/          # Services, API of artists  
+ï¿½   ï¿½ï¿½ï¿½ auth/             # Services, API of authentication  
+ï¿½   ï¿½ï¿½ï¿½ events/           # Event services  
+ï¿½   ï¿½ï¿½ï¿½ youtube/          # API, hooks of YouTube  
+ï¿½ï¿½ï¿½ shared/               # Shared utilities  
+ï¿½   ï¿½ï¿½ï¿½ api/             # Supabase clients (anon, server)  
+ï¿½   ï¿½ï¿½ï¿½ hooks/           # Generic hooks (useInterval, useMediaQuery)  
+ï¿½   ï¿½ï¿½ï¿½ styles/          # Global styles  
+ï¿½   ï¿½ï¿½ï¿½ ui/              # Shared UI components (VirtualizedGrid)  
+ï¿½   ï¿½ï¿½ï¿½ utils/           # Utilities (imageUtils)  
 docs/                     # Detailed documentation  
 public/                 # Public assets  
-ÃÄÄ artists/              # Artist images  
-ÃÄÄ fonts/                # Typography (CloisterBlack)  
-ÀÄÄ data/                 # JSON of artists (production fallback)  
+ï¿½ï¿½ï¿½ artists/              # Artist images  
+ï¿½ï¿½ï¿½ fonts/                # Typography (CloisterBlack)  
+ï¿½ï¿½ï¿½ data/                 # JSON of artists (production fallback)  
 supabase/             # Supabase configuration  
-ÀÄÄ migrations/           # SQL schema 
+ï¿½ï¿½ï¿½ migrations/           # SQL schema 
   
 ## Key Features 
   
 - YouTube Gallery - Videos and shorts from the channel with automatic highlights (most viral, liked, commented)  
-- Artists Section - Grid with role filters, detail modal, photos, biographies and social networks  
-- Events Section - 25 documented editions with judges, hosts and Instagram/YouTube links  
+- Artists Section - Grid with role filters, detail modal, photos, biographies and social networks (virtualized for >50 items)  
+- Events Section - 25 documented editions with judges, hosts and Instagram/YouTube links (virtualized for >50 items)  
 - History Section - Animated timeline (Origins, Philosophy, Structure, Vision)  
-- Admin Panel - Complete CRUD for artists and events with Supabase authentication  
+- Admin Panel - Complete CRUD for artists and events with Supabase authentication (virtualized grids)  
 - Dark UI - Dark design with glassmorphism, Cloister + Esteban typography  
-- Responsive - Desktop-first with mobile menu, touch carousels, adaptive grids 
+- Responsive - Desktop-first with mobile menu, touch carousels, adaptive grids  
+- Performance - List virtualization with react-window for large datasets 
   
 ## Routes 
   
@@ -210,7 +213,8 @@ Routes:
 - Buttons: Polymorphic (link/anchor/button) with variants and sizes  
 - Modals: Centered with backdrop and escape key handling  
 - Forms: Label-input pairs with validation states  
-- Navigation: Sticky header with desktop/mobile menu variants 
+- Navigation: Sticky header with desktop/mobile menu variants  
+- VirtualizedGrid: Generic 2D grid virtualization (react-window) for large datasets (>50 items), configurable columns/item dimensions/overscan 
   
 ### Responsive Design  
 - Base Styles: Desktop-first approach  
@@ -247,7 +251,8 @@ Routes:
 - Code Splitting: Automatic route-based splitting  
 - Lazy Loading: Images and non-critical components  
 - Caching: SWR/stale-while-revalidate for data fetching  
-- Server Components: Minimize client-side JavaScript 
+- Server Components: Minimize client-side JavaScript  
+- List Virtualization: react-window Grid component for large datasets (>50 items), renders only visible viewport items 
   
 ## Deployment 
   
@@ -329,5 +334,5 @@ Optimized for Vercel with:
 - Accessibility audits and WCAG compliance 
   
 ---  
-*Document last updated: June 7, 2026*  
+*Document last updated: June 8, 2026*  
 *For AI agent context and understanding* 

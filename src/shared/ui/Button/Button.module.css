@@ -29,6 +29,18 @@
   transform: translateY(0);
 }
 
+/* Focus visible - accessible focus styles */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+}
+
+.btn:focus-visible:not(:focus-visible) {
+  /* Fallback for browsers that don't support :focus-visible */
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 /* Primary - White on Black */
 .primary {
   background-color: var(--color-white);

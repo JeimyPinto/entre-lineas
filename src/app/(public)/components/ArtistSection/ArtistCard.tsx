@@ -7,7 +7,6 @@ import Button from "@/shared/ui/Button/Button";
 import { FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaChevronDown, FaTiktok } from "react-icons/fa6";
 import { Artist } from "@/entities/artist/types";
 
-
 interface ArtistCardProps {
   artist: Artist;
   onOpenModal: (artist: Artist) => void;
@@ -29,16 +28,31 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
   const hasContent = artist.bio[0] !== "" || socialLinks.length > 0;
   const imageSrc = artist.image || "/1-01.png";
 
+  const handleDesktopClick = () => {
+    if (hasContent) onOpenModal(artist);
+  };
+
+  const handleMobileToggle = () => {
+    if (hasContent) setIsExpanded(prev => !prev);
+  };
+
   return (
     <div className={`${styles.card} ${isExpanded ? styles.expanded : ""}`}>
       {/* Desktop Version */}
-      <div className={styles.desktopView} onClick={() => hasContent && onOpenModal(artist)}>
+      <button
+        className={styles.desktopButton}
+        onClick={handleDesktopClick}
+        aria-label={hasContent ? `Ver biografía de ${artist.name}` : undefined}
+        disabled={!hasContent}
+        aria-disabled={!hasContent}
+      >
         <div className={styles.imageWrapper}>
           <Image
             src={imageSrc}
             alt={artist.name}
             fill
             className={styles.image}
+            sizes="(max-width: 900px) 60px, (max-width: 1200px) 280px, 320px"
             style={{ '--image-position': artist.imagePosition || '50%' } as React.CSSProperties}
           />
           {hasContent && (
@@ -67,17 +81,25 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
             </div>
           )}
         </div>
-      </div>
+      </button>
 
       {/* Mobile Version (Accordion style) */}
       <div className={styles.mobileView}>
-        <div className={styles.accordionHeader} onClick={() => hasContent && setIsExpanded(!isExpanded)}>
+        <button
+          className={styles.accordionHeader}
+          onClick={handleMobileToggle}
+          disabled={!hasContent}
+          aria-disabled={!hasContent}
+          aria-expanded={isExpanded}
+          aria-controls={`artist-content-${artist.id}`}
+        >
           <div className={styles.thumbWrapper}>
             <Image
               src={imageSrc}
               alt={artist.name}
               fill
               className={styles.thumb}
+              sizes="60px"
               style={{ '--image-position': artist.imagePosition || '50%' } as React.CSSProperties}
             />
           </div>
@@ -86,12 +108,12 @@ export default function ArtistCard({ artist, onOpenModal }: ArtistCardProps) {
             <span className={styles.mobileRoles}>{artist.orgRole.join(" • ")}</span>
           </div>
           {hasContent && (
-            <FaChevronDown className={`${styles.chevron} ${isExpanded ? styles.chevronUp : ""}`} />
+            <FaChevronDown className={`${styles.chevron} ${isExpanded ? styles.chevronUp : ""}`} aria-hidden="true" />
           )}
-        </div>
+        </button>
 
         {isExpanded && (
-          <div className={styles.accordionContent}>
+          <div id={`artist-content-${artist.id}`} className={styles.accordionContent}>
             <div className={styles.mobileMeta}>
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Profesión u Ocupación</span>

@@ -1,6 +1,5 @@
 /* ============================================
-   ARTIST CARD v2.0
-   Consistent with design system
+   ARTIST CARD v2.1 - Accessible interactive card
    ============================================ */
 
 .card {
@@ -17,7 +16,6 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   transition: all var(--transition-normal);
-  cursor: pointer;
   color: var(--color-white);
 }
 
@@ -26,6 +24,27 @@
   background: var(--bg-card-hover);
   border-color: var(--color-accent-glow);
   box-shadow: 0 20px 50px var(--color-shadow), 0 0 30px var(--color-accent-glow);
+}
+
+.desktopView:focus-within {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-glow);
+}
+
+.desktopButton {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.desktopButton:focus-visible {
+  outline: none;
 }
 
 /* Image */
@@ -47,7 +66,8 @@
   filter: brightness(1.05) saturate(1.05);
 }
 
-.desktopView:hover .image {
+.desktopView:hover .image,
+.desktopView:focus-within .image {
   transform: scale(1.1);
 }
 
@@ -64,7 +84,8 @@
   transition: opacity var(--transition-base);
 }
 
-.desktopView:hover .overlay {
+.desktopView:hover .overlay,
+.desktopView:focus-within .overlay {
   opacity: 1;
 }
 
@@ -153,6 +174,19 @@
     align-items: center;
     gap: var(--gap-xl);
     cursor: pointer;
+    border: none;
+    background: transparent;
+    text-align: left;
+  }
+
+  .accordionHeader:focus-visible {
+    outline: none;
+    background: var(--bg-card);
+  }
+
+  .accordionHeader:focus-visible .mobileName {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
   .thumbWrapper {
@@ -171,6 +205,7 @@
 
   .mobileMainInfo {
     flex: 1;
+    min-width: 0;
   }
 
   .mobileName {
@@ -179,6 +214,9 @@
     color: var(--color-white);
     line-height: 1;
     margin-bottom: var(--margin-s);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .mobileRoles {
@@ -191,6 +229,7 @@
   .chevron {
     color: var(--color-text-muted);
     transition: transform var(--transition-base);
+    flex-shrink: 0;
   }
 
   .chevronUp {
@@ -257,4 +296,17 @@
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .desktopView,
+  .image,
+  .overlay,
+  .accordionHeader,
+  .chevron,
+  .accordionContent {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

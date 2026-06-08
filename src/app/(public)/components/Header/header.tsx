@@ -40,7 +40,7 @@ export default function Header() {
       <div className={styles.headerRow}>
         <Link href="/#inicio" className={styles.headerLogoTitle}>
           <div className={styles.headerLogo}>
-            <BlinkingLogo closedImg="/1-04.png" openImg="/1-01.png" size={50} />
+            <BlinkingLogo closedImg="/1-04.png" openImg="/1-01.png" size={50} ariaHidden={true} />
           </div>
           <h1 className={styles.headerTitle}>Entre Líneas</h1>
         </Link>

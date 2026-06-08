@@ -135,6 +135,22 @@
   color: var(--color-white);
 }
 
+/* Focus visible for tabs */
+.galleryBlockTabs button:focus-visible {
+  outline: none;
+  color: var(--color-white);
+}
+
+.galleryBlockTabs button:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+}
+
 /* Gallery subscribe button */
 .gallerySubscribeButton {
   padding: var(--padding-s) var(--padding-l) !important;
@@ -147,6 +163,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--gap-l);
   transition: all var(--transition-normal);
+  touch-action: pan-x;
 }
 
 /* Mobile responsive */

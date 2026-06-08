@@ -39,6 +39,11 @@
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.thumbnailContain {
+  object-fit: contain;
+  padding: 2rem;
+}
+
 .card:hover .thumbnail {
   transform: scale(1.08);
 }
@@ -184,6 +189,12 @@
   transform: translateY(-2px);
 }
 
+.judgeChip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+  border-radius: var(--border-radius-m);
+}
+
 .judgeAvatar {
   width: 32px !important;
   height: 32px !important;
@@ -253,6 +264,12 @@
 .youtubeLink:hover {
   background: var(--color-accent-glow);
   color: var(--color-accent);
+}
+
+.ctaLink:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+  border-radius: var(--border-radius-m);
 }
 
 .ctaIcon {

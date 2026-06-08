@@ -3,6 +3,7 @@
 import styles from "./EventsSection.module.css";
 import InstagramCard from "@/shared/ui/InstagramCard/InstagramCard";
 import { Event } from "@/entities/event/types";
+import VirtualizedGrid from "@/shared/ui/VirtualizedGrid/VirtualizedGrid";
 
 interface EventsSectionProps {
   initialEvents: Event[];
@@ -25,18 +26,26 @@ export default function EventsSection({ initialEvents }: EventsSectionProps) {
       </div>
 
       <div className={`${styles.eventsGrid} mobile-reduced-gap`}>
-        {events.map((event) => (
-          <InstagramCard
-            key={event.id}
-            title={event.title}
-            date={event.date}
-            location={event.location}
-            postUrl={event.postUrl}
-            judges={event.judges}
-            hosts={event.host}
-            youtubeLink={event.youtubeLink}
-          />
-        ))}
+        <VirtualizedGrid
+          items={events}
+          columnCount={3}
+          itemHeight={400}
+          itemWidth={320}
+          overscanCount={5}
+          emptyMessage="No hay eventos registrados."
+        >
+          {(event) => (
+            <InstagramCard
+              title={event.title}
+              date={event.date}
+              location={event.location}
+              postUrl={event.postUrl}
+              judges={event.judges}
+              hosts={event.host}
+              youtubeLink={event.youtubeLink}
+            />
+          )}
+        </VirtualizedGrid>
       </div>
     </section>
   );

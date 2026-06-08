@@ -278,6 +278,20 @@
   opacity: 0.12;
 }
 
+/* Focus visible - accessible focus styles */
+.navLink:focus-visible {
+  outline: none;
+  color: var(--color-white);
+  background: var(--bg-glass-medium);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.navLink:focus-visible::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
 .navIcon {
   width: 20px;
   height: 20px;
@@ -349,6 +363,14 @@
 
 .logoutBtn:hover::before {
   opacity: 0.08;
+}
+
+.logoutBtn:focus-visible {
+  outline: none;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--bg-glass-medium);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
 .logoutIcon {

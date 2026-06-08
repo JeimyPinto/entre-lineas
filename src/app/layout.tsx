@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
-import "@/styles/global.css";
 import { LazyScript } from "@/shared/ui/LazyScript";
+import DeferredStyle from "@/shared/ui/DeferredStyle/DeferredStyle";
 
 // Read critical CSS at build time
 const criticalCssPath = path.join(process.cwd(), "src/shared/styles/critical.css");
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ colorScheme: 'dark' }}>
       <head>
         {/* Critical CSS inlined for LCP - eliminates render-blocking */}
         <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
@@ -35,6 +35,8 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        {/* Non-critical CSS loaded deferred (after initial render) */}
+        <DeferredStyle href="/styles/global.css" id="global-styles" />
         {/* Third-party scripts loaded on user interaction (not blocking initial render) */}
         <LazyScript
           src="https://gist.github.com/devinschumacher/6cbd52c082040f0e4c414836aebdb36f.js"

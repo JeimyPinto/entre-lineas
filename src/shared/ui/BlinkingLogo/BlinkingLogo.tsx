@@ -10,6 +10,7 @@ interface BlinkingLogoProps {
   size?: number;
   className?: string;
   style?: React.CSSProperties;
+  ariaHidden?: boolean;
 }
 
 const BlinkingLogo = ({ 
@@ -17,11 +18,27 @@ const BlinkingLogo = ({
   openImg, 
   size = 60, 
   className = "",
-  style = {}
+  style = {},
+  ariaHidden = true
 }: BlinkingLogoProps) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    
     const blink = () => {
       // Random intervals for a more natural effect
       const blinkDuration = 150; //ms
@@ -37,7 +54,7 @@ const BlinkingLogo = ({
     };
 
     blink();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div 
@@ -60,10 +77,11 @@ const BlinkingLogo = ({
         >
           <Image
             src={isOpen ? openImg : closedImg}
-            alt="Entre Líneas Logo"
+            alt={ariaHidden ? "" : "Entre Líneas Logo"}
             fill
             sizes="100px"
             style={{ objectFit: 'contain' }}
+            aria-hidden={ariaHidden}
           />
         </motion.div>
       </AnimatePresence>

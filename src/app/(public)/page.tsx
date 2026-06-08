@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import MainSection from './components/MainSection/section';
 import Gallery from './components/Gallery/gallery';
 import ArtistSection from './components/ArtistSection/ArtistSection';
@@ -8,6 +9,10 @@ import Footer from './components/Footer/Footer';
 import { eventService } from '@/features/events/services';
 import { artistService } from '@/features/artists/services';
 import { getYouTubeData } from '@/features/youtube/services';
+
+function LoadingPlaceholder() {
+  return <div className="loading-placeholder" aria-hidden="true">Cargando...</div>;
+}
 
 export default async function Home() {
   let events: import('@/entities/event/types').Event[] = [];
@@ -42,10 +47,14 @@ export default async function Home() {
       </div>
       <HistorySection />
       <div id="galeria">
-        <Gallery />
+        <Suspense fallback={<LoadingPlaceholder />}>
+          <Gallery />
+        </Suspense>
       </div>
       <div id="artistas">
-        <ArtistSection initialArtists={artists} />
+        <Suspense fallback={<LoadingPlaceholder />}>
+          <ArtistSection initialArtists={artists} />
+        </Suspense>
       </div>
       <div id="eventos">
         <EventsSection initialEvents={events} />

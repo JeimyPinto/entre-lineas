@@ -38,6 +38,21 @@
   width: 100%;
 }
 
+/* Focus visible - accessible focus styles */
+.headerNavLink:focus-visible {
+  outline: none;
+  color: var(--color-red);
+}
+
+.headerNavLink:focus-visible::after {
+  width: 100%;
+}
+
+.headerNavLink:focus-visible .navLogoBullet {
+  box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+  border-radius: var(--border-radius-s);
+}
+
 .navLogoBullet {
   display: flex;
   align-items: center;

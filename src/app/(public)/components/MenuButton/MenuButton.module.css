@@ -9,7 +9,14 @@
     justify-content: center;
     margin-right: var(--margin-xxl);
     transition: all var(--transition-fast);
-    z-index: 1; 
+    z-index: 1;
+    touch-action: manipulation;
+}
+
+.headerMenuButton:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+    border-radius: var(--border-radius-m);
 }
 
 .hamburger {

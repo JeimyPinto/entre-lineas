@@ -19,8 +19,8 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
           className={styles.headerNavLink}
           onClick={onNavigate}
         >
-          <span className={styles.navLogoBullet}>
-            <Image src="/1-03.png" alt="Ojo" width={50} height={50} />
+          <span className={styles.navLogoBullet} aria-hidden="true">
+            <Image src="/1-03.png" alt="" width={50} height={50} aria-hidden="true" />
           </span>
           {link.label}
         </Link>

@@ -30,8 +30,8 @@ export const historyChapters: HistoryContent[] = [
     title: "Crecimiento y Eventos",
     icon: "landmark",
     paragraphs: [
-      "A lo largo de los años, hemos organizado diversos eventos, batallas defreestyle y sesiones live que han convocatoria a artistas de todo el país.",
-      "Nuestra comunidad ha crecido significativamente, logrando establesconexiones con artistas de Medellín, Bogotá, Cali y otras ciudades."
+      "A lo largo de los años, hemos organizado diversos eventos, batallas de freestyle y sesiones live que han convocado a artistas de todo el país.",
+      "Nuestra comunidad ha crecido significativamente, logrando estables conexiones con artistas de Medellín, Bogotá, Cali y otras ciudades."
     ]
   },
   {
@@ -40,8 +40,8 @@ export const historyChapters: HistoryContent[] = [
     title: "Expansión Digital",
     icon: "layer",
     paragraphs: [
-      "Con el surgimiento de plataformas como YouTube e Instagram,expandimos nuestro alcance hacia el público digital.",
-      "Hoy mantenemos un canal activo donde compartimos videos decompetencias, entrevistas y contenido original."
+      "Con el surgimiento de plataformas como YouTube e Instagram, expandimos nuestro alcance hacia el público digital.",
+      "Hoy mantenemos un canal activo donde compartimos videos de competencias, entrevistas y contenido original."
     ]
   },
   {
@@ -50,8 +50,8 @@ export const historyChapters: HistoryContent[] = [
     title: "Presente y Futuro", 
     icon: "book",
     paragraphs: [
-      "Actualmente Entre Líneas continúa siendo un faro para la comunidadurbana en Colombia, promoviendo valores positivos a través del arte.",
-      "Nuestro compromiso es seguir creciendo y.brindando oportunidades a los nuevos talentos de la escena."
+      "Actualmente Entre Líneas continúa siendo un faro para la comunidad urbana en Colombia, promoviendo valores positivos a través del arte.",
+      "Nuestro compromiso es seguir creciendo y brindando oportunidades a los nuevos talentos de la escena."
     ]
   }
 ];

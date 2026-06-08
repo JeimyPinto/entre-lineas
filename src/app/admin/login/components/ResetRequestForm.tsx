@@ -20,6 +20,7 @@ export function ResetRequestForm({ error, loading, onSubmit }: ResetRequestFormP
             name="email"
             placeholder="admin@entrelineas.com"
             required
+            autoComplete="email"
             className={styles.input}
           />
         </div>

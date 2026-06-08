@@ -12,6 +12,7 @@ export default function Input({ label, error, className = '', ...props }: InputP
       {label && <label className={styles.label}>{label}</label>}
       <input 
         className={`${styles.input} ${error ? styles.inputError : ''}`} 
+        spellCheck={props.type === 'email' || props.type === 'password' ? false : undefined}
         {...props} 
       />
       {error && <span className={styles.errorText}>{error}</span>}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import GalleryItem from "../GalleryItem/GalleryItem";
 import GalleryModal from "../GalleryModal/GalleryModal";
 import YouTubeIframe from "../YouTubeIframe/YouTubeIframe";
@@ -15,9 +16,27 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 export default function Gallery() {
 	const { shorts, videos, subscriberCount, loading, isOnline, error } = useYouTubeData();
 	const isMobile = useMediaQuery("(max-width: 768px)");
+	const searchParams = useSearchParams();
+	const router = useRouter();
+	
 	const [selected, setSelected] = useState<string | null>(null);
 	const [carouselIndex, setCarouselIndex] = useState(0);
-	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>('videos');
+	const [activeBlock, setActiveBlock] = useState<'videos' | 'shorts'>(() => {
+		// Initialize from URL on client side
+		if (typeof window !== 'undefined') {
+			const params = new URLSearchParams(window.location.search);
+			const tab = params.get('tab');
+			if (tab === 'shorts' || tab === 'videos') return tab;
+		}
+		return 'videos';
+	});
+
+	// Sync activeBlock to URL
+	useEffect(() => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.set('tab', activeBlock);
+		router.replace(`?${params.toString()}`, { scroll: false });
+	}, [activeBlock, searchParams, router]);
 
 	// Show loading only when we're actually loading data (not during initial SSR)
 	if (loading) {
@@ -68,12 +87,16 @@ export default function Gallery() {
 					Suscribirse al canal
 				</Button>
 			</div>
-			<div className={styles.galleryBlockTabs}>
+			<div className={styles.galleryBlockTabs} role="tablist" aria-label="Tipo de contenido">
 				<button
+					role="tab"
+					aria-selected={activeBlock === 'videos'}
 					className={activeBlock === 'videos' ? styles.active : ''}
 					onClick={() => setActiveBlock('videos')}
 				>Videos</button>
 				<button
+					role="tab"
+					aria-selected={activeBlock === 'shorts'}
 					className={activeBlock === 'shorts' ? styles.active : ''}
 					onClick={() => setActiveBlock('shorts')}
 				>Shorts</button>

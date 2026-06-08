@@ -1,20 +1,43 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./ArtistSection.module.css";
 import ArtistCard from "./ArtistCard";
 import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "@/shared/ui/Button/Button";
 import { Artist } from "@/entities/artist/types";
+import VirtualizedGrid from "@/shared/ui/VirtualizedGrid/VirtualizedGrid";
 
 interface ArtistSectionProps {
   initialArtists: Artist[];
 }
 
 export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
-  const [filter, setFilter] = useState("Todos");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  
+  const [filter, setFilter] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const filterParam = params.get('filter');
+      if (filterParam) return filterParam;
+    }
+    return "Todos";
+  });
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const [artistsData] = useState<Artist[]>(initialArtists || []);
+
+  // Sync filter to URL
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (filter === "Todos") {
+      params.delete('filter');
+    } else {
+      params.set('filter', filter);
+    }
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [filter, searchParams, router]);
 
   const roles = useMemo(() => {
     const allRoles = artistsData.flatMap(a => a.orgRole);
@@ -47,9 +70,11 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
         )}
 
         {artistsData.length > 0 && (
-          <div className={styles.filterBar}>
+          <div className={styles.filterBar} role="tablist" aria-label="Filtrar por rol">
             {roles.map(role => (
               <button
+                role="tab"
+                aria-selected={filter === role}
                 key={role}
                 className={`${styles.filterChip} ${filter === role ? styles.activeChip : ""}`}
                 onClick={() => setFilter(role)}
@@ -62,13 +87,21 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
       </div>
 
       <div className={styles.artistsContainer}>
-        {filteredArtists.map((artist) => (
-          <ArtistCard
-            key={artist.id}
-            artist={artist}
-            onOpenModal={setSelectedArtist}
-          />
-        ))}
+        <VirtualizedGrid
+          items={filteredArtists}
+          columnCount={3}
+          itemHeight={380}
+          itemWidth={320}
+          overscanCount={5}
+          emptyMessage="No hay artistas con este filtro."
+        >
+          {(artist) => (
+            <ArtistCard
+              artist={artist}
+              onOpenModal={setSelectedArtist}
+            />
+          )}
+        </VirtualizedGrid>
       </div>
 
       {selectedArtist && (

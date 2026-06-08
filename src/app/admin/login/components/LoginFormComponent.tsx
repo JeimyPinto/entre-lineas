@@ -19,6 +19,7 @@ export function LoginFormComponent({ error, loading, onSubmit }: LoginFormCompon
           name="email"
           placeholder="admin@entrelineas.com"
           required
+          autoComplete="email"
           className={styles.input}
         />
       </div>
@@ -30,6 +31,7 @@ export function LoginFormComponent({ error, loading, onSubmit }: LoginFormCompon
           name="password"
           placeholder="••••••••"
           required
+          autoComplete="current-password"
           className={styles.input}
         />
       </div>

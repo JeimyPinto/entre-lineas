@@ -65,12 +65,11 @@ export default function InstagramCard({
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={styles.thumbnail}
-          style={{ objectFit: thumbnail ? "cover" : "contain", padding: thumbnail ? 0 : "2rem" }}
+          className={`${styles.thumbnail} ${thumbnail ? '' : styles.thumbnailContain}`}
         />
         <div className={styles.thumbnailOverlay} />
-        <span className={styles.instaBadge}>
-          <FaInstagram size={20} />
+        <span className={styles.instaBadge} aria-hidden="true">
+          <FaInstagram size={20} aria-hidden="true" />
         </span>
       </a>
 
@@ -109,7 +108,6 @@ export default function InstagramCard({
                       width={28}
                       height={28}
                       className={styles.judgeAvatar}
-                      style={{ width: "28px", height: "auto" }}
                     />
                   ) : (
                     <span className={styles.judgePlaceholder}>
@@ -159,7 +157,6 @@ export default function InstagramCard({
                       width={28}
                       height={28}
                       className={styles.judgeAvatar}
-                      style={{ width: "28px", height: "auto" }}
                     />
                   ) : (
                     <span className={styles.judgePlaceholder}>
