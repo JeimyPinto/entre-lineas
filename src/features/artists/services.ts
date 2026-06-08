@@ -17,8 +17,10 @@ export const artistService = {
         return [];
       }
 
+      const artistsData = (artists || []) as any[];
+
 // Get all social links in one query
-      const artistIds = (artists || []).map(a => a.id);
+      const artistIds = artistsData.map(a => a.id);
       const socialLinksMap: Record<number, SocialLink[]> = {};
       
       if (artistIds.length > 0) {
@@ -27,8 +29,10 @@ export const artistService = {
           .select('artist_id, platform, url, label')
           .in('artist_id', artistIds);
 
-        if (socials) {
-          socials.forEach(s => {
+        const socialsData = (socials || []) as any[];
+
+        if (socialsData.length > 0) {
+          socialsData.forEach(s => {
             if (!socialLinksMap[s.artist_id]) {
               socialLinksMap[s.artist_id] = [];
             }
@@ -41,7 +45,7 @@ export const artistService = {
         }
       }
 
-      return (artists || []).map(db => {
+      return artistsData.map(db => {
         const artist = Artist.fromDb(db);
         // Add social links from new table
         const artistId = typeof db.id === 'number' ? db.id : parseInt(String(db.id));
@@ -65,15 +69,17 @@ export const artistService = {
 
     if (error) return null;
     
-    const artistId = typeof artist.id === 'number' ? artist.id : parseInt(String(artist.id));
+    const artistData = artist as any;
+    const artistId = typeof artistData.id === 'number' ? artistData.id : parseInt(String(artistData.id));
     const { data: socials } = await supabaseAnon
       .from('artist_socials')
       .select('platform, url, label')
       .eq('artist_id', artistId);
 
-    const result = Artist.fromDb(artist);
-    if (socials && socials.length > 0) {
-      result.socials = socials.map(s => ({
+    const result = Artist.fromDb(artistData);
+    const socialsData = (socials || []) as any[];
+    if (socialsData.length > 0) {
+      result.socials = socialsData.map(s => ({
         platform: s.platform as SocialLink['platform'],
         url: s.url,
         label: s.label || s.platform

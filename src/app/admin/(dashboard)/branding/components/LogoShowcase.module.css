@@ -2,65 +2,259 @@
    Logo Showcase Section - Branding
    ============================================ */
 
-.brandingGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.variantsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  marginBottom: 24px;
 }
 
-.logoGroup {
+.variantCard {
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
-  padding: 32px;
-}
-
-.logoRow {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 16px;
+  padding: 24px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
-}
-
-.logoItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.85rem;
-  color: #a4a4a4;
-}
-
-.logoPreviewLight, .logoPreviewDark {
-  padding: 28px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
+  flexDirection: column;
+  alignItems: center;
+  gap: 16px;
   transition: all 0.3s ease;
 }
 
-.logoPreviewLight {
+.variantCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  borderColor: rgba(220, 38, 38, 0.2);
+  transform: translateY(-2px);
+}
+
+.variantCard.darkBg {
+  background: rgba(0, 0, 0, 0.3);
+  borderColor: rgba(255, 255, 255, 0.08);
+}
+
+.variantPreview {
+  width: 80px;
+  height: 112px;
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
+  background: rgba(255, 255, 255, 0.03);
+  borderRadius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.variantCard.darkBg .variantPreview {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  borderColor: rgba(255, 255, 255, 0.1);
 }
 
-.logoPreviewDark {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.variantInfo {
+  textAlign: center;
+  width: 100%;
 }
 
-.logoPreviewLight:hover, .logoPreviewDark:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+.variantName {
+  fontSize: 0.85rem;
+  fontWeight: 600;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.variantDesc {
+  fontSize: 0.7rem;
+  color: #888;
+  margin: 0 0 8px 0;
+}
+
+.variantFile {
+  fontSize: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a4a4a4;
+  padding: 2px 8px;
+  borderRadius: 4px;
+  fontFamily: monospace;
+  display: inline-block;
+  marginBottom: 12px;
+}
+
+.variantTags {
+  display: flex;
+  gap: 8px;
+  justifyContent: center;
+  flexWrap: wrap;
+}
+
+.tag {
+  fontSize: 0.55rem;
+  fontWeight: 600;
+  textTransform: uppercase;
+  letterSpacing: 1px;
+  padding: 3px 8px;
+  borderRadius: var(--radius-pill);
+}
+
+.tagLight {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.tagDark {
+  background: rgba(220, 38, 38, 0.2);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.tagAnim {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Animation Demo */
+.animationDemo {
+  marginTop: 24px;
+}
+
+.animationRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  marginTop: 20px;
+}
+
+.animationCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 16px;
+  padding: 24px;
+  textAlign: center;
+}
+
+/* Guidelines */
+.guidelinesSection {
+  marginTop: 24px;
+}
+
+.guidelinesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  marginTop: 20px;
+}
+
+.guidelineCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 16px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.guidelineCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.guidelineCard.guidelineOk {
+  borderLeft: 3px solid #22c55e;
+}
+
+.guidelineCard.guidelineError {
+  borderLeft: 3px solid #ef4444;
+}
+
+.guidelineCard.guidelineInfo {
+  borderLeft: 3px solid #3b82f6;
+}
+
+.guidelineIcon {
+  flexShrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
+  borderRadius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.guidelineTitle {
+  fontSize: 0.85rem;
+  fontWeight: 600;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.guidelineDesc {
+  fontSize: 0.75rem;
+  color: #a4a4a4;
+  lineHeight: 1.6;
+  margin: 0;
+}
+
+/* Tech Specs */
+.techSpecs {
+  marginTop: 24px;
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  marginTop: 20px;
+}
+
+.specCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 16px;
+  padding: 24px;
+}
+
+.specCard h4 {
+  fontSize: 0.75rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 1.5px;
+  color: #dc2626;
+  marginBottom: 16px;
+  paddingBottom: 8px;
+  borderBottom: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.specCard ul {
+  margin: 0;
+  paddingLeft: 20px;
+}
+
+.specCard li {
+  fontSize: 0.75rem;
+  color: #a4a4a4;
+  lineHeight: 1.8;
+  listStyle: disc;
 }
 
 @media (max-width: 768px) {
-  .logoPreviewLight, .logoPreviewDark {
-    width: 80px;
-    height: 80px;
+  .variantsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .animationRow,
+  .guidelinesGrid,
+  .specsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .guidelineCard {
+    flexDirection: column;
+    textAlign: center;
+    alignItems: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .variantsGrid {
+    grid-template-columns: 1fr;
   }
 }

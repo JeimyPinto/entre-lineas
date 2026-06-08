@@ -2,6 +2,128 @@
    Typography Section - Branding
    ============================================ */
 
+.fontFamilySection {
+  marginTop: 0;
+}
+
+.subSectionTitle {
+  fontSize: 0.75rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 2px;
+  color: #dc2626;
+  marginBottom: 20px;
+  paddingBottom: 8px;
+  borderBottom: 1px solid rgba(220, 38, 38, 0.2);
+  display: flex;
+  alignItems: center;
+}
+
+.fontFamilyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.fontFamilyCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.fontFamilyCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  borderColor: rgba(220, 38, 38, 0.2);
+}
+
+.fontFamilyHeader {
+  display: flex;
+  justifyContent: space-between;
+  alignItems: center;
+  marginBottom: 16px;
+}
+
+.fontFamilyName {
+  fontSize: 0.7rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 1.5px;
+  color: #dc2626;
+}
+
+.fontFamilyVar {
+  fontSize: 0.6rem;
+  background: rgba(220, 38, 38, 0.15);
+  color: #dc2626;
+  padding: 2px 8px;
+  borderRadius: 4px;
+  fontFamily: monospace;
+}
+
+.fontFamilyPreview {
+  margin: 0;
+  lineHeight: 1.5;
+  fontSize: 1.5rem;
+}
+
+.weightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.weightCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 12px;
+  padding: 20px;
+  textAlign: center;
+  transition: all 0.3s ease;
+}
+
+.weightCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  borderColor: rgba(220, 38, 38, 0.2);
+}
+
+.weightName {
+  display: block;
+  fontSize: 0.7rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 1.5px;
+  color: #dc2626;
+  marginBottom: 8px;
+}
+
+.weightVar {
+  display: block;
+  fontSize: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a4a4a4;
+  padding: 2px 8px;
+  borderRadius: 4px;
+  fontFamily: monospace;
+  marginBottom: 12px;
+}
+
+.weightValue {
+  display: block;
+  fontSize: 0.7rem;
+  color: #666;
+  marginBottom: 16px;
+}
+
+.weightPreview {
+  margin: 0;
+  lineHeight: 1.5;
+  fontSize: 1rem;
+  fontFamily: var(--font-main);
+}
+
+/* Scale */
 .typoScaleList {
   display: flex;
   flex-direction: column;
@@ -12,7 +134,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 24px 0;
+  padding: 20px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: background 0.3s ease;
 }
@@ -31,13 +153,25 @@
 .sizeName {
   font-weight: 700;
   color: #dc2626;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
+.sizeVar {
+  fontSize: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a4a4a4;
+  padding: 2px 8px;
+  borderRadius: 4px;
+  fontFamily: monospace;
+  display: inline-block;
+  width: fit-content;
+  marginTop: 4px;
+}
+
 .sizeValue {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #737373;
 }
 
@@ -51,6 +185,26 @@
   white-space: nowrap;
 }
 
+/* Usage Examples */
+.usageExamples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.usageCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.usageCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  borderColor: rgba(220, 38, 38, 0.2);
+}
+
 @media (max-width: 768px) {
   .typoScaleItem {
     flex-direction: column;
@@ -60,5 +214,11 @@
   .typoScalePreview {
     text-align: left;
     max-width: 100%;
+  }
+  
+  .fontFamilyGrid,
+  .weightsGrid,
+  .usageExamples {
+    grid-template-columns: 1fr;
   }
 }

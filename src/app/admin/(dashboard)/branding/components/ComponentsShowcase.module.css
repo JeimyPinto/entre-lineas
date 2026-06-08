@@ -4,32 +4,34 @@
 
 .uiShowcase {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
 }
 
 .uiColumn {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .uiLabel {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #dc2626;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   font-weight: 700;
+  marginBottom: 8px;
 }
 
 .uiContent {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 24px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  minHeight: 120px;
 }
 
 .cardShowcase {
@@ -37,6 +39,7 @@
   flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
+  marginTop: 32px;
 }
 
 .cardPreviewItem {
@@ -45,8 +48,105 @@
   gap: 12px;
 }
 
+/* Inventory Table */
+.inventoryTable {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 12px;
+  overflow: hidden;
+}
+
+.inventoryHeader {
+  display: grid;
+  grid-template-columns: 180px 140px 120px 1fr;
+  padding: 16px 24px;
+  background: rgba(220, 38, 38, 0.1);
+  borderBottom: 1px solid rgba(255, 255, 255, 0.05);
+  fontSize: 0.7rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 1px;
+  color: #dc2626;
+}
+
+.inventoryRow {
+  display: grid;
+  grid-template-columns: 180px 140px 120px 1fr;
+  padding: 14px 24px;
+  borderBottom: 1px solid rgba(255, 255, 255, 0.03);
+  fontSize: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.inventoryRow:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.inventoryRow.even {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.inventoryRow.odd {
+  background: transparent;
+}
+
+.inventoryRow:last-child {
+  borderBottom: none;
+}
+
+.compName {
+  fontFamily: 'monospace';
+  fontSize: 0.8rem;
+  color: #fff;
+}
+
+.compName code {
+  background: rgba(220, 38, 38, 0.15);
+  padding: 2px 8px;
+  borderRadius: 4px;
+  fontSize: 0.75rem;
+  color: #dc2626;
+}
+
+.compCategory {
+  fontSize: 0.75rem;
+  color: #a4a4a4;
+  textTransform: capitalize;
+}
+
+.compStatus {
+  fontSize: 0.8rem;
+  fontWeight: 600;
+}
+
+.compDesc {
+  fontSize: 0.8rem;
+  color: #888;
+  lineHeight: 1.5;
+}
+
 @media (max-width: 768px) {
   .uiShowcase {
     grid-template-columns: 1fr;
   }
+  
+  .inventoryHeader,
+  .inventoryRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px;
+  }
+  
+  .inventoryHeader {
+    display: none;
+  }
+  
+  .inventoryRow {
+    borderBottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .compName::before { content: 'Componente: '; color: #dc2626; fontWeight: 700; fontSize: 0.7rem; }
+  .compCategory::before { content: 'Categoría: '; color: #dc2626; fontWeight: 700; fontSize: 0.7rem; }
+  .compStatus::before { content: 'Estado: '; color: #dc2626; fontWeight: 700; fontSize: 0.7rem; }
+  .compDesc::before { content: 'Descripción: '; color: #dc2626; fontWeight: 700; fontSize: 0.7rem; }
 }

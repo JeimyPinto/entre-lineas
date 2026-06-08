@@ -1,19 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Button from "@/shared/ui/Button/Button";
 import styles from "./section.module.css";
-import { useYouTubeData } from "@/features/youtube/hooks/useYouTubeData";
 import Card from "@/shared/ui/Card/Card";
 import { FaInstagram, FaYoutube, FaHeart, FaComment, FaFire } from "react-icons/fa6";
 
 import { useInterval } from "@/hooks/useInterval";
 
-export default function MainSection() {
-  const { highlights } = useYouTubeData();
-  
-  const formatStat = (value: any) => {
+import { Video } from '@/entities/youtube-video/types';
+
+interface Highlights {
+  viral: Video | null;
+  mostLiked: Video | null;
+  mostCommented: Video | null;
+}
+
+interface MainSectionProps {
+  highlights: Highlights | null;
+}
+
+export default function MainSection({ highlights }: MainSectionProps) {
+  const formatStat = (value: string | number | undefined) => {
     const num = Number(value);
     return isNaN(num) ? "0" : num.toLocaleString();
   };
@@ -34,7 +43,8 @@ export default function MainSection() {
             fill
             sizes="(max-width: 768px) 100vw, 400px"
             loading="eager"
-            priority 
+            priority
+            fetchPriority="high"
             style={{ objectFit: "contain" }}
           />
         </div>

@@ -1,0 +1,178 @@
+/* ============================================
+   CRITICAL CSS - Inlined in <head> for LCP
+   Only above-the-fold styles for home page
+   ============================================ */
+
+/* CSS Variables needed immediately */
+:root {
+  --color-bg-primary: #0a0a0a;
+  --color-dark: #0f0f0f;
+  --color-white: #ffffff;
+  --color-text-muted: #a3a3a3;
+  --color-accent: #dc2626;
+  --color-accent-glow: rgba(220, 38, 38, 0.4);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --bg-glass-thin: rgba(255, 255, 255, 0.025);
+  --bg-card: rgba(255, 255, 255, 0.025);
+  --font-main: "Esteban", serif;
+  --font-title: "Cloister", "Esteban", serif;
+  --font-display: clamp(3rem, 8vw, 4.5rem);
+  --font-h1: clamp(2rem, 5vw, 3rem);
+  --font-h2: clamp(1.5rem, 4vw, 2.25rem);
+  --font-h3: clamp(1.25rem, 3vw, 1.75rem);
+  --font-h4: clamp(1rem, 2vw, 1.25rem);
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+  --font-xs: 0.75rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --gap-s: 0.5rem;
+  --gap-m: 0.75rem;
+  --gap-l: 1rem;
+  --gap-xl: 1.5rem;
+  --gap-xxl: 2rem;
+  --gap-xxxl: 3rem;
+  --padding-l: 1rem;
+  --padding-xl: 1.5rem;
+  --padding-xxl: 2rem;
+  --padding-xxxl: 2.5rem;
+  --margin-xl: 1.5rem;
+  --margin-xxl: 2rem;
+  --margin-xxxl: 3rem;
+  --border-radius-l: 1em;
+  --border-radius-xl: 1.5em;
+  --transition-base: 0.25s ease;
+}
+
+/* Reset critical */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { max-width: 100%; height: 100%; overflow-x: hidden; }
+body { background-color: var(--color-dark); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img, video, iframe, picture { max-width: 100%; height: auto; display: block; }
+
+/* Hero section critical styles */
+.homeSection {
+  padding: var(--padding-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--color-bg-primary);
+  color: var(--color-white);
+  min-height: 90vh;
+}
+
+.homeAbout {
+  margin: var(--margin-xl);
+  padding: var(--margin-xl);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.logoContainer {
+  position: relative;
+  width: 140px;
+  height: 198px;
+  margin: 0 auto var(--margin-xxl) auto;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.08));
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  border-radius: var(--border-radius-l);
+  padding: var(--padding-l);
+  animation: fadeIn 1s ease forwards;
+}
+
+.homeTitle {
+  font-family: var(--font-title);
+  font-size: var(--font-display);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: var(--margin-xl);
+  letter-spacing: 3px;
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.homeDescription {
+  font-size: var(--font-body);
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+  opacity: 0;
+}
+
+/* Critical animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Header critical styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: all var(--transition-base);
+}
+
+.headerScrolled {
+  background: rgba(10, 10, 10, 0.98);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-m) var(--padding-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerLogoTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  text-decoration: none;
+}
+
+.headerLogo {
+  width: 50px;
+  height: 50px;
+}
+
+.headerTitle {
+  font-family: var(--font-title);
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  letter-spacing: 1px;
+}
+
+/* Mobile header */
+@media (max-width: 768px) {
+  body { padding-top: 75px; }
+  .headerRow { padding: var(--padding-s) var(--padding-m); }
+  .headerTitle { font-size: var(--font-h4); }
+  .headerLogo { width: 40px; height: 40px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Enable CSS imports with ?inline for critical CSS
+  experimental: {
+    inlineCss: true,
+  },
 };
 
 export default nextConfig;

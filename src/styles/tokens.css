@@ -3,7 +3,7 @@
    Colors, Typography, Spacing, Borders
    ============================================ */
 
-/* Import fonts */
+/* Import fonts with display=swap for LCP optimization */
 @import url('https://fonts.googleapis.com/css2?family=Esteban:wght@400&display=swap');
 
 @font-face {
@@ -11,6 +11,7 @@
   src: url('/fonts/CloisterBlack.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 :root {

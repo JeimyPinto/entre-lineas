@@ -12,8 +12,8 @@ export default async function EditArtistPage({ params }: { params: Promise<{ id:
   try {
     artist = await artistService.getById(id);
     if (!artist) error = "Talento no encontrado";
-  } catch (err: any) {
-    error = err.message;
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'Error desconocido';
   }
 
   if (error || !artist) {

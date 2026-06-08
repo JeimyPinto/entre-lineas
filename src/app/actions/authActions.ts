@@ -31,5 +31,5 @@ export async function loginAction(formData: FormData) {
     return { error: message };
   }
 
-  redirect('/admin/dashboard');
+  redirect('/admin');
 }

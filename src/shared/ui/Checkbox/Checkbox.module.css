@@ -1,0 +1,87 @@
+/* ============================================
+   CHECKBOX COMPONENT
+   Dark theme, glassmorphism
+   ============================================ */
+
+.checkboxWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  width: 100%;
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  background: var(--bg-glass-thin);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--border-radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.checkmark::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid var(--color-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--transition-fast);
+}
+
+.checkbox:checked + .checkmark {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.checkbox:checked + .checkmark::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.checkbox:focus-visible + .checkmark {
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
+}
+
+.label {
+  font-size: var(--font-small);
+  color: var(--color-white);
+  font-weight: var(--font-weight-medium);
+}
+
+.errorText {
+  font-size: var(--font-xs);
+  color: var(--color-error);
+  margin-left: 24px;
+}
+
+.helpText {
+  font-size: var(--font-xs);
+  color: var(--color-text-subtle);
+  margin-left: 24px;
+}
+
+/* Disabled state */
+.checkbox:disabled + .checkmark {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-grey-dark);
+}

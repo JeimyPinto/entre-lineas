@@ -1,22 +1,25 @@
 import MainSection from './components/MainSection/section';
-import Gallery from './components/Gallery/gallery'
-import ArtistSection from './components/ArtistSection/ArtistSection'
-import EventsSection from './components/EventsSection/EventsSection'
-import Contact from './components/Contact/Contact'
-import HistorySection from './components/HistorySection/HistorySection'
-import Footer from './components/Footer/Footer'
-import { eventService } from '@/features/events/services'
-import { artistService } from '@/features/artists/services'
+import Gallery from './components/Gallery/gallery';
+import ArtistSection from './components/ArtistSection/ArtistSection';
+import EventsSection from './components/EventsSection/EventsSection';
+import Contact from './components/Contact/Contact';
+import HistorySection from './components/HistorySection/HistorySection';
+import Footer from './components/Footer/Footer';
+import { eventService } from '@/features/events/services';
+import { artistService } from '@/features/artists/services';
+import { getYouTubeData } from '@/features/youtube/services';
 
 export default async function Home() {
   let events: import('@/entities/event/types').Event[] = [];
   let artists: import('@/entities/artist/types').Artist[] = [];
+  let highlights: Awaited<ReturnType<typeof getYouTubeData>> = null;
   let serverError: string | null = null;
 
   try {
-    [events, artists] = await Promise.all([
+    [events, artists, highlights] = await Promise.all([
       eventService.getAll(),
-      artistService.getAll()
+      artistService.getAll(),
+      getYouTubeData()
     ]);
 
     if (events.length === 0 && artists.length === 0) {
@@ -35,7 +38,7 @@ export default async function Home() {
         </div>
       )}
       <div id="inicio">
-        <MainSection />
+        <MainSection highlights={highlights} />
       </div>
       <HistorySection />
       <div id="galeria">

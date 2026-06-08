@@ -2,9 +2,26 @@
    Color Palette Section - Branding
    ============================================ */
 
+.colorGroup {
+  marginBottom: 40px;
+}
+
+.groupTitle {
+  fontSize: 0.75rem;
+  fontWeight: 700;
+  textTransform: uppercase;
+  letterSpacing: 2px;
+  color: #dc2626;
+  marginBottom: 20px;
+  paddingBottom: 8px;
+  borderBottom: 1px solid rgba(220, 38, 38, 0.2);
+  display: flex;
+  alignItems: center;
+}
+
 .colorGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
 
@@ -16,7 +33,7 @@
   padding: 16px;
   display: flex;
   gap: 16px;
-  align-items: center;
+  align-items: flex-start;
   transition: all 0.3s ease;
 }
 
@@ -39,31 +56,52 @@
   flex-direction: column;
   gap: 4px;
   min-width: 0;
+  flex: 1;
 }
 
 .colorName {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #fff;
 }
 
 .hexCode {
   font-family: 'SF Mono', 'Fira Code', monospace;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #a4a4a4;
 }
 
 .varName {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   background: rgba(220, 38, 38, 0.15);
   color: #dc2626;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: monospace;
   display: inline-block;
+  width: fit-content;
+}
+
+.colorDesc {
+  font-size: 0.65rem;
+  color: #666;
+  font-style: italic;
+  marginTop: 4px;
 }
 
 @media (max-width: 480px) {
   .colorGrid {
     grid-template-columns: 1fr;
+  }
+  
+  .colorCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .colorValue {
+    width: 80px;
+    height: 80px;
   }
 }

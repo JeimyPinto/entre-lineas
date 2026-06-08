@@ -25,7 +25,7 @@ export default async function proxy(request: NextRequest) {
   // 1. Si está logueado y va al LOGIN -> Mandar al DASHBOARD
   if (isAuthenticated && request.nextUrl.pathname.startsWith('/admin/login')) {
     console.log('✅ Usuario autenticado, redirigiendo a dashboard');
-    return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+    return NextResponse.redirect(new URL('/admin', request.url));
   }
 
   // 2. Si NO está logueado y va a cualquier ruta /admin que no sea pública -> Mandar al LOGIN

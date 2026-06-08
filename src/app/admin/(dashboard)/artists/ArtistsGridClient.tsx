@@ -29,7 +29,10 @@ export default function ArtistsGridClient({ artists }: ArtistsGridClientProps) {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Gestión de Artistas</h1>
-        <Button href="/admin/artists/new">Nuevo Artista</Button>
+        <Button href="/admin/artists/new" className={styles.newArtistBtn} aria-label="Nuevo artista">
+          <span className={styles.btnIcon}>+</span>
+          <span className={styles.btnText}>Nuevo Artista</span>
+        </Button>
       </div>
 
       <div className={styles.searchBar}>

@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const cookieStore = await cookies();
+const cookieStore = await cookies();
     
     // Create client with PKCE and cookies to maintain the session from the reset link
     const supabase = createServerClient(

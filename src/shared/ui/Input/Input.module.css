@@ -1,33 +1,33 @@
 /* ============================================
    INPUT COMPONENT v2.0
-   Consistent styling with focus states
+   Consistent styling with focus states - Exact pixel measurements
    ============================================ */
 
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-m);
+  gap: 8px;
   width: 100%;
 }
 
 .label {
-  font-size: var(--label-font-size);
+  font-size: 11px;
   color: var(--label-text);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
 }
 
 .input {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
-  border-radius: var(--border-radius-m);
-  padding: var(--padding-m) var(--padding-l);
+  border-radius: 8px;
+  padding: 12px 16px;
   color: var(--input-text);
-  font-size: var(--font-body);
+  font-size: 15px;
   font-family: var(--font-main);
-  transition: all var(--transition-base);
-  width: 100%;
+  transition: all 0.2s ease;
+  width: 80%;
   box-sizing: border-box;
 }
 
@@ -56,9 +56,9 @@
 }
 
 .errorText {
-  font-size: var(--font-xs);
+  font-size: 12px;
   color: var(--color-accent);
-  margin-top: var(--gap-xs);
+  margin-top: 4px;
 }
 
 /* Textarea variant */

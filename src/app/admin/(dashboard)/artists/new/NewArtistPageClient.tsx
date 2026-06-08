@@ -78,28 +78,42 @@ export default function NewArtistPageClient() {
 
       <Card className={styles.formCard}>
         <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
-          {/* Tabs Navigation */}
-          <div className={styles.tabs}>
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-              >
-                {tab.label}
-                {tab.id === 'socials' && socials.length > 0 && (
-                  <span className={styles.tabBadge}>{socials.length}</span>
-                )}
-              </button>
-            ))}
+          {/* Fixed header with tabs - stays in place */}
+          <div className={styles.formHeader}>
+            {/* Tabs Navigation */}
+            <div className={styles.tabs} role="tablist" aria-label="Secciones del formulario">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  aria-controls={`panel-${tab.id}`}
+                  id={`tab-${tab.id}`}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
+                >
+                  {tab.label}
+                  {tab.id === 'socials' && socials.length > 0 && (
+                    <span className={styles.tabBadge}>{socials.length}</span>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Tab Content */}
-          <div className={styles.tabContent}>
-            {/* Tab 1: Basic Info */}
-            {activeTab === 'info' && (
-              <div className={styles.tabPanel}>
+          {/* Scrollable body with tab panels */}
+          <div className={styles.formBody}>
+            {/* Tab Content - All panels rendered, only active visible */}
+            <div className={styles.tabContent}>
+              {/* Tab 1: Basic Info */}
+              <div
+                id="panel-info"
+                role="tabpanel"
+                aria-labelledby="tab-info"
+                className={`${styles.tabPanel} ${activeTab === 'info' ? styles.tabPanelActive : styles.tabPanelHidden}`}
+                hidden={activeTab !== 'info'}
+              >
                 <div className={styles.row}>
                   <Input label="Alias / Nombre Artístico" name="alias" placeholder="Nombre que se muestra en la web" required />
                   <Input label="Nombre Real" name="name" required />
@@ -114,28 +128,40 @@ export default function NewArtistPageClient() {
                   <Input label="Profesión u Ocupación" name="profession" />
                 </div>
               </div>
-            )}
 
-            {/* Tab 2: Location */}
-            {activeTab === 'location' && (
-              <div className={styles.tabPanel}>
+              {/* Tab 2: Location */}
+              <div
+                id="panel-location"
+                role="tabpanel"
+                aria-labelledby="tab-location"
+                className={`${styles.tabPanel} ${activeTab === 'location' ? styles.tabPanelActive : styles.tabPanelHidden}`}
+                hidden={activeTab !== 'location'}
+              >
                 <div className={styles.row}>
                   <LocationSelector label="Origen" name="origin" />
                   <YearSelector label="Trayectoria (Inició en...)" name="trajectory" min={1900} />
                 </div>
               </div>
-            )}
 
-            {/* Tab 3: Photo */}
-            {activeTab === 'photo' && (
-              <div className={styles.tabPanel}>
+              {/* Tab 3: Photo */}
+              <div
+                id="panel-photo"
+                role="tabpanel"
+                aria-labelledby="tab-photo"
+                className={`${styles.tabPanel} ${activeTab === 'photo' ? styles.tabPanelActive : styles.tabPanelHidden}`}
+                hidden={activeTab !== 'photo'}
+              >
                 <ImageUploader label="Foto del Artista" name="imageFile" />
               </div>
-            )}
 
-            {/* Tab 4: Socials */}
-            {activeTab === 'socials' && (
-              <div className={styles.tabPanel}>
+              {/* Tab 4: Socials */}
+              <div
+                id="panel-socials"
+                role="tabpanel"
+                aria-labelledby="tab-socials"
+                className={`${styles.tabPanel} ${activeTab === 'socials' ? styles.tabPanelActive : styles.tabPanelHidden}`}
+                hidden={activeTab !== 'socials'}
+              >
                 <div className={styles.socialsList}>
 {socials.map((social, index) => {
                     const PlatformIcon = PLATFORMS.find(p => p.value === social.platform)?.icon || FaLink;
@@ -179,31 +205,35 @@ export default function NewArtistPageClient() {
                       </div>
                     );
                   })}
-                  <Button type="button" variant="secondary" onClick={addSocial}>
-                    + Agregar Red Social
-                  </Button>
-                </div>
+                <Button type="button" variant="secondary" onClick={addSocial}>
+                  + Agregar Red Social
+                </Button>
               </div>
-            )}
 
-            {/* Tab 5: Bio */}
-            {activeTab === 'bio' && (
-              <div className={styles.tabPanel}>
+              {/* Tab 5: Bio */}
+              <div
+                id="panel-bio"
+                role="tabpanel"
+                aria-labelledby="tab-bio"
+                className={`${styles.tabPanel} ${activeTab === 'bio' ? styles.tabPanelActive : styles.tabPanelHidden}`}
+                hidden={activeTab !== 'bio'}
+              >
                 <div className={styles.textareaGroup}>
                   <label className={styles.label}>Biografía (una oración por línea)</label>
                   <textarea name="bio" className={styles.textarea} rows={8}></textarea>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
 
-          {error && <div className={styles.errorMsg}>{error}</div>}
+            {error && <div className={styles.errorMsg}>{error}</div>}
 
-          <div className={styles.formActions}>
-            <Button type="submit" disabled={loading}>
-              {loading ? 'Guardando...' : 'Guardar Artista'}
-            </Button>
+            <div className={styles.formActions}>
+              <Button type="submit" disabled={loading}>
+                {loading ? 'Guardando…' : 'Guardar Artista'}
+              </Button>
+            </div>
           </div>
+        </div>
         </form>
       </Card>
     </div>

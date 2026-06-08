@@ -13,7 +13,12 @@ import {
   FaArrowRightFromBracket,
   FaBars,
   FaXmark,
-  FaUser
+  FaUser,
+  FaLink,
+  FaDatabase,
+  FaFlag,
+  FaLocationDot,
+  FaBuilding
 } from 'react-icons/fa6';
 
 interface NavItem {
@@ -24,11 +29,16 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/admin/dashboard', label: 'Resumen', icon: <FaChartLine /> },
+  { href: '/admin', label: 'Resumen', icon: <FaChartLine /> },
   { href: '/admin/artists', label: 'Artistas', icon: <FaUsers /> },
   { href: '/admin/events', label: 'Eventos', icon: <FaCalendar /> },
+  { href: '/admin/artist_socials', label: 'Redes Sociales', icon: <FaLink /> },
+  { href: '/admin/youtube_cache', label: 'Cache YouTube', icon: <FaDatabase /> },
   { href: '/admin/branding', label: 'Identidad', icon: <FaPalette /> },
   { href: '/admin/users', label: 'Usuarios', icon: <FaUserGear /> },
+  { href: '/admin/countries', label: 'Países', icon: <FaFlag /> },
+  { href: '/admin/departments', label: 'Departamentos', icon: <FaLocationDot /> },
+  { href: '/admin/cities', label: 'Ciudades', icon: <FaBuilding /> },
 ];
 
 interface AdminLayoutClientProps {
@@ -83,7 +93,7 @@ export default function AdminLayoutClient({
       >
         {/* Brand/Header */}
         <div className={styles.sidebarHeader}>
-          <a href="/admin/dashboard" className={styles.sidebarBrand} aria-label="Entre Líneas Admin">
+          <a href="/admin" className={styles.sidebarBrand} aria-label="Entre Líneas Admin">
             <div className={styles.brandIcon} aria-hidden="true">
               <FaPalette size={20} />
             </div>
@@ -111,7 +121,7 @@ export default function AdminLayoutClient({
           
           {navItems.map((item) => {
             const isActive = pathname === item.href || 
-              (item.href !== '/admin/dashboard' && pathname.startsWith(item.href));
+              (item.href !== '/admin' && pathname.startsWith(item.href));
             
             return (
               <a

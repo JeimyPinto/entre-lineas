@@ -1,0 +1,81 @@
+/* ============================================
+   SELECT COMPONENT
+   Dark theme, glassmorphism
+   ============================================ */
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select {
+  width: 100%;
+  padding: var(--padding-s) var(--padding-m);
+  background: var(--bg-glass-thin);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--border-radius-s);
+  color: var(--color-white);
+  font-family: var(--font-main);
+  font-size: var(--font-small);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23929090' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--padding-m) center;
+  padding-right: 40px;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
+}
+
+.select option {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: var(--padding-s);
+}
+
+.selectError {
+  border-color: var(--color-error);
+}
+
+.selectError:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.select[multiple] {
+  min-height: 120px;
+  background-image: none;
+  padding-right: var(--padding-m);
+}
+
+.errorText {
+  font-size: var(--font-xs);
+  color: var(--color-error);
+}
+
+.helpText {
+  font-size: var(--font-xs);
+  color: var(--color-text-subtle);
+}
+
+/* Disabled state */
+.select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-grey-dark);
+}
