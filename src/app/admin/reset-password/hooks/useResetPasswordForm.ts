@@ -156,7 +156,7 @@ export function useResetPasswordForm(): UseResetPasswordFormReturn {
       if (result?.error) {
         setError(result.error);
       } else {
-        window.location.href = '/admin/login?reset=success';
+        window.location.href = '/login?reset=success';
       }
     } catch (err) {
       console.error('[ResetPassword] Submit error:', err);

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Card from '@/shared/ui/Card/Card';
-import styles from '../login.module.css';
+import styles from './login.module.css';
 
 interface LoginCardProps {
   children: React.ReactNode;

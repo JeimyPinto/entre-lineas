@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { logoutAction } from '@/app/actions/authActions';
+import { signOut } from 'next-auth/react';
 import styles from '../admin.module.css';
 import { 
   FaChartLine, 
@@ -41,8 +41,17 @@ const navItems: NavItem[] = [
   { href: '/admin/cities', label: 'Ciudades', icon: <FaBuilding /> },
 ];
 
+interface SessionUser {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  role: string;
+  org_role?: string[];
+  image?: string | null;
+}
+
 interface AdminLayoutClientProps {
-  user: { name: string | null; email: string; role: string };
+  user: SessionUser;
   children: React.ReactNode;
 }
 
@@ -65,6 +74,11 @@ export default function AdminLayoutClient({
 
   const toggleMobileMenu = () => setIsMobileOpen(!isMobileOpen);
   const closeMobileMenu = () => setIsMobileOpen(false);
+
+  const handleLogout = async () => {
+    closeMobileMenu();
+    await signOut({ callbackUrl: '/login' });
+  };
 
   return (
     <div className={styles.adminContainer}>
@@ -148,16 +162,14 @@ export default function AdminLayoutClient({
 
         {/* Logout */}
         <div className={styles.logoutSection}>
-          <form action={logoutAction} className={styles.logoutWrapper}>
-            <button 
-              type="submit" 
-              className={styles.logoutBtn}
-              onClick={closeMobileMenu}
-            >
-              <FaArrowRightFromBracket className={styles.logoutIcon} size={18} aria-hidden="true" />
-              <span>Cerrar Sesión</span>
-            </button>
-          </form>
+          <button 
+            type="button" 
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+          >
+            <FaArrowRightFromBracket className={styles.logoutIcon} size={18} aria-hidden="true" />
+            <span>Cerrar Sesión</span>
+          </button>
         </div>
       </aside>
 

@@ -1,11 +1,15 @@
 import { Artist as ArtistType } from './types';
 
+/**
+ * Crea un objeto PLANO de Artist desde los datos de Supabase
+ * Next.js requiere objetos planos para pasar datos entre Server y Client Components
+ */
 export class Artist {
   /**
-   * Crea un objeto PLANO de Artist desde los datos de Supabase
-   * Next.js requiere objetos planos para pasar datos entre Server y Client Components
+   * Convierte datos de la base de datos a un objeto Artist plano
+   * Nota: Los socials se manejan por separado en el servicio
    */
-static fromDb(dbData: any): ArtistType {
+  static fromDb(dbData: any): ArtistType {
     return {
       id: String(dbData.id),
       alias: dbData.alias || dbData.name,
@@ -17,14 +21,16 @@ static fromDb(dbData: any): ArtistType {
       origin: dbData.origin,
       trajectory: dbData.trajectory,
       bio: dbData.bio || [],
-      socials: dbData.socials || []
+      // socials se poblarán por separado en el servicio
+      socials: []
     };
   }
 
   /**
    * Convierte un objeto de tipo Artist a uno compatible con DB
+   * Nota: Los socials se manejan por separado en el servicio
    */
-static toDb(artist: Partial<ArtistType>) {
+  static toDb(artist: Partial<ArtistType>) {
     return {
       alias: artist.alias,
       name: artist.name,
@@ -35,7 +41,7 @@ static toDb(artist: Partial<ArtistType>) {
       origin: artist.origin,
       trajectory: artist.trajectory,
       bio: artist.bio,
-      socials: artist.socials
+      // socials se manejan por separado en el servicio
     };
   }
 }

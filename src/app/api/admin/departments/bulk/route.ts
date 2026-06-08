@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/shared/api/supabaseAdmin';
-import { getCurrentUser } from '@/features/auth/services';
+import { auth } from '@/auth';
 
 /**
  * DELETE /api/admin/departments/bulk
@@ -8,8 +8,8 @@ import { getCurrentUser } from '@/features/auth/services';
  */
 export async function DELETE(request: NextRequest) {
   try {
-    const currentUser = await getCurrentUser();
-    if (!currentUser) {
+    const session = await auth();
+    if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 

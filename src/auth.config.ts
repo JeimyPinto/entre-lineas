@@ -17,11 +17,22 @@ declare module "next-auth" {
   }
 }
 
+// Get env vars - these should be set in .env.local
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+// Create adapter only if env vars are available
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let adapter: any = undefined;
+if (supabaseUrl && supabaseServiceKey) {
+  adapter = SupabaseAdapter({
+    url: supabaseUrl,
+    secret: supabaseServiceKey,
+  });
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: SupabaseAdapter({
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  }),
+  adapter,
   providers: [
     // Providers se configurarán en auth.ts para permitir override
   ],

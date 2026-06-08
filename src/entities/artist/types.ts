@@ -17,5 +17,5 @@ export interface Artist {
   origin: string; // Ciudad o lugar de origen
   trajectory: string; // Tiempo en la escena (ej. Desde 2019)
   bio: string[];
-  socials: SocialLink[];
+  socials: SocialLink[]; // Redes sociales (almacenadas en tabla separada artist_socials)
 }

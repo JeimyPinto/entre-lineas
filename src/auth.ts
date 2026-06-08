@@ -3,17 +3,24 @@ import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Safe initialization - check for required env vars
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const loginSchema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
-});
+// Only create client if both env vars are present
+const supabase = supabaseUrl && supabaseServiceKey
+  ? createClient(supabaseUrl, supabaseServiceKey)
+  : null;
+
+// Simple validation using native JavaScript
+function validateEmail(email: unknown): email is string {
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validatePassword(password: unknown): password is string {
+  return typeof password === 'string' && password.length >= 6;
+}
 
 export { handlers, auth, signIn, signOut };
 
@@ -28,10 +35,19 @@ export const authConfig = {
         password: { label: "Contraseña", type: "password" },
       },
       async authorize(credentials) {
-        const parsed = loginSchema.safeParse(credentials);
-        if (!parsed.success) return null;
+        const email = credentials.email;
+        const password = credentials.password;
 
-        const { email, password } = parsed.data;
+        // Validate using native JS
+        if (!validateEmail(email) || !validatePassword(password)) {
+          return null;
+        }
+
+        // Check if supabase client is initialized
+        if (!supabase) {
+          console.error("[auth] Supabase client not initialized - missing env vars");
+          return null;
+        }
 
         // Verificar usuario en Supabase
         const { data: user, error } = await supabase

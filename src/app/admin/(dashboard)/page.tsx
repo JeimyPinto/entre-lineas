@@ -1,3 +1,5 @@
+'use client';
+
 export const dynamic = 'force-dynamic';
 
 import styles from './page.module.css';
@@ -12,10 +14,14 @@ import {
   FaHouse,
   FaGlobe
 } from 'react-icons/fa6';
-import { logoutAction } from '@/app/actions/authActions';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -23,11 +29,9 @@ export default function DashboardPage() {
           <h1>Panel de Control</h1>
           <p className={styles.welcome}>Administra tu contenido de Entre Líneas</p>
         </div>
-        <form action={logoutAction}>
-          <Button type="submit" variant="ghost" className={styles.logoutBtn}>
-            <FaArrowRightFromBracket /> Cerrar Sesión
-          </Button>
-        </form>
+        <Button variant="ghost" className={styles.logoutBtn} onClick={handleLogout}>
+          <FaArrowRightFromBracket /> Cerrar Sesión
+        </Button>
       </header>
 
       {/* Quick Actions */}

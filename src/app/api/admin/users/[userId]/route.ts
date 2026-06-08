@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/shared/api/supabaseServer';
-import { getCurrentUser } from '@/features/auth/services';
+import { auth } from '@/auth';
 
 /**
  * PATCH /api/admin/users/[userId]
@@ -12,9 +12,9 @@ export async function PATCH(
 ) {
   try {
     // Verificar autenticación
-    const currentUser = await getCurrentUser();
+    const session = await auth();
     
-    if (!currentUser) {
+    if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
@@ -52,9 +52,9 @@ export async function DELETE(
 ) {
   try {
     // Verificar autenticación
-    const currentUser = await getCurrentUser();
+    const session = await auth();
     
-    if (!currentUser) {
+    if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 

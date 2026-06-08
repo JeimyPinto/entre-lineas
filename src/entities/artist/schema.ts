@@ -39,6 +39,7 @@ export interface ValidationResult {
 
 /**
  * Valida datos básicos de artista
+ * Note: socials validation is handled separately in the service layer
  */
 export function validateArtist(data: {
   alias: string | null | undefined;

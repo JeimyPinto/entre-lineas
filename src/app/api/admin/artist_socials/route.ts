@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/shared/api/supabaseAdmin';
-import { getCurrentUser } from '@/features/auth/services';
+import { auth } from '@/auth';
 
 /**
  * GET /api/admin/artist_socials
@@ -8,8 +8,8 @@ import { getCurrentUser } from '@/features/auth/services';
  */
 export async function GET() {
   try {
-    const currentUser = await getCurrentUser();
-    if (!currentUser) {
+    const session = await auth();
+    if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
@@ -38,8 +38,8 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
-    const currentUser = await getCurrentUser();
-    if (!currentUser) {
+    const session = await auth();
+    if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 

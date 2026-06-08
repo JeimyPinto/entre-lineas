@@ -1,4 +1,4 @@
-import { getCurrentUser } from '@/features/auth/services';
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import AdminLayoutClient from './AdminLayoutClient';
 
@@ -7,15 +7,15 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser();
+  const session = await auth();
 
   // Redirect to login if no session
-  if (!user) {
-    redirect('/admin/login?expired=true');
+  if (!session?.user) {
+    redirect('/login?callbackUrl=/admin');
   }
 
   return (
-    <AdminLayoutClient user={user}>
+    <AdminLayoutClient user={session.user}>
       {children}
     </AdminLayoutClient>
   );

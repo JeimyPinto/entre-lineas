@@ -48,7 +48,7 @@ const Footer = () => {
               <h4 className={styles.blockTitle}>Administración</h4>
               <ul className={styles.linksList}>
                 <li>
-                  <Link href="/admin/login" className={styles.adminLink}>
+                  <Link href="/login" className={styles.adminLink}>
                     <FaUserShield size={14} />
                     <span>Panel de Control</span>
                   </Link>
