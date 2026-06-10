@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createAdminClient } from '@/shared/api/supabaseAdmin';
+import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
+import { generateVerificationToken } from '@/lib/auth-utils';
 
 /**
  * GET /api/admin/users
- * Lista todos los usuarios de Supabase Auth
+ * Lista todos los usuarios
  */
 export async function GET() {
   try {
@@ -15,35 +16,22 @@ export async function GET() {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
-    const supabase = createAdminClient();
-
-    // Listar usuarios con paginación explícita
-    const { data: { users }, error } = await supabase.auth.admin.listUsers({
-      page: 1,
-      perPage: 1000,
+    // Obtener usuarios con paginación
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        emailVerified: true,
+        createdAt: true,
+        role: true,
+        org_role: true,
+        banned: true,
+      },
+      orderBy: { createdAt: 'desc' },
     });
 
-    if (error) {
-      console.error('Error listing users:', JSON.stringify(error, null, 2));
-      return NextResponse.json({ 
-        error: error.message, 
-        code: error.code,
-        status: error.status 
-      }, { status: 500 });
-    }
-
-// Filtrar y formatear usuarios
-    const formattedUsers = users?.map(user => ({
-      id: user.id,
-      email: user.email,
-      email_confirmed_at: user.email_confirmed_at,
-      created_at: user.created_at,
-      last_sign_in_at: user.last_sign_in_at,
-      app_metadata: user.app_metadata,
-      user_metadata: user.user_metadata,
-    })) || [];
-
-    return NextResponse.json({ users: formattedUsers });
+    return NextResponse.json({ users });
   } catch (error) {
     console.error('Error in GET /api/admin/users:', error);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
@@ -69,21 +57,51 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email requerido' }, { status: 400 });
     }
 
-    const supabase = createAdminClient();
-
-    // Enviar invitación por email
-    const { error } = await supabase.auth.admin.inviteUserByEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/admin/reset-password`,
-    });
-
-    if (error) {
-      console.error('Error inviting user:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'Email inválido' }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, message: 'Invitación enviada' });
+    // Verificar que el usuario no exista
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'El usuario ya existe' },
+        { status: 409 }
+      );
+    }
+
+    // Generar token de invitación
+    const token = generateVerificationToken();
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 días
+
+    // Guardar token
+    await prisma.verificationToken.create({
+      data: {
+        email,
+        token,
+        type: 'invite',
+        expires: expiresAt,
+      },
+    });
+
+    // TODO: Enviar email de invitación con Nodemailer
+    const inviteLink = `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/signup?invite=${token}&email=${encodeURIComponent(email)}`;
+    console.log(`[User Invite] Invite link for ${email}: ${inviteLink}`);
+    console.log(`[User Invite] Token: ${token} (expires at ${expiresAt.toISOString()})`);
+
+    return NextResponse.json({
+      success: true,
+      message: 'Invitación enviada',
+      ...(process.env.NODE_ENV === 'development' && { token, inviteLink }),
+    });
   } catch (error) {
     console.error('Error in POST /api/admin/users:', error);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
   }
 }
+

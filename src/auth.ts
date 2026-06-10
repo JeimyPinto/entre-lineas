@@ -2,16 +2,8 @@ import { handlers, auth, signIn, signOut } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
-import { createClient } from "@supabase/supabase-js";
-
-// Safe initialization - check for required env vars
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-// Only create client if both env vars are present
-const supabase = supabaseUrl && supabaseServiceKey
-  ? createClient(supabaseUrl, supabaseServiceKey)
-  : null;
+import { prisma } from "@/lib/prisma";
+import { verifyPassword } from "@/lib/auth-utils";
 
 // Simple validation using native JavaScript
 function validateEmail(email: unknown): email is string {
@@ -43,37 +35,43 @@ export const authConfig = {
           return null;
         }
 
-        // Check if supabase client is initialized
-        if (!supabase) {
-          console.error("[auth] Supabase client not initialized - missing env vars");
+        try {
+          // Buscar usuario en Prisma (base de datos local)
+          const user = await prisma.user.findUnique({
+            where: { email },
+          });
+
+          if (!user || !user.password) {
+            console.warn("[auth] User not found or no password set:", email);
+            return null;
+          }
+
+          // Verificar contraseña con crypto nativo
+          const isPasswordValid = await verifyPassword(password, user.password);
+
+          if (!isPasswordValid) {
+            console.warn("[auth] Invalid password for user:", email);
+            return null;
+          }
+
+          // Verificar si el usuario está baneado
+          if (user.banned) {
+            console.warn("[auth] User is banned:", email);
+            return null;
+          }
+
+          return {
+            id: user.id,
+            email: user.email!,
+            name: user.name || user.email!,
+            role: user.role,
+            org_role: user.org_role,
+            image: user.image,
+          };
+        } catch (error) {
+          console.error("[auth] Error during authorization:", error);
           return null;
         }
-
-        // Verificar usuario en Supabase
-        const { data: user, error } = await supabase
-          .from("users")
-          .select("*")
-          .eq("email", email)
-          .single();
-
-        if (error || !user) return null;
-
-        // Verificar contraseña con Supabase Auth
-        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (authError || !authData.user) return null;
-
-        return {
-          id: authData.user.id,
-          email: authData.user.email!,
-          name: user.name || authData.user.email!,
-          role: user.role || "user",
-          org_role: user.org_role || [],
-          image: user.image || authData.user.user_metadata?.avatar_url,
-        };
       },
     }),
     GitHub({
