@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/shared/api/supabaseServer';
+import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 
 /**
@@ -21,21 +21,20 @@ export async function PATCH(
     const { userId } = await params;
     const body = await request.json();
 
-    const supabase = await createClient();
-
-// Actualizar usuario (ban_duration debe ser string | undefined, no null)
-    const banDuration = body.disabled ? 'forever' : undefined;
-    
-    const { error } = await supabase.auth.admin.updateUserById(userId, {
-      ban_duration: banDuration,
+    // Actualizar usuario (ban)
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        banned: body.disabled === true,
+      },
+      select: {
+        id: true,
+        email: true,
+        banned: true,
+      },
     });
 
-    if (error) {
-      console.error('Error updating user:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, user: updatedUser });
   } catch (error) {
     console.error('Error in PATCH /api/admin/users/[userId]:', error);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
@@ -60,17 +59,31 @@ export async function DELETE(
 
     const { userId } = await params;
 
-    const supabase = await createClient();
+    // Eliminar token de verificación asociados
+    await prisma.verificationToken.deleteMany({
+      where: { userId },
+    });
+
+    // Eliminar sesiones del usuario
+    await prisma.session.deleteMany({
+      where: { userId },
+    });
+
+    // Eliminar cuentas (OAuth)
+    await prisma.account.deleteMany({
+      where: { userId },
+    });
 
     // Eliminar usuario
-    const { error } = await supabase.auth.admin.deleteUser(userId);
+    const deletedUser = await prisma.user.delete({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
 
-    if (error) {
-      console.error('Error deleting user:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, user: deletedUser });
   } catch (error) {
     console.error('Error in DELETE /api/admin/users/[userId]:', error);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
