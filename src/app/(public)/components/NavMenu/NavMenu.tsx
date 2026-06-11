@@ -2,6 +2,7 @@
 import styles from "./NavMenu.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { FaUserShield } from "react-icons/fa6";
 
 interface NavMenuProps {
   links: { label: string; href: string }[];
@@ -25,6 +26,10 @@ export default function NavMenu({ links, open, onNavigate }: NavMenuProps) {
           {link.label}
         </Link>
       ))}
+      <Link href="/login" className={styles.adminNavLink} onClick={onNavigate}>
+        <FaUserShield size={16} />
+        Panel de Control
+      </Link>
     </nav>
   );
 }

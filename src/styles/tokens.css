@@ -3,17 +3,6 @@
    Colors, Typography, Spacing, Borders
    ============================================ */
 
-/* Import fonts with display=swap for LCP optimization */
-@import url('https://fonts.googleapis.com/css2?family=Esteban:wght@400&display=swap');
-
-@font-face {
-  font-family: "Cloister";
-  src: url('/fonts/CloisterBlack.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* ===== PALETTE - Crimson Night ===== */
   /* Backgrounds */
@@ -106,8 +95,8 @@
   --font-weight-black: 900;
 
   /* Fonts */
-  --font-main: "Esteban", serif;
-  --font-title: "Cloister", "Esteban", serif;
+  --font-main: var(--font-esteban, "Esteban"), serif;
+  --font-title: var(--font-cloister, "Cloister"), "Esteban", serif;
 
   /* ===== SPACING ===== */
   --gap-xs: 0.25rem;

@@ -1,18 +1,27 @@
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import MainSection from './components/MainSection/section';
-import Gallery from './components/Gallery/gallery';
-import ArtistSection from './components/ArtistSection/ArtistSection';
-import EventsSection from './components/EventsSection/EventsSection';
 import Contact from './components/Contact/Contact';
-import HistorySection from './components/HistorySection/HistorySection';
 import Footer from './components/Footer/Footer';
 import { eventService } from '@/features/events/services';
 import { artistService } from '@/features/artists/services';
 import { getYouTubeData } from '@/features/youtube/services';
 
-function LoadingPlaceholder() {
-  return <div className="loading-placeholder" aria-hidden="true">Cargando...</div>;
-}
+const Gallery = dynamic(() => import('./components/Gallery/gallery'), {
+  loading: () => <div className="loading-placeholder" aria-hidden="true">Cargando...</div>,
+});
+
+const ArtistSection = dynamic(() => import('./components/ArtistSection/ArtistSection'), {
+  loading: () => <div className="loading-placeholder" aria-hidden="true">Cargando...</div>,
+});
+
+const EventsSection = dynamic(() => import('./components/EventsSection/EventsSection'), {
+  loading: () => <div className="loading-placeholder" aria-hidden="true">Cargando...</div>,
+});
+
+const HistorySection = dynamic(() => import('./components/HistorySection/HistorySection'), {
+  loading: () => <div className="loading-placeholder" aria-hidden="true">Cargando...</div>,
+});
 
 export default async function Home() {
   let events: import('@/entities/event/types').Event[] = [];
@@ -45,19 +54,23 @@ export default async function Home() {
       <div id="inicio">
         <MainSection highlights={highlights} />
       </div>
-      <HistorySection />
+      <Suspense fallback={<div className="loading-placeholder" aria-hidden="true">Cargando...</div>}>
+        <HistorySection />
+      </Suspense>
       <div id="galeria">
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="loading-placeholder" aria-hidden="true">Cargando...</div>}>
           <Gallery />
         </Suspense>
       </div>
       <div id="artistas">
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<div className="loading-placeholder" aria-hidden="true">Cargando...</div>}>
           <ArtistSection initialArtists={artists} />
         </Suspense>
       </div>
       <div id="eventos">
-        <EventsSection initialEvents={events} />
+        <Suspense fallback={<div className="loading-placeholder" aria-hidden="true">Cargando...</div>}>
+          <EventsSection initialEvents={events} />
+        </Suspense>
       </div>
       <Contact />
       <Footer />

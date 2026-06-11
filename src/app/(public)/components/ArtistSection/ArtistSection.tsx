@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./ArtistSection.module.css";
 import ArtistCard from "./ArtistCard";
@@ -49,6 +49,10 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
     return artistsData.filter(a => a.orgRole.includes(filter));
   }, [filter, artistsData]);
 
+  const renderArtist = useCallback((artist: Artist) => (
+    <ArtistCard artist={artist} onOpenModal={setSelectedArtist} />
+  ), [setSelectedArtist]);
+
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'instagram': return <FaInstagram size={20} />;
@@ -95,12 +99,7 @@ export default function ArtistSection({ initialArtists }: ArtistSectionProps) {
           overscanCount={5}
           emptyMessage="No hay artistas con este filtro."
         >
-          {(artist) => (
-            <ArtistCard
-              artist={artist}
-              onOpenModal={setSelectedArtist}
-            />
-          )}
+          {renderArtist}
         </VirtualizedGrid>
       </div>
 

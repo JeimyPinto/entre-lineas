@@ -24,22 +24,24 @@ export async function getYouTubeData(): Promise<NonNullable<GalleryData['highlig
   }
 
   try {
-    // 1. Obtener los videos recientes del canal
+    // 1. Obtener videos y estadísticas del canal en paralelo
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&type=video&maxResults=${maxResults}`;
-    const res = await fetch(searchUrl, { next: { revalidate: 3600 } }); // Cache for 1 hour
+    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
 
-    if (!res.ok) {
-      const errorData = await res.json();
+    const [searchRes, channelRes] = await Promise.all([
+      fetch(searchUrl, { next: { revalidate: 3600 } }),
+      fetch(channelUrl, { next: { revalidate: 3600 } }),
+    ]);
+
+    if (!searchRes.ok) {
+      const errorData = await searchRes.json();
       console.error("YouTube Search Error:", errorData);
       throw new Error("YouTube API Limit or Error");
     }
 
-    const data = await res.json();
+    const data = await searchRes.json();
     const videoItems = data.items || [];
 
-    // 1b. Obtener estadísticas del canal
-    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
-    const channelRes = await fetch(channelUrl, { next: { revalidate: 3600 } });
     let subscriberCount = null;
     if (channelRes.ok) {
       const channelData = await channelRes.json();
@@ -107,13 +109,22 @@ export async function getYouTubeData(): Promise<NonNullable<GalleryData['highlig
       }
     });
 
-    const highlights = {
-      viral: [...videos, ...shorts].sort((a, b) => parseInt(b.viewCount || "0") - parseInt(a.viewCount || "0"))[0] || null,
-      mostLiked: [...videos, ...shorts].sort((a, b) => parseInt(b.likeCount || "0") - parseInt(a.likeCount || "0"))[0] || null,
-      mostCommented: [...videos, ...shorts].sort((a, b) => parseInt(b.commentCount || "0") - parseInt(a.commentCount || "0"))[0] || null,
-    };
+    const allVideos = [...videos, ...shorts];
+    let viral: (typeof allVideos)[number] | null = null;
+    let mostLiked: (typeof allVideos)[number] | null = null;
+    let mostCommented: (typeof allVideos)[number] | null = null;
+    let maxViews = -1, maxLikes = -1, maxComments = -1;
 
-    return highlights;
+    for (const v of allVideos) {
+      const views = parseInt(v.viewCount || "0");
+      const likes = parseInt(v.likeCount || "0");
+      const comments = parseInt(v.commentCount || "0");
+      if (views > maxViews) { maxViews = views; viral = v; }
+      if (likes > maxLikes) { maxLikes = likes; mostLiked = v; }
+      if (comments > maxComments) { maxComments = comments; mostCommented = v; }
+    }
+
+    return { viral, mostLiked, mostCommented };
 
   } catch (error) {
     console.error("YouTube API Service Error:", error);

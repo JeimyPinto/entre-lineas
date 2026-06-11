@@ -6,7 +6,6 @@
  */
 
 import { createClient } from '@/shared/api/supabaseServer';
-import { COLOMBIA_DATA, COMMON_COUNTRIES, COUNTRIES_WITH_DEPARTMENTS } from '@/data/locations';
 import type { Country, Department, City, LocationCol, LocationSimple, Location } from '@/entities/location/types';
 
 // Database types (from Prisma)
@@ -46,8 +45,7 @@ export async function getCountries(): Promise<Country[]> {
   
   if (error) {
     console.error('Error fetching countries:', error);
-    // Fallback to static data if DB fails
-    return COMMON_COUNTRIES.map(c => ({ code: c.code, name: c.name }));
+    return [];
   }
   
   return (data as DbCountry[]).map(c => ({
@@ -81,14 +79,6 @@ export async function getDepartments(countryCode: string): Promise<Department[]>
   
   if (error) {
     console.error('Error fetching departments:', error);
-    // Fallback for Colombia
-    if (countryCode === 'CO') {
-      return Object.keys(COLOMBIA_DATA).map(name => ({
-        code: name.substring(0, 3).toUpperCase(),
-        name,
-        countryCode,
-      }));
-    }
     return [];
   }
   
@@ -113,10 +103,6 @@ export async function getCities(departmentCode: string, countryCode: string = 'C
     .single();
   
   if (!department) {
-    // Fallback for Colombia
-    if (countryCode === 'CO' && COLOMBIA_DATA[departmentCode]) {
-      return COLOMBIA_DATA[departmentCode].map(name => ({ name }));
-    }
     return [];
   }
   
@@ -128,10 +114,6 @@ export async function getCities(departmentCode: string, countryCode: string = 'C
   
   if (error) {
     console.error('Error fetching cities:', error);
-    // Fallback for Colombia
-    if (countryCode === 'CO' && COLOMBIA_DATA[departmentCode]) {
-      return COLOMBIA_DATA[departmentCode].map(name => ({ name }));
-    }
     return [];
   }
   
@@ -160,8 +142,14 @@ export function buildLocationString(location: Location): string {
 /**
  * Check if a country supports departments
  */
-export function countrySupportsDepartments(countryCode: string): boolean {
-  return COUNTRIES_WITH_DEPARTMENTS.includes(countryCode);
+export async function countrySupportsDepartments(countryCode: string): Promise<boolean> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from('countries')
+    .select('has_departments')
+    .eq('code', countryCode)
+    .single();
+  return data?.has_departments ?? false;
 }
 
 /**
@@ -173,7 +161,7 @@ export async function getLocationsForCountry(countryCode: string) {
     cities: {},
   };
   
-  if (countrySupportsDepartments(countryCode)) {
+  if (await countrySupportsDepartments(countryCode)) {
     locations.departments = await getDepartments(countryCode);
     
     for (const dept of locations.departments) {

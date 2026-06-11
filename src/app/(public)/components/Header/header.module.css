@@ -67,6 +67,37 @@
   letter-spacing: 1px;
 }
 
+/* Admin access icon */
+.adminAccess {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-s);
+  background: var(--bg-glass-thin);
+  border: 1px solid transparent;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  margin-right: var(--margin-s);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.adminAccess:hover {
+  color: var(--color-accent);
+  background: var(--bg-glass-thick);
+  border-color: var(--color-accent-subtle);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.adminAccess:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-glow), 0 0 0 1px var(--color-accent);
+}
+
 @media (max-width: 768px) {
   .header {
     height: 75px;
@@ -85,5 +116,12 @@
   
   .headerLogoTitle {
     gap: var(--gap-m);
+  }
+
+  .adminAccess {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    margin-right: var(--gap-xs);
   }
 }

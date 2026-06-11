@@ -9,6 +9,20 @@ interface EventsSectionProps {
   initialEvents: Event[];
 }
 
+function renderEvent(event: Event) {
+  return (
+    <InstagramCard
+      title={event.title}
+      date={event.date}
+      location={event.location}
+      postUrl={event.postUrl}
+      judges={event.judges}
+      hosts={event.host}
+      youtubeLink={event.youtubeLink}
+    />
+  );
+}
+
 export default function EventsSection({ initialEvents }: EventsSectionProps) {
   const events = initialEvents || [];
 
@@ -34,17 +48,7 @@ export default function EventsSection({ initialEvents }: EventsSectionProps) {
           overscanCount={5}
           emptyMessage="No hay eventos registrados."
         >
-          {(event) => (
-            <InstagramCard
-              title={event.title}
-              date={event.date}
-              location={event.location}
-              postUrl={event.postUrl}
-              judges={event.judges}
-              hosts={event.host}
-              youtubeLink={event.youtubeLink}
-            />
-          )}
+          {renderEvent}
         </VirtualizedGrid>
       </div>
     </section>

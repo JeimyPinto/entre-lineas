@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Event as EventType } from '@/entities/event/types';
 import Button from '@/shared/ui/Button/Button';
 import Card from '@/shared/ui/Card/Card';
@@ -34,6 +34,29 @@ export default function EventsGridClient({ events }: EventsGridClientProps) {
     setEventToDelete(null);
   };
 
+  const renderEvent = useCallback((event: EventType) => (
+    <Card key={event.id} title={event.title} subtitle={event.date}>
+      <div className={styles.artistInfo}>
+        <p><strong>Edición:</strong> #{event.id}</p>
+        <p><strong>Lugar:</strong> {event.location}</p>
+        <div className={styles.actions}>
+          <Button href={`/admin/events/edit/${event.id}`} variant="ghost" className={styles.actionBtn}>
+            Editar
+          </Button>
+          <Button
+            type="button"
+            variant="danger"
+            disabled={isDeleting}
+            className={styles.deleteBtn}
+            onClick={() => handleDelete(event)}
+          >
+            {isDeleting ? 'Borrando...' : 'Eliminar'}
+          </Button>
+        </div>
+      </div>
+    </Card>
+  ), [handleDelete, isDeleting]);
+
   return (
     <>
       <div className={styles.grid}>
@@ -45,28 +68,7 @@ export default function EventsGridClient({ events }: EventsGridClientProps) {
           overscanCount={5}
           emptyMessage="No hay eventos registrados en la base de datos."
         >
-          {(event) => (
-            <Card key={event.id} title={event.title} subtitle={event.date}>
-              <div className={styles.artistInfo}>
-                <p><strong>Edición:</strong> #{event.id}</p>
-                <p><strong>Lugar:</strong> {event.location}</p>
-                <div className={styles.actions}>
-                  <Button href={`/admin/events/edit/${event.id}`} variant="ghost" className={styles.actionBtn}>
-                    Editar
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="danger"
-                    disabled={isDeleting}
-                    className={styles.deleteBtn}
-                    onClick={() => handleDelete(event)}
-                  >
-                    {isDeleting ? 'Borrando...' : 'Eliminar'}
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          )}
+          {renderEvent}
         </VirtualizedGrid>
       </div>
 

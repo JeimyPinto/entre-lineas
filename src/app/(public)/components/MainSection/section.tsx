@@ -24,7 +24,7 @@ interface MainSectionProps {
 export default function MainSection({ highlights }: MainSectionProps) {
   const formatStat = (value: string | number | undefined) => {
     const num = Number(value);
-    return isNaN(num) ? "0" : num.toLocaleString();
+    return isNaN(num) ? "0" : num.toLocaleString("es-CO");
   };
   const [logoIndex, setLogoIndex] = useState(0);
   const logos = ["/1-01.png", "/1-02.png", "/1-03.png", "/1-04.png"];

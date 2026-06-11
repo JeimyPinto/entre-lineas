@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { FaUserShield } from "react-icons/fa6";
 import NavMenu from "../NavMenu/NavMenu";
 import MenuButton from "../MenuButton/MenuButton";
 import styles from "./header.module.css";
@@ -47,6 +48,10 @@ export default function Header() {
         
         <NavMenu links={links} open={menuOpen} onNavigate={() => setMenuOpen(false)} />
         
+        <Link href="/login" className={styles.adminAccess} aria-label="Panel de Control">
+          <FaUserShield />
+        </Link>
+
         <MenuButton open={menuOpen} onClick={() => setMenuOpen((open) => !open)} />
       </div>
     </header>

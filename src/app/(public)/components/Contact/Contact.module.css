@@ -1,6 +1,6 @@
 /* ============================================
-   CONTACT SECTION v3.0 - Premium Redesign
-   Modern glassmorphism, smooth animations, better UX
+   CONTACT SECTION v4.0 - Premium Redesign
+   Service-colored cards, refined micro-interactions
    ============================================ */
 
 .contactSection {
@@ -140,14 +140,13 @@
   50% { text-shadow: 0 0 35px var(--color-accent-glow-intense), 0 0 50px var(--color-accent-glow); }
 }
 
-/* Grid for cards - 4 columns on desktop, responsive */
+/* Grid for cards - responsive */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--gap-xl);
 }
 
-/* Responsive grid breakpoints */
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -161,10 +160,17 @@
   }
 }
 
-/* Card wrapper for hover effects */
+/* ===== CARD WRAPPER ===== */
+
 .contactCardWrapper {
   perspective: 1000px;
   height: 100%;
+}
+
+.cardInner {
+  height: 100%;
+  transition: all var(--transition-smooth);
+  transform-style: preserve-3d;
 }
 
 .contactCardWrapper:hover .cardInner {
@@ -175,12 +181,56 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.cardInner {
-  transition: all var(--transition-smooth);
-  transform-style: preserve-3d;
+/* ===== SERVICE-COLORED ACCENT STRIPES ===== */
+
+.contactCardWrapper:nth-child(1) .cardInner {
+  border-top: 3px solid #dc2626;
 }
 
-/* Info list */
+.contactCardWrapper:nth-child(2) .cardInner {
+  border-top: 3px solid #25D366;
+}
+
+.contactCardWrapper:nth-child(3) .cardInner {
+  border-top: 3px solid #E4405F;
+}
+
+.contactCardWrapper:nth-child(4) .cardInner {
+  border-top: 3px solid #FF6B35;
+}
+
+/* ===== SERVICE-COLORED ICON GLOW ON HOVER ===== */
+
+.contactCardWrapper:nth-child(1):hover .cardInner {
+  box-shadow:
+    0 20px 40px -10px var(--color-shadow),
+    0 0 50px -10px rgba(220, 38, 38, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.contactCardWrapper:nth-child(2):hover .cardInner {
+  box-shadow:
+    0 20px 40px -10px var(--color-shadow),
+    0 0 50px -10px rgba(37, 211, 102, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.contactCardWrapper:nth-child(3):hover .cardInner {
+  box-shadow:
+    0 20px 40px -10px var(--color-shadow),
+    0 0 50px -10px rgba(228, 64, 95, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.contactCardWrapper:nth-child(4):hover .cardInner {
+  box-shadow:
+    0 20px 40px -10px var(--color-shadow),
+    0 0 50px -10px rgba(255, 107, 53, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ===== INFO LIST ===== */
+
 .infoList {
   list-style: none;
   padding: 0;
@@ -189,7 +239,7 @@
 }
 
 .infoItem {
-  padding: var(--padding-s) 0;
+  padding: var(--padding-m) 0;
   border-bottom: 1px solid var(--color-border-subtle);
   transition: all var(--transition-base);
 }
@@ -202,7 +252,8 @@
   padding-left: var(--padding-s);
 }
 
-/* Links - Premium */
+/* ===== LINKS ===== */
+
 .link {
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -236,23 +287,27 @@
   width: 100%;
 }
 
-/* Platform icons - Premium */
+/* ===== PLATFORM ICONS ===== */
+
 .platformsGrid {
   display: flex;
   justify-content: center;
-  gap: var(--gap-m);
+  gap: var(--gap-xxl);
   flex-wrap: wrap;
+  padding: var(--padding-m) 0;
 }
 
 .platformIcon {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--color-text-muted);
   transition: all var(--transition-bounce);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  gap: var(--gap-s);
+  width: 80px;
+  height: 80px;
   border-radius: var(--border-radius-m);
   background: 
     linear-gradient(145deg, var(--bg-glass-thin) 0%, var(--bg-glass-medium) 100%);
@@ -260,6 +315,19 @@
   text-decoration: none;
   position: relative;
   overflow: hidden;
+}
+
+.platformLabel {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+
+.platformIcon:hover .platformLabel {
+  color: var(--color-white);
 }
 
 .platformIcon::before {
@@ -275,7 +343,7 @@
 .platformIcon:hover {
   color: var(--color-white);
   border-color: transparent;
-  transform: translateY(-4px) scale(1.1);
+  transform: translateY(-6px) scale(1.15);
   box-shadow: 
     0 12px 32px var(--color-shadow-accent),
     0 0 0 1px var(--color-accent-glow);
@@ -290,20 +358,31 @@
   outline-offset: 2px;
 }
 
-/* WhatsApp specific styling */
-.whatsappLink {
-  background: linear-gradient(145deg, #128C7E 0%, #25D366 100%) !important;
-  border-color: transparent !important;
+/* YouTube icon hover color */
+.platformIcon[aria-label="YouTube"]:hover {
+  color: #FF0000;
+  box-shadow:
+    0 12px 32px rgba(255, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 0, 0, 0.5);
 }
 
-.whatsappLink:hover {
-  box-shadow: 
-    0 12px 32px rgba(37, 211, 102, 0.4),
-    0 0 0 1px rgba(37, 211, 102, 0.6) !important;
+.platformIcon[aria-label="YouTube"]:hover::before {
+  opacity: 0;
 }
 
-.whatsappLink::before {
-  background: linear-gradient(135deg, #075E54, #128C7E) !important;
+/* TikTok icon hover color */
+.platformIcon[aria-label="TikTok"]:hover {
+  color: #000000;
+  text-shadow:
+    0 0 0 #00f2ea,
+    0 0 0 #ff0050;
+  box-shadow:
+    0 12px 32px rgba(255, 0, 80, 0.25),
+    0 0 0 1px rgba(0, 242, 234, 0.3);
+}
+
+.platformIcon[aria-label="TikTok"]:hover::before {
+  opacity: 0;
 }
 
 /* Animations */
@@ -376,7 +455,11 @@
     transform: none;
   }
   
-  .cardInner:hover {
+  .contactCardWrapper:hover .cardInner {
+    transform: none;
+  }
+  
+  .platformIcon:hover {
     transform: none;
   }
 }
@@ -411,10 +494,18 @@
     height: auto;
   }
   
+  .platformsGrid {
+    gap: var(--gap-xl);
+  }
+  
   .platformIcon {
-    width: 52px;
-    height: 52px;
-    font-size: 1.3rem;
+    width: 72px;
+    height: 72px;
+    font-size: 1.6rem;
+  }
+  
+  .platformLabel {
+    font-size: 0.65rem;
   }
 }
 
@@ -431,5 +522,12 @@
   
   .platformIcon:hover {
     border-color: var(--color-white);
+  }
+  
+  .contactCardWrapper:nth-child(1) .cardInner,
+  .contactCardWrapper:nth-child(2) .cardInner,
+  .contactCardWrapper:nth-child(3) .cardInner,
+  .contactCardWrapper:nth-child(4) .cardInner {
+    border-top-width: 4px;
   }
 }

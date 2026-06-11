@@ -3,9 +3,10 @@ import fs from "fs";
 import path from "path";
 import { LazyScript } from "@/shared/ui/LazyScript";
 import DeferredStyle from "@/shared/ui/DeferredStyle/DeferredStyle";
+import { cloister, esteban } from "@/shared/fonts";
 
 // Read critical CSS at build time
-const criticalCssPath = path.join(process.cwd(), "src/shared/styles/critical.css");
+const criticalCssPath = path.join(process.cwd(), "src/styles/critical.css");
 const criticalCss = fs.existsSync(criticalCssPath) ? fs.readFileSync(criticalCssPath, "utf-8") : "";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ colorScheme: 'dark' }}>
+    <html lang="en" className={`${cloister.variable} ${esteban.variable}`} style={{ colorScheme: 'dark' }}>
       <head>
         {/* Critical CSS inlined for LCP - eliminates render-blocking */}
         <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
@@ -28,10 +29,6 @@ export default function RootLayout({
         <link rel="preload" href="/1-02.png" as="image" type="image/png" fetchPriority="high" />
         <link rel="preload" href="/1-03.png" as="image" type="image/png" fetchPriority="high" />
         <link rel="preload" href="/1-04.png" as="image" type="image/png" fetchPriority="high" />
-        {/* Preload critical font for hero text */}
-        <link rel="preload" href="/fonts/CloisterBlack.ttf" as="font" type="font/ttf" crossOrigin="anonymous" fetchPriority="high" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
         {children}

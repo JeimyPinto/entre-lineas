@@ -15,8 +15,8 @@
   --color-border: rgba(255, 255, 255, 0.08);
   --bg-glass-thin: rgba(255, 255, 255, 0.025);
   --bg-card: rgba(255, 255, 255, 0.025);
-  --font-main: "Esteban", serif;
-  --font-title: "Cloister", "Esteban", serif;
+  --font-main: var(--font-esteban, "Esteban"), serif;
+  --font-title: var(--font-cloister, "Cloister"), "Esteban", serif;
   --font-display: clamp(3rem, 8vw, 4.5rem);
   --font-h1: clamp(2rem, 5vw, 3rem);
   --font-h2: clamp(1.5rem, 4vw, 2.25rem);
@@ -51,7 +51,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html, body { max-width: 100%; height: 100%; overflow-x: hidden; }
-body { background-color: var(--color-dark); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body { background-color: var(--color-dark); line-height: 1.5; -webkit-font-smoothing: antialiased; padding-top: 85px; }
 img, video, iframe, picture { max-width: 100%; height: auto; display: block; }
 
 /* Hero section critical styles */

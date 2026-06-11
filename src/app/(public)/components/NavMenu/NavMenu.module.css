@@ -70,6 +70,27 @@
   display: block;
 }
 
+/* Admin nav link (mobile drawer) */
+.adminNavLink {
+  display: none;
+  align-items: center;
+  gap: var(--gap-l);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  padding: var(--padding-l) 0;
+  margin-top: var(--margin-xxl);
+  border-top: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.adminNavLink:hover {
+  color: var(--color-accent);
+}
+
 @media (max-width: 1024px) {
   .headerNav {
     position: fixed;
@@ -80,7 +101,7 @@
     right: 0;
     transform: translateX(100%);
     height: 100dvh;
-    padding: 8rem 4rem 4rem 2.5rem; /* Aumentado el margen derecho a 4rem (2.5 original + 1.5 extra o similar) */
+    padding: 8rem 4rem 4rem 2.5rem;
     transition: transform var(--transition-normal);
     z-index: var(--z-menu);
     background: color-mix(in srgb, var(--color-black) 90%, transparent);
@@ -113,10 +134,14 @@
   }
 
   .navLogoBullet {
-    order: 2; /* Move icon to the right of the text */
+    order: 2;
     background: color-mix(in srgb, var(--color-white) 95%, transparent);
     border-radius: var(--border-radius-s);
     width: 32px;
     height: 32px;
+  }
+
+  .adminNavLink {
+    display: flex;
   }
 }

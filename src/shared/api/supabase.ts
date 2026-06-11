@@ -1,23 +1,24 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-// Lazy initialization to avoid build-time errors
+// Validate environment variables during build time
+if (typeof window === 'undefined') {
+  // We're in a server environment (Node.js during build or server runtime)
+  if (!supabaseUrl || !supabaseAnonKey) {
+    // Throw a clear error during build time to prevent silent failures
+    throw new Error('Supabase credentials missing. Make sure to set SUPABASE_URL and SUPABASE_ANON_KEY in your .env.local');
+  }
+}
+
+// Lazy initialization to avoid build-time errors in browsers during SSR
 let supabaseInstance: ReturnType<typeof createClient> | null = null;
 
-function getSupabaseClient() {
+function getSupabaseClient(): ReturnType<typeof createClient> {
+  // If instance doesn't exist, create it
   if (!supabaseInstance) {
-    if (!supabaseUrl || !supabaseAnonKey) {
-      // Return a mock client during build to avoid errors
-      if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-        throw new Error('Supabase credentials missing. Make sure to set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local');
-      }
-      // During build or development without credentials, return a mock
-      return null as any;
-    }
-    
-    supabaseInstance = createClient(supabaseUrl, supabaseAnonKey, {
+    supabaseInstance = createClient(supabaseUrl!, supabaseAnonKey!, {
       auth: {
         flowType: 'pkce',
         autoRefreshToken: true,
@@ -29,14 +30,23 @@ function getSupabaseClient() {
   return supabaseInstance;
 }
 
-// Export a proxy that initializes on first use
+// Export a real client that throws meaningful errors when not configured
 export const supabase = new Proxy({} as ReturnType<typeof createClient>, {
   get(target, prop) {
-    const client = getSupabaseClient();
-    if (!client) {
-      // Return mock functions during build
-      return () => Promise.resolve({ data: null, error: { message: 'Supabase not configured' } });
+    // Handle the case where we're accessing properties on the proxy itself
+    if (prop === 'then' || prop === 'catch') {
+      return undefined;
     }
-    return (client as any)[prop];
+
+    try {
+      const client = getSupabaseClient();
+      return (client as any)[prop];
+    } catch (err) {
+      // Re-throw with more context if it's a configuration error
+      if (err instanceof Error && err.message.includes('Supabase credentials missing')) {
+        throw err;
+      }
+      throw new Error('Failed to access Supabase client. Make sure to set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+    }
   },
 });

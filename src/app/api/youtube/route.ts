@@ -38,19 +38,22 @@ async function fetchYouTubeData(): Promise<GalleryData> {
   }
 
   const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&type=video&maxResults=${maxResults}`;
-  const res = await fetch(searchUrl);
+  const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
 
-  if (!res.ok) {
-    const errorData = await res.json();
+  const [searchRes, channelRes] = await Promise.all([
+    fetch(searchUrl),
+    fetch(channelUrl),
+  ]);
+
+  if (!searchRes.ok) {
+    const errorData = await searchRes.json();
     console.error("YouTube Search Error:", errorData);
     throw new Error("YouTube API Limit or Error");
   }
 
-  const data: YoutubeApiResponse = await res.json();
+  const data: YoutubeApiResponse = await searchRes.json();
   const videoItems = data.items || [];
 
-  const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
-  const channelRes = await fetch(channelUrl);
   let subscriberCount = null;
   if (channelRes.ok) {
     const channelData = await channelRes.json();
@@ -119,16 +122,21 @@ if (videoItems.length === 0) {
   });
 
 const allVideos = [...videos, ...shorts];
-  
-  const sortedByViews = allVideos.sort((a, b) => parseInt(b.viewCount || "0") - parseInt(a.viewCount || "0"));
-  const sortedByLikes = allVideos.sort((a, b) => parseInt(b.likeCount || "0") - parseInt(a.likeCount || "0"));
-  const sortedByComments = allVideos.sort((a, b) => parseInt(b.commentCount || "0") - parseInt(a.commentCount || "0"));
-  
-  const highlights = {
-    viral: sortedByViews[0] || null,
-    mostLiked: sortedByLikes[0] || null,
-    mostCommented: sortedByComments[0] || null,
-  };
+  let viral: (typeof allVideos)[number] | null = null;
+  let mostLiked: (typeof allVideos)[number] | null = null;
+  let mostCommented: (typeof allVideos)[number] | null = null;
+  let maxViews = -1, maxLikes = -1, maxComments = -1;
+
+  for (const v of allVideos) {
+    const views = parseInt(v.viewCount || "0");
+    const likes = parseInt(v.likeCount || "0");
+    const comments = parseInt(v.commentCount || "0");
+    if (views > maxViews) { maxViews = views; viral = v; }
+    if (likes > maxLikes) { maxLikes = likes; mostLiked = v; }
+    if (comments > maxComments) { maxComments = comments; mostCommented = v; }
+  }
+
+  const highlights = { viral, mostLiked, mostCommented };
 
   return { shorts, videos, subscriberCount, highlights };
 }

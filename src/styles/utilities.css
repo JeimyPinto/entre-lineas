@@ -79,6 +79,13 @@ html .mobile-compact-padding {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 75px;
+  }
 }
 
 /* ===== ADMIN HIDE HEADER ===== */

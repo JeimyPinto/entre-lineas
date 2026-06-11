@@ -9,6 +9,10 @@ import ArtistControlCard from './ArtistControlCard';
 import styles from './artists.module.css';
 import VirtualizedGrid from '@/shared/ui/VirtualizedGrid/VirtualizedGrid';
 
+function renderArtistControl(artist: Artist) {
+  return <ArtistControlCard artist={artist} />;
+}
+
 interface ArtistsGridClientProps {
   artists: Artist[];
 }
@@ -78,7 +82,7 @@ export default function ArtistsGridClient({ artists }: ArtistsGridClientProps) {
           overscanCount={5}
           emptyMessage={search ? 'No se encontraron artistas con ese criterio.' : 'No hay artistas registrados aún.'}
         >
-          {(artist) => <ArtistControlCard artist={artist} />}
+          {renderArtistControl}
         </VirtualizedGrid>
       </div>
     </div>

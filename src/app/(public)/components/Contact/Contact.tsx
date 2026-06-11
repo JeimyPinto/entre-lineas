@@ -65,7 +65,7 @@ const Contact = () => {
                     href={contactData.whatsapp.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className={`${styles.link} ${styles.whatsappLink}`}
+                    className={styles.link}
                   >
                     {contactData.whatsapp.number}
                   </a>
@@ -123,6 +123,7 @@ const Contact = () => {
                   aria-label="YouTube"
                 >
                   <FaYoutube />
+                  <span className={styles.platformLabel}>YouTube</span>
                 </a>
                 <a 
                   href={contactData.platforms.tiktok} 
@@ -132,6 +133,7 @@ const Contact = () => {
                   aria-label="TikTok"
                 >
                   <FaTiktok />
+                  <span className={styles.platformLabel}>TikTok</span>
                 </a>
               </div>
             </Card>

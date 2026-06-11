@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+const EMPTY_ATTRS: Record<string, string> = {};
+
 export interface DeferredStyleProps {
   /** URL del CSS a cargar de forma diferida */
   href: string;
@@ -25,7 +27,7 @@ export interface DeferredStyleProps {
 export default function DeferredStyle({
   href,
   id,
-  attrs = {},
+  attrs = EMPTY_ATTRS,
   onLoad,
   onError,
 }: DeferredStyleProps) {
