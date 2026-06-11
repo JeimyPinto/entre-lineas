@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { artistService } from '@/features/artists/services';
-import { Artist, SocialLink } from '@/entities/artist/types';
+import { Artist, SocialLink } from '@/entities';
 import { safeString, safeStringArray, validateArtist } from '@/entities/artist/schema';
 
 /**

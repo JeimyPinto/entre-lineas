@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/shared/api/supabaseServer';
-import { Video, GalleryData } from '@/entities/youtube-video/types';
+import { Video, GalleryData } from '@/entities';
 import youtubeMockData from '@/data/youtube_mock.json';
 
 const CACHE_KEY = 'youtube_gallery';
@@ -107,6 +107,7 @@ if (videoItems.length === 0) {
 
     const videoObj: Video = {
       id,
+      name: item.snippet.title,  // Required by VideoBase
       title: item.snippet.title,
       thumbnail: item.snippet.thumbnails.high.url,
       viewCount: details?.statistics?.viewCount || "0",

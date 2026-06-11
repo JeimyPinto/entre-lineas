@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import EditArtistFormClient from './EditArtistFormClient';
-import { Artist } from '@/entities/artist/types';
+import { Artist } from '@/entities';
 
 interface EditArtistFormProps {
   artist: Artist;

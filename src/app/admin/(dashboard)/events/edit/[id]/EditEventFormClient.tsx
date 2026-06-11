@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { updateEventAction, deleteEventAction } from '@/app/actions/eventActions';
-import { Event } from '@/entities/event/types';
+import { Event } from '@/entities';
 import Button from '@/shared/ui/Button/Button';
 import Input from '@/shared/ui/Input/Input';
 import Card from '@/shared/ui/Card/Card';

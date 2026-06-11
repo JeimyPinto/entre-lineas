@@ -125,7 +125,7 @@ export default function Gallery() {
 				{(activeBlock === 'videos' ? videos : shorts).map((video) => (
 					<GalleryItem
 						key={video.id}
-						id={video.id}
+						id={String(video.id)}
 						title={video.title}
 						thumbnail={video.thumbnail}
 						onClick={setSelected}

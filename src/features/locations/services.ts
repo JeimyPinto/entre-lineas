@@ -6,7 +6,7 @@
  */
 
 import { createClient } from '@/shared/api/supabaseServer';
-import type { Country, Department, City, LocationCol, LocationSimple, Location } from '@/entities/location/types';
+import type { Country, Department, City, LocationCol, LocationSimple, Location } from '@/entities';
 
 // Database types (from Prisma)
 interface DbCountry {
@@ -49,6 +49,7 @@ export async function getCountries(): Promise<Country[]> {
   }
   
   return (data as DbCountry[]).map(c => ({
+    id: c.id,
     code: c.code,
     name: c.name,
   }));
@@ -83,6 +84,7 @@ export async function getDepartments(countryCode: string): Promise<Department[]>
   }
   
   return (data as DbDepartment[]).map(d => ({
+    id: d.id,
     code: d.code,
     name: d.name,
     countryCode,
@@ -117,7 +119,10 @@ export async function getCities(departmentCode: string, countryCode: string = 'C
     return [];
   }
   
-  return (data as DbCity[]).map(c => ({ name: c.name }));
+  return (data as DbCity[]).map(c => ({
+    id: c.id,
+    name: c.name,
+  }));
 }
 
 /**
@@ -126,15 +131,18 @@ export async function getCities(departmentCode: string, countryCode: string = 'C
 export function buildLocationString(location: Location): string {
   const parts: string[] = [];
   
-  if (location.city) {
-    parts.push(location.city);
+  // Handle discriminated union types
+  if (location.type === 'colombia' || location.type === 'simple') {
+    if (location.city) {
+      parts.push(location.city.name);
+    }
+    if (location.type === 'colombia' && location.department) {
+      parts.push(location.department.name);
+    }
+    parts.push(location.country.name);
+  } else if (location.type === 'country-only') {
+    parts.push(location.country.name);
   }
-  
-  if ('department' in location && location.department) {
-    parts.push(location.department.name);
-  }
-  
-  parts.push(location.country.name);
   
   return parts.join(', ');
 }

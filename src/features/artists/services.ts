@@ -1,6 +1,6 @@
 import { supabase as supabaseAnon } from '@/shared/api/supabase';
 import { createClient } from '@/shared/api/supabaseServer';
-import { Artist as ArtistType, SocialLink } from '@/entities/artist/types';
+import { Artist as ArtistType, SocialLink } from '@/entities';
 import { Artist } from '@/entities/artist/model';
 
 export const artistService = {

@@ -4,6 +4,7 @@ export class Event {
   static fromDb(dbData: any): EventType {
     return {
       id: dbData.id,
+      name: dbData.title,  // Required by BaseEntity
       title: dbData.title,
       date: dbData.date,
       location: dbData.location,

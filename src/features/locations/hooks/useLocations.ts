@@ -3,21 +3,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-
-export interface Country {
-  code: string;
-  name: string;
-}
-
-export interface Department {
-  code: string;
-  name: string;
-  countryCode: string;
-}
-
-export interface City {
-  name: string;
-}
+import type { Country, Department, City } from '@/entities';
 
 interface UseLocationsReturn {
   countries: Country[];

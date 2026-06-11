@@ -1,20 +1,30 @@
-export interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
+import { VideoBase, Identifiable, Named, Imageable } from '../shared/base';
+
+/**
+ * Base video interface with common fields
+ * Extends VideoBase from shared/base.ts
+ * id is optional for creation
+ */
+export interface Video extends Omit<VideoBase, 'id'> {
+  id?: string | number;
   viewCount?: string;
   likeCount?: string;
   commentCount?: string;
 }
 
-export interface YouTubeVideo {
-  id: string;
-  title: string;
-  thumbnail: string;
+/**
+ * Full YouTube video with additional metadata
+ * id is optional for creation
+ */
+export interface YouTubeVideo extends Omit<VideoBase, 'id'> {
+  id?: string | number;
   duration: string;
   publishedAt: string;
 }
 
+/**
+ * Gallery data structure for YouTube content
+ */
 export interface GalleryData {
   shorts: Video[];
   videos: Video[];
@@ -25,3 +35,6 @@ export interface GalleryData {
     mostCommented: Video | null;
   };
 }
+
+// Re-export base types for convenience
+export type { VideoBase, Identifiable, Named, Imageable } from '../shared/base';

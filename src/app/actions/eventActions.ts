@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { eventService } from '@/features/events/services';
-import { Event } from '@/entities/event/types';
+import { Event } from '@/entities';
 
 function parseNames(raw: string | null): { name: string }[] {
   if (!raw) return [];
@@ -17,6 +17,7 @@ export async function createEventAction(formData: FormData) {
 
     const newEvent: Event = {
       id: Number(formData.get('id')),
+      name: formData.get('title') as string,  // Required by BaseEntity
       title: formData.get('title') as string,
       date: formData.get('date') as string,
       location: formData.get('location') as string,
@@ -26,7 +27,7 @@ export async function createEventAction(formData: FormData) {
       host: parseNames(rawHosts)
     };
 
-    if (!newEvent.title || isNaN(newEvent.id)) {
+    if (!newEvent.title || newEvent.id === undefined || isNaN(Number(newEvent.id))) {
       throw new Error("El título y el número de edición (ID) son obligatorios");
     }
 
@@ -48,6 +49,7 @@ export async function updateEventAction(id: string, formData: FormData) {
 
     const updates: Partial<Event> = {
       id: Number(formData.get('id')),
+      name: formData.get('title') as string,  // Required by BaseEntity
       title: formData.get('title') as string,
       date: formData.get('date') as string,
       location: formData.get('location') as string,
@@ -57,7 +59,7 @@ export async function updateEventAction(id: string, formData: FormData) {
       host: parseNames(rawHosts)
     };
 
-    if (!updates.title || isNaN(updates.id!)) {
+    if (!updates.title || updates.id === undefined || isNaN(Number(updates.id))) {
       throw new Error("El título y el número de edición (ID) son obligatorios");
     }
 

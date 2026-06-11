@@ -11,7 +11,8 @@
     "db:push": "npx supabase db push",
     "db:seed": "npx supabase db query --linked -f supabase/seed.sql",
     "deploy": "vercel --yes",
-    "deploy:prod": "vercel --prod --yes"
+    "deploy:prod": "vercel --prod --yes",
+    "find:interfaces": "tsx scripts/find-interfaces.ts"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.11.2",
@@ -41,6 +42,7 @@
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "eslint-config-next": "15.4.1",
+    "tsx": "^4.22.4",
     "vercel": "^54.9.0"
   }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Event as EventType } from '@/entities/event/types';
+import { Event as EventType } from '@/entities';
 import Button from '@/shared/ui/Button/Button';
 import Card from '@/shared/ui/Card/Card';
 import { deleteEventAction } from '@/app/actions/eventActions';

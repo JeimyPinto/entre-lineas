@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { updateArtistAction } from '@/app/actions/artistActions';
-import { Artist, SocialLink } from '@/entities/artist/types';
+import { Artist, SocialLink } from '@/entities';
 import Button from '@/shared/ui/Button/Button';
 import Input from '@/shared/ui/Input/Input';
 import Card from '@/shared/ui/Card/Card';

@@ -1,7 +1,15 @@
 /**
- * Tipos para el sistema CRUD genérico de administración
- * Permite configurar dinámicamente tablas, columnas, formularios y acciones
+ * Admin System Types
+ * 
+ * Composable types for the generic CRUD admin system.
+ * Uses interface composition for state management.
  */
+
+import { Identifiable } from '@/entities/shared/base';
+
+// ============================================
+// Column & Table Configuration
+// ============================================
 
 export type ColumnType = 
   | 'text' 
@@ -81,6 +89,10 @@ export interface TableConfig {
   bulkActions?: BulkAction[];
 }
 
+// ============================================
+// Action Types
+// ============================================
+
 export interface RowAction {
   key: string;
   label: string;
@@ -99,6 +111,10 @@ export interface BulkAction {
   confirmMessage?: string;
 }
 
+// ============================================
+// State Composition
+// ============================================
+
 export interface PaginationState {
   page: number;
   pageSize: number;
@@ -114,15 +130,29 @@ export interface FilterState {
   [column: string]: any;
 }
 
-export interface AdminTableState {
-  data: Record<string, any>[];
-  loading: boolean;
-  error: string | null;
+/** Core table state shared across features */
+export interface TableStateCore {
   pagination: PaginationState;
   sort: SortState;
   filters: FilterState;
   selectedIds: string[];
 }
+
+/** Full admin table state with data and loading */
+export interface AdminTableState extends TableStateCore {
+  data: Record<string, any>[];
+  loading: boolean;
+  error: string | null;
+}
+
+/** Minimal state for table-only features */
+export interface MinimalTableState extends TableStateCore {
+  data: Record<string, any>[];
+}
+
+// ============================================
+// Form & Page Props
+// ============================================
 
 export interface FormFieldProps {
   config: ColumnConfig;
@@ -135,3 +165,26 @@ export interface FormFieldProps {
 export interface AdminPageProps {
   tableConfig: TableConfig;
 }
+
+// ============================================
+// Utility Types
+// ============================================
+
+/** Row data with required ID */
+export interface AdminRow extends Identifiable {
+  [key: string]: any;
+}
+
+/** Create form data (without ID) */
+export type CreateFormData<T extends AdminRow> = Omit<T, 'id'>;
+
+/** Update form data (with ID) */
+export type UpdateFormData<T extends AdminRow> = Partial<T> & Pick<T, 'id'>;
+
+/** Column keys for a table config */
+export type ColumnKeys<T extends TableConfig> = T['columns'][number]['name'];
+
+/** Extract row type from table config */
+export type RowFromConfig<T extends TableConfig> = {
+  [K in ColumnKeys<T>]: any;
+} & Identifiable;

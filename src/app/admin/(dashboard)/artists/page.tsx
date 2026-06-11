@@ -1,7 +1,7 @@
 import { artistService } from '@/features/artists/services';
 import ArtistsGridClient from './ArtistsGridClient';
 import styles from './artists.module.css';
-import { Artist } from '@/entities/artist/types';
+import { Artist } from '@/entities';
 
 export const dynamic = 'force-dynamic';
 

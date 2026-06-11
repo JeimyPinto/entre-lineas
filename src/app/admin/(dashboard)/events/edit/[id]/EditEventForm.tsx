@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import EditEventFormClient from './EditEventFormClient';
-import { Event } from '@/entities/event/types';
+import { Event } from '@/entities';
 
 interface EditEventFormProps {
   event: Event;

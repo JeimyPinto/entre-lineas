@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./ArtistCard.module.css";
 import Button from "@/shared/ui/Button/Button";
 import { FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaChevronDown, FaTiktok } from "react-icons/fa6";
-import { Artist } from "@/entities/artist/types";
+import { Artist } from "@/entities";
 
 interface ArtistCardProps {
   artist: Artist;

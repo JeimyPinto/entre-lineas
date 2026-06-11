@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Video, GalleryData } from '@/entities/youtube-video/types'
+import { Video, GalleryData } from '@/entities'
 
 export function useYouTubeData() {
   const [shorts, setShorts] = useState<Video[]>([])

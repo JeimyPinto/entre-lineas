@@ -1,11 +1,24 @@
-export interface UserProfile {
+import { BaseEntity, Classifiable } from '../shared/base';
+
+/**
+ * User Profile Entity
+ * 
+ * Extends BaseEntity with user-specific fields.
+ * name is required (not nullable) to satisfy BaseEntity
+ */
+export interface UserProfile extends BaseEntity, Classifiable {
   id: number;
   email: string;
-  name: string | null;
+  name: string;  // Required by BaseEntity
   role: string;
   active?: boolean;
 }
 
+/**
+ * User Domain Class
+ * 
+ * Encapsulates user business logic.
+ */
 export class User {
   private constructor(
     public readonly id: number,
@@ -27,5 +40,13 @@ export class User {
 
   isAdmin(): boolean {
     return this.role === 'admin';
+  }
+
+  getDisplayName(): string {
+    return this.name ?? this.email;
+  }
+
+  isActive(): boolean {
+    return this.active;
   }
 }

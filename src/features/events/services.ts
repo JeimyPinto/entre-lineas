@@ -1,6 +1,6 @@
 import { supabase as supabaseAnon } from '@/shared/api/supabase';
 import { createClient } from '@/shared/api/supabaseServer';
-import { Event as EventType } from '@/entities/event/types';
+import { Event as EventType } from '@/entities';
 import { Event } from '@/entities/event/model';
 
 export const eventService = {

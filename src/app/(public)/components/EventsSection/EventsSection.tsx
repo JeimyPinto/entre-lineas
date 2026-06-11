@@ -2,7 +2,7 @@
 
 import styles from "./EventsSection.module.css";
 import InstagramCard from "@/shared/ui/InstagramCard/InstagramCard";
-import { Event } from "@/entities/event/types";
+import { Event } from "@/entities";
 import VirtualizedGrid from "@/shared/ui/VirtualizedGrid/VirtualizedGrid";
 
 interface EventsSectionProps {

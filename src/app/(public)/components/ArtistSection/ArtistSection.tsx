@@ -6,7 +6,7 @@ import ArtistCard from "./ArtistCard";
 import { FaXmark, FaInstagram, FaYoutube, FaFacebook, FaGlobe, FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "@/shared/ui/Button/Button";
-import { Artist } from "@/entities/artist/types";
+import { Artist } from "@/entities";
 import VirtualizedGrid from "@/shared/ui/VirtualizedGrid/VirtualizedGrid";
 
 interface ArtistSectionProps {

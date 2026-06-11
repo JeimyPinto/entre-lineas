@@ -1,7 +1,15 @@
-export interface HistoryContent {
+import { Identifiable, Named, Timestamped } from '@/entities/shared/base';
+
+/**
+ * History Content Entity
+ * 
+ * Represents a chapter in the history timeline.
+ * Extends Identifiable for ID and Named for title.
+ */
+export interface HistoryContent extends Identifiable, Named, Timestamped {
   id: string;
   index: string;
-  title: string;
+  title: string;           // From Named
   icon: 'timeline' | 'landmark' | 'layer' | 'book';
   paragraphs: string[];
   blockquote?: string;
@@ -17,6 +25,7 @@ export const historyChapters: HistoryContent[] = [
   {
     id: "chapter-1",
     index: "01",
+    name: "Los Inicios",  // Required by Named
     title: "Los Inicios",
     icon: "timeline",
     paragraphs: [
@@ -27,6 +36,7 @@ export const historyChapters: HistoryContent[] = [
   {
     id: "chapter-2", 
     index: "02",
+    name: "Crecimiento y Eventos",  // Required by Named
     title: "Crecimiento y Eventos",
     icon: "landmark",
     paragraphs: [
@@ -37,6 +47,7 @@ export const historyChapters: HistoryContent[] = [
   {
     id: "chapter-3",
     index: "03", 
+    name: "Expansión Digital",  // Required by Named
     title: "Expansión Digital",
     icon: "layer",
     paragraphs: [
@@ -47,6 +58,7 @@ export const historyChapters: HistoryContent[] = [
   {
     id: "chapter-4",
     index: "04",
+    name: "Presente y Futuro",  // Required by Named
     title: "Presente y Futuro", 
     icon: "book",
     paragraphs: [

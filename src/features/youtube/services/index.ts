@@ -1,4 +1,4 @@
-import { GalleryData } from '@/entities/youtube-video/types';
+import { GalleryData } from '@/entities';
 import youtubeMockData from '@/data/youtube_mock.json';
 
 /**
